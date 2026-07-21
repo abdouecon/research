@@ -18,12 +18,11 @@
 \newtheorem{lemma}[theorem]{Lemma}
 \newtheorem{corollary}[theorem]{Corollary}
 \theoremstyle{definition}
-\newtheorem{assumption}{Assumption}
+\newtheorem{assumption}{Assumption}[section]
 \newtheorem{definition}[theorem]{Definition}
 \newtheorem{example}[theorem]{Example}
 \theoremstyle{remark}
 \newtheorem{remark}[theorem]{Remark}
-\newtheorem{observation}[theorem]{Observation}
 
 \newcommand{\ubar}[1]{\underline{#1}}
 \newcommand{\R}{\mathbb{R}}
@@ -32,6 +31,7 @@
 \newcommand{\dd}{\,d}
 \newcommand{\ubc}{\ubar{c}}
 \newcommand{\uba}{\ubar{a}}
+\newcommand{\psit}{\Psi_T}
 
 \title{Equilibrium Transition Dynamics in Heterogeneous-Agent
 Economies}
@@ -47,22 +47,29 @@ Quantitative work with heterogeneous-agent models routinely computes
 perfect-foresight transition paths: an interest-rate path clears the
 asset market at every date while the wealth distribution evolves from
 given initial conditions. We ask when such equilibrium paths exist. In
-the continuous-time Huggett economy with CRRA utility we show that
-market clearing stated in \emph{stocks} is a degenerate restriction on
-the rate path: today's interest rate has no contemporaneous effect on
-today's aggregate wealth. The operative form of clearing is a
-\emph{flow} condition---aggregate consumption equals aggregate income
-plus interest on the bond supply---in which the rate's only
-instantaneous leverage comes from the bond stock and from
-hand-to-mouth households, whose interest burden moves one-for-one with
-the rate. We prove that equilibrium transitions exist and are unique
-over short horizons whenever the debt of hand-to-mouth households is
-smaller than the bond supply, and that whether households remain at
-the borrowing constraint near the end of a transition is governed by
-terminal conditions rather than by discounting. With risk aversion
-above one, monotonicity of market clearing in the rate path fails on
-known economies, and we argue that multiple self-fulfilling transition
-paths connecting the same endpoints become a live possibility.\\[0.5em]
+the continuous-time Huggett economy with CRRA utility, the operative
+equilibrium condition is market clearing in \emph{flows}---aggregate
+consumption equals aggregate income plus interest on the bond
+supply---and the rate's only instantaneous leverage comes from the
+bond stock and from hand-to-mouth households, whose interest burden
+responds instantaneously to the rate. Our main theorem is a local
+fixed-point result built directly on this structure: because the
+hand-to-mouth channel transmits arbitrarily rapid oscillations of the
+rate path, the equilibrium map is \emph{not} compact on the full band
+of continuous paths, and the fixed point must instead be found on an
+invariant class of paths sharing a common modulus of continuity,
+constructed from a temporal transmission estimate whose
+contemporaneous coefficient---the ratio of hand-to-mouth debt to bond
+supply---is strictly below one. Under that condition, and along
+transitions on which the borrowing constraint binds uniformly (the
+constrained population remains intact), equilibrium transitions exist
+over short horizons, and are unique (exactly under bounded wealth
+densities, or up to an exponentially small ambiguity in the realistic
+boundary-layer regime). We also show that whether households remain at the borrowing
+constraint near the end of a transition is governed by terminal
+conditions rather than by discounting, and we discuss, informally, why
+long horizons with risk aversion above one may admit multiple
+self-fulfilling transition paths.\\[0.5em]
 \emph{JEL codes:} C62, D52, E21, D31.\quad
 \emph{Keywords:} incomplete markets, borrowing constraints, transition
 dynamics, existence of equilibrium, mean field games.
@@ -86,157 +93,161 @@ standard. The theory behind them is not: while existence and (under
 conditions) uniqueness of \emph{stationary} equilibria are well
 understood \citep{Aiyagari1994,Acikgoz2018,AHLLM2022,Hofer2025}, there
 is, to our knowledge, no theorem guaranteeing that the equilibrium
-transition path being computed exists, for any horizon, any preference
-parameters, or any level of asset supply. This paper studies that
-question in the canonical laboratory: the continuous-time Huggett
-economy with CRRA utility, two income states, a borrowing constraint,
-and a bond in fixed supply $B\ge0$, over a horizon $[0,T]$.
+transition path being computed exists.\footnote{The closest results
+are \cite{Ambrose2021}, on a related model of \cite{ABLLM2014} with
+diffusive income, \emph{no} borrowing constraint, and zero net supply,
+where small-time existence holds only for a \emph{relaxed} clearing
+constraint and the exact problem is generically unsolvable; and
+\cite{ChenEtAl2025}, an overlapping-generations economy with a
+never-binding natural borrowing limit and a small-lifespan
+restriction. Section~\ref{sec:literature} discusses both in detail.}
+This paper proves such a theorem for the canonical laboratory---the
+continuous-time Huggett economy with CRRA utility, two income states,
+a borrowing constraint, and a bond in fixed supply $B\ge0$, over a
+horizon $[0,T]$---and shows that its shape is dictated by a specific
+economic mechanism.
 
-Why is this not a routine extension of the steady-state theory? In a
-stationary equilibrium the entire influence of the wealth
-distribution on any single household is summarized by one number, the
-interest rate $r$. Fixing $r$ decouples the household problem from
-the distribution, and existence reduces to finding a root of a scalar
-excess-supply function---Aiyagari's celebrated diagram, formalized by
-an intermediate-value argument. Along a transition, the unknown is a
-\emph{path} $r(\cdot)$, pinned down by a clearing condition at a
-continuum of dates. Three economic facts, which we formalize, make
-this fixed-point problem behave very differently from its scalar
-ancestor.
-
-\emph{First, almost nobody responds to today's interest rate today.}
-A household's consumption at date $t$ is determined by its wealth and
-by the price path it expects \emph{from $t$ onward}; changing $r$ at
-the single instant $t$ leaves its date-$t$ behavior unchanged. The
-wealth distribution at $t$, in turn, depends on prices \emph{before}
-$t$. Consequently today's rate has no contemporaneous effect on
-today's aggregate wealth: market clearing stated in stocks
-(``aggregate wealth equals bond supply at every date'') is a
-degenerate restriction on the rate path---in technical language, a
-first-kind integral equation, which admits no stable inversion
-(Theorem~\ref{thm:firstkind}). The exception, and it is the crux of
-the paper, is a group whose behavior \emph{does} depend on today's
-rate: hand-to-mouth households at the borrowing constraint, who
-consume their income flow $y_1+r(t)\uba$ and whose interest burden
-therefore moves one-for-one with $r(t)$; and bondholders in the
-aggregate, whose interest income moves with $r(t)B$.
-
-\emph{Second, the operative form of market clearing is a flow
-condition.} Differentiating aggregate wealth along the distributional
-dynamics shows that clearing at every date is equivalent to clearing
-at the initial date---a restriction on the \emph{data}, not on
-prices---plus the aggregate budget identity
+The mechanism is easiest to see by asking: \emph{who responds to
+today's interest rate today?} A household's consumption at date $t$ is
+determined by its wealth and by the price path it expects from $t$
+onward; changing $r$ at the single instant $t$ leaves its date-$t$
+behavior unchanged. The wealth distribution at $t$ depends on prices
+before $t$. So today's rate moves today's aggregate wealth not at
+all---market clearing stated in \emph{stocks} is a degenerate
+restriction on the rate path (Proposition~\ref{prop:firstkind}). The
+operative form of clearing is instead the \emph{flow} form obtained by
+differentiating the stock condition along the distributional
+dynamics: clearing at every date is equivalent to clearing at the
+initial date---a restriction on the data---plus the aggregate budget
+identity
 \[
 C(t)\;=\;Y(t)+r(t)B \qquad\text{at every }t,
 \]
 aggregate consumption equals aggregate income plus interest on the
-bond supply (Lemma~\ref{lem:flow}). In this form the rate has exactly
-the two contemporaneous levers just described: the sensitivity of
-excess demand to $r(t)$ is $B+|\uba|\,m_1(t)$, where $m_1(t)$ is the
-mass of constrained households. All of our existence results are built
-on this diagonal. It is telling that numerical practice discovered the
-same structure by trial: the transition algorithm of
-\citet[\S5.5]{AHLLM2022} updates the rate path using the \emph{time
-derivative} of excess supply---the flow---rather than its level.
-
-\emph{Third, the borrowing constraint itself becomes a moving part.}
-In the stationary economy, impatience ($r<\rho$) guarantees that the
-constraint binds and that a point mass of hand-to-mouth households
-forms at the borrowing limit. Along a transition this is no longer
-governed by discounting. We show that whether households stay at the
-constraint near the end of the horizon is controlled by the
-\emph{terminal condition}: with the standard choice---continuation
-values from a stationary equilibrium at rate $r^*$---the constrained
-group stays put at the end of the horizon if and only if
-$r(T)\ge r^*$, and disperses whenever the path ends below $r^*$, even
-if $r(t)<\rho$ throughout (Corollary~\ref{cor:knife}). The economics
-is elementary once seen: constrained households are debtors, so a
-rate \emph{below} the one embedded in their continuation values
-lowers their debt service, leaves them income to spare, and they save
-their way off the constraint. Since the constrained mass $m_1(t)$ is
-also the rate's main lever on market clearing, the model's two
-degeneracies---at the borrowing limit and in the price---are coupled:
-episodes in which the constrained group disperses are episodes in
-which the market loses its contemporaneous handle on the interest
-rate.
-
-\paragraph{Results.} With this structure in place, our main results
-are as follows.
-
-(1) \emph{Existence and uniqueness for short transitions with
-positive bond supply} (Theorem~\ref{thm:smallT}). If the initial
-distribution clears the market, if the data imply an interior
-initial rate (an ``anchoring'' condition), and if
+bond supply (Lemma~\ref{lem:flow}). This stock-to-flow conversion is
+already how the model is solved in practice: the transition algorithm
+of \citet{AHLLM2022} iterates on the rate path using the \emph{time
+derivative} of excess bond supply (see the algorithm in their \S5.5
+and the accompanying Numerical Appendix and codes,
+\citealp{AHLLMnum}). What the flow form isolates analytically is the
+rate's contemporaneous leverage: differentiating the flow-clearing
+residual with respect to $r(t)$ gives exactly
 \[
-\theta\;:=\;\frac{|\uba|\cdot\sup_t m_1(t)}{B}\;<\;1,
+-\big(B+|\uba|\,m_1(t)\big),
 \]
-then an equilibrium transition exists and is unique on $[0,T]$ for
-$T$ below an explicit threshold. The condition $\theta<1$ has a
-transparent reading: a rise $dr$ in the rate mechanically raises the
-consumption the economy must absorb by $B\,dr$ (interest paid on the
-bond supply) and lowers hand-to-mouth consumption by
-$|\uba|m_1\,dr$ (interest charged on constrained debt); the
-equilibrium feedback loop is stable when the second effect is smaller
-than the first---equivalently, when the debt of hand-to-mouth
-households is smaller than the bond supply. That is the stability
-condition of the transition.
+where $m_1(t):=G_{1,t}(\{\uba\})$ is the mass of hand-to-mouth
+households at the borrowing limit---the only agents whose date-$t$
+consumption depends on the date-$t$ rate, through their budget
+$y_1+r(t)\uba$.
 
-(2) \emph{Zero net supply lives or dies by the constrained mass}
-(Theorem~\ref{thm:B0atom}, Proposition~\ref{prop:notheorem}). With
-$B=0$, the flow condition pins aggregate consumption to aggregate
-income, and the \emph{only} contemporaneous lever of the rate is the
-constrained group. If the initial distribution carries a point mass
-at the constraint and the constraint remains binding, that mass decays
-no faster than the rate at which its members draw the high income
-state, and a short-horizon equilibrium exists. If instead $B=0$ and no
-one is constrained on some time interval, market clearing there
-contains today's rate \emph{nowhere}: the constraint becomes a
-restriction linking only past and future, no local solution theory
-applies, and---consistent with the nonexistence results of
-\citet{Ambrose2021} for a frictionless relative of this model---exact
-clearing is generically the wrong demand. Relaxations (a slightly
-elastic bond supply, or a price rule responding to excess demand)
-restore a well-posed problem; we make precise the sense in which they
-are a necessity rather than a computational convenience.
+\paragraph{The main theorem.}
+Our central result (Theorem~\ref{thm:main} and
+Corollary~\ref{cor:model}) turns this structure into a short-horizon
+existence and uniqueness theorem for equilibrium transitions with
+$B>0$. Two features of its architecture are dictated by the economics,
+and we want to flag them up front because they are where a naive
+approach fails.
 
-(3) \emph{The household problem along a price path is harder than its
-stationary counterpart, in identifiable places}
-(Section~\ref{sec:household}, Appendices~\ref{app:household} and
-\ref{app:distribution}). We provide a complete well-posedness package:
-the household's value function is the unique constrained viscosity
-solution of its Bellman equation along any admissible rate path;
-marginal values admit two-sided bounds, constructed by explicit
-barrier arguments because the stationary shortcut---the binding
-constraint pinning the boundary gradient---is unavailable; consumption
-near the constraint follows a square-root law whose speed coefficient
-$\nu_1(t)$ acquires a new term $\dot r(t)\uba$ (a \emph{rising} rate
-slows the approach to the constraint through the debtor's income
-channel); and the wealth distribution evolves as a measure with a
-point mass at the constraint that grows while the constraint binds and
-detaches \emph{discontinuously} when it stops binding. Two features of
-the finite horizon are genuinely simpler and worth recording: neither
-$\rho>0$ nor $r<\rho$ plays any role in household well-posedness.
+First, \emph{the equilibrium map is not compact on the full band of
+continuous rate paths}, so the textbook route---Schauder's fixed-point
+theorem applied to a map with relatively compact range---is
+unavailable. The reason is the hand-to-mouth channel itself: over
+short horizons the multiplier map $\psit$ (the rate that makes bond
+interest absorb excess consumption) tracks
+$A_0(r(t))$, where $A_0$ contains the term
+$m_1(0)\min\{c_{T,1}(\uba),y_1+r(t)\uba\}/B$; whenever the
+hand-to-mouth branch is active, a rate path that ramps between two
+values over an arbitrarily short window produces an order-one
+oscillation of $\psit(r)$ over that window
+(Proposition~\ref{prop:notcompact}). Rapid oscillations of the rate
+pass straight through constrained households' budgets into aggregate
+consumption. No smoothing occurs on this channel, and no common
+modulus of continuity exists for the image of the full band.
 
-(4) \emph{Long transitions bifurcate on risk aversion}
-(Section~\ref{sec:long}). For $\gamma\le1$ (intertemporal elasticity
-of substitution at least one---the range in which the stationary
-equilibrium is known to be unique), a natural monotonicity property of
-aggregate consumption in the rate path, if it holds, localizes all
-equilibria between two computable paths and yields uniqueness under a
-verifiable collapse condition (Theorem~\ref{thm:mono}); we explain
-exactly why this monotonicity is a hypothesis rather than a theorem in
-finite horizon. For $\gamma>1$ it is not available even as a
-hypothesis: \citet{Hofer2025} constructs economies whose stationary
-aggregate saving \emph{decreases} in the interest rate over a range,
-and on long horizons such economies produce singular linearizations of
-the market-clearing map and, plausibly, multiple self-fulfilling
-transition paths connecting the same endpoints---anticipation-driven
-loops in which a believed future path of rates alters consumption
-today, reshapes the wealth distribution, and validates the belief
-(Proposition~\ref{prop:multiplicity}). For risk aversion above
-one---the empirically common calibration---uniqueness of transition
-dynamics should be regarded as an assumption of computational
-practice, not a theorem.
+Second, the fix is not technical patching but a sharper isolation of
+the economics. The map does satisfy a \emph{temporal transmission
+estimate}: its output oscillates no more than $\bar\theta$ times the
+oscillation of the input plus a genuinely smoothing remainder,
+\[
+|\psit(r)(t)-\psit(r)(s)|\ \le\
+\bar\theta\,|r(t)-r(s)|+\omega_T(|t-s|),
+\qquad
+\bar\theta\;=\;\frac{|\uba|\,\sup_t m_1(t)}{B}\;<\;1,
+\]
+where the coefficient $\bar\theta$ is the ratio of hand-to-mouth debt
+to the bond supply. When $\bar\theta<1$, the class of paths whose
+modulus of continuity is $\Omega_T=\omega_T/(1-\bar\theta)$---the
+fixed point of the modulus recursion $x\mapsto\bar\theta
+x+\omega_T$---is invariant under the map, and it \emph{is} compact.
+Schauder's theorem applies there. Uniqueness holds by contraction when
+wealth densities are bounded near the constraint, and up to an
+ambiguity exponentially small in $1/T$ in the realistic regime where
+the density has the inverse-square-root boundary layer generated by
+the constraint. A further geometric point matters for the
+construction: the map is \emph{antitone} in the rate (higher rates cut
+hand-to-mouth consumption), and an antitone map can throw an
+asymmetric band around its fixed point out of the band; invariance
+must be arranged on a \emph{symmetric} interval around the anchoring
+rate $r^{**}$ implied by the data
+(Remark~\ref{rem:antitone}).
+
+The stability condition $\bar\theta<1$ has a transparent reading, and
+it is, to our knowledge, new. A contemporaneous rise $dr$ in the rate
+obliges the economy to absorb $B\,dr$ of additional interest income as
+consumption, while cutting hand-to-mouth consumption by
+$|\uba|\,m_1\,dr$---the interest surcharge on constrained debt. The
+equilibrium feedback loop is stable when the second effect is smaller:
+hand-to-mouth debt below the outstanding stock of bonds. Economies
+with large constrained populations, deep borrowing, and thin asset
+markets are the ones in which equilibrium transitions are fragile.
+
+\paragraph{Supporting results.}
+Three further sets of results surround the main theorem.
+
+\emph{The household problem along a rate path}
+(Section~\ref{sec:household}, Appendices~\ref{app:household}--%
+\ref{app:distribution}). We provide the well-posedness package the
+main theorem consumes: unique constrained viscosity solutions of the
+household's Bellman equation along any admissible path, two-sided
+marginal-value bounds by explicit barriers, and a forward Kolmogorov
+theory for wealth distributions carrying a boundary atom driven by
+one-sided-Lipschitz flows. The economically substantive finding is
+that \emph{whether the constraint binds near the end of the horizon is
+governed by terminal conditions, not by discounting}: with
+continuation values drawn from a stationary equilibrium at rate
+$r^*$, the constrained group stays put at the end of the transition if
+and only if $r(T)\ge r^*$, and disperses whenever the path ends below
+$r^*$---even if $r(t)<\rho$ throughout
+(Corollary~\ref{cor:knife}). Constrained households are debtors; a
+terminal rate below the one embedded in their continuation plan
+lightens their debt service, and they save their way off the limit.
+Because $m_1(t)$ is also the market's contemporaneous lever, binding
+episodes and the tractability of the equilibrium problem switch on and
+off together.
+
+\emph{Zero net supply} (Section~\ref{sec:B0}). With $B=0$ the flow
+condition pins aggregate consumption to aggregate income and the
+\emph{only} contemporaneous lever is the constrained mass. If the
+initial distribution carries an atom at the limit and the constraint
+remains binding, a short-horizon equilibrium exists
+(Proposition~\ref{prop:B0atom}); if no one is constrained on a time
+interval, clearing there contains today's rate nowhere, no local
+solution theory applies, and---consistent with the nonexistence
+results of \citet{Ambrose2021} in a frictionless relative of the
+model---exact clearing is generically the wrong demand; slightly
+elastic supply or a price rule is then the correct formulation, not an
+approximation (Proposition~\ref{prop:notheorem}).
+
+\emph{Long horizons} (Section~\ref{sec:long}). What happens beyond
+short horizons is genuinely open, and we deliberately present it as
+informal discussion rather than as results: a monotonicity property of
+aggregate consumption in the rate path would localize all equilibria
+between two computable paths, but it is unproven even for
+intertemporal elasticity of substitution above one; and for risk
+aversion above one, economies constructed by \citet{Hofer2025} with
+non-monotone stationary aggregate saving suggest singular
+linearizations of the clearing condition and multiple self-fulfilling
+transition paths.
 
 \subsection{Related literature}
 \label{sec:literature}
@@ -249,9 +260,9 @@ substitution is at least one and borrowing is prohibited;
 \citet{Acikgoz2018} rigorizes the discrete-time counterpart and gives
 a calibrated multiplicity example. Mathematically complete stationary
 treatments are given by \citet{Shigeta2023} (bounded utility) and
-\citet{Hofer2025} (CRRA utility under a no-borrowing limit; ergodicity
-of the wealth process, continuity of aggregate assets in $r$, and the
-non-monotonicity construction for $\gamma>1$ used in
+\citet{Hofer2025} (CRRA utility under a no-borrowing limit;
+ergodicity of the wealth process, continuity of aggregate assets in
+$r$, and the non-monotonicity construction for $\gamma>1$ discussed in
 Section~\ref{sec:long}); \citet{BayerRendallWaelde2019} analyze the
 invariant wealth distribution at fixed prices. All of these concern
 steady states.
@@ -289,7 +300,7 @@ state-constrained case under a smallness condition on the dependence
 of preferences on the joint law of states and controls
 \citep{GraberMayorga2021}---a condition that, in our multiplier
 formulation, scales like $1/B$ and fails precisely in the
-economically central small-$B$ regime--- and for general non-separable
+economically central small-$B$ regime---and for general non-separable
 forward--backward parabolic systems over short horizons
 \citep{CirantGianniMannucci2020}. In all of these, either the
 clearing constraint responds nondegenerately to the contemporaneous
@@ -297,34 +308,27 @@ price through the controls, or there is no exact clearing constraint
 at all; none features the combination present here---a hard borrowing
 constraint with a boundary point mass, switching income risk, a
 Hamiltonian singular at zero marginal value, and a price path pinned
-by instant-by-instant clearing in stocks. The deterministic theory of
-MFG with state constraints
-\citep{CannarsaCapuani2018,CCC2021} supplies the right language for
-constrained trajectories; the planning problem
+by instant-by-instant clearing. The deterministic theory of MFG with
+state constraints \citep{CannarsaCapuani2018,CCC2021} supplies the
+right language for constrained trajectories; the planning problem
 \citep{Porretta2014} treats a single terminal constraint enforced by a
 multiplier, where our clearing imposes one scalar constraint per
-instant.
-
-Finally, our degeneracy theorem speaks to computational practice. In
-discrete time, the sequence-space Jacobian of
-\citet{AuclertEtAl2021} is precisely a discretization of the
-linearized market-clearing map that our Theorem~\ref{thm:firstkind}
-analyzes; the theorem implies that in the continuous-time limit the
-Jacobian of \emph{stock}-level clearing has vanishing diagonal and is
-compact---ill-conditioned at fine time discretizations---while the
-flow form retains an invertible diagonal $B+|\uba|m_1(t)$. This is
-consistent with, and explains, the practice of updating rate paths
-via flow imbalances \citep[\S5.5]{AHLLM2022}.
+instant. In discrete time, sequence-space methods
+\citep{AuclertEtAl2021} work with linearizations of market-clearing
+conditions along price paths; our degeneracy result speaks to the
+conditioning of such Jacobians in the continuous-time limit, where
+stock-level clearing has vanishing diagonal while the flow form
+retains the invertible diagonal $B+|\uba|m_1(t)$.
 
 The paper proceeds as follows. Section~\ref{sec:model} lays out the
 economy. Section~\ref{sec:household} analyzes the household problem
-along a rate path, with the binding/dispersal results.
-Section~\ref{sec:clearing} develops the structure of market clearing.
-Section~\ref{sec:smallT} contains the short-horizon existence and
-uniqueness theory, Section~\ref{sec:long} the long-horizon analysis.
-Section~\ref{sec:conclusion} concludes. Appendices~\ref{app:household}
---\ref{app:proofs} contain the technical package and proof
-architectures.
+along a rate path. Section~\ref{sec:clearing} develops the structure
+of market clearing. Section~\ref{sec:main} contains the main theorem
+and its model corollary; Section~\ref{sec:B0} treats zero net supply.
+Section~\ref{sec:long} discusses long horizons informally.
+Section~\ref{sec:conclusion} concludes.
+Appendices~\ref{app:household}--\ref{app:proofs} contain the
+technical package and the verification of the model hypotheses.
 
 %======================================================================
 \section{The economy}
@@ -381,13 +385,16 @@ The cross-sectional distribution of (income, wealth) is described by
 measures $G_j(\cdot,t)$ on $[\uba,\infty)$ of total mass one, evolving
 under the households' saving policies and the income switching by the
 Kolmogorov forward equation, understood in a weak (measure) sense that
-accommodates a point mass $m_1(t)$ of households \emph{at} the
-borrowing limit (Definition~\ref{def:KFweak} in
-Appendix~\ref{app:distribution}); $G_j(\cdot,0)=G_{0,j}$ is given.
-This system---equations (12)--(17) of \citet{AHLLM2022}, together
-with their market-clearing condition (4)---is the transition-dynamics
-version of the continuous-time Huggett model
-\citep{Huggett1993}.
+accommodates a point mass
+\[
+m_1(t)\;:=\;G_{1,t}(\{\uba\})
+\]
+of households \emph{at} the borrowing limit
+(Definition~\ref{def:KFweak} in Appendix~\ref{app:distribution});
+$G_j(\cdot,0)=G_{0,j}$ is given. This system---equations (12)--(17),
+together with the market-clearing condition (4), of
+\citet{AHLLM2022}---is the transition-dynamics version of the
+continuous-time Huggett model \citep{Huggett1993}.
 
 \subsection{Equilibrium}
 \label{sec:eqmdef}
@@ -407,7 +414,8 @@ S(t)\;:=\;\sum_{j=1,2}\int_{[\uba,\infty)}a\dd G_j(a,t)\;=\;B
 \end{definition}
 
 Throughout, candidate rate paths lie in a band
-$\Kcal=\{r\in C([0,T]):r_{\min}\le r\le r_{\max}\}$ with
+$\Kcal_I=\{r\in C([0,T]):r(t)\in I\ \forall t\}$, $I=[r_{\min},
+r_{\max}]$, with
 \begin{equation}\label{eq:band}
 r_{\max}<\frac{y_1}{|\uba|},
 \end{equation}
@@ -419,24 +427,24 @@ tighter than the natural limit; it is what makes the constraint
 economically meaningful (households at the limit are hand-to-mouth,
 not defaulting) and, mathematically, it is the inward-pointing
 condition on which the entire boundary analysis rests. The full list
-of maintained assumptions on the data $(G_0,v_T)$ is collected in
+of maintained assumptions is collected in
 Appendix~\ref{app:household}
 (Assumptions~\ref{ass:prim}--\ref{ass:G0}, covering primitives, the
-rate band, and the data);
-the terminal valuation is concave, increasing, with marginal values
-bounded above and decaying no faster than CRRA marginal utility of a
-linearly growing consumption level---properties satisfied by the
-canonical choice $v_\infty(\cdot\,;r^*)$.
+rate band, and the data); the terminal valuation is concave,
+increasing, with marginal values bounded above and decaying no faster
+than CRRA marginal utility of a linearly growing consumption
+level---properties satisfied by the canonical choice
+$v_\infty(\cdot\,;r^*)$.
 
 For the quantitative equilibrium analysis we will distinguish two
 regimes for the wealth distribution near the constraint:
 \begin{itemize}[leftmargin=2.6em]
 \item[\textbf{(D1)}] the absolutely continuous parts of the
 distributions have densities bounded near $\uba$, uniformly in $t$
-and over the band $\Kcal$;
+and over the band;
 \item[\textbf{(D1$'$)}] the densities may blow up like
 $(a-\uba)^{-1/2}$ near $\uba$, with a constant uniform in $t$ and
-over $\Kcal$.
+over the band.
 \end{itemize}
 (D1$'$) is the realistic regime: it is exactly the profile generated
 by the square-root consumption law at a binding constraint
@@ -446,9 +454,6 @@ constraint does not bind.
 
 \subsection{Why transitions are not steady states strung together}
 \label{sec:whyhard}
-
-It is worth previewing, in words, where the difficulty lies, because
-it is \emph{not} where the steady-state theory suggests.
 
 In a stationary equilibrium the logic is: fix $r$, solve the
 household problem, compute the implied stationary wealth stock
@@ -460,41 +465,39 @@ as a family of such problems indexed by $t$. This fails, for an
 economic reason: $S(t)$ is a \emph{stock}, accumulated from past
 saving decisions, each of which was made looking at \emph{future}
 rates. The rate at date $t$ influences wealth at date $t$ not at all;
-it influences wealth \emph{after} $t$ through household budgets, and
-consumption \emph{before} $t$ through anticipation. So the natural
-analogue of Aiyagari's diagram---move $r(t)$ until $S(t)$ hits
-$B$---moves nothing. Section~\ref{sec:clearing} makes this precise
-and locates the two places where the contemporaneous rate does bite:
-interest on the bond supply, and the budgets of constrained
-households. Everything constructive in this paper is built on those
-two levers; and the second lever is itself an equilibrium object,
-switched on and off by the binding analysis of the next section.
+it influences wealth after $t$ through household budgets, and
+consumption before $t$ through anticipation. Section~\ref{sec:clearing}
+makes this precise and locates the two places where the
+contemporaneous rate does bite: interest on the bond supply, and the
+budgets of constrained households. The main theorem of
+Section~\ref{sec:main} is built entirely on those two levers; and the
+second lever is itself an equilibrium object, switched on and off by
+the binding analysis of the next section.
 
 %======================================================================
 \section{Household behavior along an interest-rate path}
 \label{sec:household}
 
-This section takes the rate path $r\in\Kcal$ as given and establishes
-what we need about individual behavior: that the household problem is
-well posed at all (Theorem~\ref{thm:household}), and---the
+This section takes the rate path $r\in\Kcal_I$ as given and
+establishes what we need about individual behavior: that the household
+problem is well posed (Theorem~\ref{thm:household}), and---the
 economically substantive part---when households at the borrowing
 limit stay there (Section~\ref{sec:binding}). Readers willing to take
-well-posedness on faith can skim to
-Section~\ref{sec:binding}; the technical package, including all
-regularity and stability estimates used later, is developed in
-Appendix~\ref{app:household}.
+well-posedness on faith can skim to Section~\ref{sec:binding}; the
+technical package, including the regularity and stability estimates
+used later, is developed in Appendix~\ref{app:household}.
 
 \begin{theorem}[the household problem is well posed]
 \label{thm:household}
-Under the maintained assumptions
-(Appendix~\ref{app:household}), for every $r\in\Kcal$ the household's
-value function is the unique constrained viscosity solution of
-\eqref{eq:HJB}--\eqref{eq:BC} with terminal data $v_T$, in the class
-of continuous functions concave and increasing in wealth with linear
-growth. It is continuously differentiable in wealth on
-$(\uba,\infty)$, with a one-sided derivative at $\uba$; consumption is
-continuous and nondecreasing in wealth; marginal values admit
-two-sided bounds, uniform over $\Kcal$,
+Under the maintained assumptions (Appendix~\ref{app:household}), for
+every $r\in\Kcal_I$ the household's value function is the unique
+constrained viscosity solution of \eqref{eq:HJB}--\eqref{eq:BC} with
+terminal data $v_T$, in the class of continuous functions concave and
+increasing in wealth with linear growth. It is continuously
+differentiable in wealth on $(\uba,\infty)$, with a one-sided
+derivative at $\uba$; consumption is continuous and nondecreasing in
+wealth; marginal values admit two-sided bounds, uniform over the
+band,
 \[
 0<\kappa\,e^{-CT}(1+a-\uba)^{-\gamma}\ \le\ \partial_a v_j(a,t)\ \le\
 \max\{\bar p_T,\,u'(\ubc)\}\,e^{(r_{\max}-\rho)^+T},
@@ -522,13 +525,12 @@ $\bar p_T$ on terminal marginal values is a genuine assumption on the
 terminal data, not a free good. Second, the bounds keep marginal
 values in a compact positive range, which is what tames the CRRA
 Hamiltonian $H(p)=\max_c\{u(c)-pc\}$, whose slope
-$H'(p)=-p^{-1/\gamma}$ blows up as $p\downarrow0$ (marginal values
-near zero correspond to unboundedly rich households). Third---an
-honest simplification---neither $\rho>0$ nor $r<\rho$ appears
-anywhere: on a finite horizon the terminal valuation replaces
-transversality, and impatience plays no coercive role. The conditions
-involving $\rho$ reappear only through the terminal data, which is
-exactly where the next subsection locates them.
+$H'(p)=-p^{-1/\gamma}$ blows up as $p\downarrow0$. Third---an honest
+simplification---neither $\rho>0$ nor $r<\rho$ appears anywhere: on a
+finite horizon the terminal valuation replaces transversality, and
+impatience plays no coercive role. The conditions involving $\rho$
+reappear only through the terminal data, which is exactly where the
+next subsection locates them.
 
 \subsection{When does the borrowing constraint bind?}
 \label{sec:binding}
@@ -558,7 +560,8 @@ $r^*$, so that $\partial_a v_{T,1}(\uba)=u'(y_1+r^*\uba)$ by the
 stationary binding equality. Then the boundary saving rate at the end
 of the horizon is
 \[
-s_1(\uba,T^-)\;=\;\big[(r(T)-r^*)\,\uba\big]^+,
+s_1(\uba,T^-)\;=\;\big[(y_1+r(T)\uba)-(y_1+r^*\uba)\big]^+
+=\big[(r(T)-r^*)\,\uba\big]^+ ,
 \]
 and since $\uba<0$: \emph{the constraint binds at $T^-$ if and only if
 $r(T)\ge r^*$}. Whenever the path ends below the rate embedded in the
@@ -573,11 +576,11 @@ consumption is income net of debt service, $y_1+r(t)\uba$, which
 $v_T$, was drawn at rate $r^*$. If the transition delivers a terminal
 rate below $r^*$, debt service is lighter than the continuation plan
 assumed; the constrained household finds itself with slack, saves, and
-detaches from the limit. Impatience ($\rho$) never enters: over a
-short remaining horizon, behavior is governed by the terminal
-valuation, not by discounting. A closed-form illustration with no
-income risk, in which binding fails on an entire terminal interval
-despite $r<\rho$, is given in Example~\ref{ex:closedform}
+detaches from the limit. Impatience never enters: over a short
+remaining horizon, behavior is governed by the terminal valuation, not
+by discounting. A closed-form illustration with no income risk, in
+which binding fails on an entire terminal interval despite $r<\rho$,
+is given in Example~\ref{ex:closedform}
 (Appendix~\ref{app:household}); the same example exhibits the turnpike
 property---binding is restored at dates far from $T$, where the
 stationary logic reasserts itself.
@@ -606,9 +609,12 @@ Relative to the stationary coefficient, time dependence adds the term
 $\dot r(t)\,\uba$: since $\uba<0$, a \emph{rising} rate path lowers
 $\nu_1$---anticipated increases in debt service slow the approach to
 the constraint---and $\nu_1(t)\downarrow0$ is precisely the incipient
-dispersal regime of Corollary~\ref{cor:knife}. The formal expansion
-and its rigorous version are discussed in
-Appendix~\ref{app:household}.
+dispersal regime of Corollary~\ref{cor:knife}. We stress the
+hypotheses: a $C^1$ path, binding on the interval, and
+$\nu_1$ bounded away from zero. The square-root layer is a property of
+\emph{binding regimes}, not of the model wholesale; this matters for
+the hypotheses of the main theorem, and we return to it in
+Section~\ref{sec:verify}.
 
 Finally, the constrained mass itself. While the constraint binds,
 $m_1(t)$ grows by the inflow of low-income households hitting the
@@ -616,11 +622,7 @@ limit and shrinks only as its members draw the high income state (at
 rate $\lambda_1$). When binding fails, the entire mass detaches
 \emph{at once} and moves into the interior as a traveling atom:
 $m_1(t)$ drops to zero discontinuously
-(Proposition~\ref{prop:atom}, Appendix~\ref{app:distribution}). This
-bookkeeping matters beyond descriptive interest: $m_1(t)$ is exactly
-the market's contemporaneous lever on the interest rate, so the
-binding analysis of this subsection switches the tractability of the
-equilibrium problem on and off.
+(Proposition~\ref{prop:atom}, Appendix~\ref{app:distribution}).
 
 %======================================================================
 \section{Market clearing along a transition}
@@ -629,8 +631,6 @@ equilibrium problem on and off.
 We now turn to equilibrium. Throughout, $S(t)$ denotes aggregate
 wealth \eqref{eq:clearing}, $C(t)=\sum_j\int c_j\dd G_{j,t}$ aggregate
 consumption, and $Y(t)=\sum_j\int y_j\dd G_{j,t}$ aggregate income.
-
-\subsection{Compatibility and the flow form of clearing}
 
 \begin{proposition}[the data must clear the market at date zero]
 \label{prop:compat}
@@ -653,7 +653,7 @@ bounded first moments, $t\mapsto S(t)$ is Lipschitz and
 \]
 the boundary contributing nothing (households at the limit have zero
 saving while the constraint binds; dispersing mass is counted in the
-interior). Consequently, for $r\in\Kcal$:
+interior). Consequently, for $r\in\Kcal_I$:
 \[
 S(t)=B\ \ \forall t\in[0,T]
 \qquad\Longleftrightarrow\qquad
@@ -662,203 +662,381 @@ S(0)=B\ \text{ and }\ C(t)=Y(t)+r(t)B\ \ \forall t\in[0,T].
 \end{lemma}
 
 The flow form is the economy's aggregate budget identity: consumption
-absorbs income plus the interest paid on the bond supply. For $B=0$ it
-says aggregate consumption is pinned to aggregate income at every
-date---an exogenous restriction in which, as we will see, the interest
-rate barely appears.
+absorbs income plus the interest paid on the bond supply. It is also
+the form in which the model is solved numerically: the transition
+algorithm of \citet[\S5.5]{AHLLM2022} updates the rate path by the
+time derivative of excess bond supply,
+$r^{\ell+1}(t)=r^\ell(t)-\xi(t)\frac{d}{dt}S^\ell(t)$, precisely the
+stock-to-flow conversion above; see their Numerical Appendix and
+codes \citep{AHLLMnum}. The reason the flow form is the right object
+for analysis as well is the following degeneracy of the stock form.
 
-\subsection{Stock-level clearing is degenerate}
-
-\begin{theorem}[no contemporaneous leverage in stocks]
-\label{thm:firstkind}
-Fix data and a path $r\in\Kcal$, and consider the equilibrium map
-$r\mapsto S(\cdot\,;r)$.
-\begin{enumerate}[label=(\roman*),leftmargin=2.2em]
-\item \emph{Pinning.} $S(0;r)$ is independent of $r$: near $t=0$ the
-stock condition restricts only the data.
-\item \emph{Vanishing diagonal.} For path perturbations $\delta r$
-supported on a window $(t_0-h,t_0+h)$,
+\begin{proposition}[stock-level clearing has no contemporaneous
+diagonal]\label{prop:firstkind}
+Fix data and a path $r\in\Kcal_I$, and consider the map
+$r\mapsto S(\cdot\,;r)$. Then: (i) $S(0;r)$ is independent of $r$;
+(ii) for path perturbations $\delta r$ supported on a window
+$(t_0-h,t_0+h)$,
 \[
 |S(t_0;r+\delta r)-S(t_0;r)|\ \le\ C\,h\,(1+T)\,\|\delta r\|_\infty
 \]
-(under the bounded-density regime (D1); with an additional factor
-$1+\log_+\!\big(1/(h\|\delta r\|_\infty)\big)$ in the realistic
-boundary-layer regime (D1$'$)---either way the bound vanishes with
-$h$): the rate at date $t_0$ has no contemporaneous effect on wealth
-at date $t_0$.
-\item \emph{Compactness.} The linearized map $DS(\cdot\,;r)$ is a
-compact integral operator on $C([0,T])$; the equation
-$S(\cdot\,;r)=B$ is a first-kind equation, admitting no bounded local
-inverse and no Picard or Newton theory, and a stock-level
-t\^atonnement $r\mapsto r+\kappa(S-B)$ cannot be closed: unlike the
-stationary problem, sign information on excess supply at the edges of
-the rate band is unavailable pointwise in $t$, because $S(t;\cdot)$ is
-a functional of the entire path.
-\end{enumerate}
-Any existence argument must therefore run through the flow form of
-Lemma~\ref{lem:flow}.
-\end{theorem}
+under (D1), with an additional factor
+$1+\log_+\!\big(1/(h\|\delta r\|_\infty)\big)$ under (D1$'$)---either
+way the bound vanishes with $h$: the rate at date $t_0$ has no
+contemporaneous effect on wealth at date $t_0$; and (iii) the
+linearized map $DS(\cdot\,;r)$ is a compact integral operator on
+$C([0,T])$, so the equation $S(\cdot\,;r)=B$ is a first-kind equation
+admitting no bounded local inverse.
+\end{proposition}
 
-The economic content of (ii) is the observation of the introduction:
-consumption at $t$ is forward-looking, wealth at $t$ is
-backward-looking, and the instant $t$ itself has measure zero in
-both. The exception is hidden in the constant $C$: it is built from
-the \emph{integrated} response of consumption and savings to the rate
-window, which includes the mechanical response of constrained
-households. That response reappears, no longer averaged away, in the
-flow form: differentiating the flow-clearing residual with respect to
-the contemporaneous rate,
+By contrast, differentiating the flow-clearing residual with respect
+to the contemporaneous rate,
 \begin{equation}\label{eq:diagonal}
 \frac{\partial}{\partial r(t)}\Big[C(t)-Y(t)-r(t)B\Big]
 \;=\;m_1(t)\,\uba\;-\;B\;=\;-\big(B+|\uba|\,m_1(t)\big),
 \end{equation}
 because the only households whose date-$t$ consumption depends on the
 date-$t$ rate are those at the borrowing limit, consuming
-$y_1+r(t)\uba$. The flow constraint has a uniformly invertible
+$y_1+r(t)\uba$ (only the low-income type carries boundary mass, by
+Assumption~\ref{ass:type2}). The flow constraint has a uniformly invertible
 diagonal if and only if $B+|\uba|m_1(t)$ is bounded away from
 zero---automatically for $B>0$; through the constrained mass, hence
 through the binding analysis of Section~\ref{sec:binding}, when
 $B=0$.
 
-Theorem~\ref{thm:firstkind} also rationalizes numerical practice. The
-transition algorithm of \citet[\S5.5]{AHLLM2022} updates
-$r^{\ell+1}(t)=r^\ell(t)-\xi(t)\,\frac{d}{dt}S^\ell(t)$: the update
-signal is the \emph{flow} imbalance, the object with a nondegenerate
-diagonal, not the excess stock. Likewise, in discrete-time
-sequence-space methods \citep{AuclertEtAl2021}, our result implies
-that the Jacobian of stock-level clearing becomes ill-conditioned as
-the period shrinks, while flow-level clearing does not.
-
 %======================================================================
-\section{Short transitions: existence and uniqueness}
-\label{sec:smallT}
+\section{The main theorem: short-horizon existence and uniqueness}
+\label{sec:main}
 
-We now solve the equilibrium problem over short horizons, first with
-positive bond supply, then at zero net supply. Throughout:
-$S(0)=B$ (Proposition~\ref{prop:compat}), the maintained assumptions,
-the household package of Section~\ref{sec:household}, and the two
-density regimes (D1)/(D1$'$) of Section~\ref{sec:eqmdef}.
-
-\subsection{Positive bond supply: the multiplier map and the
-hand-to-mouth threshold}
-
-For $B>0$, Lemma~\ref{lem:flow} converts equilibrium into a fixed
-point over rate paths: $r=\Psi(r)$ with
+Throughout this section $B>0$ and $S(0)=B$
+(Proposition~\ref{prop:compat}). By Lemma~\ref{lem:flow}, equilibrium
+is equivalent to a fixed point over rate paths: $r=\psit(r)$ with
 \[
-\Psi(r)(t)\;:=\;\frac{C(t;r)-Y(t;r)}{B},
+\psit(r)(t)\;:=\;\frac{C(t;r)-Y(t)}{B},
 \]
 the rate that makes bond interest absorb the excess of consumption
-over income implied by the path $r$. The map $\Psi$ is compact (its
-range is uniformly bounded and equicontinuous---there is no identity
-part, unlike a stock-level t\^atonnement), and its Lipschitz constant
-decomposes along economic channels: for paths $r,r'$ with
-$\eta=\|r-r'\|_\infty$,
-\[
-\|\Psi(r)-\Psi(r')\|_\infty\ \le\
-\underbrace{\theta\,\eta}_{\substack{\text{contemporaneous:}\\
-\text{hand-to-mouth}\\ \text{budgets}}}
-\;+\;\underbrace{C_1T\,\eta}_{\substack{\text{anticipation:}\\
-\text{policies respond}\\ \text{to future rates}}}
-\;+\;\underbrace{C_2T\,\eta\,\big(1+\log_+(1/\eta)\big)}
-_{\substack{\text{history:}\\ \text{distribution shaped}\\
-\text{by past rates}}},
-\]
-where
-\[
-\theta\;:=\;\frac{|\uba|\,\sup_{t,\,r\in\Kcal}m_1(t;r)}{B},
-\]
-with the logarithm absent under (D1). The anticipation and history
-channels are weak over short horizons---each carries a factor
-$T$---but the contemporaneous channel is not: it is the hand-to-mouth
-budget response, present at any horizon, and it is governed by
-$\theta$, the ratio of constrained households' debt exposure to the
-bond supply. One further data condition is needed to keep the fixed
-point inside the rate band: as $T\to0$ the map $\Psi$ converges to an
-affine map of the instantaneous rate (the affine term again being the
-hand-to-mouth budget), whose fixed point $r^{**}$ solves a scalar
-equation in the data; we require $r^{**}$ to be interior to the band
-(condition (ANCH), Appendix~\ref{app:proofs}).
+over income implied by the path $r$. (Aggregate income $Y(t)$ does
+not depend on the path: the income-type marginals follow the
+autonomous two-state chain.)
 
-\begin{theorem}[existence and uniqueness for short transitions,
-$B>0$]\label{thm:smallT}
-Let $B>0$, $S(0)=B$, (ANCH), and
+\subsection{Why the fixed point must be local}
+\label{sec:whylocal}
+
+Over short horizons the multiplier map tracks an \emph{anchoring
+function} of the contemporaneous rate. Let
+$c_{T,j}:=(u')^{-1}(\partial_a v_{T,j})$ denote the terminal-implied
+consumption policies and define
+\begin{equation}\label{eq:A0}
+A_0(x)\;:=\;\frac{1}{B}\Big[\textstyle\sum_j
+\int_{(\uba,\infty)}c_{T,j}\dd G_{0,j}
++m_1(0)\,\min\{c_{T,1}(\uba),\,y_1+x\,\uba\}-Y(0)\Big],
+\qquad x\in I .
+\end{equation}
+$A_0$ is nonincreasing and Lipschitz with constant
+$\theta_0:=m_1(0)|\uba|/B$: its only dependence on the rate is the
+budget of the initially constrained households. (Only the type-1 atom
+enters: the high-income type is unconstrained at the limit throughout,
+by Assumption~\ref{ass:type2}.) The \emph{anchoring approximation},
+over a band $\Kcal_J$ of paths with values in a subinterval
+$J\subseteq I$, is the statement
+\begin{equation}\label{eq:anchor}
+\sup_{r\in\Kcal_J}\sup_{t\in[0,T]}
+\big|\psit(r)(t)-A_0(r(t))\big|\ \le\ \varepsilon_T,
+\qquad \varepsilon_T\to0\ \text{ as }T\to0 .
+\end{equation}
+Appendix~\ref{app:proofs} establishes \eqref{eq:anchor} on the
+symmetric sub-band used by the main theorem, on uniform binding
+regimes, as hypothesis (M1) of Corollary~\ref{cor:model}.
+
+The approximation \eqref{eq:anchor} immediately reveals that the
+textbook compactness route is closed:
+
+\begin{proposition}[no compactness]
+\label{prop:notcompact}
+Suppose \eqref{eq:anchor} holds on $\Kcal_J$ and $A_0$ is nonconstant
+on $J$, with
+$2\varepsilon_T<\operatorname{osc}_J A_0
+:=\sup_{x,y\in J}|A_0(x)-A_0(y)|$. Then
+$\psit(\Kcal_J)$ is not uniformly equicontinuous, hence not
+relatively compact in $C([0,T])$.
+\end{proposition}
+
+\begin{proof}
+Choose $x_0,x_1\in J$ with $d:=|A_0(x_0)-A_0(x_1)|>2\varepsilon_T$.
+For any $h>0$ pick $s_h<t_h$ in $[0,T]$ with $t_h-s_h<h$ and a
+continuous path $r_h\in\Kcal_J$ with $r_h(s_h)=x_0$,
+$r_h(t_h)=x_1$ (a linear ramp on $[s_h,t_h]$ suffices). By
+\eqref{eq:anchor},
+$|\psit(r_h)(t_h)-\psit(r_h)(s_h)|\ge d-2\varepsilon_T>0$,
+a lower bound independent of $h$: no common modulus of continuity
+exists, and Arzel\`a--Ascoli rules out relative compactness.
+\end{proof}
+
+$A_0$ is nonconstant precisely when $m_1(0)>0$ and the budget branch
+of the $\min$ in \eqref{eq:A0} is active on a nondegenerate
+subinterval---that is, when the hand-to-mouth diagonal is operative.
+The economics: rapid oscillations of the rate path pass
+\emph{undamped, with coefficient $\theta_0$}, through constrained
+households' budgets into the multiplier map; the map performs no
+smoothing on this channel. Any fixed-point argument must therefore work on a
+restricted class of paths whose oscillations are controlled---and the
+restriction must be self-consistent, i.e.\ invariant under the map.
+
+\begin{remark}[antitone geometry]\label{rem:antitone}
+A second, more elementary point shapes the construction. $A_0$ is
+\emph{antitone}: higher rates cut hand-to-mouth consumption. An
+antitone map can throw an asymmetric band around its fixed point out
+of the band: on $I=[0,10]$, the map $A_0(x)=\tfrac32-\tfrac12x$ is
+$\tfrac12$-Lipschitz with interior fixed point $x^{**}=1$, yet
+$A_0(10)=-\tfrac72\notin I$. Deviations \emph{below} the fixed point
+are produced by rates \emph{above} it. Invariance must therefore be
+arranged on a \emph{symmetric} interval $[r^{**}-R,\,r^{**}+R]$
+around the anchoring rate, on which a $q$-Lipschitz antitone map with
+$q<1$ is genuinely contracting toward its fixed point.
+\end{remark}
+
+\subsection{The fixed-point theorem}
+\label{sec:fixedpoint}
+
+The following theorem is the paper's central mathematical result. It
+is stated abstractly---$\psit$ any family of maps on rate
+paths---because its hypotheses are exactly the economic estimates the
+model must deliver, and stating them separately makes the division of
+labor transparent. A \emph{modulus} is a nondecreasing function
+$\omega:[0,T]\to[0,\infty)$ with $\omega(0)=0$ and
+$\omega(h)\to0$ as $h\downarrow0$.
+
+\begin{theorem}[short-horizon fixed point]\label{thm:main}
+Let $I=[r_{\min},r_{\max}]$ and let $A_0:I\to\R$ be Lipschitz with
+constant $q<1$ and fixed point $r^{**}\in\operatorname{int}I$. Choose
+$R>0$ with $I_R:=[r^{**}-R,\,r^{**}+R]\subset\operatorname{int}I$ and
+set $\Kcal_R:=\Kcal_{I_R}$. For each sufficiently small $T>0$ let
+$\psit:\Kcal_R\to C([0,T])$ satisfy:
+\begin{enumerate}[label=\textup{(H\arabic*)},leftmargin=3.2em]
+\item \emph{Anchoring approximation:} there is $\varepsilon_T\ge0$
+with
 \[
-\theta\ \le\ \bar\theta\ <\ 1
-\qquad\text{\emph{(hand-to-mouth debt exposure below bond supply).}}
+\sup_{r\in\Kcal_R}\sup_{t\in[0,T]}|\psit(r)(t)-A_0(r(t))|
+\le\varepsilon_T,
+\qquad \varepsilon_T<(1-q)\,R .
 \]
-Then there is $T^*>0$, depending on the data, $\bar\theta$, and the
-anchoring margin, such that for $T\le T^*$:
-\begin{enumerate}[label=(\roman*),leftmargin=2.2em]
-\item an equilibrium transition exists;
-\item under (D1), the map $\Psi$ is a contraction with modulus
-$\bar\theta+CT<1$: the equilibrium is unique in the band, and the
-natural iteration---guess a rate path, solve households backward,
-aggregate forward, update the rate from the flow-clearing
-condition---converges geometrically from any starting path;
-\item under (D1$'$), any two equilibria are within
-$\exp\!\big(-(1-\bar\theta-(C_1+C_2)T)/(C_2T)\big)$ of each other:
-uniqueness holds up to an ambiguity exponentially small in $1/T$.
+\item \emph{Continuity:} $\psit:(\Kcal_R,\|\cdot\|_\infty)\to
+C([0,T])$ is continuous.
+\item \emph{Temporal transmission estimate:} there are
+$\bar\theta<1$ and a modulus $\omega_T$ such that, for every
+$r\in\Kcal_R$ and all $s,t\in[0,T]$,
+\begin{equation}\label{eq:temporal}
+|\psit(r)(t)-\psit(r)(s)|\ \le\
+\bar\theta\,|r(t)-r(s)|+\omega_T(|t-s|).
+\end{equation}
 \end{enumerate}
+Then $\psit$ has a fixed point in $\Kcal_R$.
+
+If, in addition, there is $C_3\ge0$ with
+\begin{equation}\label{eq:D1contr}
+\|\psit(r)-\psit(r')\|_\infty\le(\bar\theta+C_3T)\,\|r-r'\|_\infty
+\qquad(r,r'\in\Kcal_R),
+\end{equation}
+then, whenever $\bar\theta+C_3T<1$, the fixed point is unique in
+$\Kcal_R$ and Picard iteration converges geometrically from every
+starting path in $\Kcal_R$.
+
+Finally, set $D:=2R$ and suppose instead of \eqref{eq:D1contr} that
+for some $C_1,C_2\ge0$, all distinct $r,r'\in\Kcal_R$ with
+$\eta=\|r-r'\|_\infty\in(0,D]$ satisfy
+\begin{equation}\label{eq:D1prime}
+\|\psit(r)-\psit(r')\|_\infty\ \le\
+\bar\theta\,\eta+C_1T\,\eta+C_2T\,\eta\Big(1+\log\frac{D}{\eta}\Big).
+\end{equation}
+Then any two fixed points in $\Kcal_R$ satisfy
+\begin{equation}\label{eq:ambiguity}
+\|r-r'\|_\infty\ \le\
+D\,\exp\!\Big(-\frac{1-\bar\theta-(C_1+C_2)T}{C_2T}\Big)
+\end{equation}
+whenever $C_2>0$ and the numerator is positive; if $C_2=0$ and
+$\bar\theta+C_1T<1$, the fixed point is unique.
 \end{theorem}
 
-The stability condition $\theta<1$ deserves emphasis; it is, to our
-knowledge, new. Consider a contemporaneous increase $dr$ in the rate.
-Flow clearing requires the economy to absorb $B\,dr$ of additional
-interest income as consumption. But the same increase \emph{taxes}
-hand-to-mouth debtors, whose consumption falls mechanically by
-$|\uba|\,m_1\,dr$. If the second effect exceeds the first, the
-market-clearing response to excess consumption is to \emph{raise}
-required consumption further: the multiplier loop is unstable, and the
-fixed-point argument fails. The condition is economically
-interpretable and, in principle, measurable: the debt of
-constrained households relative to the outstanding stock of liquid
-assets. Economies with large hand-to-mouth populations, deep
-borrowing, and thin asset markets are the ones in which transition
-equilibria are fragile.
+\begin{proof}
+\emph{Step 1: invariance of the local band.} For $r\in\Kcal_R$ and
+any $t$, using (H1), $A_0(r^{**})=r^{**}$, and the $q$-Lipschitz
+property,
+\[
+|\psit(r)(t)-r^{**}|
+\le|\psit(r)(t)-A_0(r(t))|+|A_0(r(t))-A_0(r^{**})|
+\le\varepsilon_T+q\,|r(t)-r^{**}|
+\le\varepsilon_T+qR<R .
+\]
+Thus $\psit(\Kcal_R)\subset\Kcal_R$.
 
-A natural question is whether the threshold is an artifact of the
-fixed-point scheme. It is not, in the following sense: one can solve
-the flow-clearing condition \emph{exactly} for $r(t)$ (the constrained
-group's budget is known in closed form), eliminating the
-contemporaneous channel altogether; but the resulting map depends on
-the constrained mass $m_1(t;r)$ \emph{separated} from the rest of the
-distribution, and the mass alone is only $\tfrac12$-H\"older stable in
-the rate path under (D1$'$)---mass exchanged between the atom and the
-adjacent boundary layer moves the aggregate only at second order, but
-moves the atom at first order. Under (D1) the elimination works and
-$\theta<1$ can be dispensed with; under the realistic (D1$'$) the
-threshold is load-bearing (Proposition~\ref{prop:diagelim},
-Appendix~\ref{app:proofs}).
+\emph{Step 2: a compact invariant class.} Define
+$\Omega_T(h):=\omega_T(h)/(1-\bar\theta)$ and
+\[
+X_T:=\big\{r\in\Kcal_R:\ |r(t)-r(s)|\le\Omega_T(|t-s|)\ \ \forall
+s,t\in[0,T]\big\}.
+\]
+$X_T$ is nonempty (it contains the constant path $r^{**}$), convex,
+closed in the uniform norm, uniformly bounded, and uniformly
+equicontinuous---hence compact, by Arzel\`a--Ascoli. If $r\in X_T$,
+then (H3) gives
+\[
+|\psit(r)(t)-\psit(r)(s)|
+\le\bar\theta\,\Omega_T(|t-s|)+\omega_T(|t-s|)
+=\Omega_T(|t-s|),
+\]
+since $\Omega_T$ is precisely the fixed point of the modulus
+recursion $x\mapsto\bar\theta x+\omega_T$. Together with Step~1 this
+shows $\psit(X_T)\subset X_T$. By (H2), $\psit|_{X_T}$ is continuous;
+Schauder's theorem gives a fixed point in $X_T\subset\Kcal_R$.
 
-\subsection{Zero net supply: the constrained mass is the market}
+\emph{Step 3: contraction.} Under \eqref{eq:D1contr}, $\psit$ is a
+strict contraction of the complete metric space $\Kcal_R$ (closed in
+$C([0,T])$; self-map by Step~1) whenever $\bar\theta+C_3T<1$;
+Banach's theorem gives uniqueness and geometric Picard convergence.
+
+\emph{Step 4: the ambiguity estimate.} Let $r\ne r'$ be fixed points
+and $\eta=\|r-r'\|_\infty$; both paths take values in $I_R$, so
+$0<\eta\le D$. Applying \eqref{eq:D1prime} to the fixed-point
+identity and dividing by $\eta$,
+\[
+1\ \le\ \bar\theta+(C_1+C_2)T+C_2T\,\log\frac{D}{\eta}.
+\]
+If $C_2>0$, rearranging gives \eqref{eq:ambiguity}; if $C_2=0$, the
+inequality contradicts $\bar\theta+C_1T<1$, so two distinct fixed
+points cannot exist.
+\end{proof}
+
+The theorem's architecture mirrors the economics. Step~1 is
+stabilization of the \emph{level} of rates by the anchoring data,
+on the symmetric interval that the antitone geometry requires
+(Remark~\ref{rem:antitone}). Step~2 handles the \emph{oscillation}:
+(H3) says the map transmits temporal oscillations of the rate with
+gain $\bar\theta$---the hand-to-mouth exposure---plus a smoothing
+remainder; when $\bar\theta<1$ the transmitted oscillation contracts,
+and the class of paths whose modulus is the recursion's fixed point
+$\Omega_T$ is exactly the self-consistent restriction that
+Proposition~\ref{prop:notcompact} demands. The two uniqueness regimes
+correspond to the two density regimes at the constraint.
+
+\subsection{The model corollary}
+\label{sec:verify}
+
+\begin{corollary}[equilibrium transitions exist for short horizons]
+\label{cor:model}
+Let $B>0$, $S(0)=B$, and let the anchoring function $A_0$ of
+\eqref{eq:A0} have Lipschitz constant
+$\theta_0\le\bar\theta<1$ and fixed point
+$r^{**}\in\operatorname{int}I$; fix a symmetric sub-band
+$I_R\subset\operatorname{int}I$ as in Theorem~\ref{thm:main}.
+Suppose the model delivers, on $\Kcal_R$ and for small $T$:
+\begin{enumerate}[label=\textup{(M\arabic*)},leftmargin=3.2em]
+\item the anchoring approximation \eqref{eq:anchor} with
+$\varepsilon_T<(1-\bar\theta)R$;
+\item continuity of $r\mapsto C(\cdot\,;r)$ in the uniform norm;
+\item the temporal transmission estimate \eqref{eq:temporal} with
+coefficient $\bar\theta$ bounded by the hand-to-mouth exposure
+$|\uba|\sup_{t,r}m_1(t;r)/B$;
+\item either the Lipschitz estimate \eqref{eq:D1contr} (bounded
+densities, (D1)) or the log-Lipschitz estimate \eqref{eq:D1prime}
+(boundary layer, (D1$'$)).
+\end{enumerate}
+Then there is $T^*>0$, depending on the data, $\bar\theta$, and the
+sub-band, such that for all $T\le T^*$ an equilibrium transition
+exists
+with rate path in $\Kcal_R$; it is unique in $\Kcal_R$ under (M4)-(D1),
+and unique up to the exponentially small ambiguity
+\eqref{eq:ambiguity} under (M4)-(D1$'$). (A fixed point of
+$\psit$ satisfies $C=Y+rB$ at every date; with $S(0)=B$,
+Lemma~\ref{lem:flow} upgrades this to $S\equiv B$.)
+\end{corollary}
+
+The corollary's hypotheses (M1)--(M4) are the precise interface
+between the equilibrium theorem and the household-level analysis, and
+we state them as hypotheses deliberately: they are aggregate
+estimates, and what the household package of
+Appendices~\ref{app:household}--\ref{app:distribution} delivers
+depends on the regime. Appendix~\ref{app:proofs} gives the
+verification arguments and their exact status. In brief:
+\begin{itemize}[leftmargin=2em]
+\item The \emph{contemporaneous ingredients} are exact and
+unconditional: constrained households consume $y_1+r(t)\uba$, so the
+atom's contribution to $C(t)$ responds to the rate with coefficient
+$m_1(t)\uba$---this is what puts the hand-to-mouth exposure into
+(M3) and the $\theta_0$-Lipschitz constant into $A_0$.
+\item The \emph{smoothing ingredients}---the modulus $\omega_T$ in
+(M3), the remainder $\varepsilon_T$ in (M1), and the interior parts of
+(M2) and (M4)---are delivered by the household package on
+\emph{uniform binding regimes}: when the constraint binds along the
+sub-band (sufficient conditions: the terminal compatibility
+$r_{\min}\ge r^*$ of Corollary~\ref{cor:knife} for canonical terminal
+data, plus paths slowly varying enough that the square-root
+coefficient $\nu_1$ of Lemma~\ref{lem:sqrt} stays positive), the atom
+mass is absolutely continuous with bounded derivative, the boundary
+layer has the square-root profile, and the interior policies have the
+stability in the path recorded in Lemma~\ref{lem:stability} and
+Remark~\ref{rem:halfHolder}.
+\item One strengthening of the data assumptions is genuinely needed,
+and we record it as Assumption~\ref{ass:VTs} (Appendix~%
+\ref{app:household}): the maintained bounds on terminal marginal
+values do \emph{not} by themselves imply a square-root modulus for the
+terminal consumption policy near the limit---terminal data with
+$c_T(a)=c_0+(a-\uba)^\alpha$, $\alpha<\tfrac12$, satisfy every
+maintained bound yet have a worse modulus
+(Remark~\ref{rem:sqrtcounter}). Since the layer estimates propagate
+backward from the terminal data, (M4)-(D1$'$) requires the terminal
+policy itself to have the square-root modulus; canonical terminal
+data $v_\infty(\cdot\,;r^*)$ satisfy this automatically, by the
+stationary square-root law.
+\end{itemize}
+
+Economically, the corollary says: \emph{short equilibrium transitions
+exist---and the natural computational scheme converges to them under
+bounded densities, and to within the exponentially small ambiguity in
+the boundary-layer regime---in
+economies where hand-to-mouth debt is smaller than the bond supply and
+along transitions that keep the constrained population intact}. Both
+qualifiers are substantive. The first is the stability condition
+$\bar\theta<1$ discussed in the introduction. The second connects the
+equilibrium theory back to Section~\ref{sec:binding}: dispersal
+episodes---terminal rates below the continuation rate, sharp rate
+rises---switch off both the square-root layer that (M4) quantifies
+and, at $B=0$, the market's contemporaneous lever itself.
+
+%======================================================================
+\section{Zero net supply}
 \label{sec:B0}
 
-At $B=0$ the flow condition reads $C(t)=Y(t)$: aggregate consumption
-is pinned to aggregate income, and by \eqref{eq:diagonal} the
-\emph{only} contemporaneous lever of the rate on clearing is the
-hand-to-mouth group, with weight $|\uba|\,m_1(t)$.
+At $B=0$ the flow condition reads $C(t;r)=Y(t)$---aggregate
+consumption pinned to aggregate income---and by \eqref{eq:diagonal}
+the only contemporaneous lever of the rate on clearing is the
+constrained mass, with weight $|\uba|\,m_1(t)$. The fixed-point
+formulation solves the flow condition for the rate through the
+constrained households' budget:
+\[
+r(t)\;=\;\widetilde\Psi_0(r)(t)\;:=\;
+\frac{C^{\mathrm{int}}(t;r)+m_1(t;r)\,y_1-Y(t)}
+{|\uba|\,m_1(t;r)},
+\]
+with $C^{\mathrm{int}}$ the consumption of the unconstrained.
 
-\begin{theorem}[$B=0$ with a constrained population]\label{thm:B0atom}
+\begin{proposition}[$B=0$ with a constrained population]
+\label{prop:B0atom}
 Let $B=0$, $S(0)=0$, $m_1(0)>0$, and assume---as an explicit
-hypothesis---that the constraint binds along the band throughout
-$[0,T]$. (Necessary for this is the terminal-data compatibility
-$\partial_a v_{T,1}(\uba)\le u'(y_1+r_{\min}\uba)$, which for
-canonical terminal data reads $r_{\min}\ge r^*$ by
-Corollary~\ref{cor:knife}; but terminal compatibility controls binding
-only near $T$, and interior dispersal episodes along
-dipping-and-rebounding paths must be excluded, e.g.\ by restricting to
-slowly varying paths on which the square-root coefficient $\nu_1$ of
-Lemma~\ref{lem:sqrt} stays positive.) Assume also the $B=0$ anchoring
-condition: the instantaneous rate implied by the data---the solution
-of the flow-clearing equation at $t=0$, with policies at their
-terminal-implied values---is interior to the band. Then the
-constrained mass decays no faster than its members find high income,
-$m_1(t)\ge m_1(0)e^{-\lambda_1t}$, the flow condition can be solved
-for the rate, and for $T\le T^*(\text{data},m_1(0))$ an equilibrium
-transition exists; it is unique in the band under (D1). The horizon
+hypothesis---that the constraint binds along the sub-band throughout
+$[0,T]$ (necessary for this is the terminal-data compatibility
+$\partial_a v_{T,1}(\uba)\le u'(y_1+r_{\min}\uba)$, i.e.\
+$r_{\min}\ge r^*$ for canonical terminal data; sufficient, in
+addition, is a restriction to slowly varying paths keeping
+$\nu_1>0$). Then the constrained mass decays no faster than its
+members find high income, $m_1(t)\ge m_1(0)e^{-\lambda_1t}$, the map
+$\widetilde\Psi_0$ is well defined with uniformly positive
+denominator, and---under the analogues of (M1)--(M4) for
+$\widetilde\Psi_0$ on a symmetric sub-band around its anchoring
+rate---an equilibrium transition exists for
+$T\le T^*(\mathrm{data},m_1(0))$, unique under (D1). The horizon
 $T^*$ shrinks linearly with $m_1(0)$: a thin hand-to-mouth population
 supports only a thin theorem.
-\end{theorem}
+\end{proposition}
 
 \begin{proposition}[$B=0$ with no constrained population: no local
 theory]\label{prop:notheorem}
@@ -867,161 +1045,124 @@ $t=0$ when the initial distribution has no mass at the limit, or
 following a dispersal episode. On that interval the clearing
 condition $C(t;r)=Y(t)$ contains the contemporaneous rate
 \emph{nowhere}: its linearization in the path is a compact operator
-(as in Theorem~\ref{thm:firstkind}), the constraint is a first-kind
-equation, and no local solution theory---Picard, Newton, or implicit
-function---applies. In this regime relaxations are a necessity, not a
-computational convenience: an $\varepsilon$-elastic bond supply
-$B_\varepsilon(r)=\varepsilon r$, or a price rule
+(as in Proposition~\ref{prop:firstkind}), the constraint is a
+first-kind equation, and no local solution theory---Picard, Newton,
+or implicit function---applies. In this regime relaxations are a
+necessity, not a computational convenience: an $\varepsilon$-elastic
+bond supply $B_\varepsilon(r)=\varepsilon r$, or a price rule
 $r(t)=F(C(t)-Y(t))$ with $F$ Lipschitz, restores an invertible
 diagonal $\varepsilon+|\uba|m_1$ and places the problem back in the
-class of Theorem~\ref{thm:smallT}; as $\varepsilon\to0$ one retains
-only weak limits of approximate equilibria, with clearing recovered in
-an integrated sense. Existence of exact equilibria in this regime is
-open---and the neighbouring analysis of \citet{Ambrose2021}, in a
+scope of Theorem~\ref{thm:main}; as $\varepsilon\to0$ one retains
+only weak limits of approximate equilibria, with clearing recovered
+in an integrated sense. Existence of exact equilibria in this regime
+is open---and the neighbouring analysis of \citet{Ambrose2021}, in a
 model where the constrained-mass channel is absent by construction,
 shows that there the exact problem is generically \emph{unsolvable}
 while its relaxation is well posed over short horizons.
 \end{proposition}
 
-The pair of results delivers a sharp economic message about the
-textbook case $B=0$: \emph{the hand-to-mouth population is the
-market}. When it is present, its budget is the margin along which the
-interest rate clears the market instant by instant, and equilibrium
-transitions exist. When it is absent, the interest rate is a shadow
-price with no contemporaneous market to clear, exact instant-by-instant
-clearing overdetermines the system, and the economically meaningful
-formulation is one in which either the asset supply has some
-elasticity or the price responds to imbalances with some friction.
+The pair delivers a sharp message about the textbook case $B=0$:
+\emph{the hand-to-mouth population is the market}. When it is
+present, its budget is the margin along which the interest rate
+clears the market instant by instant. When it is absent, the interest
+rate is a shadow price with no contemporaneous market to clear, exact
+instant-by-instant clearing overdetermines the system, and the
+economically meaningful formulation gives the asset supply some
+elasticity or the price some friction.
 
 %======================================================================
-\section{Long transitions: monotonicity and multiple self-fulfilling
-paths}
+\section{Long transitions: an informal discussion}
 \label{sec:long}
 
-The results above are local in the horizon: the anticipation and
-history channels each carry a factor $T$, and the ``loop gain'' of
-expectations---beliefs about future rates alter consumption today,
-which alters the wealth distribution, which alters market-clearing
-rates tomorrow---scales like $T^2$. For long horizons, one hopes for
-global structure. The natural candidate, suggested by the stationary
-theory, is monotonicity in the rate.
+The results above are local in the horizon, and we want to be candid
+that what follows is not a set of theorems but a map of the open
+territory. The anticipation and history channels of the multiplier
+map each carry a factor $T$, so the ``loop gain'' of the expectations
+feedback---beliefs about future rates alter consumption today, which
+alters the wealth distribution, which alters market-clearing rates
+tomorrow---scales like $T^2$; beyond the horizon $T^*$ of
+Corollary~\ref{cor:model}, contraction-based uniqueness must fail
+\emph{as an argument}, and something else is needed.
 
-\begin{lemma}[pathwise comparison fails for debtors]\label{lem:nocomp}
-Couple two economies under rate paths $r_h\ge r_\ell$ (pointwise),
-identical income realizations, identical initial wealth. Wealth under
-the higher path dominates wealth under the lower path only if,
-wherever wealth is negative,
-\[
-c^{r_\ell}(a,t)-c^{r_h}(a,t)\ \ge\ (r_h(t)-r_\ell(t))\,|a| :
-\]
-the consumption cut induced by higher rates must exceed the added
-interest burden. For debtors this is a quantitative restriction on the
-consumption response, not a sign restriction; ``higher rates
-$\Rightarrow$ higher wealth'' is not a comparison-principle fact in
-this model.
-\end{lemma}
+The natural candidate, suggested by the stationary theory, is
+monotonicity in the rate. It is worth recording first why this is not
+a soft comparison-principle fact. Couple two economies under rate
+paths $r_h\ge r_\ell$ (pointwise), with identical income realizations
+and initial wealth. Wealth under the higher path dominates only if,
+wherever wealth is negative, the consumption cut induced by higher
+rates exceeds the added interest burden:
+$c^{r_\ell}(a,t)-c^{r_h}(a,t)\ge(r_h(t)-r_\ell(t))\,|a|$. For
+debtors this is a quantitative restriction on the consumption
+response, not a sign restriction. In the stationary economy,
+\citet{AHLLM2022} prove the aggregate version---saving increasing in
+$r$---when the intertemporal elasticity of substitution is at least
+one ($\gamma\le1$) and borrowing is prohibited, and conclude
+uniqueness of the steady state. Their argument does not survive
+transplantation to time-varying paths, for identifiable reasons: it
+perturbs by a \emph{constant} rate (a time-varying perturbation turns
+the linearized Euler system into a two-point boundary problem with
+sign-indefinite kernels mixing substitution and wealth effects); it
+uses CRRA homogeneity to absorb the rate shift (which requires
+terminal data covariant under the same scaling---and terminal data
+drawn from a different stationary equilibrium are not); and it
+aggregates using stationary-distribution identities unavailable along
+a transition.
 
-In the stationary economy, \citet{AHLLM2022} prove the aggregate
-version of this dominance---saving increasing in $r$---when the
-intertemporal elasticity of substitution is at least one
-($\gamma\le1$) and borrowing is prohibited, and conclude uniqueness of
-the steady state. Their argument does not survive transplantation to
-time-varying paths, for identifiable reasons: it perturbs by a
-\emph{constant} rate (a time-varying perturbation turns the linearized
-Euler system into a two-point boundary problem with sign-indefinite
-kernels mixing substitution and wealth effects); it uses CRRA
-homogeneity to absorb the rate shift (which requires terminal data
-covariant under the same scaling---and terminal data drawn from a
-\emph{different} stationary equilibrium are not); and it aggregates
-using stationary-distribution identities unavailable along a
-transition. We therefore state the needed property as a hypothesis and
-develop its consequences honestly as such:
+Suppose, nonetheless, that aggregate consumption were antitone in the
+rate path---$C(t;r)\ge C(t;r')$ whenever $r\le r'$ pointwise. Then
+the multiplier map would be antitone, and the standard two-sided
+iteration started from the edges of the band---each iterate an
+application of the natural computational scheme---would generate
+monotone sequences converging to a pair of paths
+$\ubar r^\ast\le\bar r^\ast$ bracketing \emph{every} equilibrium,
+with uniqueness whenever the bracket collapses. The bracket would be
+computable, and its collapse checkable numerically. We emphasize that
+this monotonicity is a hypothesis: it holds in the stationary limit
+under a no-borrowing limit by \citet{AHLLM2022}, and over short
+horizons up to $O(T)$ by the sensitivity structure of
+Section~\ref{sec:main}, but it is unproven for genuinely time-varying
+perturbations even when $\gamma\le1$.
 
-\begin{itemize}[leftmargin=2em]
-\item[\textbf{(H-MONO)}] For paths $r\le r'$ pointwise in the band:
-$C(t;r)\ge C(t;r')$ for all $t$ (aggregate consumption falls when the
-whole rate path rises).
-\end{itemize}
-
-\begin{theorem}[monotone localization of equilibria]\label{thm:mono}
-Let $B>0$, $S(0)=B$, assume the multiplier map preserves the band and
-(H-MONO). Then $\Psi$ is antitone, and the two-sided iteration started
-from the band edges,
-$\bar r^{n+1}=\Psi(\ubar r^{n})$, $\ubar r^{n+1}=\Psi(\bar r^{n})$,
-converges monotonically and uniformly to continuous limits
-$\ubar r^\ast\le\bar r^\ast$ with $\Psi(\ubar r^\ast)=\bar r^\ast$
-and $\Psi(\bar r^\ast)=\ubar r^\ast$. \emph{Every} equilibrium in the
-band lies between $\ubar r^\ast$ and $\bar r^\ast$; any two
-pointwise-ordered equilibria coincide; and if the limits collapse,
-$\ubar r^\ast=\bar r^\ast$, the equilibrium is unique and the
-iteration converges to it globally.
-\end{theorem}
-
-The bracket $[\ubar r^\ast,\bar r^\ast]$ is computable: it is the
-limit of the natural best-response iteration started from the
-extremes, and the collapse condition can be checked numerically. For
-$\gamma\le1$, (H-MONO) is credible---its stationary counterpart holds
-under a no-borrowing limit
-by \citet{AHLLM2022}, and over short horizons up to $O(T)$ by the
-sensitivity decomposition---but we emphasize it remains unproven for
-genuinely time-varying perturbations.
-
-For $\gamma>1$ the situation is qualitatively different.
-
-\begin{proposition}[risk aversion above one: singular linearizations
-and multiplicity]\label{prop:multiplicity}
-By \citet[Thm.~1.10]{Hofer2025}, for every $\gamma>1$ there exist
-two-state economies (with a no-borrowing limit) and rates
-$r_1<r_2<\rho$ at which stationary aggregate wealth satisfies
-$S_{\mathrm{stat}}(r_1)>S_{\mathrm{stat}}(r_2)$. Two scope caveats:
-the construction is existential over economies (a rare-disaster
-income process), not universal; and it is proved at the no-borrowing
-limit $\uba=0$, a boundary case of our maintained $\uba<0$ (where the
+For risk aversion above one, even the hypothesis is untenable as a
+general principle. \citet[Thm.~1.10]{Hofer2025} shows that for every
+$\gamma>1$ there \emph{exist} two-state economies (with a
+no-borrowing limit; the construction is a rare-disaster income
+process, and it is existential over economies, not universal) and
+rates $r_1<r_2<\rho$ at which stationary aggregate wealth satisfies
+$S_{\mathrm{stat}}(r_1)>S_{\mathrm{stat}}(r_2)$. Two caveats before
+drawing conclusions: the construction lives at the no-borrowing limit
+$\uba=0$, a boundary case of our maintained $\uba<0$ (where the
 hand-to-mouth channel $m_1\uba$ vanishes identically), so its
-extension to $\uba<0$ rests on an unproven continuity argument. On
-the constructed class, and with the bridge from constant paths to
-transitions understood as a turnpike heuristic:
-\begin{enumerate}[label=(\roman*),leftmargin=2.2em]
-\item (H-MONO) fails in the bulk of long horizons: constant paths at
-$r_1<r_2$ order aggregate wealth the wrong way for most of the
-horizon.
-\item At a stationary point on the downward-sloping branch, slowly
-varying path perturbations satisfy $DS[\delta r]\approx
-S_{\mathrm{stat}}'(r^\ast)\,\delta r$ with
-$S_{\mathrm{stat}}'(r^\ast)\le0$: the linearized clearing map acquires
-an approximate kernel (at a fold) or a wrong-signed diagonal. Monotone
-methods and na\"ive continuation in the horizon cross a singular
-linearization; the reduction at a fold is one-dimensional and
-degenerate---the classical environment for bifurcation of
-self-fulfilling equilibrium paths, in which a believed future path of
-rates alters current consumption, reshapes the wealth distribution,
-and validates the belief.
-\item When several stationary rates clear the same bond supply, data
-connecting two of them (initial distribution from one, terminal
-values from the other; both satisfy $S(0)=B$) admit, on long
-horizons, transition paths lingering near each steady state as natural
-candidates for \emph{distinct equilibria with identical endpoints}.
-Under $\gamma\le1$ and (H-MONO), by contrast,
-Theorem~\ref{thm:mono} confines any multiplicity to non-ordered,
-crossing pairs of paths.
-\end{enumerate}
-\end{proposition}
+extension to $\uba<0$ rests on an unproven continuity argument; and
+the passage from stationary comparisons to transition paths is a
+turnpike heuristic. With those caveats, the picture such economies
+suggest is the following. On long horizons with data near a
+stationary point on the downward-sloping branch of
+$S_{\mathrm{stat}}$, slowly varying path perturbations see a
+linearized clearing map with an approximate kernel (at a fold) or a
+wrong-signed diagonal: monotone methods and na\"ive continuation in
+the horizon would cross a singular linearization, the classical
+environment for bifurcation of self-fulfilling equilibrium paths---a
+believed future path of rates alters current consumption, reshapes
+the wealth distribution, and validates the belief. And when several
+stationary rates clear the same bond supply, data connecting two of
+them (initial distribution from one, terminal values from the other;
+both satisfy $S(0)=B$) admit, on long horizons, transition paths
+lingering near each steady state as natural candidates for distinct
+equilibria with identical endpoints.
 
-\begin{remark}[what is proved and what is conjectured]
-\label{rem:honest}
-Unconditional, given the household package:
-Proposition~\ref{prop:compat}, Lemma~\ref{lem:flow},
-Theorem~\ref{thm:firstkind}, Theorems~\ref{thm:smallT} and
-\ref{thm:B0atom}, Proposition~\ref{prop:notheorem}. Conditional:
-Theorem~\ref{thm:mono} under (H-MONO)---credible for $\gamma\le1$,
-refuted in the bulk-of-horizon sense for $\gamma>1$ on the economies
-of \citet[Thm.~1.10]{Hofer2025}. Open: existence for long horizons at
-$B>0$ without (H-MONO) (the missing ingredient is an a~priori bound
-keeping equilibrium rate paths in a band); exact uniqueness in the
-boundary-layer density regime; existence at $B=0$ without a
-constrained population; and the rigorous turnpike bridge in
-Proposition~\ref{prop:multiplicity}.
-\end{remark}
+None of this is proved, and we prefer to leave it that way in print:
+the honest summary is that short-horizon existence and uniqueness are
+established in Section~\ref{sec:main} under explicit, verifiable
+hypotheses, long-horizon uniqueness for
+$\gamma\le1$ is a plausible conjecture waiting on a genuinely
+time-dependent monotonicity argument, and long-horizon uniqueness for
+$\gamma>1$ is doubtful on the strength of the stationary
+counterexamples. For the empirically common calibrations with
+$\gamma>1$, uniqueness of computed transition dynamics should be
+regarded as an assumption of computational practice---testable, for
+instance, by restarting path-iteration algorithms from dispersed
+initial guesses---rather than as a theorem.
 
 %======================================================================
 \section{Conclusion}
@@ -1030,35 +1171,24 @@ Proposition~\ref{prop:multiplicity}.
 The steady-state theory of heterogeneous-agent economies rests on two
 gifts: the interest rate summarizes the distribution in one number,
 and impatience pins households to the borrowing constraint, where
-their behavior is transparent. This paper shows that along a
-transition both gifts are revoked, and identifies exactly what
-replaces them. Market clearing in stocks is degenerate---today's rate
-moves nothing today---and the operative equilibrium condition is the
-aggregate budget identity in flows, in which the rate's only
-instantaneous levers are interest on the bond supply and the budgets
-of hand-to-mouth debtors. Binding at the constraint is governed by
-terminal conditions rather than impatience, so the hand-to-mouth
-population---the market's own lever---can disperse endogenously along
-the path.
-
-Three practical conclusions follow. First, transition equilibria
-exist and are unique over short horizons under a measurable stability
-condition, $\theta=|\uba|\sup_tm_1/B<1$: hand-to-mouth debt
-below the stock of liquid assets. Second, the textbook case of zero
-net supply is exactly as well behaved as its constrained population:
-with no one at the limit, instant-by-instant clearing overdetermines
-the economy, and slightly elastic supply or a price rule is not an
-approximation of the true problem but its correct formulation---a
-conclusion reinforced from the frictionless side by
-\citet{Ambrose2021}. Third, for risk aversion above one, the
-non-monotone aggregate-saving economies of \citet{Hofer2025} can make
-the linearized clearing condition singular along a transition, and
-multiple self-fulfilling paths between the same endpoints become a
-live possibility: the uniqueness of computed transition dynamics in
-common calibrations is an article of numerical faith, and testing for
-it---by restarting path-iteration algorithms from dispersed initial
-guesses, or by monitoring the sign of the flow-clearing
-diagonal---seems a worthwhile discipline.
+their behavior is transparent. Along a transition both gifts are
+revoked. This paper's main theorem shows what replaces them: the
+operative equilibrium condition is the aggregate budget identity in
+flows---the form the computational algorithms already iterate
+on---and the equilibrium fixed point lives on a class of rate paths
+whose oscillations are self-consistently controlled by the one group
+that responds to the rate in real time, hand-to-mouth debtors.
+Existence and uniqueness over short horizons are established when that
+group's debt is smaller than the bond supply, $\bar\theta=|\uba|
+\sup_tm_1/B<1$: a measurable stability condition, load-bearing in the
+realistic boundary-layer regime. Around the theorem
+sit three findings worth carrying away: whether the constrained
+population survives to the end of a transition is decided by terminal
+conditions, not impatience; at zero net supply the constrained
+population \emph{is} the market, and without it exact
+instant-by-instant clearing is the wrong demand; and for risk
+aversion above one, the uniqueness of long transitions is an open
+question on which the stationary evidence counsels doubt.
 
 %======================================================================
 \appendix
@@ -1083,7 +1213,7 @@ $-\infty<\uba<0$; $T<\infty$; $B\in[0,\infty)$.
 \end{assumption}
 
 \begin{assumption}[price band]\label{ass:band}
-$r\in\Kcal=\{r\in C([0,T]):r_{\min}\le r\le r_{\max}\}$ with
+$r\in\Kcal_I$ with $I=[r_{\min},r_{\max}]$,
 $r_{\max}<y_1/|\uba|$; write $\bar r=\max\{|r_{\min}|,r_{\max}\}$ and
 $\ubc=y_1+r_{\max}\uba>0$.
 \end{assumption}
@@ -1094,16 +1224,63 @@ constants $c_T^{\min}>0$, $C_T>0$ such that
 \emph{(VT-u)} $\partial_a v_{T,j}\le u'(c_T^{\min})=:\bar p_T$ and
 \emph{(VT-l)} $\partial_a v_{T,j}(a)\ge u'(C_T(1+a-\uba))$ for all
 $a$. Both hold for $v_T=v_\infty(\cdot\,;r^*)$ with
-$r^*\in[r_{\min},r_{\max}]$, $r^*<\rho$, by the stationary binding
-equality and asymptotically linear stationary consumption.
+$r^*\in I$, $r^*<\rho$, by the stationary binding equality and
+asymptotically linear stationary consumption.
+\end{assumption}
+
+\begin{assumption}[terminal layer regularity]\label{ass:VTs}
+The terminal consumption policies
+$c_{T,j}=(u')^{-1}(\partial_a v_{T,j})$ satisfy the square-root
+modulus at the limit: on a neighborhood of $\uba$,
+\[
+|c_{T,j}(a)-c_{T,j}(\uba)|\ \le\
+C_{T,\mathrm{lay}}\,\sqrt{a-\uba}.
+\] This is a genuine strengthening of
+Assumption~\ref{ass:VT} (see Remark~\ref{rem:sqrtcounter}); it holds
+for canonical terminal data $v_\infty(\cdot\,;r^*)$ by the stationary
+square-root law.
 \end{assumption}
 
 \begin{assumption}[initial data]\label{ass:G0}
 $G_0=(G_{0,1},G_{0,2})$ nonnegative measures on $[\uba,\infty)$ with
 total mass one and finite first moment; compact support
-$[\uba,A_0]$ where stated. Density regimes (D1)/(D1$'$) as in
+$[\uba,\bar A]$ where stated; and no high-income mass at the limit,
+$G_{0,2}(\{\uba\})=0$. Density regimes (D1)/(D1$'$) as in
 Section~\ref{sec:eqmdef}.
 \end{assumption}
+
+\begin{assumption}[the high-income type is unconstrained at the
+limit]\label{ass:type2}
+Along the band, $s_2(\uba,t)>0$ for all $t$: the high-income
+household at the borrowing limit strictly saves, so no type-2
+boundary mass ever forms and the only atom is $m_1(t)$. Sufficient
+near the terminal date is
+$\partial_a v_{T,2}(\uba)>u'(y_2+r_{\max}\uba)$, which canonical
+terminal data satisfy (the high type saves at the constraint in the
+stationary equilibrium). This assumption is what licenses writing the
+contemporaneous clearing sensitivity as $B+|\uba|m_1(t)$ in
+\eqref{eq:diagonal} and the anchoring function \eqref{eq:A0} with the
+type-1 atom only.
+\end{assumption}
+
+\begin{remark}[why Assumption~\ref{ass:VTs} is needed]
+\label{rem:sqrtcounter}
+Fix $0<\alpha<\tfrac12$ and $c_0>0$, and set
+$c_T(a)=c_0+(a-\uba)^\alpha$,
+$v_T(a)=v_T(\uba)+\int_{\uba}^a c_T(x)^{-\gamma}dx$. Then $v_T$ is
+$C^1$, strictly increasing, concave, and satisfies (VT-u) with
+$c_T^{\min}=c_0$ and (VT-l) with a suitable $C_T$; if
+$c_0<\min_{x\in I}(y_1+x\uba)$ the terminal boundary policy is
+$c_0$. Yet $|c_T(a)-c_T(\uba)|=(a-\uba)^\alpha$ is not
+$O(\sqrt{a-\uba})$. Hence the maintained bounds on terminal marginal
+values do not imply the square-root layer modulus, and any argument
+propagating layer estimates backward from $T$ must assume it. (The
+square-root law of Lemma~\ref{lem:sqrt} generates the modulus on
+binding intervals \emph{away} from the terminal layer, under its
+stated hypotheses---a $C^1$ path, uniform binding,
+$\nu_1\ge\ubar\nu>0$---but not at $t=T$ from rough admissible
+terminal data.)
+\end{remark}
 
 \begin{remark}[not assumed]
 Neither $\rho>0$, nor $r(t)<\rho$, nor the stationary finiteness
@@ -1117,7 +1294,7 @@ The value function is
 $v_j(a,t)=\sup\E[\int_t^Te^{-\rho(s-t)}u(c_s)ds
 +e^{-\rho(T-t)}v_{T,y_T}(a_T)]$ over progressively measurable
 $c\ge0$ maintaining $a_s\ge\uba$; admissibility is nonempty uniformly
-over $\Kcal$ by Assumption~\ref{ass:band} (hold the state consuming
+over the band by Assumption~\ref{ass:band} (hold the state consuming
 $\ubc_{y_s}(s)>0$). Standard arguments give pathwise wealth and
 budget bounds, finiteness and linear growth of $v$, concavity and
 strict monotonicity in $a$, and dynamic programming.
@@ -1133,7 +1310,7 @@ $\uba$ is equivalent to \eqref{eq:BC} \citep{Soner1986a,CDL1990}.
 
 \begin{theorem}[existence, comparison, uniqueness]\label{thm:cvs}
 Under Assumptions~\ref{ass:prim}--\ref{ass:VT}, for every
-$r\in\Kcal$ the value function is the unique constrained viscosity
+$r\in\Kcal_I$ the value function is the unique constrained viscosity
 solution in the class of continuous functions concave, nondecreasing,
 of linear growth in $a$.
 \end{theorem}
@@ -1141,14 +1318,12 @@ of linear growth in $a$.
 \emph{Proof architecture.} (i) Sub/supersolution properties from
 dynamic programming; the state-constraint supersolution property at
 $\uba$ via Soner's inward cone, whose hypothesis is exactly
-$\ubc_j(t)\ge\ubc>0$, uniform over $\Kcal$
+$\ubc_j(t)\ge\ubc>0$, uniform over the band
 \citep{Soner1986a,Soner1986b,CDL1990}. (ii) The singular Hamiltonian
 is handled by truncation: comparison is proved for a globally
 Lipschitz $H_\flat$ agreeing with $H$ on the compact gradient range
 delivered by Theorems~\ref{thm:upper}--\ref{thm:lower}; solutions
-never see the truncation. This interface between the gradient bounds
-and the comparison argument must be made explicit, since the range is
-not free in finite horizon. (iii) Comparison for the weakly coupled
+never see the truncation. (iii) Comparison for the weakly coupled
 system: the switching coupling is quasi-monotone, so the system
 comparison principles of \citet{IshiiKoike1991} and
 \citet{EnglerLenhart1991} combine with parabolic doubling
@@ -1183,9 +1358,11 @@ vanishing-viscosity or implicit finite-difference approximations and
 pass to the limit.
 
 \begin{theorem}[upper bound]\label{thm:upper}
-For all $j,a,t$ and $r\in\Kcal$:
-$\partial_a v_j(a,t)\le p_{\max}
-:=\max\{\bar p_T,u'(\ubc)\}\,e^{(r_{\max}-\rho)^+T}$.
+For all $j,a,t$ and $r\in\Kcal_I$:
+\[
+\partial_a v_j(a,t)\ \le\ p_{\max}
+:=\max\{\bar p_T,\,u'(\ubc)\}\,e^{(r_{\max}-\rho)^+T}.
+\]
 \end{theorem}
 
 \emph{Sketch.} $W(t)=\max\{\bar p_T,u'(\ubc)\}
@@ -1206,7 +1383,7 @@ assumption.\hfill$\square$
 There are $\kappa>0$ and $C=C(\gamma,y_2,\bar r,\rho,\lambda)$ with
 $\partial_a v_j(a,t)\ge\kappa e^{-CT}(1+a-\uba)^{-\gamma}$,
 equivalently $c_j(a,t)\le\kappa^{-1/\gamma}e^{CT/\gamma}(1+a-\uba)$,
-uniformly over $\Kcal$.
+uniformly over the band.
 \end{theorem}
 
 \emph{Sketch.} The ansatz $m(a,t)=\delta(t)(1+a-\uba)^{-\gamma}$,
@@ -1254,20 +1431,24 @@ complementarity (KKT) rate of the state-constraint multiplier, so the
 square-root law and binding degrade together. A rigorous version
 freezes coefficients on short time intervals and compares with sub-
 and super-boundary layers; we flag it as the delicate step of the
-package.
+package, and we emphasize again its hypotheses ($C^1$ path, binding,
+$\nu_1\ge\ubar\nu>0$), which is why the corresponding aggregate
+estimates enter Corollary~\ref{cor:model} as hypotheses verified on
+uniform binding regimes.
 
 \subsection{Stability in the rate path}
 
-\begin{lemma}[continuity and Lipschitz stability]\label{lem:stability}
-If $r_n\to r$ uniformly in $\Kcal$, then $v^{r_n}\to v^r$ locally
+\begin{lemma}[continuity and Lipschitz stability of the value]
+\label{lem:stability}
+If $r_n\to r$ uniformly in $\Kcal_I$, then $v^{r_n}\to v^r$ locally
 uniformly (half-relaxed limits plus comparison, the boundary obstacle
-converging uniformly by Assumption~\ref{ass:band}), and policies
+converging uniformly by Assumption~\ref{ass:band}), and the policies
 converge locally uniformly on $[\uba,\infty)\times[0,T)$. Moreover
 \[
 |v^r_j(a,t)-v^{r'}_j(a,t)|\ \le\
 C^\star(1+a-\uba)\,\|r-r'\|_{C([t,T])},
 \]
-with $C^\star$ uniform over $\Kcal$; only the future of the path
+with $C^\star$ uniform over the band; only the future of the path
 enters.
 \end{lemma}
 
@@ -1279,11 +1460,13 @@ times move with $r$, making $\|c^r-c^{r'}\|_\infty\lesssim
 \|r-r'\|^{1/2}$ the honest generic rate. The equilibrium analysis
 needs less: in aggregates, the atom's consumption
 $y_1+r(t)\uba$ is exactly Lipschitz with constant $|\uba|$, and the
-interior part meets the layer only on a set of small mass
-($O(\delta^{3/2})$ under (D1), $O(\delta)$ under (D1$'$)); the
-pointwise loss integrates away, up to a logarithm under (D1$'$).
+interior part meets a layer of width $\delta$ only on a set of mass
+$O(\delta)$ under (D1) and $O(\sqrt\delta)$ under (D1$'$), whose
+contribution to aggregates is $O(\delta^{3/2})$ and $O(\delta)$
+respectively; the pointwise loss integrates away, up to a logarithm
+under (D1$'$).
 This atom/interior division is the interface used in
-Section~\ref{sec:smallT}.
+Appendix~\ref{app:proofs}.
 \end{remark}
 
 \section{Distributional dynamics}
@@ -1312,7 +1495,7 @@ moments.
 \begin{lemma}[one-sided Lipschitz drift]\label{lem:OSL}
 Since $c_j(\cdot,t)$ is nondecreasing,
 $(s_j(a,t)-s_j(b,t))(a-b)\le\bar r|a-b|^2$: the drift is one-sided
-Lipschitz uniformly in $t$ and $\Kcal$, despite the square-root
+Lipschitz uniformly in $t$ and over the band, despite the square-root
 singularity (which has the contractive sign); and
 $s_1(\uba,t)\ge0$ always.
 \end{lemma}
@@ -1326,8 +1509,8 @@ by duality in the one-dimensional one-sided-Lipschitz transport
 theory \citep{Filippov1960,BouchutJames1998,PoupaudRascle1997},
 extended to the switching system by Duhamel. Compact supports
 propagate with explicit bounds, and the first moment $S(t)$ is
-Lipschitz in $t$ uniformly over $\Kcal$---the rigorous content of the
-flow identity in Lemma~\ref{lem:flow}.
+Lipschitz in $t$ uniformly over the band---the rigorous content of
+the flow identity in Lemma~\ref{lem:flow}.
 \end{theorem}
 
 \begin{proposition}[atom dynamics: growth and discontinuous release]
@@ -1349,11 +1532,12 @@ re-accumulates if binding resumes. In particular $t\mapsto m_1(t)$ is
 of bounded variation but not continuous, and the contemporaneous
 clearing sensitivity $B+|\uba|m_1(t)$ of
 Section~\ref{sec:clearing} is switched on and off by the binding
-analysis of Section~\ref{sec:binding}.
+analysis of Section~\ref{sec:binding}. On uniform binding regimes
+$m_1$ is absolutely continuous with derivative bounded uniformly over
+the band---the property consumed by hypothesis (M3).
 \end{proposition}
 
-\section{Proof architectures for
-Sections~\ref{sec:clearing}--\ref{sec:long}}
+\section{Proofs and verification of the model hypotheses}
 \label{app:proofs}
 
 \paragraph{Lemma~\ref{lem:flow}.} Take $\varphi_j=a$ in
@@ -1363,7 +1547,7 @@ terms cancel, leaving $\dot S=\sum_j\int s_j\dd G_{j,t}
 $S\equiv B$ by Gr\"onwall; conversely $S\equiv B$ forces $\dot S=0$,
 i.e.\ $C=Y+rB$.
 
-\paragraph{Theorem~\ref{thm:firstkind}.} (i) is
+\paragraph{Proposition~\ref{prop:firstkind}.} (i) is
 Proposition~\ref{prop:compat}. (ii): the value at dates $t\le t_0-h$
 responds to a perturbation supported on $(t_0-h,t_0+h)$ only through a
 Duhamel source active on a window of width $2h$
@@ -1374,311 +1558,139 @@ with the logarithmic factor under (D1$'$) inherited from
 Remark~\ref{rem:halfHolder}. (iii): (ii) plus Arzel\`a--Ascoli; the
 first-kind character is the vanishing diagonal.
 
-\subsection{Full proof of Theorem~\ref{thm:smallT}}
-\label{app:smallTproof}
+\paragraph{Verification of (M1)--(M4): status and arguments.}
+We work on a symmetric sub-band $\Kcal_R$ around $r^{**}$ as in
+Theorem~\ref{thm:main}, on a \emph{uniform binding regime}: the
+constraint binds along the sub-band throughout $[0,T]$ (sufficient
+conditions in Corollary~\ref{cor:model}), with
+Assumption~\ref{ass:VTs} in force. Write
+$\eta=\|r-r'\|_\infty$ and $\bar m_1=\sup_{t,r\in\Kcal_R}m_1(t;r)$.
+The household-level inputs are: the exact atom budget identity
+($c_1(\uba,t)=y_1+r(t)\uba$ under binding); the layer modulus
+$|c^r_j(a,t)-c^r_j(\uba,t)|\le C_{\mathrm{lay}}\sqrt{a-\uba}$,
+\emph{taken as an explicit package hypothesis uniformly over
+$\Kcal_R$}---Lemma~\ref{lem:sqrt} derives it only for $C^1$, slowly
+varying paths with $\nu_1\ge\ubar\nu>0$, and
+Assumption~\ref{ass:VTs} supplies it at the terminal layer, while the
+Schauder class $X_T$ of Theorem~\ref{thm:main} consists of paths with
+modulus $\Omega_T\asymp\sqrt{\cdot}$ that are not $C^1$, so the
+extension across $\Kcal_R$ is assumed, not derived; interior policy
+stability at rate
+$L_1(T-t)\eta$ (differentiating the comparison argument behind
+Lemma~\ref{lem:stability} where the value is locally $C^{1,1}$; the
+layer-crossing rate is the delicate step flagged in
+Remark~\ref{rem:halfHolder}, used only in integrated form); the
+$W_\infty$-flow stability $W_\infty(G^r_t,G^{r'}_t)\le L_2t\eta$
+(pathwise coupling, Lemma~\ref{lem:OSL}, Gr\"onwall); and the
+time-regularity of $G$ and of $m_1$ (Theorem~\ref{thm:KF},
+Proposition~\ref{prop:atom}).
 
-Throughout this subsection $B>0$, $S(0)=B$, the maintained
-assumptions hold, distributions are supported in the common compact
-$[\uba,A]$ with $A=A(T,A_0)$ from Theorem~\ref{thm:KF}, and for
-$r,r'\in\Kcal$ we write $\eta:=\|r-r'\|_\infty$,
-$\bar m_1:=\sup_{t,\,r\in\Kcal}m_1(t;r)$, and
-$\theta=|\uba|\bar m_1/B\le\bar\theta<1$. The proof consumes the
-household package of
-Appendices~\ref{app:household}--\ref{app:distribution} through the
-following quantitative statements, recorded once.
+\emph{(M1).} As $T\to0$, the value functions converge to the terminal
+data uniformly on compacts at rate $O(T)$, so interior policies
+converge to $c_{T,j}$ and the boundary policy to
+$\min\{c_{T,1}(\uba),y_1+r(t)\uba\}$; distributions satisfy
+$W_\infty(G_t,G_0)\le\bar sT$ and $m_1(t)\to m_1(0)$ on binding
+regimes. Passing to the limit in $C(t;r)$ channel by channel gives
+$\sup_{r,t}|\psit(r)(t)-A_0(r(t))|=\varepsilon_T\to0$, with
+$A_0$ as in \eqref{eq:A0}: the limit depends on the path only through
+the contemporaneous budget of the initially constrained.
 
-\begin{enumerate}[label=(S\arabic*),leftmargin=3em]
-\item \emph{Policy stability.} At the constraint, whenever both
-problems bind, the exact budget identity
-$c^r_1(\uba,t)-c^{r'}_1(\uba,t)=\uba\,(r(t)-r'(t))$ holds (both sides
-consume $y_1+r(\cdot)\uba$); in the mixed binding case the
-$\min$-structure of the boundary policy gives
-$|c^r_1(\uba,t)-c^{r'}_1(\uba,t)|\le|\uba|\eta$ plus a term of
-interior type. On the interior region, uniformly over $\Kcal$,
+\emph{(M2) and (M4).} Decompose, for $r,r'\in\Kcal_R$,
 \[
-\sup_{a\in[\uba+\delta_0,A]}|c^r_j(a,t)-c^{r'}_j(a,t)|
-\ \le\ L_1\,(T-t)\,\eta,
+B\big[\psit(r)(t)-\psit(r')(t)\big]
+=\underbrace{\sum_j\int(c^r_j-c^{r'}_j)(\cdot,t)\dd
+G^{r'}_{j,t}}_{I}
++\underbrace{\sum_j\int c^r_j(\cdot,t)\dd(G^r_{j,t}
+-G^{r'}_{j,t})}_{II}.
 \]
-obtained by differentiating the comparison argument behind
-Lemma~\ref{lem:stability}---whose error term accrues only over
-$[t,T]$, giving the factor $(T-t)$---on the region where the value is
-locally $C^{1,1}$ in wealth. Across the boundary layer
-$[\uba,\uba+\delta_0]$ the pointwise rate degrades to order
-$\sqrt\eta$ (Remark~\ref{rem:halfHolder}); the Lipschitz rate is
-restored there under uniform binding, where the square-root
-coefficient $\nu_1(\cdot\,;r)$ of Lemma~\ref{lem:sqrt} is Lipschitz
-in the path through its explicit formula. This layer statement is the
-delicate step of the household package flagged in
-Appendix~\ref{app:household}; it is used below only through
-integrated quantities.
-\item \emph{Layer modulus.} Uniformly over $\Kcal$,
-$|c^r_j(a,t)-c^r_j(\uba,t)|\le C_{\mathrm{lay}}\sqrt{a-\uba}$ on
-$[\uba,\uba+\delta_0]$ (Lemma~\ref{lem:sqrt} with the gradient bounds
-of Theorems~\ref{thm:upper}--\ref{thm:lower}).
-\item \emph{Flow stability.} $W_\infty(G^r_t,G^{r'}_t)\le
-L_2\,t\,\eta$. \emph{Proof:} couple the two populations pathwise
-(same initial wealth, same income realizations). Between switches,
-$\tfrac{d}{dt}(a^r_t-a^{r'}_t)^2\le
-2\bar r\,(a^r_t-a^{r'}_t)^2
-+2|a^r_t-a^{r'}_t|\,\big(A\,\eta+\|c^r-c^{r'}\|_\infty\big)$ by
-Lemma~\ref{lem:OSL} (the one-sided part has the contractive sign),
-and the constrained projection at $\uba$ is a contraction in one
-dimension; Gr\"onwall and (S1) give
-$|a^r_t-a^{r'}_t|\le e^{\bar rt}\,t\,(A+|\uba|+L_1T)\,\eta$, and the
-supremum over paths bounds $W_\infty$.
-\item \emph{Time regularity.} $t\mapsto G_t$ is $W_\infty$-Lipschitz
-with constant $\bar s=\sup_{[\uba,A]}|s_j|$ (bounded drift,
-Theorem~\ref{thm:KF}), and away from the terminal layer the policies
-have a uniform modulus of continuity in $t$ (bound $\partial_tv$
-through the equation and the gradient bounds, then argue as in (S2)).
-\end{enumerate}
+In $I$, the atom contributes $\le\bar m_1|\uba|\eta$ (exact identity)
+and the interior $\le L_1T\eta$. In $II$, couple the measures by the
+monotone quantile coupling at $W_\infty$-distance
+$\hat\eta=L_2T\eta$ and split the pairs: both at the atom (zero);
+mismatch pairs, one at the atom and one in the layer (consumption
+discrepancy $\le C_{\mathrm{lay}}\sqrt{\hat\eta}$ by the layer
+modulus; layer mass $\le2D\sqrt{\hat\eta}$ under (D1$'$); product
+$O(\hat\eta)$---mass exchanged between atom and layer moves
+consumption only at second order because consumption is continuous
+across the limit); interior pairs (modulus
+$C_{\mathrm{lay}}\hat\eta/\sqrt{x-\uba}$ in the layer, Lipschitz
+outside), giving
+$\int_{\hat\eta}^{\delta_0}(\hat\eta/\sqrt x)\,Dx^{-1/2}dx
+=D\hat\eta\log(\delta_0/\hat\eta)$. Summing:
+\begin{align*}
+\|\psit(r)-\psit(r')\|_\infty&\le
+\bar\theta\eta+C_1T\eta+C_2T\eta\Big(1+\log\frac{D}{\eta}\Big)
+&&\text{under (D1$'$)},\\
+\|\psit(r)-\psit(r')\|_\infty&\le(\bar\theta+C_3T)\,\eta
+&&\text{under (D1)},
+\end{align*}
+which is (M4) in the two regimes (the $\log(D/\eta)$ form follows
+from $\log(\delta_0/\hat\eta)$ after absorbing constants, using
+$\eta\le D$ on $\Kcal_R$) and, a fortiori, (M2).
 
-\begin{lemma}[aggregate stability transfer]\label{lem:agg}
-For all $t\in[0,T]$ and $r,r'\in\Kcal$:
+\emph{(M3).} Decompose $B[\psit(r)(t)-\psit(r)(s)]
+=[C(t;r)-C(s;r)]-[Y(t)-Y(s)]$. The atom's contribution to
+$C(t)-C(s)$ is
 \[
-|C(t;r)-C(t;r')|\ \le\
-|\uba|\,\bar m_1\,\eta+C_1T\,\eta+C_2T\,\eta\big(1+\log_+(1/\eta)\big)
-\quad\text{under (D1$'$)},
+m_1(t)\big(y_1+r(t)\uba\big)-m_1(s)\big(y_1+r(s)\uba\big)
+=m_1(t)\,\uba\,\big(r(t)-r(s)\big)
++\big(m_1(t)-m_1(s)\big)\big(y_1+r(s)\uba\big),
 \]
-and $|C(t;r)-C(t;r')|\le(|\uba|\bar m_1+C_3T)\,\eta$ under (D1).
-Moreover $Y(t;r)=Y(t)$ does not depend on the path: the income-type
-marginals solve the autonomous two-state master equation
-($\dot\pi_1=-\lambda_1\pi_1+\lambda_2\pi_2$), as is seen by taking
-$\varphi_1\equiv1$, $\varphi_2\equiv0$ in
-Definition~\ref{def:KFweak}.
-\end{lemma}
+whose first term is bounded by $\bar m_1|\uba|\,|r(t)-r(s)|$---the
+$\bar\theta|r(t)-r(s)|$ term of \eqref{eq:temporal} with
+$\bar\theta=|\uba|\bar m_1/B$---and whose second term is
+$\omega$-type on uniform binding regimes, where $m_1$ is absolutely
+continuous with bounded derivative
+(Proposition~\ref{prop:atom}). The interior consumption and the
+distributional drift contribute moduli in $|t-s|$: the interior
+policies have a uniform time-modulus away from the terminal layer
+(bound $\partial_tv$ through the equation and the gradient bounds,
+then argue as for the layer modulus), and
+$W_\infty(G_t,G_s)\le\bar s|t-s|$ transfers through the
+layer/interior split above with $\hat\eta$ replaced by
+$\bar s|t-s|$. $Y$ is Lipschitz. Collecting terms gives
+\eqref{eq:temporal} with $\omega_T(h)=C(\sqrt h+h(1+\log_+(1/h)))$
+under (D1$'$) (the square root from the layer's consumption modulus),
+a legitimate modulus.
 
-\begin{proof}
-Decompose
-\[
-C(t;r)-C(t;r')
-=\underbrace{\sum_j\int\big(c^r_j-c^{r'}_j\big)(\cdot,t)\dd
-G^{r'}_{j,t}}_{=:I}
-+\underbrace{\sum_j\int c^r_j(\cdot,t)\dd\big(G^r_{j,t}
--G^{r'}_{j,t}\big)}_{=:II}.
-\]
+\emph{Status.} The contemporaneous ingredients (the
+$\bar\theta$-terms in (M3) and (M4), the $\theta_0$-Lipschitz
+property of $A_0$) are exact. The smoothing ingredients rest on the
+household package under uniform binding plus
+Assumption~\ref{ass:VTs}; within it, the layer-crossing policy
+stability, the rigorous square-root law, and the extension of the
+layer modulus from $C^1$ slowly varying paths to all of $\Kcal_R$
+(the preamble's explicit package hypothesis) retain the ``delicate''
+flags recorded in Appendix~\ref{app:household}. Outside uniform
+binding regimes---dispersal episodes with their discontinuous
+$m_1$---(M3) fails as stated, and the analysis does not apply; this
+is a modeling boundary, not an oversight
+(cf.\ Section~\ref{sec:verify}).
 
-\emph{Term $I$.} The atom at $\uba$ contributes
-$m_1(t;r')\,|c^r_1(\uba,t)-c^{r'}_1(\uba,t)|\le\bar m_1|\uba|\,\eta$
-by the exact identity in (S1) (mixed binding case: same bound plus an
-interior-type term absorbed into the next one). The absolutely
-continuous part contributes, by (S1),
-$\le L_1(T-t)\eta\cdot G^{r'}_t\big((\uba,A]\big)\le L_1T\eta$; the
-boundary-layer portion of the integral is covered by the same
-constant under the layer-restored Lipschitz rate of (S1), and in any
-case by the integrated bound below.
-
-\emph{Term $II$.} Let $\pi_t$ be an optimal $W_\infty$-coupling of
-$G^{r}_{j,t}$ and $G^{r'}_{j,t}$ (in one dimension, the monotone
-quantile coupling), so that pairs $(x,y)\in\operatorname{supp}\pi_t$
-satisfy $|x-y|\le\hat\eta:=L_2T\eta$ by (S3). Then
-$|II|\le\sum_j\int|c^r_j(x,t)-c^r_j(y,t)|\dd\pi_t(x,y)$. Split the
-pairs three ways. (a) Both endpoints at the atom: zero contribution.
-(b) Mismatch pairs (one endpoint at $\uba$, the other in the layer):
-their $x$-coordinates lie within $\hat\eta$ of $\uba$, so by (S2) the
-consumption discrepancy is at most
-$C_{\mathrm{lay}}\sqrt{\hat\eta}$; under (D1$'$) the mass of the
-layer $(\uba,\uba+\hat\eta]$ is at most
-$D\int_0^{\hat\eta}x^{-1/2}dx=2D\sqrt{\hat\eta}$, so the mismatch
-set contributes at most
-$2DC_{\mathrm{lay}}\,\hat\eta=O(T\eta)$---mass exchanged between the
-atom and the adjacent layer moves consumption only at second order,
-because consumption is continuous across the constraint. (c) Interior
-pairs: where both endpoints exceed $\uba+\hat\eta$, use the modulus
-$|c^r_j(x)-c^r_j(y)|\le
-C_{\mathrm{lay}}\,\hat\eta/\sqrt{x-\uba}$ for $x$ in the layer (mean
-value of the $\sqrt{\cdot}$ profile) and plain Lipschitz continuity
-of $c^r_j$ outside it; integrating against the (D1$'$) density,
-\[
-\int_{\hat\eta}^{\delta_0}\frac{\hat\eta}{\sqrt{x}}\;D\,
-x^{-1/2}\dd x
-\;=\;D\,\hat\eta\,\log\!\big(\delta_0/\hat\eta\big)
-\;=\;O\!\big(T\eta\,(1+\log_+(1/\eta))\big),
-\]
-while the region outside the layer contributes
-$\le\mathrm{Lip}(c)\,\hat\eta=O(T\eta)$. Summing (a)--(c) gives
-$|II|\le C_2T\eta(1+\log_+(1/\eta))$ under (D1$'$); under (D1) the
-density is bounded, every step above is Lipschitz, and
-$|II|\le C\hat\eta=O(T\eta)$. Collecting terms yields the two
-displayed bounds.
-\end{proof}
-
-\begin{lemma}[compact range]\label{lem:cpt}
-$\Psi$ maps $\Kcal$ into a bounded, uniformly equicontinuous subset
-of $C([0,T])$; its closed convex hull is compact.
-\end{lemma}
-
-\begin{proof}
-Boundedness: $0\le C(t;r)\le\kappa^{-1/\gamma}e^{CT/\gamma}(1+A-\uba)$
-by the linear consumption bound (Theorem~\ref{thm:lower}) on the
-common support, so $\sup_{\Kcal}\|\Psi(r)\|_\infty<\infty$.
-Equicontinuity: for $t<t'$,
-$|C(t;r)-C(t';r)|\le
-\sum_j\int|c^r_j(\cdot,t)-c^r_j(\cdot,t')|\dd G_{j,t}
-+\big|\sum_j\int c^r_j(\cdot,t')\dd(G_{j,t}-G_{j,t'})\big|$. The
-first term is controlled by the uniform time-modulus of the policies
-(S4); the second, coupling $G_t$ to $G_{t'}$ at $W_\infty$-distance
-$\le\bar s|t-t'|$ (S4) and applying the layer/interior split of
-Lemma~\ref{lem:agg}(c) with $\hat\eta$ replaced by $\bar s|t-t'|$,
-is $O\big(|t-t'|^{1/2}\big)$ under either density regime ($O(|t-t'|
-(1+\log_+))$ under (D1$'$), $O(|t-t'|)$ under (D1), and in the worst
-case the $\sqrt{\cdot}$ modulus of consumption near the constraint
-gives the square root). Since $Y(\cdot)$ is Lipschitz (autonomous
-two-state chain), $\Psi(\Kcal)$ admits the uniform modulus
-$\omega(h)=C(\sqrt h+h(1+\log_+(1/h)))$. Arzel\`a--Ascoli gives
-relative compactness; Mazur's theorem gives compactness of the closed
-convex hull.
-\end{proof}
-
-\begin{lemma}[anchoring limit and band invariance]\label{lem:anch}
-Let $c_{T,j}:=(u')^{-1}(\partial_a v_{T,j})$ and define
-\[
-A_0(x)\;:=\;\frac{1}{B}\Big[\textstyle\sum_j
-\int_{(\uba,\infty)}c_{T,j}\dd G_{0,j}
-+m_1(0)\,\min\{c_{T,1}(\uba),\,y_1+x\,\uba\}-Y(0)\Big],
-\qquad x\in\R .
-\]
-Then: (i) $\sup_{r\in\Kcal}\sup_{t\le T}
-|\Psi(r)(t)-A_0(r(t))|=:\varepsilon(T)\to0$ as $T\to0$; (ii) $A_0$ is
-nonincreasing and Lipschitz with constant
-$\theta_0:=m_1(0)|\uba|/B\le\theta\le\bar\theta<1$, so
-$x\mapsto x-A_0(x)$ is strictly increasing with slope at least
-$1-\bar\theta$ and $A_0$ has a unique fixed point $r^{**}\in\R$;
-(iii) under \textbf{(ANCH)}---$r^{**}\in(r_{\min}+\delta,
-r_{\max}-\delta)$ for some $\delta>0$---there is $T_1>0$ such that
-$\Psi(\Kcal)\subset\Kcal$ for all $T\le T_1$.
-\end{lemma}
-
-\begin{proof}
-(i) As $T\to0$: the value functions converge to the terminal data
-uniformly on compacts at rate $O(T)$ (the running payoff and the
-switching corrections over $[t,T]$ are $O(T)$ by the bounds of
-Appendix~\ref{app:household}), so by concavity the interior policies
-converge to $c_{T,j}$ locally uniformly; at the constraint the
-$\min$-structure of the boundary policy delivers exactly
-$\min\{c_{T,1}(\uba),y_1+r(t)\uba\}$ in the limit, consistent with
-the terminal boundary layer of Remark~\ref{rem:BClayer}.
-Distributions: $W_\infty(G_t,G_0)\le\bar sT\to0$ (S4), and the atom
-mass converges to $m_1(0)$ in the binding regime
-(Proposition~\ref{prop:atom}). Passing to the limit in
-$C(t;r)$ with the split of Lemma~\ref{lem:agg} gives the claim,
-uniformly in $r\in\Kcal$ because the limit map depends on the path
-only through the one-dimensional value $r(t)$.
-(ii) $x\mapsto\min\{c_{T,1}(\uba),y_1+x\uba\}$ is nonincreasing
-(slope $0$ or $\uba<0$) with Lipschitz constant $|\uba|$; multiply by
-$m_1(0)/B$. Since $A_0$ is bounded above and decreases at most
-linearly, $x-A_0(x)$ is strictly increasing (slope
-$\ge1-\bar\theta>0$) and changes sign, giving a unique root
-$r^{**}$.
-(iii) For $x\in[r_{\min},r_{\max}]$,
-$|A_0(x)-r^{**}|=|A_0(x)-A_0(r^{**})|\le\bar\theta\,|x-r^{**}|$,
-hence
-$A_0(x)\ge r^{**}-\bar\theta\,(r^{**}-r_{\min})
-=(1-\bar\theta)r^{**}+\bar\theta r_{\min}\ge
-r_{\min}+(1-\bar\theta)\delta$, and symmetrically
-$A_0(x)\le r_{\max}-(1-\bar\theta)\delta$. Choose $T_1$ with
-$\varepsilon(T_1)\le\tfrac12(1-\bar\theta)\delta$; then for $T\le
-T_1$ and every $r\in\Kcal$, $\Psi(r)(t)\in[r_{\min},r_{\max}]$ for
-all $t$.
-\end{proof}
-
-\begin{proof}[Proof of Theorem~\ref{thm:smallT}]
-Let $T\le T_1$ (Lemma~\ref{lem:anch}).
-
-\emph{(i) Existence.} Let $X$ be the closed convex hull of
-$\Psi(\Kcal)$ in $C([0,T])$: compact and convex by
-Lemma~\ref{lem:cpt}, contained in $\Kcal$ by
-Lemma~\ref{lem:anch}(iii), and $\Psi(X)\subset
-\overline{\mathrm{conv}}\,\Psi(\Kcal)=X$. By Lemma~\ref{lem:agg},
-$\|\Psi(r)-\Psi(r')\|_\infty\le\bar\theta\eta+C_1T\eta
-+C_2T\eta(1+\log_+(1/\eta))\to0$ as $\eta\to0$, so $\Psi$ is
-continuous on $X$. Schauder's fixed-point theorem yields
-$r^\ast=\Psi(r^\ast)\in X$. By construction the induced
-$(v^{r^\ast},G^{r^\ast},r^\ast)$ satisfies flow clearing
-$C=Y+r^\ast B$ at every $t$; with $S(0)=B$,
-Lemma~\ref{lem:flow} upgrades this to $S(t)\equiv B$: an equilibrium
-transition.
-
-\emph{(ii) Uniqueness under (D1).} By Lemma~\ref{lem:agg}(D1) and
-Lemma~\ref{lem:anch}(iii), $\Psi$ is a self-map of the complete
-metric space $(\Kcal,\|\cdot\|_\infty)$ with
-$\|\Psi(r)-\Psi(r')\|_\infty\le(\bar\theta+C_3T)\,\eta$. Choose
-$T^*\le T_1$ with $\bar\theta+C_3T^*\le\tfrac12(1+\bar\theta)<1$;
-Banach's fixed-point theorem gives uniqueness in $\Kcal$ and
-geometric convergence of the iteration
-$r^{n+1}=\Psi(r^n)$ from any $r^0\in\Kcal$---which is precisely the
-economic scheme: guess a rate path, solve households backward,
-aggregate forward, reset the rate from flow clearing.
-
-\emph{(iii) Ambiguity bound under (D1$'$).} Let $r\ne r'$ be two
-equilibria in $\Kcal$ and $\eta=\|r-r'\|_\infty>0$. Both are fixed
-points, so Lemma~\ref{lem:agg} gives
-$\eta\le\bar\theta\eta+C_1T\eta+C_2T\eta(1+\log_+(1/\eta))$.
-Dividing by $\eta>0$,
-\[
-1\ \le\ \bar\theta+(C_1+C_2)T+C_2T\,\log_+(1/\eta)
-\qquad\Longrightarrow\qquad
-\eta\ \le\ \exp\!\Big(-\tfrac{1-\bar\theta-(C_1+C_2)T}{C_2T}\Big),
-\]
-for $T^*$ small enough that the numerator is positive. The same
-inequality applied to $r^{n+1}=\Psi(r^n)$ against a fixed point shows
-the Picard iterates contract geometrically until they enter a ball of
-that exponentially small radius. The estimate does not self-improve
-to $\eta=0$: the logarithm grows as $\eta\downarrow0$ on the
-favorable side, and the two-directional time coupling---the
-anticipation channel propagates backward from $T$, the history
-channel forward from $0$---blocks a Gr\"onwall--Osgood closure in
-either single time direction.
-\end{proof}
-
-\begin{proposition}[diagonal elimination and its price]
-\label{prop:diagelim}
-Solving the flow condition exactly for $r(t)$ yields
-\[
-r(t)=\widetilde\Psi(r)(t)
-=\frac{C^{\mathrm{int}}(t;r)+m_1(t;r)\,y_1-Y(t)}
-{B+m_1(t;r)\,|\uba|},
-\]
-with $C^{\mathrm{int}}$ the consumption of the unconstrained.
-$\widetilde\Psi$ has zero contemporaneous sensitivity and a uniformly
-invertible denominator for $B>0$; under (D1),
-Theorem~\ref{thm:smallT}(ii) holds for $\widetilde\Psi$ without the
-hypothesis $\theta<1$. Under (D1$'$), the separated atom mass is only
+\paragraph{Proposition~\ref{prop:B0atom}.} Under binding on $[0,T]$,
+atom outflow is only through switching, giving
+$m_1(t)\ge m_1(0)e^{-\lambda_1t}$; the map $\widetilde\Psi_0$ has
+denominator bounded below by $|\uba|m_1(0)e^{-\lambda_1T}>0$ and
+zero contemporaneous sensitivity (the solved-out diagonal), so
+Theorem~\ref{thm:main} applies to it on a symmetric sub-band around
+its anchoring rate with $\bar\theta$ replaced by the (small)
+transmission constant of the mass channel; all constants scale by
+$1/(|\uba|m_1(0))$, whence $T^*$ degrading linearly in $m_1(0)$.
+Under (D1$'$), the separated atom mass is only
 $\tfrac12$-H\"older stable in the path
-($|m_1(t;r)-m_1(t;r')|\le C\sqrt{T\eta}$, the mismatch mass between
-atom and boundary layer), and the loss enters $\widetilde\Psi$ at
-order one: no contraction. The trade-off is sharp at the level of
-these estimates: aggregates are log-Lipschitz because mass exchanged
-between atom and layer moves consumption at second order; any map
-separating the atom pays the H\"older price. Under (D1$'$) the
-economic threshold $\theta<1$ is genuinely load-bearing.
-\end{proposition}
+($|m_1(t;r)-m_1(t;r')|\le C\sqrt{T\eta}$, the mismatch-mass
+computation above), which enters $\widetilde\Psi_0$ at order one: the
+(D1$'$) uniqueness question at $B=0$ remains open, as stated.
 
-\paragraph{Theorem~\ref{thm:B0atom}.} Under binding on $[0,T]$, atom
-outflow is only through switching, giving
-$m_1(t)\ge m_1(0)e^{-\lambda_1t}$; the map
-$\widetilde\Psi_0(r)(t)=\big(C^{\mathrm{int}}(t;r)+m_1(t;r)y_1
--Y(t)\big)/\big(|\uba|m_1(t;r)\big)$ is then well defined, its
-denominator bounded below by $|\uba|m_1(0)e^{-\lambda_1T}$; the
-Schauder and contraction steps proceed as in
-Theorem~\ref{thm:smallT}, with all constants scaled by
-$1/(|\uba|m_1(0))$---whence $T^*$ degrading linearly in $m_1(0)$.
-Under (D1$'$), two equilibria satisfy $\eta\le C\sqrt{T\eta}$, i.e.\
-$\eta\le CT$; exact uniqueness is open.
-
-\paragraph{Theorem~\ref{thm:mono}.} Standard mixed-monotone iteration
-for antitone maps on the order-complete cone of $C([0,T])$:
-(H-MONO) makes $\Psi$ antitone, so the two-sided scheme generates
-nested order intervals; compactness of $\Psi$'s range upgrades
-monotone pointwise convergence to uniform convergence with continuous
-limits; any equilibrium is squeezed by induction, and ordered
-equilibria coincide by antitonicity. A degree-theoretic continuation
-in $T$ from the small-horizon equilibrium (index $+1$) extends
-existence along the branch while a priori interiority holds and
-$I-D\Psi$ stays invertible; (H-MONO) supplies sign structure but not
-spectral control, so this continuation remains conditional---and
-Proposition~\ref{prop:multiplicity}(ii) identifies exactly where it
-fails for $\gamma>1$.
+\paragraph{A remark on eliminating the diagonal at $B>0$.} The same
+solved-out map with denominator $B+m_1(t;r)|\uba|$ removes the
+contemporaneous term altogether and, under (D1), yields the
+contraction conclusion without the hypothesis $\bar\theta<1$. Under
+(D1$'$) it pays the $\tfrac12$-H\"older price just described:
+aggregates are log-Lipschitz because atom--layer exchanges move
+consumption at second order, but any map that \emph{separates} the
+atom is only $\sqrt{\cdot}$-stable. Under the realistic (D1$'$), the
+economic threshold $\bar\theta<1$ is genuinely load-bearing.
 
 %======================================================================
 \begin{thebibliography}{99}
@@ -1694,11 +1706,18 @@ Lions, and Benjamin Moll. 2014. ``Partial Differential Equation
 Models in Macroeconomics.'' \emph{Philosophical Transactions of the
 Royal Society A} 372: 20130397.
 
-\bibitem[Achdou et al.(2022)]{AHLLM2022}
+\bibitem[Achdou et al.(2022a)]{AHLLM2022}
 Achdou, Yves, Jiequn Han, Jean-Michel Lasry, Pierre-Louis Lions, and
-Benjamin Moll. 2022. ``Income and Wealth Distribution in
+Benjamin Moll. 2022a. ``Income and Wealth Distribution in
 Macroeconomics: A Continuous-Time Approach.'' \emph{Review of
-Economic Studies} 89 (1): 45--86.
+Economic Studies} 89 (1): 45--86; and Online Appendix.
+
+\bibitem[Achdou et al.(2022b)]{AHLLMnum}
+Achdou, Yves, Jiequn Han, Jean-Michel Lasry, Pierre-Louis Lions, and
+Benjamin Moll. 2022b. ``Numerical Appendix to `Income and Wealth
+Distribution in Macroeconomics: A Continuous-Time Approach'.''
+Available at \url{https://benjaminmoll.com/HACT_Numerical_Appendix/};
+codes at \url{https://benjaminmoll.com/codes/}.
 
 \bibitem[Aiyagari(1994)]{Aiyagari1994}
 Aiyagari, S. Rao. 1994. ``Uninsured Idiosyncratic Risk and Aggregate
