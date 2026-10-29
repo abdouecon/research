@@ -1,0 +1,508 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<script>try{var t=localStorage.getItem("theme");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
+<title>Abdoulaye Ndiaye</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Abdoulaye Ndiaye, Assistant Professor of Economics at NYU Stern. Macroeconomics, public finance, development, and political economy.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&family=Source+Serif+4:opsz,wght@8..60,500;8..60,600&display=swap">
+<style>
+/* Layout: fixed left identity column (photo, name, nav) beside one reading column, like a classic academic homepage. Stacks on phones. */
+:root{
+  --bg:#fcfbfd; --panel:#f4f1f8; --fg:#1d1a22; --muted:#625c6c; --line:#e5e0ec;
+  --accent:#5b2a86; --accent-soft:#ece4f5; --badge:#9a5b00; --badge-soft:#fbefdc;
+  --serif:"Source Serif 4", Georgia, "Times New Roman", serif;
+  --sans:"Source Sans 3", "Helvetica Neue", Arial, sans-serif;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#131118; --panel:#1b1822; --fg:#e8e4ef; --muted:#a29bad; --line:#2e2938;
+  --accent:#b993e6; --accent-soft:#2a2138; --badge:#e7a94b; --badge-soft:#2e2414; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#131118; --panel:#1b1822; --fg:#e8e4ef; --muted:#a29bad; --line:#2e2938;
+  --accent:#b993e6; --accent-soft:#2a2138; --badge:#e7a94b; --badge-soft:#2e2414; color-scheme:dark}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+body{background:var(--bg);color:var(--fg);font-family:var(--sans);font-size:17px;line-height:1.6;margin:0}
+a{color:var(--accent);text-decoration:none;text-underline-offset:2px}
+a:hover{text-decoration:underline}
+a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:2px}
+
+.wrap{display:grid;grid-template-columns:clamp(176px,24vw,250px) minmax(0,1fr);gap:clamp(28px,5vw,56px);max-width:1120px;margin:0 auto;
+  padding-left:max(24px, env(safe-area-inset-left, 0px));padding-right:max(24px, env(safe-area-inset-right, 0px));padding-block:48px 64px}
+
+/* Identity column */
+.side{position:sticky;top:calc(28px + env(safe-area-inset-top, 0px));align-self:start;display:flex;flex-direction:column;gap:16px;max-height:calc(100vh - 56px);overflow-y:auto;scrollbar-width:thin}
+.portrait{width:clamp(120px,15vw,170px);height:clamp(120px,15vw,170px);flex:none;border-radius:50%;overflow:hidden;background:var(--accent-soft);display:grid;place-items:center}
+.portrait img{width:100%;height:100%;object-fit:cover;object-position:center;display:block}
+.portrait .mono{font-family:var(--serif);font-size:56px;color:var(--accent);font-weight:600;letter-spacing:.02em}
+.side h1{font-family:var(--serif);font-weight:600;font-size:clamp(1.3rem,2.2vw,1.6rem);line-height:1.2;margin:0}
+.side .role{color:var(--muted);font-size:.95rem;line-height:1.45;margin:0}
+.side nav{display:flex;flex-direction:column;border-top:1px solid var(--line);padding-top:12px}
+.side nav a{color:var(--fg);padding:5px 0 5px 10px;font-size:.98rem;border-left:2px solid transparent;transition:color .15s,border-color .15s}
+.side nav a:hover{color:var(--accent);text-decoration:none}
+.side nav a[aria-current="true"]{color:var(--accent);border-left-color:var(--accent);font-weight:600}
+@media (prefers-reduced-motion: reduce){.side nav a{transition:none}}
+.side nav .navlabel{font-size:.72rem;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);margin-top:12px;padding-bottom:2px}
+
+/* Reading column */
+main{min-width:0;max-width:760px;display:flex;flex-direction:column;gap:56px}
+section{scroll-margin-top:24px}
+h2{font-family:var(--serif);font-weight:600;font-size:1.65rem;line-height:1.2;margin:0 0 18px;text-wrap:balance}
+h3.group{font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:700;margin:36px 0 4px;padding-bottom:8px;border-bottom:1px solid var(--line)}
+h3.group:first-of-type{margin-top:8px}
+h4{font-family:var(--serif);font-weight:600;font-size:1.05rem;margin:22px 0 6px}
+p{margin:0 0 14px}
+.about p{max-width:66ch}
+.affil{list-style:none;padding:0;margin:0 0 16px;color:var(--fg)}
+.affil li{padding:2px 0}
+
+/* News */
+.news{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:14px}
+.news li{display:grid;grid-template-columns:112px minmax(0,1fr);gap:16px}
+.news time{color:var(--muted);font-size:.92rem;font-variant-numeric:tabular-nums;padding-top:1px}
+
+/* Papers */
+.jump{color:var(--muted);font-size:.95rem;margin-bottom:10px}
+.filters{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:4px 0 6px}
+.filters span{color:var(--muted);font-size:.92rem;margin-right:4px}
+.chip{font:inherit;font-size:.88rem;border:1px solid var(--line);background:transparent;color:var(--fg);padding:4px 12px;border-radius:999px;cursor:pointer}
+.chip:hover{border-color:var(--accent)}
+.chip[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--bg)}
+.paper{padding:18px 0;border-bottom:1px solid var(--line)}
+.paper:last-child{border-bottom:none}
+.paper .t{font-family:var(--serif);font-weight:600;font-size:1.12rem;line-height:1.35;margin:0 0 4px;text-wrap:balance}
+.paper .t a{color:var(--fg)}
+.paper .t a:hover{color:var(--accent)}
+.paper .who{color:var(--muted);margin:0 0 2px;font-size:.97rem}
+.paper .status{margin:0 0 6px;font-size:.97rem}
+.paper .status em{font-style:italic}
+.badge{display:inline-block;font-family:var(--sans);font-size:.68rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--badge);background:var(--badge-soft);padding:2px 7px;border-radius:3px;margin-right:8px;vertical-align:3px}
+.toggle{font:inherit;font-size:.92rem;color:var(--accent);background:none;border:0;padding:0;cursor:pointer}
+.toggle::before{content:"▸ ";display:inline-block;transition:transform .15s}
+.toggle[aria-expanded="true"]::before{content:"▾ "}
+.abstract{margin:8px 0 6px;padding:12px 16px;background:var(--panel);border-radius:4px;font-size:.96rem;line-height:1.6;max-width:68ch}
+.links{font-size:.93rem;color:var(--muted);margin-top:6px}
+.links a{margin-right:2px}
+.cover{font-size:.9rem;color:var(--muted);margin-top:4px}
+.paper[hidden]{display:none}
+
+/* Simple lists */
+.plain{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:14px}
+.plain .src{display:block;color:var(--muted);font-size:.95rem}
+.small{font-size:.95rem}
+.students li{display:grid;grid-template-columns:96px minmax(0,1fr);gap:16px}
+.students .yr{color:var(--muted);font-variant-numeric:tabular-nums;font-size:.92rem;padding-top:1px}
+details.more{margin-top:8px}
+details.more summary{cursor:pointer;color:var(--accent);font-size:.95rem}
+details.more summary:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+details.more ul{margin-top:12px}
+/* Theme toggle: follows the system setting until the visitor picks one */
+.theme-toggle{position:fixed;z-index:20;top:calc(14px + env(safe-area-inset-top, 0px));right:max(14px, env(safe-area-inset-right, 0px));
+  width:36px;height:36px;display:grid;place-items:center;border-radius:50%;border:1px solid var(--line);
+  background:var(--bg);color:var(--muted);cursor:pointer;padding:0;transition:color .15s,border-color .15s}
+.theme-toggle:hover{color:var(--accent);border-color:var(--accent)}
+.theme-toggle svg{width:18px;height:18px;display:block}
+.theme-toggle .sun{display:none}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .theme-toggle .moon{display:none}:root:not([data-theme="light"]) .theme-toggle .sun{display:block}}
+:root[data-theme="dark"] .theme-toggle .moon{display:none}
+:root[data-theme="dark"] .theme-toggle .sun{display:block}
+@media (prefers-reduced-motion: reduce){.theme-toggle{transition:none}}
+
+/* Lecture notes */
+.course{margin-bottom:28px}
+.course .meta{color:var(--muted);font-size:.95rem;margin:0 0 10px}
+.part{font-size:.78rem;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);font-weight:700;margin:16px 0 6px}
+.lectures{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px;font-size:.97rem}
+.lectures li{display:grid;grid-template-columns:84px minmax(0,1fr);gap:12px}
+.lectures .n{color:var(--muted);font-variant-numeric:tabular-nums}
+.lectures .res{color:var(--muted)}
+@media (max-width:640px){.lectures li{grid-template-columns:minmax(0,1fr);gap:0}}
+footer{color:var(--muted);font-size:.85rem;border-top:1px solid var(--line);padding-top:16px}
+
+@media (max-width:640px){
+  .wrap{grid-template-columns:minmax(0,1fr);gap:32px;padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px));padding-block:28px 48px}
+  .side{position:static;max-height:none;overflow:visible;padding-right:44px;display:grid;grid-template-columns:96px minmax(0,1fr);gap:4px 18px;align-items:center}
+  .portrait{width:96px;height:96px;grid-row:span 2}
+  .portrait .mono{font-size:34px}
+  .side nav{grid-column:1 / -1;flex-direction:row;flex-wrap:wrap;gap:4px 18px;margin-top:10px}
+  .side nav a{padding:4px 0;margin-left:0;border-left:0}
+  .side nav a[aria-current="true"]{text-decoration:underline;text-underline-offset:4px}
+  .side nav .navlabel{display:none}
+  .news li,.students li{grid-template-columns:minmax(0,1fr);gap:0}
+}
+</style>
+</head>
+<body>
+
+<button class="theme-toggle" type="button" id="theme-toggle" aria-label="Switch to dark mode" title="Switch to dark mode">
+  <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.5 14.2A8.5 8.5 0 0 1 9.8 3.5a8.5 8.5 0 1 0 10.7 10.7z"/></svg>
+  <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6"/></svg>
+</button>
+
+<div class="wrap">
+  <aside class="side">
+    <div class="portrait">
+      <img src="images/abdoulaye-ndiaye.jpg" alt="Photo of Abdoulaye Ndiaye" onerror="this.parentNode.innerHTML='<span class=&quot;mono&quot; aria-hidden=&quot;true&quot;>AN</span>'">
+    </div>
+    <div>
+      <h1>Abdoulaye Ndiaye</h1>
+      <p class="role">Assistant Professor of Economics, NYU Stern School of Business</p>
+    </div>
+    <nav aria-label="Site">
+      <a href="#about">Home</a>
+      <a href="admin/CV_Abdou.pdf">Vitae</a>
+      <a href="#news">News</a>
+      <a href="#research">Research</a>
+      <a href="#policy">Policy Papers</a>
+      <a href="#discussions">Discussions</a>
+      <a href="#lectures">Lecture Notes</a>
+      <a href="#publicgoods">Public Goods</a>
+      <a href="#students">Students</a>
+    </nav>
+  </aside>
+
+  <main>
+    <section id="about" class="about">
+      <h2>About Me</h2>
+      <p>I'm an assistant professor of economics at <a href="https://www.stern.nyu.edu/">New York University's Stern School of Business</a>. I'm a macroeconomist working on public finance, development, and political economy. My research covers four themes: taxation and social insurance, state capacity in Africa, sovereign debt and global finance, and incentives and market design, from performance pay to fee mechanisms for blockchains.</p>
+      <ul class="affil small">
+        <li>Theme Leader, The Role of the Public Sector, <a href="https://steg.cepr.org/">STEG</a></li>
+        <li>Research Fellow, CEPR, CESifo, and HCEO</li>
+        <li>Fellow, Royal Economic Society, Finance for Development Lab, AUL, and BWC</li>
+      </ul>
+      <p>I received my PhD in economics from Northwestern University. Before that I studied at École Polytechnique and Lycée Louis-le-Grand in Paris, after growing up in Senegal. In 2026 I received the NextGen Best African Economist Under 40 Award from the African Development Bank, The Africa Report, and Jeune Afrique, and was elected a Fellow of the Royal Economic Society.</p>
+      <h4>Contact</h4>
+      <p>My email is an1490 [at] stern [dot] nyu [dot] edu. Department of Economics, 44 West 4th Street, 7-72, New York, NY 10012. I sometimes <a href="https://x.com/AbdouNdiayeNYU">post</a> about my research.</p>
+    </section>
+
+    <section id="news">
+      <h2>News</h2>
+      <ul class="news">
+        <li><time>October 2026</time><div><a href="papers/FROT.pdf">Flexible Retirement and Optimal Taxation</a> (with Zhixiu Yu) is conditionally accepted at the <em>Quarterly Journal of Economics</em>. A new draft of <a href="papers/Tax_Productivity.pdf">Tax Productivity and Development</a> is posted.</div></li>
+        <li><time>August 2026</time><div>Named in The Africa Report's <a href="https://www.theafricareport.com/427128/from-dangote-and-tyla-to-vozinha-and-rebecca-enonchong-26-africans-making-waves-in-2026/">list of 26 Africans making waves in 2026</a>.</div></li>
+        <li><time>July 2026</time><div>Revised versions of <a href="papers/Property_Tax.pdf">Property Taxes and Housing Allocation Under Financial Constraints</a> and <a href="papers/feepolicies.pdf">Blockchain Fee Policies</a> are posted.</div></li>
+        <li><time>June 2026</time><div>A revised version of <a href="papers/boycotts.pdf">A Theory of International Boycotts</a> is posted.</div></li>
+        <li><time>May 2026</time><div>Awarded the <a href="https://www.theafricareport.com/418840/senegals-abdoulaye-ndiaye-crowned-nextgen-african-economist/">2026 NextGen Best African Economist Under 40 Award</a> and <a href="https://res.org.uk/the-royal-economic-society-announces-new-fellows-may-2026/">elected Fellow of the Royal Economic Society</a>.</div></li>
+      </ul>
+    </section>
+
+    <section id="research">
+      <h2>Research</h2>
+      <p class="jump"><strong>Jump to:</strong> <a href="#revision">Under Revision</a> | <a href="#published">Published &amp; Accepted</a> | <a href="#working">Working Papers</a> | <a href="#ongoing">Selected Ongoing Research</a></p>
+      <div class="filters" role="group" aria-label="Filter research by theme">
+        <span>Filter by theme:</span>
+        <button class="chip" type="button" id="f-all" data-f="all" aria-pressed="true">All</button>
+        <button class="chip" type="button" id="f-tax" data-f="tax" aria-pressed="false">Taxation &amp; Social Insurance</button>
+        <button class="chip" type="button" id="f-africa" data-f="africa" aria-pressed="false">State Capacity in Africa</button>
+        <button class="chip" type="button" id="f-debt" data-f="debt" aria-pressed="false">Sovereign Debt &amp; Global Finance</button>
+        <button class="chip" type="button" id="f-design" data-f="design" aria-pressed="false">Incentives &amp; Market Design</button>
+      </div>
+
+      <h3 class="group" id="revision">Under Revision</h3>
+
+      <article class="paper" data-topics="tax">
+        <p class="t"><a href="papers/FROT.pdf">Flexible Retirement and Optimal Taxation</a></p>
+        <p class="who">(with Zhixiu Yu)</p>
+        <p class="status">Conditionally accepted, <em>Quarterly Journal of Economics</em>. September 2026.</p>
+        <button class="toggle" type="button" aria-expanded="false">Show abstract</button>
+        <div class="abstract" hidden>How should retirement benefits, labor taxes, and savings incentives be designed when health declines with age? We build a life-cycle model with health shocks, wage risk, and endogenous retirement, and estimate it on US microdata. Health affects retirement through fixed costs of working, lower wages, and higher mortality. Optimal labor wedges are hump-shaped over the life cycle and lower for workers in poor health. Mortality risk can make it optimal to subsidize saving, especially for older and less healthy workers. Retirement consumption should rise more steeply with claiming age than under the current delayed retirement credit. Flexible policies that reward later retirement and account for health come closer to the efficient allocation than a uniform increase in the retirement age.</div>
+        <div class="links"><a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3057820">SSRN</a>. <a href="https://www.dropbox.com/scl/fi/wx6iw9psq7bwii0e02f2d/FROT.bib?rlkey=hxaenmqpv92c3oslrxe2nzovi&amp;raw=1">BibTeX</a>. <a href="https://x.com/AbdouNdiayeNYU/status/1919726526783803621">X summary</a>. <a href="https://www.retirementflexibility.org">Project website</a>. Coverage: <a href="https://www.chicagofed.org/publications/chicago-fed-letter/2019/419">Chicago Fed Letter</a>.</div>
+      </article>
+
+      <article class="paper" data-topics="tax">
+        <p class="t"><a href="papers/Property_Tax.pdf">Property Taxes and Housing Allocation Under Financial Constraints</a></p>
+        <p class="who">(with Joshua Coven, Sebastian Golder, and Arpit Gupta)</p>
+        <p class="status">Revise and resubmit, <em>American Economic Review</em>. August 2026. 2026 Yuki Arai Research Prize.</p>
+        <button class="toggle" type="button" aria-expanded="false">Show abstract</button>
+        <div class="abstract" hidden>Low property taxes in California keep elderly owners in their homes and limit housing access for younger families. Raising property taxes reallocates housing toward the young through two channels: lower purchase prices reduce down payments for financially constrained buyers, and higher annual bills raise the cost of holding a home for long-tenured owners. In an overlapping generations model, raising California's rates to Texas levels increases homeownership among younger households and reduces it among older ones. Removing the step-up in basis at death also lowers elderly ownership, so part of older owners' tenure reflects the tax advantages of bequeathing property. The tax treatment of housing shapes how it is allocated across generations.</div>
+        <div class="links"><a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=4880480">SSRN</a>. <a href="https://www.dropbox.com/scl/fi/fl6c3747wz9wbot9q610d/Proptax.bib?rlkey=d2ykrmyp1d7fkpyrk49f0wby8&amp;raw=1">BibTeX</a>. <a href="https://x.com/arpitrage/status/1807793814523818306">X summary</a>. <a href="https://www.youtube.com/live/f406PN9tf-s?si=R9Nw2NWQqJ36pvTd&amp;t=3555">Video</a>. Coverage: <a href="https://www.bloomberg.com/opinion/articles/2024-11-20/to-get-the-housing-market-moving-raise-property-taxes">Bloomberg</a>, <a href="https://www.minneapolisfed.org/article/2024/how-higher-property-taxes-increase-home-affordability">Minneapolis Fed</a>, <a href="https://slate.com/business/2025/01/property-tax-reform-homeowners-revolt-local-government-budget-resource-inequality.html">Slate</a>, <a href="https://www.stern.nyu.edu/experience-stern/faculty-research/how-property-taxes-could-make-housing-affordable-young-families">NYU Stern</a>, <a href="https://taxprofblog.aals.org/2026/08/11/coven-et-al-on-property-taxes-and-housing-allocation/">TaxProf Blog</a>, <a href="https://www.costar.com/article/1609088083/could-higher-property-taxes-lead-to-more-homeownership-heres-what-one-study-says">CoStar</a>.</div>
+      </article>
+
+      <article class="paper" data-topics="design">
+        <p class="t"><a href="papers/feepolicies.pdf">Blockchain Fee Policies: Quantity- vs Price-Control Design across Protocols</a></p>
+        <p class="status">Revise and resubmit, <em>Management Science</em>. July 2026.</p>
+        <button class="toggle" type="button" aria-expanded="false">Show abstract</button>
+        <div class="abstract" hidden>Blockchains choose between two fee policies: Bitcoin fixes block size and lets fees clear through bidding, while Ethereum sets a base fee and lets block size adjust. I model validators as temporary monopolists who bargain with the protocol designer. Price controls perform better when demand is volatile, costs are weakly correlated with demand, and validators have strong bargaining power. Quantity controls perform better when costs rise with demand and validators have little influence. Ethereum's base fee adjusts faster than is optimal, which can make fees and block sizes oscillate. I propose bounds on block size targets that limit exploitation of maximal extractable value.</div>
+        <div class="links"><a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=4538150">SSRN</a>. <a href="https://www.dropbox.com/scl/fi/3ww62l2fj0a573yem8fjk/blockchainfees.bib?rlkey=e7m76ts55dri7c0fmrqvc8qsx&amp;raw=1">BibTeX</a>. Coverage: <a href="https://youtu.be/barxKtDF5i0">a16z Crypto Research</a>.</div>
+      </article>
+
+      <article class="paper" data-topics="debt">
+        <p class="t"><a href="papers/boycotts.pdf">A Theory of International Boycotts</a></p>
+        <p class="status">Conditionally accepted, <em>Journal of International Economics</em>. June 2026.</p>
+        <button class="toggle" type="button" aria-expanded="false">Show abstract</button>
+        <div class="abstract" hidden>I develop a neoclassical trade model of international boycotts in which a coalition of domestic households maximizes its welfare while holding foreign welfare at a tolerated level. The coalition acts like atomistic, price-taking consumers who each face fixed budgets for spending on each country's goods. Optimal boycotts take the form of outright bans on importing certain foreign goods, and boycotters may work more when income effects dominate substitution effects. A full domestic boycott is equivalent to targeted import tariffs or a voluntary export restraint by foreign firms. Households outside the boycott leak imports and weaken its effect.</div>
+        <div class="links"><a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=4737199">SSRN</a>. <a href="https://www.dropbox.com/scl/fi/y7xfb6sh5mnfg6qmb30qk/bobcott.bib?rlkey=wuonz2x1l1vrq16lrdl34m84r&amp;raw=1">BibTeX</a>. <a href="https://x.com/and_joy_/status/1761057322539901223">X summary</a>. Coverage: <a href="https://www.marketplace.org/shows/make-me-smart/economic-sanctions-vs-boycotts/">NPR Marketplace</a>, <a href="https://afrique.latribune.fr/economie/2025-04-08/taxes-trump-l-afrique-devrait-reagir-en-phase-avec-les-autres-regions-du-monde-1022151.html">La Tribune</a>.</div>
+      </article>
+
+      <h3 class="group" id="published">Published &amp; Accepted</h3>
+
+      <article class="paper" data-topics="design">
+        <p class="t"><a href="https://jadhazell.github.io/website/Bonus_Question.pdf">Bonus Question: How Does Flexible Incentive Pay Affect Unemployment Dynamics?</a></p>
+        <p class="who">(with Meghana Gaur, John Grigsby, and Jonathon Hazell)</p>
+        <p class="status">Forthcoming, <em>American Economic Review: Insights</em>, Vol. 8, No. 4, December 2026.</p>
+        <button class="toggle" type="button" aria-expanded="false">Show abstract</button>
+        <div class="abstract" hidden>We introduce dynamic incentive contracts into a model of unemployment fluctuations. Our main result is that wage cyclicality from incentives does not affect the response of unemployment to productivity shocks. The response of unemployment is the same, to a first-order, in two economies: one with flexible incentive pay, and another with exogenously fixed wages. This equivalence is due to movements in effort. Under the optimal incentive contract, firms' profits do not change when wages fall, because the effort of the worker falls too.</div>
+        <div class="links"><a href="https://www.nber.org/papers/w31722">NBER</a>. <a href="https://www.dropbox.com/scl/fi/qcmsr47823j9uu0sq3tbz/BQ.bib?rlkey=ryjofcb2cn94dtxkaw9do3scl&amp;raw=1">BibTeX</a>. <a href="https://twitter.com/and_joy_/status/1706630172072456560">X summary</a>. Coverage: <a href="https://marginalrevolution.com/marginalrevolution/2024/05/how-does-flexible-incentive-pay-affect-wage-rigidity.html">Marginal Revolution</a>, <a href="https://www.stern.nyu.edu/experience-stern/faculty-research/bonus-question-how-does-flexible-incentive-pay-affect-wage-rigidity">NYU Stern</a>, <a href="https://www.atlantafed.org/blogs/macroblog/2022/10/20/atlanta-feds-early-career-visitor-program-workshop-synopsis">Atlanta Fed</a>.</div>
+      </article>
+
+      <article class="paper" data-topics="tax africa">
+        <p class="t"><a href="papers/UI_JME_Manuscript.pdf">How to Fund Unemployment Insurance with Informality and False Claims: Evidence from Senegal</a></p>
+        <p class="who">(with Kyle Herkenhoff, Abdoulaye Cisse, Alessandro Dell'Acqua, and Ahmadou A. Mbaye)</p>
+        <p class="status"><em>Journal of Monetary Economics</em>, vol. 150, March 2025, 103699.</p>
+        <button class="toggle" type="button" aria-expanded="false">Show abstract</button>
+        <div class="abstract" hidden>We study the welfare effects of unemployment insurance in Senegal, where formal workers are a small share of the labor force and informal workers can file false claims. We build a model with varying enforcement and funding sources and estimate it with a custom labor force survey. Liquidity gains are large and moral hazard responses are small: an additional dollar of benefits yields a consumption-equivalent gain of 60 to 90 cents, several times larger than comparable US estimates. Payroll-tax funding delivers the largest gains but becomes infeasible when few workers are formal and false claims are common. Consumption-tax funding delivers smaller gains but remains feasible under high informality.</div>
+        <div class="links"><a href="https://doi.org/10.1016/j.jmoneco.2024.103699">Journal article</a>. <a href="https://www.dropbox.com/scl/fi/7v9umz935wf0w4q4rdy8r/UISN.bib?rlkey=vq4un17afv19f10z5wofoaqyt&amp;raw=1">BibTeX</a>. <a href="https://doi.org/10.5281/zenodo.13968050">Data</a>. <a href="https://twitter.com/and_joy_/status/1689366242509918208">X summary</a>. Coverage: <a href="https://voxdev.org/topic/social-protection/how-can-governments-fund-unemployment-insurance-low-income-settings">VoxDev</a>, <a href="https://www.brookings.edu/articles/financing-unemployment-insurance-in-high-informality-economies-a-survey-analysis-of-senegal/">Brookings</a>, <a href="https://www.worldbank.org/en/region/afr/brief/office-of-chief-economist-in-the-africa-region/events">World Bank</a>.</div>
+      </article>
+
+      <article class="paper" data-topics="tax design">
+        <p class="t"><a href="papers/RPP220087.pdf">Redistribution with Performance Pay</a></p>
+        <p class="who">(with Pawel Doligalski and Nicolas Werquin)</p>
+        <p class="status"><em>Journal of Political Economy Macroeconomics</em>, vol. 1, no. 2, pp. 371–402, June 2023.</p>
+        <button class="toggle" type="button" aria-expanded="false">Show abstract</button>
+        <div class="abstract" hidden>Half of the jobs in the United States feature pay for performance. We derive incidence and optimum formulas for the rate of tax progressivity and the top income tax rate when such labor contracts arise from moral hazard frictions within firms. Our first main result is that the sensitivity of the worker's compensation to performance is roughly invariant to tax progressivity. Second, the optimal tax schedule is strictly less progressive than in standard models that treat pretax earnings risk as exogenous. Quantitatively, the welfare cost of not accounting for performance pay when choosing tax progressivity is 0.3% of consumption.</div>
+        <div class="links"><a href="https://doi.org/10.1086/724511">Journal article</a>. <a href="https://www.dropbox.com/scl/fi/wozdz1gq1hlehm1b4vcme/RPP_jpema1_371.bib?rlkey=lj9r8x2gt2c6dfwttpy0tu1p8&amp;raw=1">BibTeX</a>. <a href="https://x.com/and_joy_/status/1266489737487015938">X summary</a>. Coverage: <a href="https://www.minneapolisfed.org/article/2021/scholar-spotlight-abdoulaye-ndiaye">Minneapolis Fed</a>.</div>
+      </article>
+
+      <article class="paper" data-topics="debt africa">
+        <p class="t"><a href="papers/Senegal_debt.pdf">Optimal Default in a Small Open Economy: Senegal's Hidden Debt Crisis</a></p>
+        <p class="who">(with Louphou Coulibaly)</p>
+        <p class="status"><em>Oxford Review of Economic Policy</em>, vol. 42, issue 2, Summer 2026, pp. 362–376, October 2026.</p>
+        <button class="toggle" type="button" aria-expanded="false">Show abstract</button>
+        <div class="abstract" hidden>Hidden public debt can abruptly reprice sovereign risk once it is revealed. We model optimal default after such a revelation and apply the framework to Senegal's 2024 debt audit, which sharply raised reported debt. A baseline calibration implies that default would have been optimal from 2023 onward. Because Senegal has kept repaying, we also build a no-default calibration. It requires income shocks more volatile and less persistent than history suggests, and places Senegal near the default boundary, where an adverse shock of about 3 percent could make restructuring optimal within a year. The revelation moved Senegal from moderate fiscal risk to acute vulnerability.</div>
+        <div class="links"><a href="https://doi.org/10.1093/oxrep/grag023">Journal article</a>. <a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=6456639">SSRN</a>.</div>
+      </article>
+
+      <article class="paper" data-topics="design">
+        <p class="t"><a href="papers/Relative_Pricing.pdf">Parallel Execution Fee Mechanisms</a></p>
+        <p class="status"><em>Financial Cryptography and Data Security (FC 2025)</em>, February 2026, pp. 245–262.</p>
+        <button class="toggle" type="button" aria-expanded="false">Show abstract</button>
+        <div class="abstract" hidden>How can prices allocate resources efficiently in blockchains that process transactions through several parallel queues sharing one global capacity limit? Revenue-maximizing pricing tends to give all capacity to the highest-paying queue, while welfare-maximizing pricing generally serves every queue. Optimal relative prices depend on market size, demand elasticity, and local versus global congestion. The results apply to parallel-execution blockchains, DAG-based systems, and designs with multiple concurrent proposers.</div>
+        <div class="links"><a href="https://link.springer.com/chapter/10.1007/978-3-032-00492-5_16">Proceedings</a>. <a href="https://www.dropbox.com/scl/fi/wjvtsq7q8eab71r4zs5vb/relativepricing.bib?rlkey=br49749tuzelbmcmgk7f412cx&amp;raw=1">BibTeX</a>. Coverage: <a href="https://www.youtube.com/watch?v=UD_7Crtxy-k">a16z Crypto Research</a>.</div>
+      </article>
+
+      <article class="paper" data-topics="design">
+        <p class="t"><a href="papers/blockchainpvq.pdf">Blockchain Price vs. Quantity Controls</a></p>
+        <p class="status"><em>Financial Cryptography and Data Security (FC 2024)</em>, February 2025, pp. 303–313.</p>
+        <button class="toggle" type="button" aria-expanded="false">Show abstract</button>
+        <div class="abstract" hidden>How should blockchains set transaction fees? I compare price-based controls, such as Ethereum's EIP-1559 base fee, with quantity-based controls, such as a fixed block size limit. Demand uncertainty, validator costs, cryptocurrency price swings, demand elasticity, and decentralization all shape which approach performs better. Modeling the choice as Nash bargaining between protocol designers and validators, I show that no single mechanism fits every blockchain, and hybrid designs combining both controls can be useful.</div>
+        <div class="links"><a href="https://link.springer.com/chapter/10.1007/978-3-031-78676-1_17">Proceedings</a>. <a href="https://www.dropbox.com/scl/fi/gu8mvq1t2mgpam165lad9/blockchainpvq.bib?rlkey=ott74pn7zogc0hhrlajwywos1&amp;raw=1">BibTeX</a>.</div>
+      </article>
+
+      <h3 class="group" id="working">Working Papers</h3>
+
+      <article class="paper" data-topics="tax africa">
+        <p class="t"><span class="badge">New</span><a href="papers/Tax_Productivity.pdf">Tax Productivity and Development: A Quantitative Macroeconomic Analysis</a></p>
+        <p class="who">(with Radhika Goyal, Andres Jensen, David Lagakos, and Yuntian Zhao)</p>
+        <p class="status">Submitted. October 2026.</p>
+        <button class="toggle" type="button" aria-expanded="false">Show abstract</button>
+        <div class="abstract" hidden>Does governments' ability to collect taxes drive economic development? Using a new dataset, we show that tax revenue per dollar spent on collection rises steeply with income. We build a growth model in which tax collection uses labor and revenue funds productive public capital. A 50 percent rise in tax collection productivity raises long-run output in low-income economies far more than standard growth accounting predicts, with smaller gains in richer countries.</div>
+        <div class="links"><a href="https://www.youtube.com/live/obZ3xh71edA?t=19220s">Video</a>.</div>
+      </article>
+
+      <article class="paper" data-topics="africa">
+        <p class="t"><span class="badge">Preliminary</span><a href="https://www.dropbox.com/scl/fi/nktrzivdz0bn52bx9gzbn/20260918_Bergeron_Ndiaye_paper.pdf?rlkey=sa02k1bxj2ag3dto0j4uhzbgu&amp;raw=1">Disrupting State Legitimacy: Evidence from 48,000 Colonial Documents</a></p>
+        <p class="who">(with Augustin Bergeron)</p>
+        <p class="status">August 2026.</p>
+      </article>
+
+      <article class="paper" data-topics="design">
+        <p class="t"><span class="badge">Preliminary</span><a href="papers/EMP.pdf">Employer Market Power with Endogenous Labor Market Boundaries</a></p>
+        <p class="who">(with Olalekan Bello and Claudia Macaluso)</p>
+        <p class="status">May 2026.</p>
+        <button class="toggle" type="button" aria-expanded="false">Show abstract</button>
+        <div class="abstract" hidden>Studies of employer market power usually take labor market boundaries as fixed, such as commuting zones or counties. Using more than 63 million online applications to US hourly jobs, we show that search breadth varies widely across workers and rises when local labor markets weaken: workers search farther when their home market is concentrated or cyclically weak. We build a search-and-matching model with granular firms and costly search across distance, and confirm its four predictions for applications and wages. Employer market power depends jointly on local concentration and on how workers reallocate their search.</div>
+        <div class="links"><a href="https://drive.google.com/file/d/1TEaJyNaJm4qdKh5u7G4XK07OGE9GaDIe/view">Slides</a>.</div>
+      </article>
+
+      <article class="paper" data-topics="debt">
+        <p class="t"><a href="https://www.dropbox.com/scl/fi/i9t2um5qd9x0vw85lnih3/survey_finance-2.pdf?rlkey=38vgv0h91hxpp9m7jg3r0tqaw&amp;e=1&amp;raw=1">Mispricing Narratives after Social Unrest</a></p>
+        <p class="who">(with Bocar A. Ba, Roman G. Rivera, and Alexander Whitefield)</p>
+        <p class="status">March 2025.</p>
+        <div class="links"><a href="https://www.nber.org/papers/w32730">NBER</a>. <a href="https://www.dropbox.com/scl/fi/c8gb8d52ce2mupdwkjaz4/Narratives.bib?rlkey=54nxz4gn4p17xfedn7svx9y6l&amp;raw=1">BibTeX</a>.</div>
+      </article>
+
+      <h3 class="group" id="ongoing">Selected Ongoing Research</h3>
+
+      <article class="paper" data-topics="tax africa">
+        <p class="t">Public Service Access and Fiscal Capacity</p>
+        <p class="who">(with Hamidou Jawara, Justine Knebelmann, Joseph Levine, and Victor Pouliquen)</p>
+        <p class="status">Analysis completed. Kanifing, The Gambia. <a href="https://www.povertyactionlab.org/initiative-project/can-digitization-help-foster-synergies-between-urban-service-delivery-and-local">J-PAL DigiFi grant</a>.</p>
+        <button class="toggle" type="button" aria-expanded="false">Show abstract</button>
+        <div class="abstract" hidden>Cities in developing countries face growing demand for public services but raise too little tax revenue to fund them. Can local governments harness synergies between the two? We partner with The Gambia's largest urban municipality to implement six randomized interventions targeting property taxation and trash collection, a service households can access by paying a user fee. At baseline, only 34% of households pay property taxes, while public trucks collect just 30% of waste. We develop a model of households' joint decisions to pay property taxes and service fees to guide our analysis. Strong enforcement through court summons sharply increases tax compliance, while comprehensive enforcement using GIS technology has smaller but meaningful effects. A tax cut has no effect. Improving access to trash collection and providing information about the tax-service link do not increase compliance. By contrast, a reciprocity intervention that reduces user fees conditional on tax payment raises compliance by a similar magnitude to comprehensive enforcement. Tying user fees to tax payments is thus a promising way to sustain a virtuous cycle.</div>
+      </article>
+
+      <article class="paper" data-topics="tax africa">
+        <p class="t">Redistribution through Firms: The Impact of Oil Transportation Subsidies</p>
+        <p class="who">(with Francis Annan)</p>
+        <p class="status">Analysis completed. Ghana. Slides available on request.</p>
+      </article>
+
+      <article class="paper" data-topics="debt africa">
+        <p class="t"><a href="https://ebehi.org/Project-Summary.pdf">Frontier Technology in Frontier Markets: Financing the Global AI Revolution</a></p>
+        <p class="who">(with Ebehi Iyoha)</p>
+        <div class="links"><a href="https://ebehi.org/radia">Project website</a>.</div>
+      </article>
+
+      <article class="paper" data-topics="debt africa">
+        <p class="t">Credit and Conflict in Nigeria</p>
+        <p class="who">(with Olalekan Bello, Simone Lenzu, and Toni Oki)</p>
+      </article>
+
+      <article class="paper" data-topics="tax">
+        <p class="t">Breaking Barriers: How Policies, Norms, and Preferences Shape Women's Labor Force Participation</p>
+        <p class="who">(with Zhixiu Yu)</p>
+      </article>
+
+    </section>
+
+    <section id="policy">
+      <h2>Policy Papers</h2>
+      <ul class="plain">
+        <li><a href="http://findevlab.org/wp-content/uploads/2026/01/FDL_Policy-Note-31_A-Strategic-Compass-for-Navigating-Senegals-Debt-Crisis_Jan26_FINAL.pdf">A Strategic Compass for Navigating Senegal's Debt Crisis</a><span class="src">(with Martin Kessler) Finance for Development Lab, Policy Note 31, January 2026.</span></li>
+        <li><a href="policy/ai_agents.pdf">The AI Agent Revolution in Crypto: Looming Risks and Regulatory Opportunities</a><span class="src">(with Kevin M.K. Fodouop) Competition Policy International, January 2025.</span></li>
+        <li><a href="https://www.dropbox.com/scl/fi/861e4rx34fkxnpj2vgs73/BrookingsPB-pdf.pdf?rlkey=uurov9sb26n56rgtq873o46jr&amp;dl=0">Financing Unemployment Insurance in High-Informality Economies: A Survey Analysis of Senegal</a><span class="src">(with Ahmadou Aly Mbaye, Kyle Herkenhoff, Abdoulaye Cisse, and Alessandro Dell'Acqua) Brookings Policy Brief, Global Economy &amp; Development, 2023.</span></li>
+        <li><a href="https://www.dropbox.com/s/o7r94waghn8fm7b/cfl419-pdf.pdf?dl=0">Reforming Social Security to Save Social Security</a><span class="src">(with Lisa Camner McKay) Chicago Fed Letter, No. 419, 2019.</span></li>
+        <li><a href="https://www.dropbox.com/scl/fi/iavtlp6t8yhaiusa3smtg/ReservesUEMOA.pdf?rlkey=7ugjqbbnbds705h9fjsl6zjlq&amp;raw=1">Gestion Optimale des Réserves de Change dans l'UEMOA</a><span class="src">2016.</span></li>
+        <li><a href="https://www.econstor.eu/bitstream/10419/107998/1/797936815.pdf">Assessing the Inclusiveness of Growth in Africa: Evidence from Senegal, Cameroon, and Tanzania</a><span class="src">(with Georges Vivien Houngbonon, Arthur Bauer, Clara Champagne, Tite Yokossi, Nathalie Ferrière, Hédi Brahimi, and Jeanne Avril) UNU-WIDER Working Paper 2014/120.</span></li>
+      </ul>
+    </section>
+
+    <section id="discussions">
+      <h2>Discussions</h2>
+      <ul class="plain">
+        <li><a href="https://www.dropbox.com/scl/fi/t25eqy4tn32kvvp2cn73o/Estefan.pdf?rlkey=zx2objbozqz2q4hmjhhgjyo9x&amp;raw=1">Taxing Water Usage in Developing Countries: Theory and Evidence from Mexico</a><span class="src">Discussion of work by Alejandro Estefan. National Tax Association Meetings, 2023.</span></li>
+        <li><a href="https://www.dropbox.com/scl/fi/k1e0ahe8ofddd8m6m7pvj/Guidetti.pdf?rlkey=svsv3v755fs2ffqtmah9kgrcm&amp;raw=1">Expansion of Piped Water and Sewer Networks: The Effects of Regulation</a><span class="src">Discussion of work by Bruna Morais Guidetti and Carolina Tojal Ramos dos Santos. National Tax Association Meetings, 2023.</span></li>
+        <li><a href="https://www.dropbox.com/s/y3diinzqx296jkm/Discussion_Ndiaye.pdf?dl=0">Larger Transfers Financed with More Progressive Taxes? On the Optimal Design of Taxes and Transfers</a><span class="src">Discussion of work by Axelle Ferriere, Philipp Grübener, Gaston Navarro, and Oliko Vardishvili. National Tax Association Meetings, 2021.</span></li>
+        <li><a href="https://www.dropbox.com/s/y3diinzqx296jkm/Discussion_Ndiaye.pdf?dl=0">Optimal Fiscal Policy in a Model with Uninsurable Idiosyncratic Shocks</a><span class="src">Discussion of work by Sebastian Dyrda and Marcelo Pedroni. National Tax Association Meetings, 2021.</span></li>
+        <li><a href="https://www.dropbox.com/s/53e0e2p30s4ak76/NTA2020_Ndiaye_disc_taxcple.pdf?dl=0">The Taxation of Couples</a><span class="src">Discussion of work by Felix Bierbrauer, Pierre Boyer, Andreas Peichl, and Daniel Weishaar. National Tax Association Meetings, 2020.</span></li>
+        <li><a href="https://www.dropbox.com/s/aqypszzdmcbhyfj/NTA2020_Ndiaye_disc_survey.pdf?dl=0">Politics and Income Taxes: Progress and Progressivity</a><span class="src">Discussion of work by Marcus Berliant and Pierre Boyer. National Tax Association Meetings, 2020.</span></li>
+        <li><a href="https://www.dropbox.com/s/hcrry8hn51dxr3m/tsinghuadiscussion.pdf?raw=1">Capitalist Human Capital</a><span class="src">Discussion of work by Vincenzo Quadrini, Qi Sun, and Yicheng Wang. Tsinghua Workshop in Macroeconomics, 2019.</span></li>
+        <li><a href="https://www.dropbox.com/s/sx743lq06ikbgpu/Ndiaye_pierre.pdf?raw=1">Politically Feasible Reforms of Non-Linear Tax Systems</a><span class="src">Discussion of work by Felix J. Bierbrauer and Pierre C. Boyer. Fourth Taxation Theory Conference, 2018.</span></li>
+        <li><a href="https://www.dropbox.com/s/g1kadqhnae5js9y/pawel.pdf?raw=1">Income Taxation, Firing Costs and Insurance within Firm</a><span class="src">Discussion of work by Pawel Doligalski. National Tax Association Meetings, 2017.</span></li>
+        <li><a href="https://www.dropbox.com/s/3lge0y1mub0uzse/thomas.pdf?raw=1">Inverse December Fever</a><span class="src">Discussion of work by Zareh Asatryan, Andreas Peichl, Thomas Schwab, and Johannes Voget. National Tax Association Meetings, 2017.</span></li>
+      </ul>
+    </section>
+
+    <section id="lectures">
+      <h2>Lecture Notes</h2>
+      <div class="course">
+        <h4>PhD Macro Public Finance</h4>
+        <p class="meta"><a href="https://www.dropbox.com/s/tx3xu8ilkkoe8ls/NYU%20MPF%20Fall%202020%20Syllabus.pdf?dl=0">Syllabus</a></p>
+        <p class="part">Part I. Classical Public Finance Revisited</p>
+        <ul class="lectures">
+          <li><span class="n">Lecture 0</span><span>Introduction to Macro Public Finance. <a href="teaching/macropublic/Lecture_0_slides.pdf">Slides</a>, <a href="https://macropublicfinance.wordpress.com/2020/09/02/39/">Lecture notes</a></span></li>
+          <li><span class="n">Lecture 1</span><span>Commodity Taxation and Productive Efficiency. <a href="teaching/macropublic/Lecture_1_slides.pdf">Slides</a></span></li>
+          <li><span class="n">Lecture 2</span><span>Wealth and Capital Taxation in the Ramsey Model: Chamley–Judd. <a href="teaching/macropublic/Lecture_2_slides.pdf">Slides</a></span></li>
+          <li><span class="n">Lecture 3</span><span>Wealth and Capital Taxation Revisited: Straub–Werning. <a href="teaching/macropublic/Lecture_3_slides.pdf">Slides</a></span></li>
+          <li><span class="n">Lecture 4</span><span>Nonlinear Income Taxation. <a href="teaching/macropublic/Lecture_4_slides.pdf">Slides</a>, <a href="https://www.dropbox.com/s/98egzmrjsy33b6m/Optimal_Control_Notes.pdf?dl=0">Deterministic optimal control notes</a></span></li>
+        </ul>
+        <p class="part">Part II. Dynamic Income Taxation</p>
+        <ul class="lectures">
+          <li><span class="n">Lecture 5</span><span>Dynamic Taxation I: Capital Taxation. <a href="teaching/macropublic/Lecture_5_slides.pdf">Slides</a></span></li>
+          <li><span class="n">Lecture 6</span><span>Dynamic Taxation II: Labor Income Taxation. <a href="teaching/macropublic/Lecture_6_slides.pdf">Slides</a></span></li>
+          <li><span class="n">Lecture 7</span><span>Optimal Taxation with Endogenous Wages. <span class="res">Slides:</span> <a href="https://www.dropbox.com/s/1g3iadxg7kc9tec/s_stantcheva_jmp_slides.pdf?raw=1">Optimal Taxation and Human Capital Policies</a> (S. Stantcheva); <a href="https://www.dropbox.com/s/gaylvsgrknzoemk/DNW_Oct2020-VMACS%20%2845mn%29.pdf?raw=1">Redistribution with Performance Pay</a> (P. Doligalski, A. Ndiaye, and N. Werquin)</span></li>
+          <li><span class="n">Lecture 8</span><span>Disability Insurance. <a href="teaching/macropublic/Lecture_8_slides.pdf">Slides</a></span></li>
+        </ul>
+        <p class="part">Part III. Contemporary Topics in Macro Public Finance</p>
+        <ul class="lectures">
+          <li><span class="n">Lecture 9</span><span>Taxation and Aggregate Shocks. <a href="teaching/macropublic/Lecture_9_slides.pdf">Slides</a></span></li>
+          <li><span class="n">Lecture 10</span><span>Efficiency of Wealth vs. Capital Gains Taxation. <span class="res">Slides:</span> <a href="https://www.dropbox.com/s/o8pytfbtomi6kj2/gkkoc-2019-web-october22_slides.pdf?raw=1">Use It or Lose It: Efficiency Gains from Wealth Taxation</a> (Guvenen et al.); <a href="https://www.dropbox.com/s/nunasz5hbdl2yoh/efficient%20redistribution.pdf?raw=1">Efficient Redistribution</a> (Boar and Midrigan)</span></li>
+          <li><span class="n">Lecture 11</span><span>Gender</span></li>
+          <li><span class="n">Lecture 12</span><span>Discrimination and Racial Inequality. <a href="teaching/macropublic/mpf_conclusion.pdf">Slides</a></span></li>
+        </ul>
+      </div>
+      <div class="course">
+        <h4>Macro Development for Policymakers</h4>
+        <p class="meta"><a href="https://www.dropbox.com/s/3ciiqdcer1dwv0r/Syllabus_Macro_Development_for_Polcymakers_v202110111334.pdf?dl=0">Syllabus</a></p>
+        <ul class="lectures">
+          <li><span class="n">Lecture 1</span><span><a href="teaching/macrodevpol/Lecture_1_slides.pdf">Introduction to Macro Development</a></span></li>
+          <li><span class="n">Lecture 2</span><span><a href="teaching/macrodevpol/Lecture_2_slides.pdf">Growth, Infrastructure, and Technological Change</a></span></li>
+          <li><span class="n">Lecture 3</span><span><a href="teaching/macrodevpol/Lecture_3.pdf">Productivity and Human Capital in Developing Countries</a></span></li>
+          <li><span class="n">Lecture 4</span><span><a href="teaching/macrodevpol/Lecture_4.pdf">Agriculture, Manufacturing, and Services: Key Concepts of Structural Transformation</a></span></li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="publicgoods">
+      <h2>Public Goods</h2>
+      <ul class="plain">
+        <li><a href="publicgoods/econ_advice.pdf">What Economists Do: A Practical Map of Careers, Training, and PhD Pathways</a><span class="src">VoxDev. Last updated December 28, 2025.</span></li>
+        <li><a href="https://cepr.org/voxeu/columns/organising-high-quality-conference-equal-access-lessons-learned-vmacs-junior">Organising a High-Quality Conference with Equal Access: Lessons Learned from the VMACS Junior Conference</a><span class="src">VoxEU, September 21, 2020.</span></li>
+      </ul>
+    </section>
+
+    <section id="students">
+      <h2>Students</h2>
+      <ul class="plain students small">
+        <li><span class="yr">2024–25</span><span><a href="https://are.berkeley.edu/candidate/abdoulaye-cisse">Abdoulaye Cissé</a>, UC Berkeley ARE. Placement: Princeton postdoc, World Bank.</span></li>
+        <li><span class="yr">2023–24</span><span>Alessandro Dell'Acqua, NYU Stern predoc. Placement: PhD in Economics, UC Berkeley.</span></li>
+        <li><span class="yr">2022–23</span><span>Yifan Shi, NYU research assistant. Placement: Predoc in Finance, Kellogg.</span></li>
+        <li><span class="yr">2018–19</span><span>Richard De Thorpe, Chicago Fed predoc. Placement: PhD in Economics, Princeton.</span></li>
+      </ul>
+    </section>
+
+    <footer>© 2026 Abdoulaye Ndiaye</footer>
+  </main>
+</div>
+
+<script>
+(function(){
+  var root = document.documentElement, btn = document.getElementById('theme-toggle');
+  var mq = window.matchMedia ? window.matchMedia('(prefers-color-scheme: dark)') : null;
+  try { var saved = localStorage.getItem('theme'); if (saved === 'light' || saved === 'dark') root.setAttribute('data-theme', saved); } catch (e) {}
+  function isDark(){ var t = root.getAttribute('data-theme'); return t ? t === 'dark' : !!(mq && mq.matches); }
+  function label(){ var l = isDark() ? 'Switch to light mode' : 'Switch to dark mode'; btn.setAttribute('aria-label', l); btn.title = l; }
+  btn.addEventListener('click', function(){
+    var next = isDark() ? 'light' : 'dark';
+    root.setAttribute('data-theme', next);
+    try { localStorage.setItem('theme', next); } catch (e) {}
+    label();
+  });
+  if (mq && mq.addEventListener) mq.addEventListener('change', label);
+  label();
+})();
+(function(){
+  document.querySelectorAll('.toggle').forEach(function(b){
+    b.addEventListener('click', function(){
+      var a = b.nextElementSibling, open = b.getAttribute('aria-expanded') === 'true';
+      b.setAttribute('aria-expanded', String(!open));
+      b.textContent = open ? 'Show abstract' : 'Hide abstract';
+      a.hidden = open;
+    });
+  });
+  var chips = document.querySelectorAll('.chip'), papers = document.querySelectorAll('.paper');
+  chips.forEach(function(c){
+    c.addEventListener('click', function(){
+      var f = c.dataset.f;
+      chips.forEach(function(x){ x.setAttribute('aria-pressed', String(x === c)); });
+      papers.forEach(function(p){
+        p.hidden = !(f === 'all' || p.dataset.topics.split(' ').indexOf(f) > -1);
+      });
+    });
+  });
+  var links = {};
+  document.querySelectorAll('.side nav a[href^="#"]').forEach(function(a){ links[a.getAttribute('href').slice(1)] = a; });
+  var secs = Object.keys(links).map(function(id){ return document.getElementById(id); }).filter(Boolean);
+  function mark(id){ Object.keys(links).forEach(function(k){ links[k].setAttribute('aria-current', String(k === id)); }); }
+  function update(){
+    var y = window.innerHeight * 0.3, cur = secs[0] && secs[0].id;
+    secs.forEach(function(sec){ if (sec.getBoundingClientRect().top <= y) cur = sec.id; });
+    if ((window.innerHeight + window.scrollY) >= document.documentElement.scrollHeight - 4) cur = secs[secs.length-1].id;
+    mark(cur);
+  }
+  var ticking = false;
+  window.addEventListener('scroll', function(){ if (!ticking){ ticking = true; requestAnimationFrame(function(){ update(); ticking = false; }); } }, {passive:true});
+  window.addEventListener('resize', update);
+  update();
+})();
+</script>
+</body>
+</html>
