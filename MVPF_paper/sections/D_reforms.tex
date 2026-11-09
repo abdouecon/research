@@ -1,0 +1,145 @@
+% ============================================================================
+%  Appendix D: Construction of Reforms and Outcomes
+%  Sources: FROT 2025_sub/12_app_quant.tex ("Reforms": Construction of Reforms,
+%  Construction of Outcomes); 2025_sub/7_policy_reforms.tex (notes to the table of
+%  elimination experiments); tables/DRC_visualization_4.tex (claiming schedules).
+% ============================================================================
+\section{Construction of Reforms and Outcomes}\label{app:reforms}
+
+This appendix describes how each instrument-elimination experiment and each reform is implemented and how its welfare, fiscal, MVPF, and participation outcomes are computed. Every reform is a permanent change in the rules of Section~\ref{sec:model} that the cohort knows from age 30. For each reform, we solve the model again by backward induction under the new rules (Appendix~\ref{app:solution}) and simulate the cohort forward from the same initial distribution as in the status quo. All other rules and parameters keep their status-quo values, and the wage profiles and the pretax return $r_f$ are held fixed. Outcomes are computed from the simulated histories.
+
+\subsection{Instrument-Elimination Experiments}
+
+The five experiments of \autoref{tab:elim} each remove one instrument from the estimated economy.
+\begin{itemize}
+\item \textit{D1, no Social Security benefits:} Social Security benefits are set to zero. In a variant reported in Section~\ref{sec:results_elim}, only retirement benefits are set to zero and disability benefits are kept.
+\item \textit{D2, loss from incomplete coverage in Medicare:} out-of-pocket medical expenses after age 65 are set to zero for participants and nonparticipants, so that all medical expenditures after 65 are covered. The table reports the welfare change of the status quo relative to this economy, which, by the antisymmetry of the CE, is minus the welfare gain from full coverage.
+\item \textit{D3, full savings subsidy:} the net return on assets $r$ is set equal to the pretax return $r_f$. This experiment coincides with reform K3.
+\item \textit{D4, no income tax:} the income tax $T_t(\cdot)$ of \eqref{eq:tax} is set to zero at every age.
+\item \textit{D5, no disability benefits:} DI benefits $db_t$ of \eqref{eq:di} are set to zero.
+\end{itemize}
+These experiments change the government budget without financing the change. We report their CE and LE welfare changes only.
+
+\subsection{Claiming-Age Dependence}
+
+Let $\alpha(a)=b(a)/PIA$ be the benefit, as a fraction of the PIA, of an individual who claims at age $a\in\{62,\ldots,70\}$. Under the rules of the status quo and of the AN and AD reforms,
+\begin{equation*}
+\alpha(a)=
+\begin{cases}
+1-\dfrac{1}{15}\min\{\mathit{NRA}-a,\,3\}-\dfrac{1}{20}\max\{\mathit{NRA}-a-3,\,0\} & \text{if } a<\mathit{NRA},\\[2ex]
+1+\delta\,(a-\mathit{NRA}) & \text{if } a\geq \mathit{NRA}:
+\end{cases}
+\end{equation*}
+benefits fall by $6\tfrac{2}{3}$ percent of the PIA for each of the first three years by which the claim precedes the NRA and by 5 percent for each additional year, and they rise by the DRC $\delta$ for each year of delay past the NRA. The status quo (AN0) has $\mathit{NRA}=65$ and $\delta=4.5$ percent. % Reductions of 6.67% (first three years) and 5% (earlier years): FROT 2025_sub/12_app_quant.tex (commented rule text in 'Reforms of Social Security Claiming-Age Dependence') and tables/DRC_visualization_4.tex.
+\begin{itemize}
+\item \textit{AN1--AN3:} $\mathit{NRA}=66$, 67, and 68, with $\delta=4.5$ percent. The schedule shifts to the right by one, two, and three years, so that the benefit at 62 falls from 80 to 75, 70, and 65 percent of the PIA. Because DI benefits are paid until the NRA \eqref{eq:di}, they are paid until the new NRA.
+\item \textit{AD1--AD5:} $\mathit{NRA}=65$ and $\delta=8$, 8.5, 9, 9.5, and 10 percent. Benefits for claims before the NRA are unchanged.
+\item \textit{AL1--AL9:} $\alpha(a)=1+x\,(a-65)$ at every claiming age, with $x=7,8,\ldots,15$ percent. The reduction for early claiming and the credit for delay are equal in absolute value.
+\end{itemize}
+\autoref{tab:schedules} reports $\alpha(a)$, in percent, for every claiming age and every reform; \autoref{fig:schedules} plots selected schedules. The adjustments of the AN reforms follow the rules of the Social Security Administration for the corresponding NRA.
+
+\begin{table}[!htbp]
+\centering
+\caption{Benefits by Claiming Age under the Claiming-Age Reforms}\label{tab:schedules}
+\small
+\input{tables/D_schedules}
+\tabnotes{\textit{Notes:} Retirement benefit received by an individual who claims at each age from 62 to 70, in percent of the primary insurance amount (PIA). Bold entries mark the normal retirement age (NRA), at which the benefit equals the PIA. AN0: status quo of the 1920--1940 birth cohorts, with an NRA of 65, a reduction of $6\tfrac{2}{3}$ percent of the PIA per year of claiming before the NRA, and a delayed retirement credit (DRC) of 4.5 percent of the PIA per year of claiming after the NRA. AN1--AN3 raise the NRA to 66, 67, and 68; the reduction is $6\tfrac{2}{3}$ percent per year for the three years before the NRA and 5 percent per year before that. AD1--AD5 raise the DRC to 8, 8.5, 9, 9.5, and 10 percent. AL1--AL9 set the reduction for early claiming and the DRC to a common rate of 7 to 15 percent per year. \textit{Source:} rules of the Social Security Administration for the status quo and the AN reforms; authors' construction for the AD and AL reforms.}
+\end{table}
+
+\subsection{Benefit Progressivity and Level}
+
+Write the PIA formula \eqref{eq:pia} with replacement rates $\omega=(\omega_1,\omega_2,\omega_3)$:
+\begin{equation*}
+\begin{split}
+PIA_t={}&\omega_1\min\{aime_t,aime_0\}+\omega_2\min\big\{\max\{aime_t-aime_0,0\},\,aime_1-aime_0\big\}\\
+&+\omega_3\max\{aime_t-aime_1,0\},
+\end{split}
+\end{equation*}
+with $\omega=(0.90,\,0.32,\,0.15)$ in the status quo. The bend points $aime_0$ and $aime_1$ and the claiming-age adjustments are unchanged. The reforms set:
+\begin{itemize}
+\item \textit{P1.1--P1.9:} $\omega=(0.90+0.01k,\;0.32,\;0.15)$ for $k=1,\ldots,9$, which raises the first rate by one percentage point per step, from 0.91 to 0.99.
+\item \textit{P2.0--P2.9:} $\omega=\big(0.99,\;0.32\,(1.01+0.01k),\;0.15\big)$ for $k=0,\ldots,9$, which raises the second rate by 0.32 percentage points (1 percent of its initial value) per step, from 0.3232 to 0.352, on top of the first rate of P1.9.
+\item \textit{P3.0--P3.9:} $\omega=\big(0.99,\;0.352,\;0.15\,(1.01+0.01k)\big)$ for $k=0,\ldots,9$, which raises the third rate by 0.15 percentage points (1 percent of its initial value) per step, from 0.1515 to 0.165, on top of the first two rates of P2.9.
+\item \textit{L0--L9:} $\omega=(1.01+0.01k)\times(0.90,\;0.32,\;0.15)$ for $k=0,\ldots,9$, which raises all three rates proportionally by 1 to 10 percent; L0 sets $\omega=(0.909,\,0.3232,\,0.1515)$ and L9 sets $\omega=(0.99,\,0.352,\,0.165)$.
+\end{itemize}
+The P reforms trace a path from the status quo to a 10 percent increase in all three rates that raises the brackets one at a time, from the bottom up. The path ends at the formula of L9: P3.9 and L9 set the same rates, and their simulated outcomes in \autoref{tab:generosity} and \autoref{tab:generosity_app} coincide.
+
+\subsection{Medicare}
+
+To implement the Medicare reforms, we first measure from the MEPS the average share of medical expenditures that Medicare covers for individuals aged 65 and older, by health status and working status. Denote this coverage rate by $q(h,P)$. At ages $t\geq65$, out-of-pocket medical expenses are $m_t=\big(1-q(h_t,P_t)\big)\,m^{tot}_t$, where $m^{tot}_t$ is total medical expenditure, and Medicare pays $m^{G}_t=q(h_t,P_t)\,m^{tot}_t$ (Section~\ref{sec:model_medical}). We simulate the estimated model with these coverage rates and use the simulated economy as the baseline for the two Medicare reforms.
+\begin{itemize}
+\item \textit{Part A:} the coverage rate of every individual aged 65 and older rises by 20 percentage points, $q(h,P)\to q(h,P)+0.20$, which represents expanded coverage of inpatient services. The targeted beneficiaries are all individuals aged 65 and older.
+\item \textit{Part B:} the coverage rate of nonparticipants aged 65 and older rises by 20 percentage points, $q(h,0)\to q(h,0)+0.20$, which represents expanded coverage of physician and outpatient services. Because most employer-provided health insurance plans already cover these services, the reform targets nonparticipants. % Source: FROT 2025_sub/7_policy_reforms.tex, paragraph 'Medicare Reforms'.
+The targeted beneficiaries are the nonparticipants aged 65 and older.
+\end{itemize}
+At unchanged behavior, each reform shifts 20 percent of the total medical expenditure of the targeted beneficiaries from out-of-pocket expenses to Medicare. Under Part B, the shift is conditional on not working, so the reform also changes the return to work after 65.
+
+\subsection{Old-Age Income Taxes}
+
+Reforms I1--I5 lower income taxes from age 62 by raising the level parameter of the after-tax income schedule $y-T_t(y)=\lambda_t\,y^{1-\tau_t}$:
+\begin{equation*}
+\tilde\lambda_t=
+\begin{cases}
+\lambda_t & \text{if } t\leq 61,\\
+\lambda_t+x\,(t-61) & \text{if } t\geq 62,
+\end{cases}
+\qquad x=0.01,\,0.02,\,0.03,\,0.04,\,0.05,
+\end{equation*}
+with the progressivity parameter $\tau_t$ unchanged. At age $t\geq62$, after-tax income rises at every income level by the proportion $x(t-61)/\lambda_t$, and the tax cut $x(t-61)\,y^{1-\tau_t}$ rises with income and with age. Individuals anticipate the reform from age 30.
+
+\subsection{Savings Subsidies}
+
+Reforms K1--K3 raise the net return on assets at every age from $r$ to $\tilde r=r+\Delta_K$, with $\Delta_K=0.2$, 0.4, and 0.8 percentage points. The government pays the additional return $\Delta_K a_t$ on assets held at every age, and the present value of the subsidy is
+\begin{equation*}
+K=\sum_{t=30}^{T}(1+r)^{-(t-62)}\,\overline{\Delta_K a_t},
+\end{equation*}
+where the bar denotes the per capita value in the simulated cohort under the reform. Since $r=(1-\tau_k)\,r_f$ with $r_f=4$ percent and $\tau_k=20$ percent, the three subsidies are equivalent to lowering the capital-tax wedge $\tau_k$ to 15, 10, and 0 percent (exact arithmetic: $(1-\tilde\tau_k)\times 4=3.4$, 3.6, and 4.0 percent). K3 sets the net return equal to the pretax return and coincides with experiment D3.
+
+\subsection{Construction of Outcomes}\label{app:outcomes}
+
+\paragraph{Welfare.} Let $\bar V^{j}=\frac{1}{N}\sum_{i=1}^{N}V_{30}(X^{i}_{30};j)$ be the average value at age 30 over the $N$ simulated individuals under the rules $j$, where $j=0$ denotes the baseline and $j=1$ the reform; the initial states $X^{i}_{30}$ are the same under both. Because flow utility satisfies $u(e^{x}c,l)=e^{\gamma(1-\nu)x}u(c,l)$, scaling consumption in the baseline allocation by $e^{x}$ at every age and in every state multiplies $\bar V^{0}$ by $e^{\gamma(1-\nu)x}$. The consumption-equivalent welfare change is the $x$ that solves $\bar V^{1}=e^{\gamma(1-\nu)x}\bar V^{0}$, and the leisure-equivalent change the $y$ that solves $\bar V^{1}=e^{(1-\gamma)(1-\nu)y}\bar V^{0}$:
+\begin{equation*}
+\mathit{CE}=\frac{\ln\bar V^{1}-\ln\bar V^{0}}{\gamma(1-\nu)},
+\qquad
+\mathit{LE}=\frac{\ln\bar V^{1}-\ln\bar V^{0}}{(1-\gamma)(1-\nu)},
+\end{equation*}
+where, since $\bar V^{0}$ and $\bar V^{1}$ are negative when $\nu>1$, the logarithms apply to their absolute values; the difference is $\ln(\bar V^{1}/\bar V^{0})$, as in \eqref{eq:ce}. The tables report $100\times\mathit{CE}$ and $100\times\mathit{LE}$, in percent. The two measures satisfy $\mathit{LE}=\mathit{CE}\times\gamma/(1-\gamma)$; at the estimates, $\gamma/(1-\gamma)=0.5354/0.4646\approx1.15$, which reproduces the ratio of the LE and CE columns of \autoref{tab:elim} up to rounding. % Derived: exact arithmetic on gamma = 0.5354 (tables/est_parameters.tex). Both measures are antisymmetric: the welfare change of moving from rules $j$ to rules $k$ is minus that of moving from $k$ to $j$. The willingness to pay for a reform is $\WTP=100\times\mathit{CE}$.
+
+\paragraph{Fiscal effects.} The fiscal aggregates $\mathit{SS}$, $\mathit{DI}$, $\mathit{TR}$, $\mathit{IT}$, $\mathit{PT}$, and $G=\mathit{SS}+\mathit{DI}+\mathit{TR}-\mathit{IT}-\mathit{PT}$ are the per capita present values at age 62 of Section~\ref{sec:model_gov}, discounted at the net return $r$. A superscript 0 denotes the baseline, and $\Delta$ the difference between the reform and the baseline. % AUTHORS: absolute-value bases inferred from the table entries (see the comment in sections/4_framework.tex, Section 4.3); confirm against the code.
+Each fiscal effect is a dollar change expressed as a percentage of the absolute value of a baseline aggregate, so that positive entries are costs to the government and negative entries savings. The three columns of the results tables are constructed as follows.
+\begin{itemize}
+\item \textit{Social Security reforms} (claiming age, progressivity, and level). Direct is the percentage change in the present value of total retirement benefits paid by the program; Indirect is the percentage change in the present value of all other taxes and transfers, DI benefits and consumption-floor transfers net of income- and payroll-tax revenue; Net combines the two and is the percentage change in net government spending:
+\begin{equation*}
+\mathit{Direct}=100\,\frac{\Delta\mathit{SS}}{\mathit{SS}^{0}},\quad
+\mathit{Indirect}=100\,\frac{\Delta(\mathit{DI}+\mathit{TR}-\mathit{IT}-\mathit{PT})}{|\mathit{DI}^{0}+\mathit{TR}^{0}-\mathit{IT}^{0}-\mathit{PT}^{0}|},\quad
+\mathit{Net}=100\,\frac{\Delta G}{|G^{0}|}.
+\end{equation*}
+\item \textit{Medicare reforms.} Direct is the change in the present value of Medicare's payments to the targeted beneficiaries after age 65 (all individuals for Part A, nonparticipants for Part B), $\Delta\mathit{MC}^{tg}$, as a share of baseline payroll-tax revenue; Indirect is the percentage change in the present value of all taxes and transfers, including Social Security benefits; Net is the change in government spending plus the change in Medicare's payments to the targeted beneficiaries, as a share of baseline government spending:
+\begin{equation*}
+\mathit{Direct}=100\,\frac{\Delta\mathit{MC}^{tg}}{\mathit{PT}^{0}},\qquad
+\mathit{Indirect}=100\,\frac{\Delta G}{|G^{0}|},\qquad
+\mathit{Net}=100\,\frac{\Delta G+\Delta\mathit{MC}^{tg}}{|G^{0}|},
+\end{equation*}
+where $\mathit{MC}^{tg}=\sum_{t=65}^{T}(1+r)^{-(t-62)}\,\overline{m^{G}_t\,\Ind\{\text{targeted at } t\}}$ and all baseline values refer to the Medicare baseline.
+\item \textit{Income-tax reforms.} Direct is the percentage change in the present value of negative total income-tax revenue, that is, the revenue loss; Indirect is the percentage change in the present value of all other taxes and transfers, including Social Security benefits, net of payroll-tax revenue; Net combines the two:
+\begin{equation*}
+\mathit{Direct}=100\,\frac{-\Delta\mathit{IT}}{\mathit{IT}^{0}},\quad
+\mathit{Indirect}=100\,\frac{\Delta(\mathit{SS}+\mathit{DI}+\mathit{TR}-\mathit{PT})}{|\mathit{SS}^{0}+\mathit{DI}^{0}+\mathit{TR}^{0}-\mathit{PT}^{0}|},\quad
+\mathit{Net}=100\,\frac{\Delta G}{|G^{0}|}.
+\end{equation*}
+\item \textit{Savings subsidies.} Direct is the present value of the subsidy as a share of baseline government spending; Indirect is the percentage change in the present value of government spending excluding the subsidy; Net is the percentage change in the present value of government spending including the subsidy:
+\begin{equation*}
+\mathit{Direct}=100\,\frac{K}{|G^{0}|},\qquad
+\mathit{Indirect}=100\,\frac{\Delta G}{|G^{0}|},\qquad
+\mathit{Net}=100\,\frac{\Delta G+K}{|G^{0}|}.
+\end{equation*}
+\end{itemize}
+In dollars, the direct cost $\mathit{DC}$, the indirect cost $\mathit{IC}$, and the net cost $\mathit{NC}$ are the numerators of these expressions, and $\mathit{NC}=\mathit{DC}+\mathit{IC}$ in every family. The percentages add up only when the three columns share a base, as for the savings subsidies.
+
+\paragraph{Marginal value of public funds.} For the reforms of Social Security, Medicare, and income taxes, the MVPF is the dollar value of the CE welfare gain divided by the dollar change in the present value of per capita government spending, direct and indirect effects included. The dollar value of the welfare gain is the CE times the present value of per capita baseline consumption from age 62, discounted to age 62:
+\begin{equation*}
+\MVPF=\frac{\mathit{CE}\times\bar C^{0}_{62}}{\mathit{NC}},\qquad \bar C^{0}_{62}=\sum_{t=62}^{T}(1+r)^{-(t-62)}\,\bar c^{\,0}_{t}.
+\end{equation*}
+For the savings subsidies, which change returns from age 30, the dollar value of the welfare gain uses per capita baseline consumption from age 30, discounted to age 62, $\bar C^{0}_{30}=\sum_{t=30}^{T}(1+r)^{-(t-62)}\bar c^{\,0}_t$, and the denominator is the dollar change in government spending including the subsidy, $\mathit{NC}=\Delta G+K$. When the WTP is positive and the net cost negative, the MVPF is infinite. For such reforms, we report as a lower bound the dollar value of the welfare gain divided by the dollar direct cost, $\mathit{CE}\times\bar C^{0}_{62}/\mathit{DC}$, when the direct cost is positive; when it is negative, the lower bound is infinite as well. For the savings subsidies, the lower bound uses only the subsidy in the denominator, $\mathit{CE}\times\bar C^{0}_{30}/K$, and the MVPF computed with the net cost is an upper bound (Section~\ref{sec:fw_mvpf}). When the WTP and the net cost are both negative, the MVPF is positive and measures the welfare cost per dollar saved. Since $\mathit{NC}=\mathit{Net}\times|G^{0}|/100$, every MVPF equals $(\WTP/\mathit{Net})\times\bar C^{0}_{s}/|G^{0}|$, with $s=62$ or $s=30$.
+
+\paragraph{Participation.} The participation columns report the change in the labor force participation rate of the simulated cohort, in percentage points, between the reform and the baseline, for ages 30--49, 62--64, and 65--69.
