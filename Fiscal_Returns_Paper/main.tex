@@ -1,0 +1,63 @@
+% main.tex -- compile shell (W4). Compile from this directory:
+%   pdflatex -interaction=nonstopmode main.tex   (twice; latexmk -pdf for the full run with bibtex)
+\documentclass[12pt]{article}
+\input{preamble}
+\input{sections/macros}
+% \autoref wording (hyperref defaults print "section"; the style guide wants "Section 5", "Appendix A")
+\renewcommand{\sectionautorefname}{Section}
+\renewcommand{\subsectionautorefname}{Section}
+\renewcommand{\subsubsectionautorefname}{Section}
+\renewcommand{\appendixautorefname}{Appendix}
+
+\begin{document}
+
+\hypersetup{pageanchor=false}% title page is unnumbered; avoids a duplicate page.1 destination after \setcounter{page}{1}
+\input{sections/00_frontmatter}
+\hypersetup{pageanchor=true}
+
+\input{sections/01_intro}
+\input{sections/02_institutions}
+\input{sections/03_model}
+\input{sections/04_estimation}
+\input{sections/05_accounting}
+\input{sections/06_elimination}
+\input{sections/07_claiming}
+\input{sections/08_progressivity}
+\input{sections/09_other_reforms}
+\input{sections/10_menu}
+\input{sections/11_scope}
+\input{sections/12_conclusion}
+
+\singlespacing\footnotesize
+\bibliographystyle{aer}
+\bibliography{references}
+
+\newpage
+\appendix
+\onehalfspacing\normalsize
+% Appendix sections are lettered A--E (article's \appendix sets \thesection to \Alph{section} and
+% resets the counter; hyperref's patched \appendix makes \autoref{app:...} print "Appendix A").
+\renewcommand{\thesection}{\Alph{section}}
+\setcounter{section}{0}
+% \autoref{app:x} prints "Appendix A" from anywhere (hyperref types appendix sections by anchor).
+% \autoref of an appendix subsection prints "Section A.1"; write Appendix~\ref{...} if "Appendix A.1" is wanted.
+% Appendix tables and figures are numbered A1, A2, ..., B1, ...; counters reset in every appendix
+% section. \theH... keeps hyperref anchors distinct from the main-text ones.
+\counterwithin*{table}{section}
+\counterwithin*{figure}{section}
+\renewcommand{\thetable}{\thesection\arabic{table}}
+\renewcommand{\thefigure}{\thesection\arabic{figure}}
+\renewcommand{\theHtable}{app.\thesection.\arabic{table}}
+\renewcommand{\theHfigure}{app.\thesection.\arabic{figure}}
+\setcounter{table}{0}
+\setcounter{figure}{0}
+
+\part*{Appendix}
+
+\input{appendix/A_data}
+\input{appendix/B_estimation}
+\input{appendix/C_reforms}
+\input{appendix/D_derivations}
+% appendix/E_additional.tex is not compiled: it holds only a heading (Override O1, no rendered placeholders; layout audit 3).
+
+\end{document}

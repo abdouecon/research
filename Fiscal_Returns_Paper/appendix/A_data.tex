@@ -1,0 +1,235 @@
+% appendix/A_data.tex -- Appendix A (W1b). Plan: BLUEPRINT 7 ("Appendix A"), 2.4, 8.2-8.3; Overrides O1, O2, O5, O6.
+% Rewritten from frot/sub2025/11_app_data.tex (same authors; equations and institutional descriptions reused, prose rewritten).
+% Source order fixes the exhibit numbers: Table A1 tab:ssparams, A2 tab:psid, A3 tab:meps, A4 tab:health, A5 tab:survival,
+% A6 tab:wages, A7 tab:initial, Figure A1 fig:targets, Table A8 tab:calibrated.
+% Provenance convention (Override O5): "% src: <file>:<line>" follows every sentence that carries a number.
+% Abbreviations: 11:NN = frot/sub2025/11_app_data.tex; 12:NN = 12_app_quant.tex; 5:NN = 5_quantitative_model.tex; T: = paper/tables/; F: = paper/figures/abdou/.
+\section{Data and First-Step Estimation}\label{app:data}
+
+This appendix collects the statutory parameters of \autoref{sec:institutions}, describes the PSID and MEPS samples and the health measures of \autoref{subsec:data}, details the first-step procedures of \autoref{subsec:firststep}, documents the construction of the target profiles of \autoref{subsec:msm}, and lists the parameters that are fixed outside the method of simulated moments. Monetary values are in 2016 dollars unless a table note states otherwise.
+
+\subsection{Social Security parameters}\label{app:ssparams}
+
+\autoref{tab:ssparams} lists the Social Security parameters that enter the model through \eqref{eq:aime}--\eqref{eq:di} and \eqref{eq:payroll}, in the notation of \autoref{sec:model}. Individuals born between 1920 and 1940 faced an early retirement age of 62 and, on average over birth years, a normal retirement age of 65; their delayed retirement credit ranged from 3 to 6 percent per year of delay by year of birth, and the model uses the cohort average of 4.5 percent. % src: 12:10; T:parameters_ss.tex:46-48
+The bend points of the primary insurance amount are \$3,720 and \$22,392 and the cap on average indexed earnings is \$43,800; the earnings test withholds 50 percent of earnings above \$6,000 before the normal retirement age and 33 percent of earnings above \$8,186 from the normal retirement age to age 69. % src: 12:12; T:parameters_ss.tex:43-45, 50-52
+The payroll tax is the employee share of the combined Old-Age, Survivors, and Disability Insurance and Hospital Insurance tax, 3 to 7.65 percent since 1960, on earnings up to \$14,459--\$64,974. % src: 12:89; T:parameters_ss.tex:37-38
+The disability earnings threshold of \$3,600 a year is the annual equivalent of the monthly substantial gainful activity threshold of \$300 for nonblind individuals with a disability. % src: 12:49; T:parameters_ss.tex:42
+
+\begin{table}[!htbp]
+\centering
+\caption{Social Security Parameters}
+\label{tab:ssparams}
+\vspace{6pt}
+\footnotesize
+\begin{threeparttable}
+\input{tables/parameters_ss_paper}
+\begin{tablenotes}[flushleft]\scriptsize
+\item[] \textit{Notes:} Parameters of the Social Security rules faced by the 1920--1940 cohorts, as used in \eqref{eq:aime}--\eqref{eq:di} and \eqref{eq:payroll}. $\tau^p_t$ and $\bar{y}^p_t$ are the payroll tax rate and cap (ranges over the years the cohort worked); $y_{db}$ is the disability earnings threshold; $\aime_0$, $\aime_1$, and $\aime_{\max}$ are the bend points and the cap of the primary insurance amount; ERA, NRA, and DRC are the early retirement age, the normal retirement age, and the delayed retirement credit per year of delay; $\tau_{ret}$ and $y_{ret}$ are the withholding rate and the threshold of the retirement earnings test below the NRA and from the NRA to age 69. Monetary values in 1987 dollars; all other monetary values in the paper are 2016 dollars. Source: Social Security Administration (SSA).
+% src: T:parameters_ss_paper.tex:37-52 (copy of T:parameters_ss.tex with the two payroll symbols edited; tables/EDITS.md); 12:36 (1987 dollars)
+\end{tablenotes}
+\end{threeparttable}
+\end{table}
+
+\subsection{Samples}\label{app:samples}
+
+\paragraph{Panel Study of Income Dynamics.}
+The PSID is a longitudinal survey of a representative sample of the US population that records labor market outcomes, income, health, and wealth.\footnote{Panel Study of Income Dynamics, public use dataset, produced and distributed by the Survey Research Center, Institute for Social Research, University of Michigan, \url{https://psidonline.isr.umich.edu/}.} It began in 1968 with interviews of approximately 4,800 families and has followed the original respondents and their descendants since, with interviews every year until 1997 and every two years thereafter. % src: 11:14
+The original sample has two components: 1,872 low-income families drawn from the Survey of Economic Opportunity (SEO) and 2,930 families selected by the Survey Research Center (SRC) at the University of Michigan to represent the general population. % src: 11:14
+The sample used here consists of individuals in the SRC component interviewed between 1968 and 2015; the SEO component is dropped because most of its families were dropped from the survey after 1997. % src: 11:16
+Within the SRC component we keep household heads and, when present, their spouses, aged 20 to 90, with nonmissing labor and health information, born between 1920 and 1940. % src: T:sample_psid.tex:10-13
+\autoref{tab:psid} reports each step of the selection; the final sample has 2,248 individuals and 44,404 person-year observations. % src: T:sample_psid.tex:7-13; 11:51
+The PSID data are used to estimate health transitions, survival probabilities, wage profiles and wage dynamics, the initial distribution of state variables, and the target profiles. % src: 11:51
+
+\begin{table}[!htbp]
+\centering
+\caption{PSID Sample Selection}
+\label{tab:psid}
+\vspace{6pt}
+\footnotesize
+\begin{threeparttable}
+\input{tables/sample_psid}
+\begin{tablenotes}[flushleft]\scriptsize
+\item[] \textit{Notes:} Number of individuals and of person-year observations remaining after each selection step. Non-SEO: the Survey Research Center component of the original sample. The last row is the estimation sample. Source: PSID 1968--2015.
+% src: T:sample_psid.tex:7-13; 11:41
+\end{tablenotes}
+\end{threeparttable}
+\end{table}
+
+\paragraph{Medical Expenditure Panel Survey.}
+The MEPS is a nationally representative survey of families, individuals, their medical providers, and employers.\footnote{Medical Expenditure Panel Survey, Agency for Healthcare Research and Quality, \url{https://meps.ahrq.gov/}.} It covers individuals of all ages, with age top-coded at 85; medical spending is reported at the individual level and cross-validated with medical providers and insurance companies. % src: 11:58
+We use the 1999--2012 waves and keep household heads aged 20 and older, excluding observations with missing age, medical spending, health insurance coverage during working ages, or health status; the final sample has 120,731 individuals and 211,709 person-year observations (\autoref{tab:meps}). % src: 11:60; T:sample_meps.tex:7-16
+The MEPS data are used to estimate the out-of-pocket medical spending profiles. % src: 11:60
+
+\begin{table}[!htbp]
+\centering
+\caption{MEPS Sample Selection}
+\label{tab:meps}
+\vspace{6pt}
+\footnotesize
+\begin{threeparttable}
+\input{tables/sample_meps}
+\begin{tablenotes}[flushleft]\scriptsize
+\item[] \textit{Notes:} Number of individuals and of person-year observations remaining after each selection step. The last row is the sample used for the medical spending profiles. Source: MEPS 1999--2012.
+% src: T:sample_meps.tex:7-16; 11:79
+\end{tablenotes}
+\end{threeparttable}
+\end{table}
+
+\subsection{Health and disability measures}\label{app:health}
+
+In the PSID, health is constructed from three self-reported work-limitation questions asked in every wave: (1) \textsl{Do you have any physical or nervous condition that limits the type of work or the amount of work that you can do?} (2) \textsl{Does this condition keep you from doing some types of work?} (3) \textsl{For work you can do, how much does it limit the amount of work you can do---a lot, somewhat, or just a little?} % src: 11:92
+The first question allows \textsl{Yes} or \textsl{No}. The second, available from 1986, allows \textsl{Yes}, \textsl{No}, or \textsl{Can do nothing}. The third has been coded \textsl{Not at all}, \textsl{Somewhat}, \textsl{Just a little}, or \textsl{A lot} since 1976, and \textsl{We can't work}, \textsl{It limits me a lot}, \textsl{Some, not much}, or \textsl{Limitation but not on work} before 1976. % src: 11:94
+For observations before 1986, health is defined from the first and third questions only. % src: 11:95
+Following \citet{Low2015}, an individual is in good health ($h_t=0$) with a \textsl{No} to the first question or a \textsl{Not at all} to the third; in poor health ($h_t=1$) with a \textsl{Yes} to the first question and \textsl{Somewhat} or \textsl{Just a little} to the third; and has a disability ($h_t=2$) with a \textsl{Yes} to the first question, \textsl{Can do nothing} to the second, and \textsl{A lot} to the third, which follows the Social Security Administration's criterion for disability insurance. % src: 11:98
+The frailty index of \citet{hosseini2022evolution} uses PSID items available since 2003, and the PSID self-rated health question is available since 1984; neither covers the life cycle of the 1920--1940 cohort, which requires health information from 1968 on. % src: 11:98
+
+In the MEPS, health is based on self-rated health, following \citet{Pashchenko2019}. Each year has three interview waves, and in each the respondent rates his or her health as (1) excellent, (2) very good, (3) good, (4) fair, or (5) poor. % src: 11:100
+An individual is in good health ($h_t=0$) if the rating is in categories 1--3 in all three waves, has a disability ($h_t=2$) if the rating is poor in any wave, and is in poor health ($h_t=1$) otherwise. % src: 11:102
+\autoref{tab:health} compares the shares of each health state by age band in the two samples. The shares with a disability are 9.3 percent (PSID) and 10 percent (MEPS) at ages 50--60, 12.9 and 11.7 percent at 60--70, and 19.7 and 15 percent at 70 and older; the MEPS classifies a larger share as being in poor health in every age band. % src: T:health_measures.tex:16-18
+The PSID column for ages 70 and older sums to 99.0 because of rounding. % src: T:health_measures.tex:16-18 (19.7 + 19.3 + 60.0)
+
+\begin{table}[!htbp]
+\centering
+\caption{Health Measures by Age Band in the Two Surveys}
+\label{tab:health}
+\vspace{6pt}
+\footnotesize
+\begin{threeparttable}
+\input{tables/health_measures}
+\begin{tablenotes}[flushleft]\scriptsize
+\item[] \textit{Notes:} Share of person-year observations in each health state, in percent, by age band and survey. PSID: work-limitation classification following \citet{Low2015}; MEPS: self-rated health classification following \citet{Pashchenko2019}. The PSID column for ages 70 and older sums to 99.0 because of rounding. Sources: PSID 1968--2015; MEPS 1999--2012.
+% src: T:health_measures.tex:16-18; 11:113
+\end{tablenotes}
+\end{threeparttable}
+\end{table}
+
+\subsection{First-step procedures}\label{app:firststep}
+
+\paragraph{Health transitions.}
+The transition probabilities $\Pr(h_t=j\mid h_{t-1}=i)$, $i,j\in\{0,1,2\}$, of \eqref{eq:health} are estimated by probit regressions of the indicator $\ind{h_t=j}$ on a set of age dummies, on the subsample with $h_{t-1}=i$. % src: 11:133
+The predicted values are the transition probabilities, which are then interpolated linearly across ages so that the transition matrices change smoothly over the life cycle. % src: 11:134
+Panel (A) of \autoref{fig:firststep} plots the row for $i=0$.
+
+\paragraph{Survival probabilities.}
+The survival function $S(h_t,t+1)$ of \eqref{eq:survival} is estimated with a logistic regression of an indicator of survival on a polynomial in age, previous health status, and their interactions whenever these are statistically significant, on PSID data. % src: 11:139
+\autoref{tab:survival} reports the coefficients: age squared, dummies for poor health and disability in the previous period, their common interaction with age squared, and a constant, on 132,070 person-year observations. % src: T:survival_coeffs.tex:10-16
+Panel (B) of \autoref{fig:firststep} plots the implied annual mortality rates.
+
+\begin{table}[!htbp]
+\centering
+\caption{Estimated Coefficients of the Survival Logit}
+\label{tab:survival}
+\vspace{6pt}
+\footnotesize
+\begin{threeparttable}
+\input{tables/survival_coeffs}
+\begin{tablenotes}[flushleft]\scriptsize
+\item[] \textit{Notes:} Logistic regression; dependent variable: indicator of survival to the next period. Health$_{t-1}=1$ and Health$_{t-1}=2$ are indicators of poor health and of a disability in the previous period; Health$_{t-1}\times$Age$^2$ is the interaction of the previous health state with age squared. Robust standard errors clustered at the individual level in parentheses. $^{***}p<0.01$. Source: PSID 1968--2015.
+% src: T:survival_coeffs.tex:10-16; 11:156
+\end{tablenotes}
+\end{threeparttable}
+\end{table}
+
+\paragraph{Out-of-pocket medical spending.}
+Out-of-pocket spending is total medical spending net of the amount covered by insurance, from the MEPS. % src: 11:167
+Following \citet{Pashchenko2019}, total medical spending is regressed on age and year dummies separately for each health group, with the cross-sectional and longitudinal weights of the survey; the insurance coverage share is estimated in the same way. % src: 11:168-170
+For working-age individuals, coverage is the amount paid by insurance programs; for individuals aged 65 and older, coverage is the amount paid by Medicare. % src: 11:170
+Out-of-pocket spending at each age and health state is the product of the estimated coinsurance rate and total spending. % src: 11:171
+Following \citet{Denardi2018}, the estimated spending is multiplied by 1.60 for individuals younger than 65 and by 1.90 for those aged 65 and older, which makes it consistent with the aggregate spending reported in the National Health Expenditure Accounts, and the profiles are smoothed by regressing them on a quadratic in age. % src: 11:171
+Panel (C) of \autoref{fig:firststep} plots the result; the dependence on participation in \eqref{eq:oop} comes from the coverage share, which differs between workers and nonworkers. % src: 5:41-43
+
+\paragraph{Hourly wages.}
+Hourly wages are annual earnings divided by annual hours worked in the PSID, where respondents in survey year $t$ report earnings and hours for year $t-1$; observations with hourly wages below \$6.50 or above \$250 are excluded. % src: 11:177
+Because wages are observed only for participants, the age- and health-specific profiles $W(h,t)$ of \eqref{eq:wage} are estimated with the two-stage selection model of \citet{Heckman1976}, as applied by \citet{Guner2012}. % src: 11:178
+\citet{french2005effects} and \citet{french2011effects} instead estimate the wage equation inside the model by matching the profiles of participants; the selection model is used here because it fits the targeted moments and is computationally cheaper. % src: 11:178
+In the first stage, a probit of participation on age, age squared, health, health interacted with age, family size, and year of birth, on all PSID observations, yields the inverse Mills ratio; in the second stage, the logarithm of the hourly wage is regressed on age, age squared, their interactions with health, and the inverse Mills ratio. % src: 11:182; T:wages_coeffs.tex:15-61
+\autoref{tab:wages} reports both equations; the coefficient on the inverse Mills ratio is 0.182 with a standard error of 0.0482, and the sample has 64,941 observations. % src: T:wages_coeffs.tex:61-63
+The stochastic component of wages, $(\rho,\sigma_\varepsilon^2)$ in \eqref{eq:wage}, is estimated from the residuals of the wage equation at ages 25 to 65, after dropping the top 0.5 percent of residuals to limit the influence of outliers on the variance, by maximum likelihood with the Kalman filter; the estimates are $(0.981,\,0.016)$. % src: 11:188-190
+Panel (D) of \autoref{fig:firststep} plots $\exp W(h,t)$.
+
+\begin{table}[!htbp]
+\centering
+\caption{Estimated Coefficients of the Wage and Selection Equations}
+\label{tab:wages}
+\vspace{6pt}
+\footnotesize
+\begin{threeparttable}
+\input{tables/wages_coeffs}
+\begin{tablenotes}[flushleft]\scriptsize
+\item[] \textit{Notes:} Two-stage selection model. Wage equation: dependent variable, logarithm of the hourly wage in 2016 dollars. Selection equation: dependent variable, indicator of labor force participation; probit. Health is the health state ($0$, $1$, $2$). Robust standard errors clustered at the individual level in parentheses. $^{***}p<0.01$. Source: PSID 1968--2015.
+% src: T:wages_coeffs.tex:15-63; 11:208
+\end{tablenotes}
+\end{threeparttable}
+\end{table}
+
+\paragraph{Initial distribution.}
+The initial state at age 30 is drawn from the empirical joint distribution of wages, health, assets, and labor force participation of PSID sample members aged 28--32, with the mean of log wages adjusted to the estimated wage profile within each health group. % src: 11:222
+Initial average indexed earnings are imputed by assuming five years of work at 2,000 hours a year at the age-30 hourly wage, the procedure of \citet{french2005effects}. % src: 11:222
+\autoref{tab:initial} summarizes the initial distribution. Mean assets are \$60,241 overall and \$61,388, \$42,022, and \$30,289 for individuals in good health, in poor health, and with a disability; mean hourly wages are \$19.19, \$15.13, and \$12.50; participation is 0.97, 0.89, and 0.45; and the three groups are 94.74, 4.17, and 1.09 percent of the 4,849 observations. % src: T:initial_conditions.tex:13-36
+
+\begin{table}[!htbp]
+\centering
+\caption{Initial Conditions at Age 30}
+\label{tab:initial}
+\vspace{6pt}
+\footnotesize
+\begin{threeparttable}
+\input{tables/initial_conditions}
+\begin{tablenotes}[flushleft]\scriptsize
+\item[] \textit{Notes:} PSID sample members aged 28--32 born between 1920 and 1940. Assets are nonpension net worth and wages are hourly wages, in 2016 dollars; participation is the share with annual hours above 800; ``Percentage'' is the share of observations in each health state. Source: PSID 1968--2015.
+% src: T:initial_conditions.tex:11-36; 11:222
+\end{tablenotes}
+\end{threeparttable}
+\end{table}
+
+\subsection{Target profiles}\label{app:targets}
+
+The target profiles are labor force participation by health, hours worked conditional on participation by health, mean and median assets, and the mean labor market reentry rate over the life cycle, estimated from the PSID with fixed-effects regressions following \citet{french2005effects}. % src: 11:251
+Labor force participation is an indicator that annual hours exceed 800, which captures full- and part-time employment; hours are self-reported, with survey year $t$ referring to year $t-1$. % src: 11:253
+Assets are real estate, farm or business equity, vehicles, stocks, mutual funds, individual retirement accounts, Keogh plans, liquid assets, bonds, and investment trusts, net of mortgages and other debts, plus home equity net of debt; pension wealth and Social Security wealth are excluded. % src: 11:256
+Following \citet{Borella2018}, assets are divided equally between partners. % src: 11:256
+Wealth is observed only in selected survey years from 1984 on; for the other years assets are imputed from a fixed-effects regression of assets on age polynomials, log wages, family size, education, the unemployment rate, health indicators, and the interactions of the age polynomials with log wages and with health, and of health with education, family size, the unemployment rate, and wages; observed and imputed values are both used. % src: 11:258-259
+Reentry is the indicator $RE_t$ of \eqref{eq:leisure}: participation at $t$ after nonparticipation at $t-1$.
+
+The profiles are the age coefficients of \eqref{eq:profile}, which includes an individual effect, age dummies interacted with good health and with poor health or disability, family-size dummies, and the unemployment rate. % src: 11:269-277
+To remove family-size, business-cycle, and individual effects, the profiles are evaluated at a family size of 3, an unemployment rate of 6.5 percent, and the mean individual effect of individuals aged 50, in average health at 50, and born in 1935; the last normalization controls for cohort and for the correlation between the individual effect and health. % src: 11:279-282
+The asset and reentry profiles are not conditioned on health. % src: 11:283
+\autoref{fig:targets} plots the profiles with their 95 percent confidence bands. Healthy individuals participate more than unhealthy individuals at every age, and the difference widens after age 50; hours conditional on participation decline with age in both groups; mean assets exceed median assets throughout; and the reentry rate stays below 5 percent at every age, with a maximum of 4.47 percent at age 63. % src: 11:285; F:frot_target_l2.tex; F:frot_target_h.tex; F:frot_target_a.tex; F:frot_target_r.tex (row 63 = 4.47199)
+The same data series appear as the black lines of \autoref{fig:fit} and \autoref{fig:fitassets}.
+
+\begin{figure}[!htbp]
+\centering
+\caption{Target Profiles from the PSID}
+\label{fig:targets}
+\vspace{6pt}
+\begin{tabular}{cc}
+\input{figures/abdou/frot_target_l2} & \input{figures/abdou/frot_target_h}\\[1.5ex]
+\input{figures/abdou/frot_target_a_paper} & \input{figures/abdou/frot_target_r_paper}
+\end{tabular}
+\begin{minipage}{0.95\textwidth}\footnotesize\setstretch{1.0}
+\textit{Notes:} Profiles from \eqref{eq:profile}, ages 30--69, with 95 percent confidence bands (shaded). (A) Labor force participation in percent, healthy (blue dotted) and unhealthy (red dash-dotted); (B) annual hours conditional on participation, same groups; (C) mean (black dotted) and median (teal dash-dotted) nonpension assets in hundreds of thousands of 2016 dollars; (D) mean labor market reentry rate in percent. ``Unhealthy'' pools poor health and disability. Source: PSID 1968--2015.
+% src: F:frot_target_l2.tex, frot_target_h.tex, frot_target_a_paper.tex, frot_target_r_paper.tex (titles, axis labels, legends; the _paper copies change the y-axis label of (C) and the y-axis range of (D) only, figures/EDITS.md); 11:322-324 (May 2025 note)
+\end{minipage}
+\end{figure}
+
+\subsection{Calibrated parameters}\label{app:calibrated}
+
+\autoref{tab:calibrated} lists the parameters that are fixed outside the method of simulated moments and are not in \autoref{tab:ssparams}. The gross return is 4 percent, as in \citet{french2005effects}; the reduction from the gross to the net return is 20 percent, as in \citet{Stantcheva2017}, so the net return is 3.2 percent; the consumption floor is \$3,500, as in \citet{french2011effects}; the borrowing limit is zero. % src: 5:390 (text and footnote); 5:302
+The remaining rows restate the first-step inputs of Appendix~\ref{app:firststep}. The factor $\pi^{db}$ in \eqref{eq:di} is the probability of receiving disability benefits for older applicants with severe work limitations estimated by \citet{Low2015}. % src: 12:57-58
+% TODO-AUTHORS: Open question 9 -- the numerical value of pi^{db} appears only in a commented row of tables/parameters_summary.tex and is not printed; supply it here and in Section 3.4 if it is to be reported.
+
+\begin{table}[!htbp]
+\centering
+\caption{Calibrated Parameters}
+\label{tab:calibrated}
+\vspace{6pt}
+\footnotesize
+\begin{threeparttable}
+\input{tables/new_calibrated_parameters}
+\begin{tablenotes}[flushleft]\scriptsize
+\item[] \textit{Notes:} Parameters fixed outside the method of simulated moments; the preference parameters are in \autoref{tab:est} and the Social Security parameters in \autoref{tab:ssparams}. Monetary values in 2016 dollars except the disability earnings threshold, which is in 1987 dollars. The scaling factors multiply the estimated medical spending profiles so that they match aggregate spending in the National Health Expenditure Accounts. Sources: PSID 1968--2015; SSA; the cited studies.
+% src: tables/new_calibrated_parameters.tex header comment (5:23, 5:90, 5:302, 5:390, 11:171, 11:177, 11:188-190, 11:222, 12:49, 12:57-58)
+\end{tablenotes}
+\end{threeparttable}
+\end{table}
+% \FloatBarrier removed (layout audit 10): Table A8 may share a page with the start of Appendix B instead of standing alone on a float page

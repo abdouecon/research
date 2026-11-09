@@ -1,0 +1,102 @@
+% sections/09_other_reforms.tex -- Section 9, Medicare, Old-Age Income Taxes, and Retirement-Saving Subsidies (W3b).
+% Plan: BLUEPRINT 2.9 and registry 8.10-8.11; Overrides O1, O5; Decision 4 (no cross-family comparison of K levels).
+% Provenance abbreviations in "% src:" comments: T:x = paper/tables/x; 12:NN = frot/sub2025/12_app_quant.tex:NN;
+% 7:NN = frot/sub2025/7_policy_reforms.tex:NN; 5:NN = frot/sub2025/5_quantitative_model.tex:NN.
+% T:med = tables/welfare_medicare_mvpfv8.tex; T:tax = tables/welfare_tax_mvpf_v8.tex; T:sav = tables/welfare_savings_mvpf_v3.tex.
+% Gradient macros: every May 2025 table file defines \opacity, \gradXchange, ... with \newcommand, so a second \input would
+% stop with "Command already defined". \cleargradientmacros undefines them before each \input; the table files are not edited.
+\providecommand{\cleargradientmacros}{%
+  \let\opacity\undefined \let\gradXchange\undefined \let\gradSSpay\undefined \let\gradMVPF\undefined
+  \let\gradCost\undefined \let\gradPP\undefined \let\gradMedpay\undefined \let\gradTaxchange\undefined}
+\section{Medicare, Old-Age Income Taxes, and Retirement-Saving Subsidies}\label{sec:other}
+
+The three remaining families change programs other than Social Security retirement benefits: the coverage of medical spending after age 65, the income tax after age 62, and the net return on saving. Each is evaluated with the welfare measure of \autoref{sec:welfare} and the fiscal accounting of \autoref{sec:fiscal}. The program outlay $B$ and the base of the Direct column differ by family (\autoref{tab:conventions}): added Medicare payments to the targeted beneficiaries as a share of baseline payroll-tax collections, income-tax revenue forgone as a share of baseline income-tax collections, and the saving subsidy as a share of baseline government spending. \autoref{tab:other} reports the three families in one table, and the Indirect entries, which are on family-specific bases, are not compared across its panels.
+% src: 5:34-40 (Medicare coverage from age 65); 7:349 (income tax after age 62); 12:615, 12:620-622, 12:626 (Direct bases)
+
+\begin{table}[!tp]
+\centering
+\caption{Medicare, Old-Age Income-Tax, and Retirement-Saving Reforms}
+\label{tab:other}
+\vspace{6pt}
+\setstretch{1.0}
+\footnotesize
+\setlength{\tabcolsep}{4pt}% layout audit 20: the three panels share one fixed-width column spec (see the _paper copies)
+\begin{threeparttable}
+\textit{Panel A. Medicare Part A and Part B}\par\vspace{3pt}
+\cleargradientmacros
+\input{tables/welfare_medicare_mvpfv8_paper}
+\par\vspace{8pt}
+\textit{Panel B. Income-tax reductions after age 62}\par\vspace{3pt}
+\cleargradientmacros
+\input{tables/welfare_tax_mvpf_v8_paper}
+\par\vspace{8pt}
+\textit{Panel C. Subsidies to saving}\par\vspace{3pt}
+\cleargradientmacros
+\input{tables/welfare_savings_mvpf_v3_paper}
+\begin{tablenotes}[flushleft]\scriptsize
+\item[] \textit{Notes:} Panel A: the Part A reform raises the Medicare coverage share of total medical spending by 20 percentage points for everyone aged 65 and older; the Part B reform raises it by 20 percentage points for nonparticipants aged 65 and older. Panel B: after-tax income $y_t-T_t(y_t)$ after age 62 rises by 1 to 5 percent. Panel C: the net return on assets rises by 0.2, 0.4, and 0.8 percentage points at every age; K3 is the elimination experiment D3 of \autoref{tab:elim}.
+% src: T:med:113, :116 (+ 20 pp); 12:536; T:tax:114-118 (row labels); T:sav:120-123 (row labels); 12:560; T:welfare_decomposition_gradient.tex:33 (D3 = K3)
+Direct effect: panel A, change in the net present value (NPV) of Medicare payments to the targeted beneficiaries after 65 as a share of baseline payroll-tax collections; panel B, income-tax revenue forgone after 62 as a share of baseline income-tax collections; panel C, the subsidy as a share of baseline net government spending.
+% src: 12:615; 12:620-622; 12:626
+Indir.: panel A, change in the NPV of all taxes and transfers other than the Medicare payments, in percent of its baseline value; panel B, the same for all taxes and transfers other than the income tax; panel C, change in government spending excluding the subsidy, in percent. Net: change in net government spending, including the program outlay, in percent of its baseline value; it is related to the first two columns by \eqref{eq:netidentity} and equals their sum only in panel C.
+% src: 12:615; 12:620-622; 12:626; eq:netidentity (omega_D = omega_O = 1 for K)
+MVPF in panels A and B is the dollar welfare gain per dollar of net spending \eqref{eq:mvpf}; in panel C it is reported as [lower, upper] per \eqref{eq:mvpfk}: willingness to pay over the subsidy, and over the net cost under full realization and taxation of capital gains. WTP is the consumption-equivalent welfare change in percent of consumption; the dollar conversion uses baseline consumption from age 62 in panels A and B and from age 30 in panel C. The last three columns are changes in labor force participation at ages 30--49, 62--64, and 65--69 in percentage points. All NPVs are per capita at age 62 at the net return of 3.2 percent. Shading is blue for a welfare gain, a fiscal saving, a higher MVPF, or a participation increase and red for the opposite. Source: simulations of the estimated model.
+% src: 12:631-634; 12:639; 7:423 (upper bound); 7:73 (participation groups); 5:390 (3.2 percent)
+\end{tablenotes}
+\end{threeparttable}
+\end{table}
+
+\subsection{Medicare Part A and Part B}\label{subsec:medicare}
+
+Out-of-pocket medical spending $m_t=M(h_t,t,P_t)$ in \eqref{eq:oop} is total spending net of coverage, and from age 65 the coverage is that of Medicare. % src: 5:34-40
+Two expansions are considered. Most beneficiaries receive Part A, which covers hospital and inpatient services, without a premium on the basis of their payroll-tax contributions, so the Part A reform raises the Medicare coverage share of total medical spending for everyone aged 65 and older by 20 percentage points. % src: 7:198; T:med:113 ("+ 20 pp")
+Part B, which covers physician and outpatient services, requires a premium, and most employer-provided plans already cover those services for individuals who work; the model therefore assigns Part B to nonparticipants aged 65 and older only, and the Part B reform raises their coverage share by 20 percentage points. % src: 7:198; T:med:116
+% TODO-AUTHORS: Open question 5 -- the table label is "+ 20 pp" and the May 2025 text says "by 20%"; the implementation raises the coverage share c by x (12:538-552). Confirm that x = 0.20 is 20 percentage points of total medical spending; if it is 20 percent of the baseline coverage share, "percentage points" changes to "percent" here, in the table note, and in Appendix C.
+The experiments start from a re-simulated baseline: the average Medicare coverage rates of individuals aged 65 and older are computed from the MEPS by health and participation status, the estimated model is simulated with these rates, and the two reforms are applied to that simulation; \autoref{app:reforms} gives the rule in symbols. % src: 12:536; 7:328 fn
+
+Both expansions raise welfare: the WTP is 1.36 percent of consumption for Part A and 1.30 for Part B. % src: T:med:113, :116
+The direct effect is large on the base used for this family: the added Medicare payments to the targeted beneficiaries after 65 amount to 45.17 percent of baseline payroll-tax collections under Part A and 41.61 percent under Part B. % src: T:med:113, :116; 12:615
+The indirect effect is small and positive, 0.10 and 0.03 percent of baseline other taxes and transfers, so the rest of the budget does not offset the added payments; net government spending rises by 3.53 and 3.19 percent of its baseline value. % src: T:med:113, :116
+The MVPFs are 0.146 and 0.155. % src: T:med:113, :116
+Participation rises slightly at ages 30--49, by 0.22 and 0.21 percentage points, and falls at ages 62--64, by 1.70 and 1.95 \pp, and at ages 65--69, by 0.38 \pp\ under Part A and 3.44 \pp\ under Part B. % src: T:med:113, :116-118
+The Part B response at 65--69 is larger by construction: the reform conditions coverage on not working, so for a participant aged 65 or older, leaving the labor force now also brings the higher coverage, which lowers the return to participation at those ages. The Part A reform covers participants and nonparticipants alike, and in the model its participation effects at the older ages are income effects of lower expected out-of-pocket spending. % src: T:med:116-118 (Part B 65--69: -3.44); 7:198 (Part B conditioned on nonparticipation)
+
+The size of the direct effect relative to the welfare gain reflects what a proportional coverage increase pays for. The out-of-pocket profiles of \autoref{fig:firststep} rise with age and are highest for individuals with a disability, so an increase in coverage by a fixed share of spending applies to larger amounts at the oldest ages. The age profile of the added payments is not reported. Medical-expense risk in old age is a motive for saving and for continued work in models of this class \citep{Denardi2010,Denardi2018}, and \citet{french2011effects} conclude that Medicare matters for retirement timing on a par with Social Security; the participation responses here, negative at 62--64 and 65--69 under both expansions, are consistent with that conclusion. % src: T:med:113, :116-118 (62--64 and 65--69 negative under Part A and Part B); F:frot_oopmedical_2016_edit.tex (out-of-pocket profiles rise with age, highest for disability)
+
+\citet{finkelstein2008did} and \citet{hendren2020unified} place the MVPF of the introduction of Medicare in the range $[0.52,3.83]$. % src: 7:332
+An expansion from the status quo is a different object: the marginal dollar of coverage insures spending that is already partly insured, and with diminishing returns to insurance its value per dollar is lower than that of the first dollar. The MVPFs reported here are for expansions of 20 percentage points from the status quo and are not comparable in level to those of the introduction.\footnote{\citet{finkelstein2019subsidizing} find a willingness to pay for health insurance of about 30 percent of the cost it imposes on the insurer among low-income adults, with about 70 percent of their care uncompensated, and \citet{hendren2020unified}, attributing uncompensated care to the government, obtains an upper bound of 0.8 for the MVPF of health-insurance subsidies to low-income adults. These figures concern Medicaid and are not comparable to the Medicare expansions here.} % src: 7:332 fn; T:med:113, :116
+
+\subsection{Income-tax reductions after age 62}\label{subsec:incometax}
+
+Reforms I1--I5 lower the income tax \eqref{eq:tax} from age 62 so that after-tax income $y_t-T_t(y_t)$ rises by 1 to 5 percent, in steps of one percent, with no change before age 62. % src: 7:349; T:tax:114-118 (row labels)
+The change applies to all taxable income after 62---asset income, earnings, and pension income---and therefore to nonparticipants as well as participants; \autoref{app:reforms} gives the implementation in terms of the level parameter $\lambda_t$. % src: 7:349; 12:556-557
+% TODO-AUTHORS: Open question 6 -- 12:557 implements the reform as lambda-tilde_t = lambda_t + x(t-61), which grows with age after 62, whereas the table labels and 7:349 describe a flat 1-5 percent increase in after-tax income. Confirm which rule generated the table; the first sentence of this subsection and Appendix C.1 change accordingly.
+
+The WTP rises from 0.44 percent of consumption under I1 to 2.09 under I5. % src: T:tax:114, :118
+Participation rises at every age and in every row: by 0.06 to 0.26 percentage points at ages 30--49, 0.76 to 4.11 \pp\ at 62--64, and 1.98 to 8.92 \pp\ at 65--69. % src: T:tax:114-118
+The revenue forgone is 0.70 to 3.47 percent of baseline income-tax collections. % src: T:tax:114, :118
+The indirect effect is a saving of 0.81 to 3.58 percent of all other taxes and transfers. % src: T:tax:114, :118
+The two columns are on different bases, so their entries are not comparable in dollars. In dollars the saving offsets only part of the revenue loss: net government spending rises by 0.69 to 3.46 percent of its baseline value, and the MVPF is 0.25, 0.26, 0.25, 0.23, and 0.23 for I1 through I5. % src: T:tax:114-118 (Net positive in every row)
+
+The income-tax reductions and the steeper claiming-age adjustments of \autoref{sec:claiming} both raise participation after the normal retirement age; their fiscal outcomes differ in sign. The adjustments reward delayed claiming within the benefit formula and reduce outlays, whereas the tax reductions lower the tax on all income after 62, including the asset and pension income of individuals whose participation does not change, and the participation response does not recover the revenue. Estimates of the labor-supply response of older workers to income taxes and to the earnings test are in \citet{alpert2013estimating} and \citet{gelber2020employment}; here the response is the model's, and it is large at 62--69 in every row of panel B of \autoref{tab:other}.\footnote{The income-tax reductions apply after age 62 and the saving subsidies of \autoref{subsec:saving} at every age, and the dollar conversion of the welfare gain uses baseline consumption from age 62 for the former and from age 30 for the latter (\autoref{sec:welfare}). The two families are therefore not ranked against each other by the level of their MVPFs.} % src: 12:632; 12:639
+
+\subsection{Subsidies to retirement saving}\label{subsec:saving}
+
+Reforms K1--K3 raise the net return on assets $r$ in \eqref{eq:budget} by 0.2, 0.4, and 0.8 percentage points at every age. % src: 12:560; T:sav:120-123
+With $r=(1-\tau_k)r_f$, $r_f$ equal to 4 percent, and $\tau_k$ equal to 20 percent, K3 raises the net return to the gross return and is the elimination experiment D3 of \autoref{sec:elimination} under another name. % src: 5:390; T:welfare_decomposition_gradient.tex:33 (3.60) vs T:sav:123 (3.6)
+The reforms are read as changes in the tax treatment of retirement saving that already exists---the deferral of tax in traditional individual retirement accounts and 401(k) plans and the exemption of returns in their Roth counterparts---which raise the after-tax return on part of household saving; the model has a single asset, so the subsidy applies to all saving, and a higher $r$ is equivalently a smaller proportional reduction $\tau_k$ of the gross return. % src: 7:423 (IRA and 401(k) reading)
+The tax treatment of saving in life-cycle models with retirement is studied by \citet{conesa2009taxing} and \citet{Paluszynski2023}; the question here is confined to the welfare and fiscal returns of marginal changes in the net return.
+
+The WTP is 0.87, 1.75, and 3.6 percent of consumption. % src: T:sav:120, :122, :123
+The direct effect is the subsidy itself, 1.77, 3.77, and 8.44 percent of baseline government spending. % src: T:sav:120-123; 12:626
+The indirect effect is a reduction of 1.69, 3.59, and 7.10 percent in government spending excluding the subsidy. % src: T:sav:120-123
+In the model this reduction comes from the income taxes paid on the asset income of younger households that save more; asset income $r a_t$ is taxed each period through $y_t$ in \eqref{eq:tax}, which amounts to assuming that all capital gains are realized and taxed as they accrue. % src: 7:423; eq:budget (y_t = r a_t + e_t + pb_t)
+Net government spending rises by 0.08, 0.18, and 1.34 percent of its baseline value; in this family Net equals Direct plus Indirect because both are on the base $G^{0}$ \eqref{eq:netidentity}. % src: T:sav:120-123
+The MVPF is reported as an interval \eqref{eq:mvpfk}: the lower bound, 0.96, 0.92, and 0.84, divides the dollar welfare gain by the subsidy alone, and the upper bound, 20.37, 19.38, and 5.29, divides it by the net cost under full realization and taxation of capital gains. % src: T:sav:120-123; 12:639; 7:423
+The lower bound is the value used in the text: it does not depend on the realization assumption and treats the indirect saving as absent. All three upper bounds exceed one; they are the values obtained if the induced saving is taxed in full as its returns accrue, and they fall with the size of the subsidy because the net cost rises faster than the welfare gain. % src: T:sav:120-123 (Net 0.08, 0.18, 1.34; WTP 0.87, 1.75, 3.6)
+
+Participation rises at ages 30--49, by 0.15, 0.36, and 0.38 percentage points, and falls at ages 62--64, by 1.27, 2.58, and 5.98 \pp, and at ages 65--69, by 0.85, 1.75, and 4.11 \pp. % src: T:sav:120-123
+Saving subsidies and the claiming-schedule reforms of \autoref{sec:claiming} thus move old-age participation in opposite directions: a higher return makes retirement easier to finance, whereas a steeper adjustment makes it more costly to begin early. Two features of the model bear on these rows. First, the consumption-equivalent gain is converted to dollars with baseline consumption from age 30 rather than from age 62, because the reform changes the budget constraint at every age (\autoref{sec:welfare}); the MVPF levels in panel C of \autoref{tab:other} are therefore not compared with those of the other families. % src: 12:639
+Second, mean assets are matched through the 40s and under-predicted from the early 50s, and median assets are over-predicted through the early 50s and under-predicted from the mid-50s (\autoref{sec:estimation}), and the model has no bequest motive \citep{Denardi2010,lockwood2018incidental}; the response to a return subsidy depends on the asset base, and the direction in which these misfits bias the WTP and the fiscal columns is not determined by the reported output. % src: F:h800_meana_edit_c.tex rows 30-49 (model inside the band), 50-69 (model below the data; below the band from 52); F:h800_mediana_edit_c.tex rows 30-53 (model above the data; above the upper band at 31 and 33-52), 54-69 (model below the data); 5:303 (no bequest motive)
+Across the three families the signs are the same: the Medicare expansions, the income-tax reductions, and the saving subsidies all raise welfare and all raise net spending; they differ in what they do to work after age 62, which the tax reductions raise and the other two lower. % src: T:med:113, :116 (WTP 1.36/1.30; Net 3.53/3.19; 62--64 and 65--69 negative); T:tax:114-118 (WTP 0.44-2.09; Net 0.69-3.46; 62--64 and 65--69 positive); T:sav:120-123 (WTP 0.87-3.6; Net 0.08-1.34; 62--64 and 65--69 negative)
+% TODO-AUTHORS: Open question 11 -- if the authors have a view on the direction of this bias, state it here in one sentence.

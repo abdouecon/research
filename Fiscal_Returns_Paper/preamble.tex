@@ -1,0 +1,86 @@
+% Preamble: inherits the FROT house style (12pt article, 1.5 spacing, aer.bst natbib), cleaned of unused packages.
+\usepackage{amsfonts}
+\usepackage{setspace}
+\usepackage{subcaption}
+\usepackage{booktabs}
+\usepackage{mathtools,xfrac}
+\usepackage{amssymb, amsmath, amsthm, bm}
+\usepackage[margin=0.945in]{geometry}
+\usepackage[round]{natbib}
+\bibpunct{(}{)}{;}{a}{}{,}
+\usepackage{hyperref}% layout audit 1: backref=page dropped (no citing-page lists in the reference list)
+\usepackage{tikz, pgfplots, pgfplotstable, placeins, rotating}
+\pgfplotsset{compat=1.18}
+\usepgfplotslibrary{fillbetween}
+\usepackage{mathrsfs}
+\usepackage{graphicx}
+\usepackage{verbatim}
+\usepackage{url}
+\usepackage{xcolor}
+\usepackage{colortbl}
+\usepackage{pgf}
+\usepackage{paralist}
+\usepackage{multirow,bigdelim}
+\usepackage[skip=4pt]{caption}% layout audit 2: net 10pt with the \vspace{6pt} that follows every \caption
+\captionsetup[subfigure]{skip=4pt}
+\usepackage{float}
+\usepackage{threeparttable}
+\usepackage{etoolbox}
+\usepackage{enumitem}
+% Possessive citation (\citepos), as in FROT
+\makeatletter
+\patchcmd{\NAT@test}{\else \NAT@nm}{\else \NAT@nmfmt{\NAT@nm}}{}{}
+\DeclareRobustCommand\citepos
+  {\begingroup
+   \let\NAT@nmfmt\NAT@posfmt%
+   \NAT@swafalse\let\NAT@ctype\z@\NAT@partrue
+   \@ifstar{\NAT@fulltrue\NAT@citetp}{\NAT@fullfalse\NAT@citetp}}
+\let\NAT@orig@nmfmt\NAT@nmfmt
+\def\NAT@posfmt#1{\NAT@orig@nmfmt{#1's}}
+\makeatother
+% Graphics and input paths: work both from this folder and from the parent FROT project root
+\graphicspath{{./}{./figures/}{../figures/}{../figures/input/}}
+\makeatletter
+\providecommand*{\input@path}{}
+\def\input@path{{./}{./figures/}{./tables/}{../}}
+\makeatother
+% Colors (FROT palette)
+\definecolor{blue}{RGB}{0,114,178}
+\definecolor{red}{RGB}{213,94,0}
+\definecolor{yellow}{RGB}{240,228,66}
+\definecolor{green}{RGB}{0,158,115}
+\hypersetup{linkcolor=blue, citecolor=blue, colorlinks=true, urlcolor=blue}
+\usetikzlibrary{arrows, positioning, calc, decorations.markings}
+% Theorem environments
+\newtheorem{theorem}{Theorem}
+\newtheorem{assumption}{Assumption}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{remark}[theorem]{Remark}
+\theoremstyle{remark}
+\newtheorem*{example*}{Example}
+% Math macros
+\def\E{{\mathbb E}}
+\def\R{{\mathbb R}}
+\DeclareMathOperator*{\argmax}{argmax}
+\DeclareMathOperator{\MVPF}{MVPF}
+\DeclareMathOperator{\WTP}{WTP}
+\newcommand{\pp}{pp}
+% Spacing
+\onehalfspacing
+\usepackage[skip=0pt]{parskip}
+\usepackage[raggedright]{titlesec}% layout audit 8: no hyphenated or justified headings
+\titlespacing{\paragraph}{0pt}{0.4\baselineskip}{1em}
+\titlespacing\section{0pt}{12pt plus 4pt minus 2pt}{0pt plus 2pt minus 2pt}
+\titlespacing\subsection{0pt}{12pt plus 4pt minus 2pt}{0pt plus 2pt minus 2pt}
+\titlespacing\subsubsection{0pt}{12pt plus 4pt minus 2pt}{0pt plus 2pt minus 2pt}
+\setlength{\parindent}{15pt}
+% layout audit 9: no single first or last lines of a paragraph at a page boundary
+\widowpenalty=10000 \clubpenalty=10000 \displaywidowpenalty=10000
+% layout audit 10: a float between half and 0.8 of the text height goes to the top of a text page instead of its own float page
+\renewcommand{\topfraction}{0.85}
+\renewcommand{\bottomfraction}{0.6}
+\renewcommand{\floatpagefraction}{0.8}
+\setcounter{topnumber}{2}

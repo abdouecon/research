@@ -1,0 +1,48 @@
+% tables/welfare_decomposition_gradient_paper.tex -- copy of welfare_decomposition_gradient.tex (May 2025) with TWO edits:
+% (1) the D2 row label "Loss From Incomplete Coverage in  Medicare (A hyphen B)" is replaced by "Loss From Incomplete Medicare Coverage After Age 65"
+% (BLUEPRINT 2.6; D03 section 1.2: the printed cells -4.28/-4.93 are the raw run "full medicare A insurance", OOP after 65 set to zero for everyone).
+% (2) column alignment {cccc} -> {llcc} so that the reform IDs and row labels are left-aligned as in every other table (layout audit 2026-11-09).
+% No number is changed. Edit (1) is logged in tables/EDITS.md; edit (2) is to be added there.
+% Color definitions
+\definecolor{blue}{RGB}{0,114,178}
+\definecolor{white}{RGB}{255,255,255}
+\newcommand*{\opacity}{100}% Full opacity
+
+% For welfare delta columns: 0 is white, absolute values are blue (regardless of sign)
+\newcommand{\gradWelfare}[1]{%
+    % Take absolute value for coloring
+    \pgfmathparse{abs(#1)}
+    \pgfmathsetmacro{\absvalue}{\pgfmathresult}
+    
+    \ifdim\absvalue pt=0pt
+        \cellcolor{white!\opacity} #1
+    \else
+        % Scale based on max absolute value in the dataset (5.89)
+        \pgfmathparse{int(round(min(100, 100*(\absvalue/5.89))))}
+        \xdef\tempa{\pgfmathresult}
+        \cellcolor{blue!\tempa!white!\opacity} #1
+    \fi
+}
+
+\begin{tabular}{llcc}
+%{p{5.17cm} p{2.17cm} p{2.17cm}} % <-- Alignments: 1st column left, 2nd middle and 3rd right, with vertical lines in between
+    \toprule
+        \hline
+&&	CE Welfare $\Delta$ &	LE Welfare $\Delta$	\\\hline
+(D1)& No Social Security Benefits	&	\gradWelfare{-5.89}	&	\gradWelfare{-6.79}	\\
+(D2)& Loss From Incomplete Medicare Coverage After Age 65&	\gradWelfare{-4.28}	&	\gradWelfare{-4.93}	\\
+%&Loss Form Incomplete Coverage in  Medicare Part B	&	-4.19 &-4.83\\
+%wage	&	0.0237374	&	0.0273591	
+%mortal	&	-0.0459319	&	-0.05294	
+%fixed cost	&	0.0028875	&	0.0033281	
+(D3)& Full Savings Subsidy	&	\gradWelfare{3.60}	&	\gradWelfare{4.15}	\\
+%(D3)& Loss From Incomplete Retirement Savings Subsidies	&	\gradWelfare{3.60}	&	\gradWelfare{4.15}	\\
+%fixed cost zero	&	0.0748058	&	0.0862193								
+(D4)& No Income Tax	&	\gradWelfare{3.16}	&	\gradWelfare{3.64}	\\
+(D5)& No Disability Benefits	&	\gradWelfare{-0.34}	&	\gradWelfare{-0.40}	\\
+%medicare reform A	&	0.0132223	&	0.0152396	
+%full medicare A insurance	&	4.28	&	4.93	\\
+%full medicare B insurance &  4.19 &4.83\\
+%	\\[0.5ex]
+ \hline\bottomrule
+    \end{tabular}

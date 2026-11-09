@@ -1,0 +1,110 @@
+% sections/07_claiming.tex -- Section 7 (W3). Plan: BLUEPRINT 2.7 and 8.8; Decisions 2, 3, 7; Overrides O5, O6.
+% Provenance convention (Override O5): "% src: <file>:<line>" follows every sentence that carries a number.
+% Abbreviations in src comments: T: = paper/tables/; 7:NN = frot/sub2025/7_policy_reforms.tex; 12:NN = 12_app_quant.tex;
+% 5:NN = 5_quantitative_model.tex; 1:NN = 1_intro.tex; D05 = dossier/05_v6_corrections.md.
+\section{Reforms to the Claiming Schedule: A Higher Normal Retirement Age versus a Steeper Actuarial Adjustment}\label{sec:claiming}
+
+This section evaluates the two ways of changing the claiming schedule described in \autoref{subsec:twoways}: raising the NRA (AN1--AN3), raising the DRC (AD1--AD5), and setting equal early-claiming reductions and delayed credits (AL1--AL9). \autoref{tab:schedules} and \autoref{fig:schedules} show the schedules; \autoref{tab:claiming} reports the outcomes, with the columns defined in \autoref{sec:accounting} and \autoref{tab:conventions}.
+
+\subsection{How each reform moves the benefit schedule}\label{subsec:schedules}
+
+\begin{table}[!t]
+\centering
+\caption{Benefit as a Percentage of the PIA by Claiming Age under a Higher Normal Retirement Age (AN), a Higher Delayed Retirement Credit (AD), and a Symmetric Adjustment (AL)}
+\label{tab:schedules}
+\vspace{6pt}
+\scriptsize
+\begin{threeparttable}
+\input{tables/DRC_visualization_4_paper}
+\begin{tablenotes}[flushleft]\scriptsize
+\item[] \textit{Notes:} Social Security retirement benefit payable upon claiming at ages 62--70, as a percentage of the primary insurance amount (PIA), under the status quo of the 1920--1940 cohorts (AN0) and under each reform. AN1--AN3 raise the NRA to 66, 67, and 68. AD1--AD5 raise the DRC from the cohort's 4.5 percent to 8, 8.5, 9, 9.5, and 10 percent per year, leaving the reduction before the NRA unchanged. AL1--AL9 set equal early-claiming penalties and delayed credits of $\pm 7$ to $\pm 15$ percent per year. The blue gradient marks values above 100, the red gradient values below 100, and white marks 100 percent of the PIA. Sources: rules of the Social Security Administration (AN0) and the reform definitions of \autoref{tab:menu}.
+% src: T:DRC_visualization_4.tex:37-58; 7:109 (note wording, corrected per BLUEPRINT 2.7); T:parameters_ss.tex:48 (4.5 percent)
+\end{tablenotes}
+\end{threeparttable}
+\end{table}
+
+\input{figures/new/fig_schedules}
+
+\autoref{tab:schedules} reports the factor $\psi(a^c)$ of \eqref{eq:adjust} under the status quo (AN0) and under each reform, as a percentage of the PIA at claiming ages 62 to 70. Raising the NRA moves the whole schedule: under AN1--AN3 the factor at age 62 is 75, 70, and 65 instead of 80, and the factor at age 70 is 118, 113.5, and 109 instead of 122.5; every entry in the AN rows lies below the AN0 entry at the same age. % src: T:DRC_visualization_4.tex:37-40
+Raising the DRC leaves the factors at ages 62--65 at their status-quo values of 80, 86.67, 93.33, and 100 and raises every factor after 65: at age 70, 140 under AD1 and 150 under AD5 instead of 122.5. % src: T:DRC_visualization_4.tex:37,43-47
+The symmetric adjustments rotate the schedule around the NRA, where the factor stays at 100: the factor at age 62 is 79 under AL1 and 55 under AL9, and the factor at age 70 is 135 and 175. % src: T:DRC_visualization_4.tex:50,58
+\autoref{fig:schedules} plots AN0, AN2, AD5, and AL4. % src: T:DRC_visualization_4.tex:37,39,47,53
+
+The two kinds of reform differ in who is affected without any change in behavior. Under a higher NRA every claimant receives a lower benefit at any claiming age, so the reform cuts benefits even if no one changes the claiming age. % src: 7:90
+Under a higher DRC a claimant at or before the NRA receives the status-quo benefit and a claimant after it a higher one; under a symmetric adjustment a claimant at the NRA receives the status-quo benefit, an earlier claimant less, and a later claimant more. These reforms change the price of moving the claiming age away from the NRA, and their fiscal effect depends on who moves.\footnote{The gain from delaying claiming under current US rules, and whether households can finance a delay from their own assets, are examined by \citet{shoven2014does} and \citet{goda2018financial}.} % src: 7:92
+Three pairs share the schedule after the NRA and differ only before it: AL2 and AD1 (108 to 140 at ages 66--70), AL3 and AD3 (109 to 145), and AL4 and AD5 (110 to 150); AD2 and AD4 have no AL counterpart. % src: T:DRC_visualization_4.tex:43,45,47,51,52,53
+Comparing the members of each pair isolates the effect of the steeper early-claiming reduction.
+
+\subsection{Welfare and fiscal returns}\label{subsec:returns}
+
+\begin{table}[!t]
+\centering
+\caption{Claiming-Schedule Reforms: Marginal Value of Public Funds, Willingness to Pay, Fiscal Effects, and Participation}
+\label{tab:claiming}
+\vspace{6pt}
+\footnotesize
+\begin{threeparttable}
+\input{tables/welfare_age_dependence_mvpfv5}
+\begin{tablenotes}[flushleft]\scriptsize
+\item[] \textit{Notes:} Columns as defined in \autoref{tab:conventions}. MVPF, marginal value of public funds \eqref{eq:mvpf}; WTP, consumption-equivalent welfare change in percent of consumption \eqref{eq:ce}; Net, Direct, and Indir., percentage changes in the net present value at age 62 of the cohort's net government spending, of retirement benefits paid by Social Security, and of all other taxes and transfers \eqref{eq:fiscal}; 30--49, 62--64, and 65--69, changes in labor force participation at those ages in percentage points. $\infty$ denotes a reform with positive willingness to pay and a negative net fiscal effect; AN rows report the MVPF of reversing the reform. AN1--AN3 raise the NRA to 66, 67, and 68; AD1--AD5 raise the DRC from 4.5 percent to 8, 8.5, 9, 9.5, and 10 percent per year; AL1--AL9 set equal early-claiming penalties and delayed credits of $\pm 7$ to $\pm 15$ percent per year (\autoref{tab:schedules}). Blue shading marks entries in the direction of higher welfare, higher participation, or lower spending, and red shading the opposite. Source: authors' simulations of the estimated model.
+% src: T:welfare_age_dependence_mvpfv5.tex:104-126; 7:73 and 7:138 (column and note wording); 12:611 (bases)
+\end{tablenotes}
+\end{threeparttable}
+\end{table}
+
+An entry of $\infty$ in the MVPF column of \autoref{tab:claiming} means that the reform has a positive willingness to pay and a negative net fiscal effect, so that no finite ratio of the two exists; the AN rows report the MVPF of reversing the reform. % src: T:welfare_age_dependence_mvpfv5.tex:108-126 (infinity entries in the AD and AL rows; AN rows)
+
+The central fact of the table is that a benefit increase for late claimants reduces program outlays. Raising the DRC lowers the net present value of retirement benefits paid to the cohort by 2.46 percent under AD1 and 5.05 percent under AD5; the symmetric adjustments lower it by 0.74 percent under AL1 and 8.45 percent under AL9. % src: T:welfare_age_dependence_mvpfv5.tex:112,116,118,126
+The government's other net outlays fall as well: the indirect effect lies between $-0.10$ and $-0.04$ in the AD rows and between $-0.01$ and $-0.37$ in the AL rows. % src: T:welfare_age_dependence_mvpfv5.tex:112-116,118-126
+Net spending therefore falls in every AD and AL row, by 0.44 to 0.78 percent for AD1--AD5 and by 0.12 to 1.57 percent for AL1--AL9, while the willingness to pay is positive in every row, 0.16 to 0.3 percent of consumption for AD1--AD5 and 0.10 to 0.80 percent for AL1--AL9. % src: T:welfare_age_dependence_mvpfv5.tex:112-116,118-126
+These reforms are welfare-improving and self-financing: they raise ex ante welfare and generate a fiscal surplus.\footnote{The welfare statistic is the average consumption-equivalent change at age 30, \eqref{eq:ce}. Effects on individuals who claim early are heterogeneous, and the AL reforms raise the penalty on early claiming; the exhibits do not report the distribution of welfare changes across realized histories. % src: 7:145
+}
+The MVPF is infinite whether the denominator is the net or the direct fiscal effect, because both are negative; by \eqref{eq:mvpflb}, no finite lower bound exists when $\Delta B<0$ and $\Delta G<0$. % src: 7:147; T:welfare_age_dependence_mvpfv5.tex:112-126
+The AD rows admit the sign inference of \autoref{sec:suffstats}: the mechanical change in outlays is weakly positive, since the factors after the NRA rise and the factors before it are unchanged, while the Direct column is negative, so the within-program behavioral response more than offsets the mechanical outlay and the fiscal multiplier \eqref{eq:fm} is negative. % src: T:DRC_visualization_4.tex:43-47; T:welfare_age_dependence_mvpfv5.tex:112-116
+
+Raising the NRA has the opposite welfare sign. The willingness to pay is $-0.38$, $-0.74$, and $-1.09$ percent of consumption under AN1, AN2, and AN3; retirement benefits fall by 6.13, 11.82, and 16.75 percent; the indirect effect is $-0.02$, $-0.12$, and $-0.08$; and net spending falls by 0.87, 1.75, and 2.38 percent. % src: T:welfare_age_dependence_mvpfv5.tex:108-110
+Here the mechanical effect is a cut: every factor falls, so the reform saves money before any behavioral response. % src: T:DRC_visualization_4.tex:38-40
+The MVPF column reports 0.17, 0.16, and 0.18, the welfare loss per dollar of net saving; read as the MVPF of the reverse reform, lowering the NRA from 66, 67, or 68 back to 65 would deliver 0.17, 0.16, or 0.18 dollars of welfare per dollar of net spending. % src: T:welfare_age_dependence_mvpfv5.tex:108-110; 7:119
+In \citepos{hendren2020unified} words, the MVPF ``measures the shadow price of raising revenue from the beneficiaries of the policy by reducing spending on the policy.'' % src: 7:119-121 (quotation)
+
+Two comparisons across families hold net spending approximately fixed. AN1 and AL4 reduce net spending by 0.87 and 0.86 percent; the willingness to pay is $-0.38$ percent under AN1 and $+0.29$ percent under AL4. % src: T:welfare_age_dependence_mvpfv5.tex:108,121
+AN2 and AL9 reduce it by 1.75 and 1.57 percent; the willingness to pay is $-0.74$ and $+0.80$. % src: T:welfare_age_dependence_mvpfv5.tex:109,126
+At approximately equal fiscal saving, the symmetric adjustment raises welfare where the higher NRA lowers it. Within the second way of changing the schedule, the three pairs with a common post-NRA schedule isolate the early-claiming side. AD1 and AL2 reduce benefits by 2.46 and 2.81 percent with willingness to pay of 0.16 and 0.15; AD3 and AL3 by 4.22 and 4.74 percent with 0.23 and 0.21; AD5 and AL4 by 5.05 and 5.54 percent with 0.3 and 0.29. % src: T:welfare_age_dependence_mvpfv5.tex:112,114,116,119,120,121
+Adding the steeper early-claiming reduction to a higher DRC saves more in benefits and lowers the willingness to pay slightly; the participation changes at ages 62--64 of the two members of each pair are close (0.15 and 0.05; $-0.36$ and $-0.31$; $-0.97$ and $-0.93$). % src: T:welfare_age_dependence_mvpfv5.tex:112,114,116,119,120,121
+
+\subsection{Participation by age group}\label{subsec:participation}
+
+The last three columns of \autoref{tab:claiming} report the behavioral responses behind the fiscal effects. Under a higher NRA, participation at ages 30--49 falls by 0.04, 0.07, and 0.14 percentage points and participation at ages 65--69 rises by 0.60, 1.98, and 3.27 points. % src: T:welfare_age_dependence_mvpfv5.tex:108-110
+At ages 62--64 the response is not monotone in the size of the reform: participation rises by 0.38 points under AN1 and falls by 0.04 and 0.43 points under AN2 and AN3. % src: T:welfare_age_dependence_mvpfv5.tex:108-110
+One reading of these signs is that the lower factor at every claiming age is a loss of lifetime resources to which older workers respond by working more, while the lower benefit that a year of earnings buys lowers the return to work at younger ages. % src: 7:119 (reading, not tested by the exhibits)
+
+Under a higher DRC and under a symmetric adjustment, participation rises at ages 30--49 in every row, by 0.05 to 0.36 points, and at ages 65--69 in every row, by 0.22 to 2.61 points. % src: T:welfare_age_dependence_mvpfv5.tex:112-126
+At ages 62--64 the sign depends on the steepness of the schedule. Participation rises under AD1, AD2, AL1, and AL2, by 0.15, 0.18, 0.24, and 0.05 points, that is, for a DRC up to 8.5 percent and a symmetric adjustment up to $\pm 8$ percent. % src: T:welfare_age_dependence_mvpfv5.tex:112,113,118,119; 7:145
+It falls from AD3 and AL3 on: by 0.36, 0.49, and 0.97 points under AD3--AD5, and by 0.31 points under AL3 to 3.49 points under AL9. % src: T:welfare_age_dependence_mvpfv5.tex:114-116,120-126
+AD1, which raises the DRC from 4.5 to 8 percent, raises participation in all three age groups, lowers benefit outlays, and raises welfare. % src: T:welfare_age_dependence_mvpfv5.tex:112; 7:147
+\autoref{fig:participation_saving} in \autoref{app:reforms} plots the participation changes at ages 62--64 and 65--69 against the direct fiscal effect for every row of \autoref{tab:claiming}: in every family, beyond the smallest steps, the rows with the larger benefit saving are the rows with the larger participation loss at 62--64; the participation gain after 65 rises with the saving in the AN rows and, except at AD2 and beyond AL6 (\autoref{subsec:incidence}), in the AD and AL rows.
+% src: T:welfare_age_dependence_mvpfv5.tex:108-126 (62--64: AN 0.38, -0.04, -0.43; AD 0.15, 0.18, -0.36, -0.49, -0.97; AL 0.24, 0.05, -0.31, -0.93, -1.15, -1.46, -2.90, -3.30, -3.49; 65--69: AN 0.60, 1.98, 3.27; AD 0.74, 0.57, 1.20, 1.37, 1.39; AL 0.22, 0.61, 1.21, 1.42, 2.01, 2.61, 2.50, 2.42, 2.26)
+
+In the model, the workers for whom continued work is most costly are those in poor health or with a disability---higher participation cost, mortality and medical spending, lower wages (\autoref{fig:firststep})---and they are the ones who accept the steeper early penalty, while the steeper reward pulls the others past 65. % src: 7:145, 7:147, 1:44 (reading of the printed cells; BLUEPRINT Decision 3)
+The tables report participation by age group only; no exhibit splits the response to a priced reform by health, so this reading is not tested here.
+% TODO-AUTHORS: Open question 1 -- a participation-by-health x age-group panel for AN/AD/AL from saved simulation panels would allow the previous sentence to be upgraded to a result.
+Studies of increases in the statutory retirement age in the United States and Switzerland document claiming responses concentrated at the statutory age itself \citep{mastrobuoni2009labor,behagel2012,deshpande2024sticky,lalive2023social}, and \citet{manoli2016nonparametric} estimate responses of retirement timing to financial incentives. The model has no reference-point effect at the NRA, so the AN predictions above are the incentive component of the response; \autoref{sec:scope} discusses the direction in which reference effects would move the comparison between the two kinds of reform.
+
+\subsection{Steeper adjustments shift incidence toward early claimants}\label{subsec:incidence}
+
+Along the AL grid, every step raises welfare and lowers net spending: the willingness to pay rises monotonically from 0.10 under AL1 to 0.80 under AL9, and net spending falls monotonically from $-0.12$ to $-1.57$ percent. % src: T:welfare_age_dependence_mvpfv5.tex:118-126
+What changes along the grid is who bears the adjustment. The participation gain at ages 65--69 peaks at AL6, 2.61 points, and is 2.50, 2.42, and 2.26 points at AL7--AL9, while the participation loss at ages 62--64 keeps growing, to 2.90, 3.30, and 3.49 points. % src: T:welfare_age_dependence_mvpfv5.tex:123-126
+The indirect effect is not monotone over the steep end of the grid, $-0.19$, $-0.28$, $-0.23$, $-0.31$, and $-0.37$ for AL5--AL9, while the direct effect continues to fall, from $-7.02$ to $-8.45$. % src: T:welfare_age_dependence_mvpfv5.tex:122-126
+The steepest adjustment and the largest NRA increase lower the age-62 factor to similar levels, 55 percent of the PIA under AL9 and 65 under AN3, and both lower participation at ages 62--64, by 3.49 and 0.43 points. % src: T:DRC_visualization_4.tex:58,40; T:welfare_age_dependence_mvpfv5.tex:126,110
+The welfare signs differ: the willingness to pay is $+0.80$ under AL9, the largest positive value in the table, and $-1.09$ under AN3. % src: T:welfare_age_dependence_mvpfv5.tex:126,110
+The difference is that AL9 leaves the factor at the NRA at 100 and raises it to 175 at age 70, so the steeper early penalty is the price of a steeper reward for delay, whereas AN3 lowers the factor at every age. % src: T:DRC_visualization_4.tex:58,40
+Within the grid considered, no AL step lowers welfare or raises net spending; what the steeper steps do is shift the adjustment toward those who claim early.
+
+\subsection{The reforms against the financing benchmark}\label{subsec:benchmark}
+
+Every row of \autoref{tab:claiming} has a negative net fiscal effect, so every reform in this section reduces the cohort's net claim on the government and, in the sense of \autoref{subsec:cohort}, contributes to closing the financing gap. % src: T:welfare_age_dependence_mvpfv5.tex:108-126 (Net negative in every row)
+The steeper adjustments do so at a welfare gain and a higher NRA at a welfare cost; AL4 and AL9 match the net savings of AN1 and AN2 (\autoref{subsec:returns}), and the AL1 saving, 0.12 percent of net spending, is small. % src: T:welfare_age_dependence_mvpfv5.tex:108,109,118,121,126 (WTP signs; Net -0.87/-0.86, -1.75/-1.57, -0.12)
+Because the Net column is in percent of the cohort's baseline net spending rather than of its taxable payroll (\autoref{subsec:cohort}), the comparison with the Trustees' deficit is one of sign. % src: trustees2024 (figure carried in sec:institutions; no number printed here)
+% TODO-AUTHORS: Open question 7 -- payroll-unit conversion needs PV_62 of the cohort's taxable payroll from baseline output.
+
+The section's result is a difference in sign: at approximately equal fiscal saving, a steeper adjustment of benefits to the claiming age raises ex ante welfare and a higher normal retirement age lowers it, and the steeper the adjustment, the more of its saving is borne by those who claim early.\footnote{\citet{ndiaye2026flexible} find that requiring this cohort to finance a lump-sum transfer to earlier generations leaves retirement ages almost unchanged, the adjustment falling on consumption and hours. That experiment changes the cohort's resources without changing the price of delaying claiming, so its retirement response is a wealth effect; the reforms here change that price, and the two results are not in tension.} % src: T:welfare_age_dependence_mvpfv5.tex:108,109,121,126 (AN1/AL4, AN2/AL9); T:DRC_visualization_4.tex:50,58 and T:welfare_age_dependence_mvpfv5.tex:118-126 (incidence, subsec:incidence); D05 sections 4.3 and 6C (footnote: qualitative result only; no digits)

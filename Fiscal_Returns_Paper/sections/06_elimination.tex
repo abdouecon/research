@@ -1,0 +1,33 @@
+% sections/06_elimination.tex -- Section 6 (W3). Plan: BLUEPRINT 2.6 and 8.7; Decisions 5 and 6; Override O5.
+% Abbreviations in src comments: T: = paper/tables/; 7:NN = frot/sub2025/7_policy_reforms.tex; 12:NN = 12_app_quant.tex; 5:NN = 5_quantitative_model.tex.
+\section{What Each Instrument Is Worth: Elimination Experiments}\label{sec:elimination}
+
+Before pricing marginal reforms, we remove each policy instrument in turn and measure the welfare change with the consumption-equivalent (CE) measure \eqref{eq:ce}. \autoref{tab:elim} reports five experiments. D1 sets Social Security benefits to zero. D2 sets out-of-pocket medical spending after age 65 to zero for participants and nonparticipants and reports the status quo relative to that counterfactual, that is, the loss from incomplete Medicare coverage after age 65. D3 raises the net return on assets from 3.2 to 4 percent, the gross return; it is the same experiment as the largest saving subsidy, K3, of \autoref{sec:other}. % src: 7:34; 5:390; T:welfare_decomposition_gradient.tex:33 versus T:welfare_savings_mvpf_v3.tex:123
+D4 sets the income tax to zero, and D5 sets disability benefits to zero. % src: 7:34
+
+\begin{table}[!t]
+\centering
+\caption{Welfare Changes from Eliminating Each Policy Instrument}
+\label{tab:elim}
+\vspace{6pt}
+\footnotesize
+\begin{threeparttable}
+\input{tables/welfare_decomposition_gradient_paper}
+\begin{tablenotes}[flushleft]\scriptsize
+\item[] \textit{Notes:} Consumption-equivalent (CE) and leisure-equivalent (LE) welfare changes, in percent, for each counterfactual simulation that eliminates a policy instrument, computed from \eqref{eq:ce} and \eqref{eq:le}. D1 sets Social Security benefits to zero. D2 sets out-of-pocket medical expenses after age 65 to zero for nonparticipants and participants; the entry is the welfare of the status quo relative to this counterfactual, the loss from incomplete Medicare coverage after age 65. D3 sets the net return to assets $r$ to the gross interest rate $r_f$, from 3.2 to 4 percent; it is the same experiment as K3 in \autoref{tab:other}. D4 sets the income tax to zero. D5 sets disability benefits to zero. LE equals CE times $\gamma/(1-\gamma)$, 1.15 at the point estimates. The blue gradient indicates larger absolute values. Source: authors' simulations of the estimated model.
+% src: 7:33-35 (note wording); 5:390 (3.2 and 4 percent); T:welfare_decomposition_gradient.tex:33 versus T:welfare_savings_mvpf_v3.tex:123 (D3 = K3); T:estimated_parameters.tex:9 (gamma = 0.5354, gamma/(1-gamma) = 1.15, BLUEPRINT 4.2 eq. 21)
+\end{tablenotes}
+\end{threeparttable}
+\end{table}
+
+Eliminating Social Security benefits lowers welfare by 5.89 percent of consumption, the largest effect among the five eliminations. % src: T:welfare_decomposition_gradient.tex:27
+The loss from incomplete Medicare coverage after age 65 is 4.28 percent: covering all out-of-pocket spending after 65 would raise welfare by less than the existing Social Security benefits do. % src: T:welfare_decomposition_gradient.tex:27-28
+Raising the net return to the gross return raises welfare by 3.60 percent and eliminating the income tax by 3.16 percent; eliminating disability benefits lowers welfare by 0.34 percent. % src: T:welfare_decomposition_gradient.tex:33,36,37
+The ranking---Social Security, Medicare coverage, the return on saving, the income tax, disability insurance---orders the instruments by the welfare at stake. The LE column is the CE column multiplied by $\gamma/(1-\gamma)$, 1.15 at the point estimates, by \eqref{eq:le}; it carries no information beyond the CE column and is not reported for the reforms. % src: T:estimated_parameters.tex:9 (gamma = 0.5354); BLUEPRINT 4.2 eq. 21
+
+The participation effects of the five eliminations are reported as age profiles by health status in \autoref{app:reforms}; no table summarizes them. The profiles show the largest change in participation under D1, from age 63 on, and they show that eliminating disability benefits raises the participation of people with a disability after age 50, a group small enough that the welfare effect of D5 is the smallest in \autoref{tab:elim}.
+% src: 12:372-374; 7:41; T:welfare_decomposition_gradient.tex:37; figures/abdou/frot_weld1_paper.tex and frot_weld2.tex (D1 largest at 63-69; D5 larger at 50-59, 61, 62)
+
+\citet{french2011effects} emphasize the role of Medicare for retirement; in the earlier working-paper version, \citet{French2004} find a larger effect of Social Security than of Medicare on labor supply. % src: 7:43-44
+In the welfare metric used here, eliminating Social Security benefits has a larger effect than completing Medicare coverage after age 65, and the sections that follow show that reforms of the two instruments have different fiscal returns. % src: T:welfare_decomposition_gradient.tex:27-28
+These experiments remove whole instruments; the sections that follow price marginal changes to each, beginning with Social Security, the instrument with the most welfare at stake. % src: T:welfare_decomposition_gradient.tex:27 (largest absolute CE change)

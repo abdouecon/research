@@ -1,0 +1,39 @@
+% tables/new_calibrated_parameters.tex -- Table A8 (tab:calibrated), written by W1b. Text-only table; every value below
+% is a first-step input fixed outside the method of simulated moments. Sources (BLUEPRINT 8.2; dossier 02 section 4):
+%   entry/terminal age 30/85 .............. frot/sub2025/5_quantitative_model.tex:23
+%   labor-market entry 25; 5 years x 2,000 hours .... 5_quantitative_model.tex:90 (fn); 11_app_data.tex:222
+%   r_f = 4%; reduction 20%; r = 3.2% ...... 5_quantitative_model.tex:390 (text and footnote)
+%   consumption floor $3,500 (2016 dollars) 5_quantitative_model.tex:390
+%   borrowing limit 0 ...................... 5_quantitative_model.tex:302
+%   (rho, sigma_eps^2) = (0.981, 0.016); ages 25--65; top 0.5% dropped .... 11_app_data.tex:188-190
+%   medical-spending scaling 1.60 / 1.90 ... 11_app_data.tex:171
+%   wage trimming $6.50 / $250 (2016 dollars) 11_app_data.tex:177
+%   DI earnings threshold $3,600 (1987 dollars) ... 12_app_quant.tex:49; tables/parameters_ss.tex:42
+%   pi^{db}: Low and Pistaferri (2015); no numerical value in any active source file (Open question 9) ... 12_app_quant.tex:57-58
+\begin{tabular}{>{\raggedright\arraybackslash}p{1.7cm} >{\raggedright\arraybackslash}p{5.8cm} >{\raggedright\arraybackslash}p{3.0cm} >{\raggedright\arraybackslash}p{3.7cm}}
+\toprule
+\hline
+Parameter & Description & Value & Source\\[0.5ex]
+\hline
+\multicolumn{4}{l}{\textit{Demographics}}\\
+$t$ & Entry age; terminal age $T$ & 30; 85 & \\[0.3ex]
+ & Labor-market entry age; earnings history imputed at age 30 & 25; 5 years at 2,000 hours a year & \leavevmode\citet{french2005effects}\\[0.5ex]
+\multicolumn{4}{l}{\textit{Returns and budget}}\\
+$r_f$ & Gross return on assets & 4\% & \leavevmode\citet{french2005effects}\\[0.3ex]
+$\tau_k$ & Reduction from gross to net return & 20\% & \leavevmode\citet{Stantcheva2017}\\[0.3ex]
+$r$ & Net return, $(1-\tau_k)r_f$ & 3.2\% & \\[0.3ex]
+$\underline{c}$ & Consumption floor & \$3,500 & \leavevmode\citet{french2011effects}\\[0.3ex]
+$\underline{a}$ & Borrowing limit & 0 & \\[0.5ex]
+\multicolumn{4}{l}{\textit{Ability process}}\\
+$\rho$ & Autoregressive coefficient of $\ln\theta_t$ & 0.981 & PSID\\[0.3ex]
+$\sigma_\varepsilon^2$ & Innovation variance & 0.016 & PSID\\[0.5ex]
+\multicolumn{4}{l}{\textit{First-step data adjustments}}\\
+ & Scaling of medical spending, ages below 65; 65 and older & 1.60; 1.90 & \leavevmode\citet{Denardi2018}\\[0.3ex]
+ & Hourly-wage trimming bounds & \$6.50; \$250 & PSID\\[0.3ex]
+ & Residual age window; top share dropped for $(\rho,\sigma_\varepsilon^2)$ & 25--65; 0.5\% & PSID\\[0.5ex]
+\multicolumn{4}{l}{\textit{Disability insurance}}\\
+$y_{db}$ & Earnings threshold (1987 dollars) & \$3,600 & SSA\\[0.3ex]
+$\pi^{db}$ & Probability of receiving benefits & \leavevmode from \citet{Low2015} & \leavevmode\citet{Low2015}\\[0.5ex]
+\hline
+\bottomrule
+\end{tabular}

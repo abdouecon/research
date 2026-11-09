@@ -1,0 +1,125 @@
+% Copy of welfare_tax_mvpf_v8.tex (Override O6), Panel B of Table 9. Edits: tabular column spec `llllllllll` -> fixed-width p-columns common to the three panels so that the columns line up (layout audit 20); the \hline duplicating \toprule and the \hline duplicating \bottomrule removed. Row labels `+1$ \%` ... `+5$ \%` -> `+1\%$` ... `+5\%$` (percent sign inside math, no space; layout audit 17). All cells untouched. Listed in tables/EDITS.md.
+% Color definitions
+\definecolor{blue}{RGB}{0,114,178}
+\definecolor{red}{RGB}{213,94,0}
+\definecolor{white}{RGB}{255,255,255}
+\newcommand*{\opacity}{100}% Full opacity
+
+% For xchange% column: 0 is white, positive blue, negative red
+\newcommand{\gradXchange}[1]{%
+    \ifdim#1pt=0pt
+        \cellcolor{white!\opacity} #1
+    \else
+        \ifdim#1pt>0pt
+            % Positive values - blue
+            \pgfmathparse{int(round(min(100, 100*(#1/3.6))))}% Scaling factor based on max value
+            \xdef\tempa{\pgfmathresult}
+            \cellcolor{blue!\tempa!white!\opacity} #1
+        \else
+            % Negative values - red
+            \pgfmathparse{int(round(min(100, 100*(-#1/3.6))))}% Scaling based on min value
+            \xdef\tempa{\pgfmathresult}
+            \cellcolor{red!\tempa!white!\opacity} #1
+        \fi
+    \fi
+}
+
+% For taxchange% column: 0 is white, positive values are red, negative values are blue
+\newcommand{\gradTaxchange}[1]{%
+    \ifdim#1pt=0pt
+        \cellcolor{white!\opacity} #1
+    \else
+        \ifdim#1pt>0pt
+            % Positive values - red
+            \pgfmathparse{int(round(min(100, 100*(#1/5.87))))}% Scaling based on max value
+            \xdef\tempa{\pgfmathresult}
+            \cellcolor{red!\tempa!white!\opacity} #1
+        \else
+            % Negative values - blue
+            \pgfmathparse{int(round(min(100, 100*(-#1/5.87))))}% Scaling based on min value
+            \xdef\tempa{\pgfmathresult}
+            \cellcolor{blue!\tempa!white!\opacity} #1
+        \fi
+    \fi
+}
+
+% For total cost and indirect cost columns: 0 is white, positive red, negative blue
+\newcommand{\gradCost}[1]{%
+    \ifdim#1pt=0pt
+        \cellcolor{white!\opacity} #1
+    \else
+        \ifdim#1pt>0pt
+            % Positive values - red
+            \pgfmathparse{int(round(min(100, 100*(#1/4.0))))}% Scaling based on max value
+            \xdef\tempa{\pgfmathresult}
+            \cellcolor{red!\tempa!white!\opacity} #1
+        \else
+            % Negative values - blue
+            \pgfmathparse{int(round(min(100, 100*(-#1/3.6))))}% Scaling based on min value
+            \xdef\tempa{\pgfmathresult}
+            \cellcolor{blue!\tempa!white!\opacity} #1
+        \fi
+    \fi
+}
+
+% For MVPF column: higher values blue, middle values white, close to zero red
+\newcommand{\gradMVPF}[1]{%
+    % Middle value is approximately 0.90 (based on the data range 0.21 to 1.58)
+    \pgfmathparse{#1 - 0.0}
+    \pgfmathsetmacro{\diff}{\pgfmathresult}
+    
+    \ifdim\diff pt=0pt
+        \cellcolor{white!\opacity} #1
+    \else
+        \ifdim\diff pt>0pt
+            % Higher than middle - blue
+            \pgfmathparse{int(round(min(100, 100*(\diff/3.5))))}% Scaling factor based on range
+            \xdef\tempa{\pgfmathresult}
+            \cellcolor{blue!\tempa!white!\opacity} #1
+        \else
+            % Lower than middle - red
+            \pgfmathparse{int(round(min(100, 100*(-\diff/3.5))))}% Scaling factor based on range
+            \xdef\tempa{\pgfmathresult}
+            \cellcolor{red!\tempa!white!\opacity} #1
+        \fi
+    \fi
+}
+
+% For age range p.p. columns: 0 is white, positive blue, negative red
+\newcommand{\gradPP}[1]{%
+    \ifdim#1pt=0pt
+        \cellcolor{white!\opacity} #1
+    \else
+        \ifdim#1pt>0pt
+            % Positive values - blue
+            \pgfmathparse{int(round(min(100, 100*(#1/8.92))))}% Scaling based on max value
+            \xdef\tempa{\pgfmathresult}
+            \cellcolor{blue!\tempa!white!\opacity} #1
+        \else
+            % Negative values - red
+            \pgfmathparse{int(round(min(100, 100*(-#1/8.92))))}% Scaling based on min value
+            \xdef\tempa{\pgfmathresult}
+            \cellcolor{red!\tempa!white!\opacity} #1
+        \fi
+    \fi
+}
+
+%\begin{tabular}{clcccccccc}% 
+\begin{tabular}{@{}p{75pt}p{64pt}p{52pt}*{7}{p{28pt}}@{}}% common fixed-width spec across the three panels of Table 9 (layout audit 20); widths = widest cell content at \footnotesize + 2pt
+    \toprule
+ \multicolumn{2}{c}{Policy Reforms}&\multicolumn{2}{c}{$\%\Delta$ Welfare}&\multicolumn{3}{c}{\%$\Delta$ Budget}&\multicolumn{3}{c}{$\Delta$ Participation}\\
+
+        \hline
+&&MVPF&WTP&Net&Direct&Indir.&30--49&62--64&65--69\\	\hline
+(I1)& $y^{\text{post-tax}}_{t\geq62}+1\%$	&\gradMVPF{0.25}&\gradXchange{0.44}&\gradCost{0.69}&\gradTaxchange{0.70}&\gradCost{-0.81}&\gradPP{0.06}&\gradPP{0.76}&\gradPP{1.98}	\\
+(I2)&$y^{\text{post-tax}}_{t\geq62}+2\%$	&\gradMVPF{0.26}&\gradXchange{0.87}&\gradCost{1.28}&\gradTaxchange{1.31}&\gradCost{-1.51}&\gradPP{0.15}&\gradPP{1.58}&\gradPP{4.12}	\\
+(I3)&$y^{\text{post-tax}}_{t\geq62}+3\%$	&\gradMVPF{0.25}&\gradXchange{1.29}&\gradCost{2.01}&\gradTaxchange{2.03}&\gradCost{-2.18}&\gradPP{0.18}&\gradPP{2.76}&\gradPP{6.07}	\\
+(I4)&$y^{\text{post-tax}}_{t\geq62}+4\%$	&\gradMVPF{0.23}&\gradXchange{1.69}&\gradCost{2.80}&\gradTaxchange{2.80}&\gradCost{-2.78}&\gradPP{0.2}&\gradPP{3.19}&\gradPP{7.71}	\\
+(I5)&$y^{\text{post-tax}}_{t\geq62}+5\%$	&\gradMVPF{0.23}&\gradXchange{2.09}&\gradCost{3.46}&\gradTaxchange{3.47}&\gradCost{-3.58}&\gradPP{0.26}&\gradPP{4.11}&\gradPP{8.92}	\\
+%(K1)&$\Delta \tau_k=$ -20 pp	&\cellcolor{blue!100!white!\opacity}$\infty$&\gradXchange{3.6}&\gradCost{-0.42}&\gradTaxchange{100}&\gradCost{-7.10}&\gradPP{0.38}&\gradPP{-5.98}&\gradPP{-4.11}	\\
+%(K2)&$\Delta \tau_k=$ -10 pp	&\cellcolor{blue!100!white!\opacity}$\infty$&\gradXchange{1.75}&\gradCost{-0.67}&\gradTaxchange{43.30}&\gradCost{-3.59}&\gradPP{0.36}&\gradPP{-2.58}&\gradPP{-1.75}	\\
+%(K3)&$\Delta \tau_k=$ -5 pp	&\cellcolor{blue!100!white!\opacity}$\infty$&\gradXchange{0.87}&\gradCost{-0.33}&\gradTaxchange{20.15}&\gradCost{-1.69}&\gradPP{0.15}&\gradPP{-1.27}&\gradPP{-0.85}	\\
+%(K4)&$\Delta \tau_k=$ +5 pp	&\gradMVPF{-0.83}&\gradXchange{-0.85}&\gradCost{0.37}&\gradTaxchange{-17.06}&\gradCost{1.53}&\gradPP{-0.17}&\gradPP{1.76}&\gradPP{1.41}	\\
+%(K5)&$\Delta \tau_k=$ +10 pp	&\gradMVPF{-0.57}&\gradXchange{-1.68}&\gradCost{1.06}&\gradTaxchange{-31.41}&\gradCost{3.22}&\gradPP{-0.38}&\gradPP{3.12}&\gradPP{2.37}	\\
+\bottomrule
+    \end{tabular}

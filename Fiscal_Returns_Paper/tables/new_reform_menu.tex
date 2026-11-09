@@ -1,0 +1,65 @@
+% tables/new_reform_menu.tex -- Table 2 (tab:menu), written by W3. Text-only table of the reform families (BLUEPRINT 2.2).
+% Every entry below is taken from the following sources (no number is computed here):
+%   AN1-AN3, AD1-AD5, AL1-AL9 definitions:     frot/sub2025/12_app_quant.tex:487 (verbatim in the comment block after the notes; not rendered); grids as printed in tables/DRC_visualization_4.tex:38-40, 43-47, 50-58
+%   status-quo NRA 65 / DRC 4.5 percent:        tables/parameters_ss.tex:47-48; 12_app_quant.tex:10
+%   P1.1-P1.9, P2.0-P2.9, P3.0-P3.9, L0-L9:      frot/sub2025/12_app_quant.tex:475 (verbatim in the comment block after the notes; not rendered); bracket triples as printed in
+%                                               tables/welfare_progressivity_mvpfv7.tex:115 (P1.1: 0.91,0.32,0.15), :123 (P1.9: 0.99,0.32,0.15), :126 (P2.0: 0.99,0.3232,0.15),
+%                                               :135 (P2.9: 0.99,0.352,0.15), :137 (P3.0: 0.99,0.352,0.1515), :146 (P3.9: 0.99,0.352,0.165), :149 (L0: 0.909,0.3232,0.1515), :158 (L9: 0.99,0.352,0.165)
+%   L9 = P3.9:                                  tables/welfare_progressivity_mvpfv7.tex:146 versus :158 (same triple, same outcomes)
+%   Medicare Part A / Part B:                   frot/sub2025/12_app_quant.tex:536 (verbatim in the comment block after the notes; not rendered); 7_policy_reforms.tex:198; row labels "+ 20 pp" in tables/welfare_medicare_mvpfv8.tex:113,116
+%   I1-I5:                                      frot/sub2025/12_app_quant.tex:556-557 (verbatim in the comment block after the notes; not rendered); row labels in tables/welfare_tax_mvpf_v8.tex:114-118; 7_policy_reforms.tex:349
+%   K1-K3:                                      frot/sub2025/12_app_quant.tex:560 (verbatim in the comment block after the notes; not rendered); row labels in tables/welfare_savings_mvpf_v3.tex:120-123
+%   D3 = K3:                                    tables/welfare_decomposition_gradient.tex:33 (3.60) versus tables/welfare_savings_mvpf_v3.tex:123 (3.6); 5_quantitative_model.tex:390 (3.2 -> 4 percent); D03 section 6 item 9
+%TODO-AUTHORS: Open question 5 -- the Medicare rows say "percentage points" (table label "+ 20 pp"); the May 2025 text says "by 20%". Confirm x = 0.20 of total spending.
+%TODO-AUTHORS: Open question 6 -- the I rows follow the table labels (after-tax income +1 to +5 percent); the appendix formula lambda_t + x(t-61) grows with age. Confirm which was run.
+\begin{table}[!t]
+\centering
+\caption{The Reform Menu}
+\label{tab:menu}
+\vspace{6pt}
+\scriptsize
+\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{1.05}
+\begin{threeparttable}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{1.05in}>{\raggedright\arraybackslash}p{0.7in}>{\raggedright\arraybackslash}p{1.75in}>{\raggedright\arraybackslash}p{1.6in}>{\raggedright\arraybackslash}p{1.05in}@{}}
+\toprule
+Family & IDs & Instrument changed & Grid & Ages affected \\
+\midrule
+Normal retirement age & AN1--AN3 & NRA; the claiming schedule of \autoref{tab:ssdrc} moves one year later per step & NRA 66, 67, 68 (status quo 65) & Every claiming age 62--70 \\
+\addlinespace
+Delayed retirement credit & AD1--AD5 & DRC, the credit per year of claiming after the NRA; the reduction before the NRA is unchanged & 8, 8.5, 9, 9.5, 10 percent per year (status quo 4.5) & Claiming ages 66--70 \\
+\addlinespace
+Symmetric adjustment & AL1--AL9 & Early-claiming reduction and DRC set equal in absolute value & $\pm7$ to $\pm15$ percent per year, in 1 pp steps & Claiming ages 62--64 and 66--70 \\
+\addlinespace
+Benefit formula: progressivity & P1.1--P1.9 & First PIA factor & 0.91 to 0.99, 1 pp per step (status quo 0.90) & All beneficiaries, from the claiming age \\
+ & P2.0--P2.9 & Second PIA factor, with the first factor at 0.99 & 0.3232 to 0.352, 0.32 pp per step (status quo 0.32) & All beneficiaries, from the claiming age \\
+ & P3.0--P3.9 & Third PIA factor, with the first and second factors at 0.99 and 0.352 & 0.1515 to 0.165, 0.15 pp per step (status quo 0.15) & All beneficiaries, from the claiming age \\
+\addlinespace
+Benefit formula: level & L0--L9 & All three PIA factors & $+1$ percent of each factor per step, from (0.909, 0.3232, 0.1515) to (0.99, 0.352, 0.165); L9 coincides with P3.9\tnote{a} & All beneficiaries, from the claiming age \\
+\addlinespace
+Medicare & Part A & Share of total medical spending covered, everyone aged 65 and older & $+20$ percentage points & 65 and older \\
+ & Part B & Share of total medical spending covered, nonparticipants aged 65 and older & $+20$ percentage points & 65 and older, nonparticipants \\
+\addlinespace
+Income tax & I1--I5 & Income tax after age 62; after-tax income $y_t-T_t(y_t)$ rises & $+1$ to $+5$ percent, in 1 pp steps & 62 and older \\
+\addlinespace
+Saving subsidy & K1--K3 & Net return on assets $r$ & $+0.2$, $+0.4$, $+0.8$ pp (status quo 3.2 percent); K3 coincides with D3\tnote{b} & All ages \\
+\bottomrule
+\end{tabular}
+\begin{tablenotes}[flushleft]\scriptsize
+\item[] \textit{Notes:} NRA, normal retirement age; DRC, delayed retirement credit; PIA, primary insurance amount; pp, percentage points. The status-quo values are those of the 1920--1940 cohorts (\autoref{tab:ssdrc} and \autoref{tab:ssparams}). The rule change behind each family is stated in Appendix~\ref{app:construction}; the Medicare rows are in percentage points of the coverage share of total medical spending.
+% src: tables/parameters_ss.tex:46-48 (status quo); appendix/C_reforms.tex (app:construction); tables/welfare_medicare_mvpfv8.tex:113,116 ("+ 20 pp")
+% ---- Provenance (not rendered): the May 2025 construction definitions, quoted verbatim, that the rows above and Appendix C.1 paraphrase.
+% ---- Moved out of the rendered note on 2026-11-09 (verification pass): the note ran to 27 lines of \scriptsize, duplicated Appendix C.1,
+% ---- and the Medicare quotation says "by 20%" where the rows, the text, and Appendix C say 20 percentage points (BLUEPRINT 2.2 do-not-say; Open question 5).
+% 12_app_quant.tex:475: "Social Security progressivity reforms P1.1--P1.9 modify the first bracket of the primary insurance amount (PIA) formula by gradually increasing its replacement rate. Specifically, the initial rate of 0.90 is raised by one percentage point (pp) in each step, from 0.91 under P1.1 up to 0.99 under P1.9. Reforms P2.0--P2.9 and P3.0--P3.9 target the second and third brackets, respectively: P2.0--P2.9 increase the second bracket's replacement rate by 0.32 pp per step, while P3.0--P3.9 raise the third bracket's replacement rate by 0.15 pp per step. Each set of reforms implements changes in 1% increments relative to the initial bracket levels. In addition, Social Security level reforms L0--L9 uniformly increase the replacement rates across all PIA brackets by 1% in each step."
+% 12_app_quant.tex:487: "Reforms that modify the NRA, denoted as AN1--3, increase the NRA to ages 66, 67, and 68, respectively. Reforms that adjust the DRC, referred to as AD1--5, increase the DRC to 8%, 8.5%, 9%, 9.5%, and 10%, respectively. Reforms that change the linear adjustment of retirement benefits (AL1--9) modify both the DRC and early retirement penalties, increasing both rates from 7% to 15%, with a 1 pp increase for each reform step."
+% 12_app_quant.tex:536: "Medicare Part A reform increases coverage for all individuals over age 65 by 20%, reflecting expanded access to inpatient services; Medicare Part B reform increases coverage among nonparticipants by 20%, improving access to outpatient care for those not previously enrolled" (coverage rates for individuals aged 65 and older computed by health and working status from MEPS data; the model re-simulated with these rates is the baseline for the two reforms).
+% 12_app_quant.tex:556-557: "Income tax reforms (I1--I5) reduce income taxes after age 62, leading to increases in after-tax income y-T(y)=lambda_t y^(1-tau_t)."
+% 12_app_quant.tex:560: "Savings subsidy reforms K1--3 increase the net returns to savings by 0.20 pp, 0.4 pp, and 0.8 pp."
+\item[a] L9 and P3.9 set the same three factors, (0.99, 0.352, 0.165), and are the same policy; \autoref{tab:progressivity_full} reports identical outcomes for the two rows.
+% src: tables/welfare_progressivity_mvpfv7.tex:146 versus :158
+\item[b] K3 raises the net return from 3.2 to 4 percent, the gross return; it is the experiment reported as D3 in \autoref{tab:elim}.
+% src: 5_quantitative_model.tex:390; tables/welfare_decomposition_gradient.tex:33; tables/welfare_savings_mvpf_v3.tex:123
+\end{tablenotes}
+\end{threeparttable}
+\end{table}

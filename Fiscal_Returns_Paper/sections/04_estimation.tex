@@ -1,0 +1,149 @@
+% sections/04_estimation.tex -- Section 4 (W1b). Plan: BLUEPRINT 2.4, 3.2 (eq:profile, eq:msm), 8.3-8.6, 9; Overrides O1, O2, O5, O6.
+% Provenance convention (Override O5): "% src: <file>:<line>" follows every sentence that carries a number.
+% Abbreviations in src comments: 5:NN = frot/sub2025/5_quantitative_model.tex; 11:NN = 11_app_data.tex; 12:NN = 12_app_quant.tex;
+% T: = paper/tables/; F: = paper/figures/abdou/ (embedded data rows, age in the first column); D0N = dossier/0N_*.md; QJE:NN = rendered May 2025 text.
+% Vintage rule (BLUEPRINT Decision 8): point estimates identical in both vintages; standard errors and chi-square from the 2026 file
+% T:estimated_parameters.tex (footnoted in Table 3); fit series from the 2026 files F:h800_*_edit_c.tex (footnoted in Figure 2 and B1).
+\section{Data, Estimation, and Fit}\label{sec:estimation}
+
+The model is estimated in two steps, as in \citet{Cagetti2003} and \citet{Gourinchas2002}. % src: 5:371-373
+The first step estimates from the data, or takes from program rules and the literature, every input that does not require solving the model: health transitions, survival, medical spending, wage profiles and the ability process, the initial distribution at age 30, and the institutional parameters of \autoref{sec:institutions}. The second step estimates the seven preference parameters by the method of simulated moments (MSM), taking the first-step inputs as given. % src: 5:373-379; 5:533
+\autoref{subsec:gradient} collects the differences by health in the data profiles on which the reforms of \autoref{sec:elimination} to \autoref{sec:other} act; \autoref{app:data} and \autoref{app:estimation} give the details.
+
+\subsection{Data and samples}\label{subsec:data}
+
+The primary data source is the Panel Study of Income Dynamics (PSID), the longitudinal survey of US families conducted by the Survey Research Center at the University of Michigan since 1968, with interviews every year until 1997 and every two years thereafter.\footnote{Panel Study of Income Dynamics, public use dataset, produced and distributed by the Survey Research Center, Institute for Social Research, University of Michigan, \url{https://psidonline.isr.umich.edu/}.} % src: 11:14
+We use the 1968--2015 waves and the Survey Research Center component of the original sample, and we keep household heads and spouses born between 1920 and 1940, a cohort that faced similar Social Security rules and whose outcomes the PSID records across the life cycle. % src: 11:16; 11:18; T:sample_psid.tex:10,13
+The sample has 2,248 individuals and 44,404 person-year observations (\autoref{tab:psid}). % src: T:sample_psid.tex:13; 11:51
+It provides the health transitions, survival probabilities, wage profiles and wage dynamics, the initial distribution of state variables, and the labor supply and asset profiles that the model is estimated to match. % src: 11:51
+Medical spending and insurance coverage come from the Medical Expenditure Panel Survey (MEPS) of the Agency for Healthcare Research and Quality, in which spending reported by individuals is cross-validated with medical providers and insurers.\footnote{Medical Expenditure Panel Survey, Agency for Healthcare Research and Quality, \url{https://meps.ahrq.gov/}.} % src: 11:58
+We use the 1999--2012 waves and keep household heads aged 20 and older with nonmissing age, medical spending, insurance coverage during working ages, and health status: 120,731 individuals and 211,709 person-year observations (\autoref{tab:meps}). % src: 11:60; T:sample_meps.tex:16
+All monetary values in the paper are in 2016 dollars, except the statutory Social Security parameters of \autoref{tab:ssparams}, which are in 1987 dollars. % src: 5:620; 11:177; 12:36
+
+Health is measured in the PSID from three work-limitation questions asked in every wave, following \citet{Low2015}. Good health ($h=0$) is no condition that limits work, and poor health ($h=1$) is a condition that limits work somewhat or just a little. A disability ($h=2$) is a condition that keeps the respondent from doing any type of work and limits the amount of work a lot, the criterion of the Social Security Administration for disability insurance. % src: 11:92-98
+In the MEPS, health is classified from self-rated health in the three interviews of a year, following \citet{Pashchenko2019}: a disability is a rating of poor in any interview, good health a rating of good or better in all three, and poor health the remainder. % src: 11:100-102
+The two measures give similar shares with a disability by age band---9.3 percent in the PSID and 10 percent in the MEPS at ages 50--60, 12.9 and 11.7 percent at ages 60--70---while the MEPS classifies more individuals as being in poor health (\autoref{tab:health}). % src: T:health_measures.tex:16-17
+\autoref{app:data} reproduces the survey items.
+
+\subsection{First step: profiles by health}\label{subsec:firststep}
+
+Health transitions are probit regressions of the indicator of next year's health state on age dummies, estimated on the subsample in each current state, with the predicted probabilities interpolated linearly across ages. % src: 11:133-134
+Survival is a logit of an indicator of survival on a quadratic in age, lagged health, and their interaction, estimated on 132,070 PSID person-years (\autoref{tab:survival}). % src: 11:139; T:survival_coeffs.tex:10-16
+Out-of-pocket medical spending is total spending times one minus the coverage share, both estimated on age and year dummies by health group in the MEPS following \citet{Pashchenko2019}, with coverage from private insurance before age 65 and from Medicare afterward. The profiles are multiplied by 1.60 before age 65 and by 1.90 from age 65 to match the National Health Expenditure Accounts, following \citet{Denardi2018}, and smoothed on a quadratic in age. % src: 11:167-171
+Hourly wages are annual earnings divided by annual hours in the PSID, trimmed below \$6.50 and above \$250, and corrected for selection into work with the two-stage procedure of \citet{Heckman1976} as applied by \citet{Guner2012}, in which log wages are regressed on age polynomials, their interactions with health, and the inverse Mills ratio from a participation probit, on 64,941 observations (\autoref{tab:wages}). % src: 11:177-182; T:wages_coeffs.tex:15-63
+The persistence and innovation variance of ability in \eqref{eq:wage} are estimated by maximum likelihood with the Kalman filter on the wage residuals at ages 25--65, dropping the top 0.5 percent of residuals; the estimates are $(\rho,\sigma_\varepsilon^2)=(0.981,\,0.016)$. % src: 11:188-190
+The initial distribution at age 30 is the empirical joint distribution of wages, health, assets, and participation of sample members aged 28--32, with the mean of log wages adjusted to the estimated profile within each health group, and with average indexed earnings imputed from five years of work at 2,000 hours a year at the age-30 wage, following \citet{french2005effects} (\autoref{tab:initial}). % src: 11:222
+
+\autoref{fig:firststep} shows the four first-step profiles by health. The probability of remaining in good health falls with age, and the decline is absorbed mainly by transitions into poor health. % src: F:frot_disab0_edit.tex
+Mortality rises with age for every health state and fastest, at older ages, for individuals with a disability. % src: F:frot_mortal7_edit2.tex; 5:507-509
+Out-of-pocket medical spending rises with age and is ordered by health at every age, highest for individuals with a disability. % src: F:frot_oopmedical_2016_edit.tex; 5:511-513
+Hourly wages are hump-shaped in age for every health state and are ordered the other way: healthy workers earn more than workers in poor health, who earn more than workers with a disability. % src: F:frot_wageselection_n800_edit.tex; 5:516
+\autoref{subsec:gradient} reports the values at the ages that matter for the reforms.
+
+\begin{figure}[!tp]
+\centering
+\caption{First-Step Profiles by Health Status}
+\label{fig:firststep}
+\vspace{6pt}
+\begin{tabular}{cc}
+\input{figures/abdou/frot_disab0_edit} & \input{figures/abdou/frot_mortal7_edit2}\\[1.5ex]
+\input{figures/abdou/frot_oopmedical_2016_edit} & \input{figures/abdou/frot_wageselection_n800_edit_paper}
+\end{tabular}
+\begin{minipage}{0.95\textwidth}\footnotesize\setstretch{1.0}
+\textit{Notes:} (A) Probabilities of transition from good health at age $t-1$ to good health, poor health, and a disability at age $t$; (B) annual mortality rate in percent; (C) out-of-pocket medical spending in thousands of 2016 dollars; (D) hourly wages in 2016 dollars, corrected for selection into work. Blue dotted: good health; red dash-dotted: poor health; green dashed: with a disability. Sources: PSID 1968--2015 (A, B, D); MEPS 1999--2012 (C).
+% src: F:frot_disab0_edit.tex, frot_mortal7_edit2.tex, frot_oopmedical_2016_edit.tex, frot_wageselection_n800_edit_paper.tex (axis labels and legends); 5:619-626 (May 2025 note)
+\end{minipage}
+\end{figure}
+
+\subsection{Second step: method of simulated moments}\label{subsec:msm}
+
+The second step estimates the seven preference parameters, $\mathcal{P}=(\gamma,\nu,\allowbreak\phi_n(h{=}0),\allowbreak\phi_n(h{=}1,2),\allowbreak\phi_{RE},L,\beta)$. % src: 5:533; 12:156
+The targets are life-cycle profiles for ages 30 to 69 constructed from the PSID with the fixed-effects regression of \citet{french2005effects}, % src: 11:251; 12:186
+\begin{equation}\label{eq:profile}
+\begin{split}
+Z_{it}={}&f_i+\sum_{k}B_{gk}\,\ind{\mathit{age}_{it}=k}\,\ind{h_{it}=0}+\sum_{k}B_{bk}\,\ind{\mathit{age}_{it}=k}\,\ind{h_{it}\neq 0}\\
+&+\sum_{f}B_{f}\,\ind{\mathit{famsize}_{it}=f}+B_{u}\,U_{t}+u_{it},
+\end{split}
+\end{equation}
+% src: 11:269-273
+where $Z_{it}$ is participation or hours of individual $i$ at age $t$, $f_i$ is an individual effect, the age dummies are interacted with good health ($h=0$) and with poor health or disability ($h\neq 0$), $\mathit{famsize}_{it}$ is family size, and $U_t$ is the unemployment rate. % src: 11:275-277
+The profiles are evaluated at a family size of 3, an unemployment rate of 6.5 percent, and the mean individual effect of individuals aged 50, in average health at 50, and born in 1935, so that family size, the business cycle, and cohort effects do not enter them. % src: 11:279-282
+Participation is annual hours above 800; hours are conditional on participation; assets are nonpension net worth, divided equally between partners following \citet{Borella2018}; the asset and reentry profiles are not conditioned on health (\autoref{app:data}). % src: 11:253; 11:256-259; 11:283
+Seven blocks of 40 age-specific moments---participation of healthy and of unhealthy individuals, hours of healthy and of unhealthy workers, mean assets, median assets, and the mean reentry rate---give 280 moments for seven parameters. % src: 12:186-195; 5:533
+The estimator is
+\begin{equation}\label{eq:msm}
+\hat{\mathcal{P}}=\operatorname*{argmin}_{\mathcal{P}}\ \frac{I}{1+\varsigma}\,\hat{\varphi}(\mathcal{P};\chi)'\,\hat{\mathbf{W}}_{I}\,\hat{\varphi}(\mathcal{P};\chi),
+\end{equation}
+% src: 12:165
+where $\hat{\varphi}(\mathcal{P};\chi)$ stacks the differences between the data moments and the moments of profiles simulated from the model at $\mathcal{P}$ and at the first-step inputs $\chi$, $I$ is the number of individuals in the data, $\varsigma$ is the ratio of the number of data observations to the number of simulated observations, and $\hat{\mathbf{W}}_{I}$ is the inverse of the diagonal matrix formed from the diagonal of the data variance--covariance matrix. % src: 12:167; 12:197
+Identification follows \citet{french2005effects} under two assumptions: work decisions do not affect health or wages, and age changes work and saving incentives but not preferences. % src: 12:199
+\autoref{app:estimation} writes out the moment vector and the estimation steps.
+
+\subsection{Estimates and identification}\label{subsec:estimates}
+
+\autoref{tab:est} reports the estimates. The discount factor is 0.98, identified by intertemporal substitution and therefore by the labor supply and asset profiles, in particular at the ages at which wealth is accumulated for retirement. % src: 5:635; T:estimated_parameters.tex:13-14
+The time endowment is 4,491 hours a year, and the fixed cost of participation is 791 hours for healthy workers and 868 hours for workers in poor health or with a disability. % src: 5:638; T:estimated_parameters.tex:15-20
+These three parameters are identified by participation and hours by health: the fixed cost generates a reservation level of hours below which working does not pay, and the endowment scales hours; the estimates lie within the range of \citet{french2011effects} and \citet{Borella2023}. % src: 5:639
+\citet{Yu2024}, whose specification adds a time cost of being unhealthy that is paid whether or not the individual works, estimates participation costs of 936 hours for healthy and 755 hours for unhealthy workers on the 1920--1935 PSID cohort; the specification here has no separate health time cost, and the participation cost is higher for unhealthy workers. % src: D08 §7 X1 (yu_jpube/Yu_Zhixiu_retirement_NBER.tex:1020); D08 §2 (N:439-443, N:287)
+% TODO-AUTHORS: 936/755 and the 1920--1935 cohort are from the November 2023 NBER version (D08 Flag V1); confirm against the published JPubE table before submission (citations audit 21). If they differ, drop the digits: "estimates a lower participation cost for unhealthy than for healthy workers".
+The reentry cost is 3,312 hours, identified by reentry rates that stay below 5 percent at every age in the data; at this value the model generates no reentry (\autoref{subsec:fit}). % src: 5:639; 11:285; F:h800_reentry_edit.tex
+The curvature parameter $\nu$ is 1.70 and the consumption weight $\gamma$ is 0.54, which imply a coefficient of relative risk aversion with respect to consumption, $-c_t\,u_{cc}/u_c$, of about 1.38; they are identified by the asset and labor supply profiles, since higher risk aversion raises precautionary saving and work early in life. % src: 5:641-646
+The $\chi^2$ statistic of 1463 with 273 degrees of freedom rejects the overidentifying restrictions, as the corresponding statistics do for the estimated models of \citet{french2005effects} and \citet{french2011effects}. % src: T:estimated_parameters.tex:21; 5:535 (fn)
+
+\begin{table}[!tp]
+\centering
+\caption{Estimated Preference Parameters}
+\label{tab:est}
+\vspace{6pt}
+\footnotesize
+\begin{threeparttable}
+\input{tables/estimated_parameters_paper}
+\begin{tablenotes}[flushleft]\scriptsize
+\item[] \textit{Notes:} Method of simulated moments on 280 moments (ages 30--69); standard errors in the last column; $\chi^2$ statistic with 273 degrees of freedom. $L$, $\phi_{RE}$, $\phi_n(h{=}0)$, and $\phi_n(h{=}1,2)$ are in hours per year. Point estimates are those of the May 2025 version of the companion paper (Ndiaye and Yu); standard errors and the $\chi^2$ statistic were recomputed in 2026. The May 2025 manuscript reported standard errors of 0.0042, 0.0587, 0.0020, 24.71, 5.1666, 20.003, and 30.613 and a $\chi^2$ statistic of 1386.8 for the same point estimates.
+% src: T:estimated_parameters.tex:9-21 (2026 file); QJE:2625-2645 (May 2025 standard errors and chi-square); wording fixed in BLUEPRINT 9
+\end{tablenotes}
+\end{threeparttable}
+\end{table}
+
+\subsection{Fit}\label{subsec:fit}
+
+\autoref{fig:fit} compares the model's participation and hours profiles by health with the PSID profiles and their 95 percent confidence bands; \autoref{fig:fitassets} in \autoref{app:estimation} does the same for mean and median assets and for reentry.
+% src: F:h800_l0_edit_c.tex, h800_l1_edit_c.tex, h800_h0_edit_c.tex, h800_h1_edit_c.tex (legend entry 95\% C.I.)
+
+Healthy participation is above the data at ages 30--38 (93.25 percent against 88.34 at age 30), within a few percentage points of the data from age 39 through the mid-50s, and below the data at every age from 58 to 69: 59.19 against 64.34 at age 60 and 27.30 against 28.71 at age 65. % src: F:h800_l0_edit_c.tex rows 30-38 (model above data), 39 (89.24 vs 89.35), 39-57 (|model-data| at most 2.4 pp), 58-69, 60, 65
+Unhealthy participation is above the data at ages 33--34 and from age 36 to age 50, and above the 95 percent confidence band at age 39 and at ages 43--49 (84.97 against 71.03 at age 49); it is below the data at every age from 51 to 69, with the under-prediction concentrated at ages 54--66 (29.83 against 40.79 at age 60 and 15.46 against 19.45 at age 65), and the model's decline through the 50s is steeper than the data's.
+% src: F:h800_l1_edit_c.tex rows 33-34 and 36-50 (model above data; 35: 83.57 vs 83.79), 39 and 43-49 (model above the upper band: +1.45 pp at 39, +0.89 to +9.75 pp at 43-49), 49 (model 84.97, data 71.03), 51-69 (model below data), 54-66 (data minus model 4.0-11.0 pp; 2.5-3.9 pp at 67-69), 60, 65
+Hours conditional on participation are below the data at most ages for both groups: 2,053 against 2,144 at age 30 and 1,556 against 1,601 at age 65 for healthy workers, and 1,876 against 2,251 at age 30 for unhealthy workers. % src: F:h800_h0_edit_c.tex rows 30, 65 (model above the data only at ages 62, 64, 68); F:h800_h1_edit_c.tex row 30 (model above the data only at ages 34, 63)
+Mean assets are matched through the 40s; from the early 50s the mean, and from the mid-50s the median, fall below the data, and the gap widens with age: at age 60 the model has 1.642 against 3.218 for the mean and 1.183 against 2.252 for the median, in hundreds of thousands of 2016 dollars; the median is above the data from the 30s through the early 50s (1.833 against 1.471 at age 50). % src: F:h800_meana_edit_c.tex rows 30-49, 50-69, 60; F:h800_mediana_edit_c.tex rows 30-53, 54-69, 50, 60
+The model has no bequest motive, so it does not generate the saving in old age that a motive for planned bequests produces \citep{Denardi2010,lockwood2018incidental}; the motive is omitted so that the environment remains comparable with the life-cycle taxation literature with exogenous retirement \citep{farhi2013insurance,golosov2016redistribution,Stantcheva2017}. % src: 5:662; 5:303
+Reentry is zero in the model at every age, against a data profile that stays below 5 percent and peaks at 4.47 percent at age 63. % src: F:h800_reentry_edit.tex (model rows all 0; data row 63 = 4.47199); 11:285
+
+Each misfit bears on a part of the reform analysis. Healthy participation is under-predicted at ages 58--69 and unhealthy participation at ages 54--66. The claiming-schedule reforms of \autoref{sec:claiming}, whose participation effects are reported at ages 62--64 and 65--69, and the disability-insurance elimination of \autoref{sec:elimination} are therefore evaluated from a baseline with fewer workers at those ages than the data. The over-prediction of unhealthy participation at 43--49 falls at ages at which the reforms change incentives only through the accrual of future benefits, the 30--49 column of the reform tables. % src: F:h800_l0_edit_c.tex; F:h800_l1_edit_c.tex; T:welfare_age_dependence_mvpfv5.tex (age groups 62-64, 65-69)
+The under-prediction of hours lowers the earnings base on which payroll taxes, the income tax after age 62, and the earnings test are computed, which bears on the fiscal columns of every family and in particular on the income-tax reforms of \autoref{sec:other}. % src: F:h800_h0_edit_c.tex; F:h800_h1_edit_c.tex
+The under-prediction of assets after the mid-50s bears on the saving-subsidy reforms, whose fiscal cost is proportional to the asset base; the direction of the resulting bias is not determined by the reported output. % src: F:h800_meana_edit_c.tex; D04 line 286 (checklist item 12)
+The absence of reentry means that the participation responses to every reform operate through the timing of exit from the labor force and not through returns to it. % src: F:h800_reentry_edit.tex
+
+\begin{figure}[!tp]
+\centering
+\caption{Model Fit: Labor Force Participation and Hours by Health Status}
+\label{fig:fit}
+\vspace{6pt}
+% The two participation panels carry long titles that widen their bounding boxes (246pt and 252pt); the row is centered
+% in a \makebox of \textwidth with zero column separation and overhangs the text block by about 10pt on each side.
+\setlength{\tabcolsep}{0pt}%
+\makebox[\textwidth][c]{\begin{tabular}{cc}
+\input{figures/abdou/h800_l0_edit_c} & \input{figures/abdou/h800_l1_edit_c}\\[1.5ex]
+\input{figures/abdou/h800_h0_edit_c} & \input{figures/abdou/h800_h1_edit_c}
+\end{tabular}}
+\begin{minipage}{0.95\textwidth}\footnotesize\setstretch{1.0}
+\textit{Notes:} Black: PSID profiles from \eqref{eq:profile}; shaded: 95 percent confidence bands; red dashed: model. Ages 30--69 (panel D: ages 30--68). (A) and (B) labor force participation in percent, defined as annual hours above 800; (C) and (D) annual hours conditional on participation. ``Unhealthy'' pools poor health and disability. Model series recomputed in 2026; data profiles and confidence bands are unchanged from the May 2025 version. Source: PSID 1968--2015.
+% src: F:h800_l0_edit_c.tex, h800_l1_edit_c.tex, h800_h0_edit_c.tex, h800_h1_edit_c.tex (series styles and titles); 11:253 (800 hours); wording of the vintage sentence fixed in BLUEPRINT 9
+\end{minipage}
+\end{figure}
+
+\subsection{The health gradient in retirement}\label{subsec:gradient}
+
+The reforms of \autoref{sec:elimination} to \autoref{sec:other} act on a cohort whose labor supply, mortality, medical spending, and wages differ by health, and the estimated participation cost adds a difference in the fixed cost of working. In the PSID profiles (black lines of \autoref{fig:fit}; \autoref{fig:targets} in \autoref{app:data}), participation of healthy and unhealthy individuals is 83.94 and 69.06 percent at age 50, 64.34 and 40.79 percent at age 60, and 28.71 and 19.45 percent at age 65: the gap is about 5 percentage points at age 40, widens from the mid-40s, more than a decade before the early retirement age, and exceeds 20 percentage points at every age from 52 to 61. % src: F:h800_l0_edit_c.tex and F:h800_l1_edit_c.tex, data rows 50, 60, 65; gap (healthy minus unhealthy, pp) 5.1 at 40, 4.5 at 41, 9.5 at 43, 13.4 at 49, 14.9 at 50, 21.7 at 52, 25.5 at 53 (maximum), 20.5 at 57 (minimum over 52-61), 21.9 at 61, 19.3 at 62
+Disability insurance is a route out of the labor force before the normal retirement age for workers with a disability \citep{Maestas2013,French2014,Low2015,Li2018}; in the model it enters through \eqref{eq:di}. % src: 5:654
+In the first-step profiles (\autoref{fig:firststep}), the probability of remaining in good health from one year to the next is 0.8986 at age 60; annual mortality at age 70 is 0.51 percent in good health, 0.89 percent in poor health, and 2.51 percent with a disability; out-of-pocket medical spending at age 70 is \$5,260, \$7,741, and \$13,150; and the hourly wage at age 60 is \$17.87, \$14.53, and \$11.81. % src: F:frot_disab0_edit.tex row 60 (0.8986); F:frot_mortal7_edit2.tex row 70 (0.5114, 0.8873, 2.506); F:frot_oopmedical_2016_edit.tex row 70 (5.26, 7.741, 13.15); F:frot_wageselection_n800_edit.tex row 60 (17.87, 14.53, 11.81)
+At the ages at which the claiming schedule applies, a worker in poor health or with a disability therefore faces a lower wage, a higher participation cost, a shorter expected horizon over which a delayed benefit is paid, and higher medical spending than a healthy worker of the same age. These profiles, with the participation cost of \autoref{tab:est}, determine in the model who exits before the normal retirement age and who continues past it, and therefore who is affected by a change in the early-claiming reduction and who by a change in the delayed retirement credit (\autoref{sec:claiming}). The decomposition of retirement behavior into these channels is in the companion paper \citep{ndiaye2026flexible}. The reform tables that follow report participation by age group, and \autoref{subsec:participation} uses these profiles to say who, in the model, moves under each reform.

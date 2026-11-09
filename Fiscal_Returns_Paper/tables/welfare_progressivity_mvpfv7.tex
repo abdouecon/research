@@ -1,0 +1,162 @@
+% Color definitions
+\definecolor{blue}{RGB}{0,114,178}
+\definecolor{red}{RGB}{213,94,0}
+\definecolor{white}{RGB}{255,255,255}
+\newcommand*{\opacity}{100}% Full opacity
+
+% Specific gradient commands for different columns
+% For xchange% column: 0 is white, positive blue, negative red
+\newcommand{\gradXchange}[1]{%
+    \ifdim#1pt=0pt
+        \cellcolor{white!\opacity} #1
+    \else
+        \ifdim#1pt>0pt
+            % Positive values - blue
+            \pgfmathparse{int(round(min(100, 100*(#1/1.5))))}% Scaling factor 1.5 based on max value in this column
+            \xdef\tempa{\pgfmathresult}
+            \cellcolor{blue!\tempa!white!\opacity} #1
+        \else
+            % Negative values - red (not present in this data but included for completeness)
+            \pgfmathparse{int(round(min(100, 100*(-#1/1.5))))}% Same scaling as positive
+            \xdef\tempa{\pgfmathresult}
+            \cellcolor{red!\tempa!white!\opacity} #1
+        \fi
+    \fi
+}
+
+% For sspay %Δ column: 0 is white, positive red, negative blue
+\newcommand{\gradSSpay}[1]{%
+    \ifdim#1pt=0pt
+        \cellcolor{white!\opacity} #1
+    \else
+        \ifdim#1pt>0pt
+            % Positive values - red
+            \pgfmathparse{int(round(min(100, 100*(#1/10.71))))}% Scaling based on max value ~10.71
+            \xdef\tempa{\pgfmathresult}
+            \cellcolor{red!\tempa!white!\opacity} #1
+        \else
+            % Negative values - blue (not present in this data but included for completeness)
+            \pgfmathparse{int(round(min(100, 100*(-#1/10.71))))}
+            \xdef\tempa{\pgfmathresult}
+            \cellcolor{blue!\tempa!white!\opacity} #1
+        \fi
+    \fi
+}
+
+% For MVPF column: middle value is white (0.42), high values blue, low values red
+\newcommand{\gradMVPF}[1]{%
+    % Middle value is approximately 0.42 (2.82406434 * 0.15)
+    \pgfmathparse{#1 - 0.42}
+    \pgfmathsetmacro{\diff}{\pgfmathresult}
+    
+    \ifdim\diff pt=0pt
+        \cellcolor{white!\opacity} #1
+    \else
+        \ifdim\diff pt>0pt
+            % Higher than middle - blue
+            \pgfmathparse{int(round(min(100, 100*(\diff/0.8))))}% Scaling factor based on range
+            \xdef\tempa{\pgfmathresult}
+            \cellcolor{blue!\tempa!white!\opacity} #1
+        \else
+            % Lower than middle - red
+            \pgfmathparse{int(round(min(100, 100*(-\diff/1.8))))}% Scaling factor based on range
+            \xdef\tempa{\pgfmathresult}
+            \cellcolor{red!\tempa!white!\opacity} #1
+        \fi
+    \fi
+}
+
+% For total cost and indirect cost columns: 0 is white, positive red, negative blue
+\newcommand{\gradCost}[1]{%
+    \ifdim#1pt=0pt
+        \cellcolor{white!\opacity} #1
+    \else
+        \ifdim#1pt>0pt
+            % Positive values - red
+            \pgfmathparse{int(round(min(100, 100*(#1/1.3))))}% Scaling based on max value
+            \xdef\tempa{\pgfmathresult}
+            \cellcolor{red!\tempa!white!\opacity} #1
+        \else
+            % Negative values - blue
+            \pgfmathparse{int(round(min(100, 100*(-#1/0.37))))}% Scaling based on min value
+            \xdef\tempa{\pgfmathresult}
+            \cellcolor{blue!\tempa!white!\opacity} #1
+        \fi
+    \fi
+}
+
+% UPDATED: For age range p.p. columns: 0 is white, positive blue, negative red with more adapted scaling
+\newcommand{\gradPP}[1]{%
+    \ifdim#1pt=0pt
+        \cellcolor{white!\opacity} #1
+    \else
+        \ifdim#1pt>0pt
+            % Positive values - blue - adjusted scaling to better represent the positive range (max ~0.34)
+            \pgfmathparse{int(round(min(100, 100*(#1/2.41))))}% Adjusted scaling for positive values
+            \xdef\tempa{\pgfmathresult}
+            \cellcolor{blue!\tempa!white!\opacity} #1
+        \else
+            % Negative values - red - adjusted scaling to better represent the negative range (min ~-2.41)
+            \pgfmathparse{int(round(min(100, 100*(-#1/2.5))))}% Adjusted scaling for negative values
+            \xdef\tempa{\pgfmathresult}
+            \cellcolor{red!\tempa!white!\opacity} #1
+        \fi
+    \fi
+}
+
+%\begin{tabular}{clcccccccc}
+\begin{tabular}{llllllllll}%
+%{p{3.97cm} p{1.37cm} p{1.07cm} p{1.07cm} p{1.07cm}  p{1.07cm}  p{1.07cm} }% 
+\toprule
+    \hline
+ \multicolumn{2}{c}{Policy Reforms} &\multicolumn{2}{c}{$\%\Delta$ Welfare}&\multicolumn{3}{c}{\%$\Delta$ Budget}&\multicolumn{3}{c}{$\Delta$ Participation}\\
+        \hline
+&PIA Brackets&MVPF&WTP&Net&Direct&Indir.&30--49&62--64&65--69\\	\hline
+(P1.1)&(0.91,	0.32,	0.15)&\cellcolor{blue!90!white!\opacity}$[0.52,+\infty)$&\gradXchange{0.10}&\gradCost{-0.03}&\gradSSpay{0.57}&\gradCost{-0.10}&\gradPP{0.08}&\gradPP{0.20}&\gradPP{0.06}\\
+(P1.2)&(0.92,	0.32,	0.15)&\gradMVPF{0.97}&\gradXchange{0.22}&\gradCost{0.09}&\gradSSpay{1.23}&\gradCost{-0.07}&\gradPP{0.14}&\gradPP{-0.07}&\gradPP{0.00}\\
+(P1.3)&(0.93,	0.32,	0.15)&\gradMVPF{0.92}&\gradXchange{0.31}&\gradCost{0.13}&\gradSSpay{1.66}&\gradCost{-0.09}&\gradPP{0.14}&\gradPP{0.15}&\gradPP{0.01}\\
+(P1.4)&(0.94,	0.32,	0.15)&\gradMVPF{0.84}&\gradXchange{0.40}&\gradCost{0.19}&\gradSSpay{2.16}&\gradCost{-0.10}&\gradPP{0.14}&\gradPP{-0.17}&\gradPP{-0.23}\\
+(P1.5)&(0.95,	0.32,	0.15)&\gradMVPF{0.91}&\gradXchange{0.50}&\gradCost{0.21}&\gradSSpay{2.32}&\gradCost{-0.09}&\gradPP{0.16}&\gradPP{-0.34}&\gradPP{-0.31}\\
+(P1.6)&(0.96,	0.32,	0.15)&\gradMVPF{1.14}&\gradXchange{0.59}&\gradCost{0.20}&\gradSSpay{2.80}&\gradCost{-0.16}&\gradPP{0.19}&\gradPP{-0.27}&\gradPP{-0.15}\\
+(P1.7)&(0.97,	0.32,	0.15)&\gradMVPF{1.01}&\gradXchange{0.67}&\gradCost{0.26}&\gradSSpay{3.22}&\gradCost{-0.16}&\gradPP{0.21}&\gradPP{-0.57}&\gradPP{-0.50}\\
+(P1.8)&(0.98,	0.32,	0.15)&\gradMVPF{0.86}&\gradXchange{0.75}&\gradCost{0.34}&\gradSSpay{3.72}&\gradCost{-0.15}&\gradPP{0.24}&\gradPP{-0.71}&\gradPP{-0.49}\\
+(P1.9)&(0.99,	0.32,	0.15)&\gradMVPF{0.69}&\gradXchange{0.80}&\gradCost{0.44}&\gradSSpay{4.12}&\gradCost{-0.11}&\gradPP{0.25}&\gradPP{-0.85}&\gradPP{-0.60}\\
+\hline									
+											
+(P2.0)&(0.99,	0.3232,	0.15)&\gradMVPF{0.56}&\gradXchange{0.83}&\gradCost{0.57}&\gradSSpay{4.75}&\gradCost{-0.07}&\gradPP{0.25}&\gradPP{-1.10}&\gradPP{-0.83}\\
+(P2.1)&(0.99,	0.3264,	0.15)&\gradMVPF{0.50}&\gradXchange{0.86}&\gradCost{0.67}&\gradSSpay{5.28}&\gradCost{-0.05}&\gradPP{0.24}&\gradPP{-1.29}&\gradPP{-1.03}\\
+(P2.2)&(0.99,	0.3296,	0.15)&\gradMVPF{0.49}&\gradXchange{0.88}&\gradCost{0.70}&\gradSSpay{5.99}&\gradCost{-0.11}&\gradPP{0.25}&\gradPP{-1.05}&\gradPP{-1.01}\\
+(P2.3)&(0.99,	0.3328,	0.15)&\gradMVPF{0.44}&\gradXchange{0.90}&\gradCost{0.78}&\gradSSpay{6.56}&\gradCost{-0.10}&\gradPP{0.24}&\gradPP{-1.37}&\gradPP{-1.15}\\
+(P2.4)&(0.99,	0.336,	0.15)&\gradMVPF{0.38}&\gradXchange{0.92}&\gradCost{0.93}&\gradSSpay{7.21}&\gradCost{-0.05}&\gradPP{0.24}&\gradPP{-1.60}&\gradPP{-1.63}\\
+(P2.5)&(0.99,	0.3392,	0.15)&\gradMVPF{0.37}&\gradXchange{0.93}&\gradCost{0.98}&\gradSSpay{7.95}&\gradCost{-0.10}&\gradPP{0.27}&\gradPP{-1.63}&\gradPP{-1.58}\\
+(P2.6)&(0.99,	0.3424,	0.15)&\gradMVPF{0.36}&\gradXchange{0.95}&\gradCost{1.03}&\gradSSpay{8.46}&\gradCost{-0.11}&\gradPP{0.28}&\gradPP{-1.47}&\gradPP{-1.68}\\
+(P2.7)&(0.99,	0.3456,	0.15)&\gradMVPF{0.33}&\gradXchange{0.94}&\gradCost{1.11}&\gradSSpay{8.99}&\gradCost{-0.10}&\gradPP{0.27}&\gradPP{-1.74}&\gradPP{-1.99}\\
+(P2.8)&(0.99,	0.3488,	0.15)&\gradMVPF{0.31}&\gradXchange{0.95}&\gradCost{1.19}&\gradSSpay{9.49}&\gradCost{-0.10}&\gradPP{0.28}&\gradPP{-2.29}&\gradPP{-2.1}\\
+(P2.9)&(0.99,	0.352,	0.15)&\gradMVPF{0.29}&\gradXchange{0.95}&\gradCost{1.27}&\gradSSpay{9.97}&\gradCost{-0.09}&\gradPP{0.28}&\gradPP{-2.26}&\gradPP{-2.05}\\
+\hline																			
+(P3.0)&(0.99,	0.352,	0.1515)&\gradMVPF{0.29}&\gradXchange{0.95}&\gradCost{1.26}&\gradSSpay{10.04}&\gradCost{-0.10}&\gradPP{0.28}&\gradPP{-2.22}&\gradPP{-2.05}\\
+(P3.1)&(0.99,	0.352,	0.153)&\gradMVPF{0.29}&\gradXchange{0.96}&\gradCost{1.27}&\gradSSpay{10.13}&\gradCost{-0.10}&\gradPP{0.28}&\gradPP{-2.30}&\gradPP{-2.07}\\
+(P3.2)&(0.99,	0.352,	0.1545)&\gradMVPF{0.29}&\gradXchange{0.96}&\gradCost{1.28}&\gradSSpay{10.19}&\gradCost{-0.10}&\gradPP{0.28}&\gradPP{-2.30}&\gradPP{-2.07}\\
+(P3.3)&(0.99,	0.352,	0.156)&\gradMVPF{0.29}&\gradXchange{0.96}&\gradCost{1.26}&\gradSSpay{10.26}&\gradCost{-0.13}&\gradPP{0.28}&\gradPP{-2.25}&\gradPP{-2.03}\\
+(P3.4)&(0.99,	0.352,	0.1575)&\gradMVPF{0.29}&\gradXchange{0.96}&\gradCost{1.27}&\gradSSpay{10.34}&\gradCost{-0.13}&\gradPP{0.28}&\gradPP{-2.23}&\gradPP{-2.03}\\
+(P3.5)&(0.99,	0.352,	0.159)&\gradMVPF{0.29}&\gradXchange{0.97}&\gradCost{1.29}&\gradSSpay{10.41}&\gradCost{-0.12}&\gradPP{0.28}&\gradPP{-2.41}&\gradPP{-2.02}\\
+(P3.6)&(0.99,	0.352,	0.1605)&\gradMVPF{0.29}&\gradXchange{0.97}&\gradCost{1.27}&\gradSSpay{10.48}&\gradCost{-0.14}&\gradPP{0.28}&\gradPP{-2.39}&\gradPP{-2.02}\\
+(P3.7)&(0.99,	0.352,	0.162)&\gradMVPF{0.30}&\gradXchange{0.97}&\gradCost{1.27}&\gradSSpay{10.55}&\gradCost{-0.15}&\gradPP{0.28}&\gradPP{-2.39}&\gradPP{-2.02}\\
+(P3.8)&(0.99,	0.352,	0.1635)&\gradMVPF{0.30}&\gradXchange{0.97}&\gradCost{1.25}&\gradSSpay{10.63}&\gradCost{-0.18}&\gradPP{0.28}&\gradPP{-2.37}&\gradPP{-2.01}\\
+(P3.9)&(0.99,	0.352,	0.165)&\gradMVPF{0.30}&\gradXchange{0.98}&\gradCost{1.24}&\gradSSpay{10.70}&\gradCost{-0.20}&\gradPP{0.28}&\gradPP{-2.37}&\gradPP{-1.99}\\
+\hline \hline				
+																								
+(L0)&(0.909,	0.3232,	0.1515)&\gradMVPF{0.51}&\gradXchange{0.16}&\gradCost{0.12}&\gradSSpay{1.34}&\gradCost{-0.05}&\gradPP{0.11}&\gradPP{-0.05}&\gradPP{0.01}\\
+(L1)&(0.918,	0.3264,	0.153)&\gradMVPF{0.59}&\gradXchange{0.32}&\gradCost{0.21}&\gradSSpay{2.47}&\gradCost{-0.11}&\gradPP{0.14}&\gradPP{-0.15}&\gradPP{-0.13}\\
+(L2)&(0.927,	0.3296,	0.1545)&\gradMVPF{0.49}&\gradXchange{0.46}&\gradCost{0.36}&\gradSSpay{3.48}&\gradCost{-0.10}&\gradPP{0.13}&\gradPP{-0.49}&\gradPP{-0.08}\\
+(L3)&(0.936,	0.3328,	0.156)&\gradMVPF{0.61}&\gradXchange{0.60}&\gradCost{0.38}&\gradSSpay{4.25}&\gradCost{-0.18}&\gradPP{0.18}&\gradPP{-0.29}&\gradPP{-0.3}\\
+(L4)&(0.945,	0.336,	0.1575)&\gradMVPF{0.59}&\gradXchange{0.74}&\gradCost{0.49}&\gradSSpay{5.28}&\gradCost{-0.21}&\gradPP{0.21}&\gradPP{-0.48}&\gradPP{-0.43}\\
+(L5)&(0.954,	0.3392,	0.159)&\gradMVPF{0.52}&\gradXchange{0.87}&\gradCost{0.64}&\gradSSpay{6.31}&\gradCost{-0.19}&\gradPP{0.23}&\gradPP{-0.72}&\gradPP{-0.68}\\
+(L6)&(0.963,	0.3424,	0.1605)&\gradMVPF{0.47}&\gradXchange{0.95}&\gradCost{0.79}&\gradSSpay{7.41}&\gradCost{-0.20}&\gradPP{0.24}&\gradPP{-1.00}&\gradPP{-1.22}\\
+(L7)&(0.972,	0.3456,	0.162)&\gradMVPF{ 0.42}&\gradXchange{1.00}&\gradCost{0.92}&\gradSSpay{8.66}&\gradCost{-0.23}&\gradPP{0.26}&\gradPP{-1.40}&\gradPP{-1.43}\\
+(L8)&(0.981,	0.3488,	0.1635)&\gradMVPF{0.35}&\gradXchange{1.02}&\gradCost{1.14}&\gradSSpay{9.80}&\gradCost{-0.18}&\gradPP{0.27}&\gradPP{-1.76}&\gradPP{-1.86}\\
+(L9)&(0.99,	0.352,	0.165)&\gradMVPF{0.30}&\gradXchange{0.98}&\gradCost{1.24}&\gradSSpay{10.70}&\gradCost{-0.20}&\gradPP{0.28}&\gradPP{-2.37}&\gradPP{-1.99}\\
+				
+ \hline
+ \bottomrule
+    \end{tabular}

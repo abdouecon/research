@@ -1,0 +1,162 @@
+% tables/new_progressivity_compressed.tex -- Table 8 (tab:progressivity), written by W3b.
+% Ten rows COPIED VERBATIM (sed, no retyping) from tables/welfare_progressivity_mvpfv7.tex:
+%   P1.1 :115 | P1.5 :119 | P1.9 :123 | P2.4 :130 | P2.9 :135 | P3.4 :141 | P3.9 :146 | L0 :149 | L4 :153 | L9 :158
+% Header rows copied from :112-114 (column layout unchanged: ID | bracket triple | MVPF | WTP | Net | Direct | Indir. | 30--49 | 62--64 | 65--69).
+% Gradient macros (\gradXchange, \gradSSpay, \gradMVPF, \gradCost, \gradPP, \opacity) copied verbatim from :1-105 so that the
+% shading is identical to Appendix Table C1 (the full file). Because every May 2025 table file defines these macros with
+% \newcommand, they are undefined here before being (re)defined; the source table files are not edited.
+% Caption and notes: BLUEPRINT 2.8; column definitions follow sections/05_accounting.tex and tables/new_accounting_conventions.tex.
+\let\opacity\undefined \let\gradXchange\undefined \let\gradSSpay\undefined \let\gradMVPF\undefined
+\let\gradCost\undefined \let\gradPP\undefined \let\gradMedpay\undefined \let\gradTaxchange\undefined
+\begin{table}[!tp]
+\centering
+\caption{Social Security Progressivity and Level Reforms}
+\label{tab:progressivity}
+\vspace{6pt}
+\setstretch{1.0}
+\footnotesize
+\setlength{\tabcolsep}{5pt}
+\begin{threeparttable}
+% ---- gradient macro block: verbatim copy of tables/welfare_progressivity_mvpfv7.tex:1-105 ----
+% Color definitions
+\definecolor{blue}{RGB}{0,114,178}
+\definecolor{red}{RGB}{213,94,0}
+\definecolor{white}{RGB}{255,255,255}
+\newcommand*{\opacity}{100}% Full opacity
+
+% Specific gradient commands for different columns
+% For xchange% column: 0 is white, positive blue, negative red
+\newcommand{\gradXchange}[1]{%
+    \ifdim#1pt=0pt
+        \cellcolor{white!\opacity} #1
+    \else
+        \ifdim#1pt>0pt
+            % Positive values - blue
+            \pgfmathparse{int(round(min(100, 100*(#1/1.5))))}% Scaling factor 1.5 based on max value in this column
+            \xdef\tempa{\pgfmathresult}
+            \cellcolor{blue!\tempa!white!\opacity} #1
+        \else
+            % Negative values - red (not present in this data but included for completeness)
+            \pgfmathparse{int(round(min(100, 100*(-#1/1.5))))}% Same scaling as positive
+            \xdef\tempa{\pgfmathresult}
+            \cellcolor{red!\tempa!white!\opacity} #1
+        \fi
+    \fi
+}
+
+% For sspay %Δ column: 0 is white, positive red, negative blue
+\newcommand{\gradSSpay}[1]{%
+    \ifdim#1pt=0pt
+        \cellcolor{white!\opacity} #1
+    \else
+        \ifdim#1pt>0pt
+            % Positive values - red
+            \pgfmathparse{int(round(min(100, 100*(#1/10.71))))}% Scaling based on max value ~10.71
+            \xdef\tempa{\pgfmathresult}
+            \cellcolor{red!\tempa!white!\opacity} #1
+        \else
+            % Negative values - blue (not present in this data but included for completeness)
+            \pgfmathparse{int(round(min(100, 100*(-#1/10.71))))}
+            \xdef\tempa{\pgfmathresult}
+            \cellcolor{blue!\tempa!white!\opacity} #1
+        \fi
+    \fi
+}
+
+% For MVPF column: middle value is white (0.42), high values blue, low values red
+\newcommand{\gradMVPF}[1]{%
+    % Middle value is approximately 0.42 (2.82406434 * 0.15)
+    \pgfmathparse{#1 - 0.42}
+    \pgfmathsetmacro{\diff}{\pgfmathresult}
+    
+    \ifdim\diff pt=0pt
+        \cellcolor{white!\opacity} #1
+    \else
+        \ifdim\diff pt>0pt
+            % Higher than middle - blue
+            \pgfmathparse{int(round(min(100, 100*(\diff/0.8))))}% Scaling factor based on range
+            \xdef\tempa{\pgfmathresult}
+            \cellcolor{blue!\tempa!white!\opacity} #1
+        \else
+            % Lower than middle - red
+            \pgfmathparse{int(round(min(100, 100*(-\diff/1.8))))}% Scaling factor based on range
+            \xdef\tempa{\pgfmathresult}
+            \cellcolor{red!\tempa!white!\opacity} #1
+        \fi
+    \fi
+}
+
+% For total cost and indirect cost columns: 0 is white, positive red, negative blue
+\newcommand{\gradCost}[1]{%
+    \ifdim#1pt=0pt
+        \cellcolor{white!\opacity} #1
+    \else
+        \ifdim#1pt>0pt
+            % Positive values - red
+            \pgfmathparse{int(round(min(100, 100*(#1/1.3))))}% Scaling based on max value
+            \xdef\tempa{\pgfmathresult}
+            \cellcolor{red!\tempa!white!\opacity} #1
+        \else
+            % Negative values - blue
+            \pgfmathparse{int(round(min(100, 100*(-#1/0.37))))}% Scaling based on min value
+            \xdef\tempa{\pgfmathresult}
+            \cellcolor{blue!\tempa!white!\opacity} #1
+        \fi
+    \fi
+}
+
+% UPDATED: For age range p.p. columns: 0 is white, positive blue, negative red with more adapted scaling
+\newcommand{\gradPP}[1]{%
+    \ifdim#1pt=0pt
+        \cellcolor{white!\opacity} #1
+    \else
+        \ifdim#1pt>0pt
+            % Positive values - blue - adjusted scaling to better represent the positive range (max ~0.34)
+            \pgfmathparse{int(round(min(100, 100*(#1/2.41))))}% Adjusted scaling for positive values
+            \xdef\tempa{\pgfmathresult}
+            \cellcolor{blue!\tempa!white!\opacity} #1
+        \else
+            % Negative values - red - adjusted scaling to better represent the negative range (min ~-2.41)
+            \pgfmathparse{int(round(min(100, 100*(-#1/2.5))))}% Adjusted scaling for negative values
+            \xdef\tempa{\pgfmathresult}
+            \cellcolor{red!\tempa!white!\opacity} #1
+        \fi
+    \fi
+}
+% ---- end of macro block ----
+% ---- header: verbatim copy of :108, :110-114 ----
+\begin{tabular}{llllllllll}%
+\toprule
+    \hline
+ \multicolumn{2}{c}{Policy Reforms} &\multicolumn{2}{c}{$\%\Delta$ Welfare}&\multicolumn{3}{c}{\%$\Delta$ Budget}&\multicolumn{3}{c}{$\Delta$ Participation}\\
+        \hline
+&PIA Brackets&MVPF&WTP&Net&Direct&Indir.&30--49&62--64&65--69\\	\hline
+% ---- rows: verbatim copies of :115, :119, :123 ----
+(P1.1)&(0.91,	0.32,	0.15)&\cellcolor{blue!90!white!\opacity}$[0.52,+\infty)$&\gradXchange{0.10}&\gradCost{-0.03}&\gradSSpay{0.57}&\gradCost{-0.10}&\gradPP{0.08}&\gradPP{0.20}&\gradPP{0.06}\\
+(P1.5)&(0.95,	0.32,	0.15)&\gradMVPF{0.91}&\gradXchange{0.50}&\gradCost{0.21}&\gradSSpay{2.32}&\gradCost{-0.09}&\gradPP{0.16}&\gradPP{-0.34}&\gradPP{-0.31}\\
+(P1.9)&(0.99,	0.32,	0.15)&\gradMVPF{0.69}&\gradXchange{0.80}&\gradCost{0.44}&\gradSSpay{4.12}&\gradCost{-0.11}&\gradPP{0.25}&\gradPP{-0.85}&\gradPP{-0.60}\\
+\hline
+% ---- rows: verbatim copies of :130, :135 ----
+(P2.4)&(0.99,	0.336,	0.15)&\gradMVPF{0.38}&\gradXchange{0.92}&\gradCost{0.93}&\gradSSpay{7.21}&\gradCost{-0.05}&\gradPP{0.24}&\gradPP{-1.60}&\gradPP{-1.63}\\
+(P2.9)&(0.99,	0.352,	0.15)&\gradMVPF{0.29}&\gradXchange{0.95}&\gradCost{1.27}&\gradSSpay{9.97}&\gradCost{-0.09}&\gradPP{0.28}&\gradPP{-2.26}&\gradPP{-2.05}\\
+\hline
+% ---- rows: verbatim copies of :141, :146 ----
+(P3.4)&(0.99,	0.352,	0.1575)&\gradMVPF{0.29}&\gradXchange{0.96}&\gradCost{1.27}&\gradSSpay{10.34}&\gradCost{-0.13}&\gradPP{0.28}&\gradPP{-2.23}&\gradPP{-2.03}\\
+(P3.9)&(0.99,	0.352,	0.165)&\gradMVPF{0.30}&\gradXchange{0.98}&\gradCost{1.24}&\gradSSpay{10.70}&\gradCost{-0.20}&\gradPP{0.28}&\gradPP{-2.37}&\gradPP{-1.99}\\
+\hline \hline
+% ---- rows: verbatim copies of :149, :153, :158 ----
+(L0)&(0.909,	0.3232,	0.1515)&\gradMVPF{0.51}&\gradXchange{0.16}&\gradCost{0.12}&\gradSSpay{1.34}&\gradCost{-0.05}&\gradPP{0.11}&\gradPP{-0.05}&\gradPP{0.01}\\
+(L4)&(0.945,	0.336,	0.1575)&\gradMVPF{0.59}&\gradXchange{0.74}&\gradCost{0.49}&\gradSSpay{5.28}&\gradCost{-0.21}&\gradPP{0.21}&\gradPP{-0.48}&\gradPP{-0.43}\\
+(L9)&(0.99,	0.352,	0.165)&\gradMVPF{0.30}&\gradXchange{0.98}&\gradCost{1.24}&\gradSSpay{10.70}&\gradCost{-0.20}&\gradPP{0.28}&\gradPP{-2.37}&\gradPP{-1.99}\\
+ \hline
+ \bottomrule
+    \end{tabular}
+\begin{tablenotes}[flushleft]\scriptsize
+\item[] \textit{Notes:} Ten of the 39 reforms of the grid in \autoref{subsec:pgrid}; the full grid is \autoref{tab:progressivity_full}. The second column gives the three bracket rates of the primary insurance amount \eqref{eq:pia} under the reform; the status quo is (0.9, 0.32, 0.15). L9 and P3.9 are the same policy.
+% src: tables/welfare_progressivity_mvpfv7.tex:115-158 (39 rows); :146 vs :158 (L9 = P3.9); 5_quantitative_model.tex:102-104 (0.9/0.32/0.15)
+Columns are defined in \autoref{tab:conventions} and \eqref{eq:ce}--\eqref{eq:mvpflb}: WTP is the consumption-equivalent welfare change in percent of consumption; Direct is the change in the net present value (NPV) of retirement benefits in percent of its baseline value; Indir.\ is the change in the NPV of all other taxes and transfers (disability benefits and transfers net of income and payroll taxes) in percent of its baseline value; Net is the change in net government spending in percent of its baseline value, related to the other two by \eqref{eq:netidentity} and not by addition; MVPF is the dollar welfare gain per dollar of net spending, and the entry $[0.52,+\infty)$ reports, for the one row in which net spending falls, the lower bound that counts only the increase in retirement benefits. The last three columns are changes in labor force participation at ages 30--49, 62--64, and 65--69 in percentage points. All NPVs are per capita at age 62 at the net return of 3.2 percent.
+% src: 12_app_quant.tex:611 (SS definitions), :631-634 (MVPF, lower bound); 7_policy_reforms.tex:73 (participation groups); 5_quantitative_model.tex:390 (3.2 percent)
+Shading is blue for a welfare gain, a fiscal saving, a higher MVPF, or a participation increase and red for the opposite, with intensity proportional to the entry. Source: simulations of the estimated model.
+\end{tablenotes}
+\end{threeparttable}
+\end{table}

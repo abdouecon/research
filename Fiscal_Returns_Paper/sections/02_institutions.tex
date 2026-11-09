@@ -1,0 +1,69 @@
+% sections/02_institutions.tex -- Section 2 (W3). Plan: BLUEPRINT 2.2 and 5.3; Overrides O4, O5, O8, O9.
+% Provenance convention (Override O5): "% src: <file>:<line>" follows every sentence that carries a number.
+% Abbreviations in src comments: 12:NN = frot/sub2025/12_app_quant.tex; 7:NN = 7_policy_reforms.tex; 5:NN = 5_quantitative_model.tex;
+% 1:NN = 1_intro.tex; T: = paper/tables/; v6: = frot/current/.
+\section{Social Security Rules, the Financing Problem, and the Reform Menu}\label{sec:institutions}
+
+\subsection{Rules faced by the 1920--1940 cohorts}\label{subsec:rules}
+
+Individuals born between 1920 and 1940 could first claim Old-Age, Survivors, and Disability Insurance (OASDI) retirement benefits at the early retirement age (ERA) of 62 and faced, on average over birth years, a normal retirement age (NRA) of 65. % src: 12:10; T:parameters_ss.tex:46-47
+The benefit is the primary insurance amount (PIA) multiplied by a claiming-age factor that falls by 6.67 percentage points for each year of claiming before the NRA and rises by the delayed retirement credit (DRC) for each year of claiming after it, up to age 70. The DRC ranged from 3 to 6 percent per year by year of birth, and the paper uses the cohort average of 4.5 percent. % src: 7:90; 12:10
+\autoref{tab:ssdrc} reports the schedule: 80 percent of the PIA at age 62, 100 percent at 65, and 122.5 percent at 70. % src: T:SS_DRC.tex:10
+
+\begin{table}[!t]
+\centering
+\caption{Social Security Benefit as a Percentage of the Primary Insurance Amount by Claiming Age, 1920--1940 Cohorts (NRA 65, DRC 4.5 Percent)}
+\label{tab:ssdrc}
+\vspace{6pt}
+\footnotesize
+\begin{threeparttable}
+\input{tables/SS_DRC}
+\begin{tablenotes}[flushleft]\scriptsize
+\item[] \textit{Notes:} Benefit payable at ages 62--70 as a percentage of the PIA, from the rules of the Social Security Administration; the reduction before the NRA is 6.67 percentage points per year and the delayed retirement credit after the NRA is 4.5 percentage points per year. NRA, normal retirement age; DRC, delayed retirement credit, in percent per year. Source: Social Security Administration.
+% src: T:SS_DRC.tex:10; 7:90
+\end{tablenotes}
+\end{threeparttable}
+\end{table}
+
+The PIA applies factors of 0.9, 0.32, and 0.15 to average indexed monthly earnings (AIME), the average of the highest 35 years of indexed earnings, below \$3,720, between \$3,720 and \$22,392, and above \$22,392, with AIME capped at \$43,800 (1987 dollars, as are the other amounts in this subsection). % src: 5:70; 5:102-104; T:parameters_ss.tex:43-45; 12:12
+Under the retirement earnings test (RET), a beneficiary loses one dollar of benefits for every two dollars of earnings above \$6,000 before the NRA and one for every three dollars above \$8,186 from the NRA to age 69, with no test from age 70; withheld benefits are credited to later benefits \citep{french2011effects}. % src: T:parameters_ss.tex:50-52; 12:12; 5:140; 5:148-149
+Disability insurance (DI) pays a PIA-based benefit, without the early-claiming reduction, to a worker with a disability who is older than 50, younger than the NRA, and earns at most \$3,600 a year. % src: 12:46-49; T:parameters_ss.tex:42
+A payroll tax of 3 to 7.65 percent on earnings up to \$14,459--\$64,974 finances OASDI and Hospital Insurance. % src: T:parameters_ss.tex:37-38; 12:89
+\autoref{tab:ssparams} collects these parameters; \autoref{sec:model} states how each enters the individual's problem.
+
+\subsection{A higher normal retirement age or a steeper actuarial adjustment}\label{subsec:twoways}
+
+The schedule of \autoref{tab:ssdrc} is the factor $\psi(a^c)$ that multiplies the PIA in \eqref{eq:adjust}. A reform can change it in two ways.
+
+The first way moves the NRA. Reforms AN1--AN3 raise it to 66, 67, and 68, and the whole schedule moves one year later for each year added: the factor at age 62 falls from 80 to 75, 70, and 65 percent of the PIA, and the factor at age 70 from 122.5 to 118, 113.5, and 109. % src: T:DRC_visualization_4.tex:37-40
+Every claimant receives a lower benefit at a given claiming age, whether or not the claiming age changes. % src: 7:90
+This is the instrument of the 1983 amendments, which raise the NRA to 67 for cohorts born in 1960 and later, and of the proposal, analyzed by \citet{cbo2024socialsecurity}, to raise it to 70 for cohorts born in 1981 and later. % src: 1:44 (footnote)
+
+The second way leaves the factor at the NRA at 100 percent and changes the slope of the schedule around it. Reforms AD1--AD5 raise the DRC from the cohort's 4.5 percent to 8, 8.5, 9, 9.5, and 10 percent per year and leave the reduction before the NRA unchanged, so the factor at age 70 rises from 122.5 to 140 under AD1 and 150 under AD5 while the factors at ages 62--65 are those of the status quo. % src: T:DRC_visualization_4.tex:37,43-47
+Reforms AL1--AL9 set the early-claiming reduction and the DRC equal in absolute value, at $\pm 7$ to $\pm 15$ percent per year in steps of one percentage point; the factor at age 62 falls from 79 under AL1 to 55 under AL9, and the factor at age 70 rises from 135 to 175. % src: T:DRC_visualization_4.tex:50,58
+Under both the AD and the AL reforms a claimant at the NRA receives the status-quo benefit; what changes is the price of claiming earlier or later. % src: 7:92
+AN1 and AD1 applied together, an NRA of 66 and a DRC of 8 percent, are the rules that the cohort born in the 1950s faced in \citet{Yu2024}; here each is applied alone to the cohort that faced an NRA of 65 and a DRC of 4.5 percent, and the combination was not simulated. % src: frot/yu_jpube/Yu_Zhixiu_retirement_NBER.tex:387-388; T:parameters_ss.tex:47-48
+% TODO-AUTHORS: Open question 18 -- verify that the published JPubE table prints NRA 66 / DRC 8 for the 1950s cohort; the sentence is written to hold for the NBER version (Override O9).
+
+\subsection{The reform menu}\label{subsec:menu}
+
+\autoref{tab:menu} lists every reform evaluated in \autoref{sec:claiming} to \autoref{sec:other}.\footnote{There are 66 reform rows in seven families; L9 and P3.9 are the same policy, and D3 and K3 are the same experiment.} % src: rows of T:welfare_age_dependence_mvpfv5.tex:108-126, T:welfare_progressivity_mvpfv7.tex:115-158, T:welfare_medicare_mvpfv8.tex:113,116, T:welfare_tax_mvpf_v8.tex:114-118, T:welfare_savings_mvpf_v3.tex:120-123; wording fixed in BLUEPRINT Decision 9
+The benefit-formula reforms raise the first, second, or third PIA factor in steps of one percent of its initial value (P1.1--P1.9, P2.0--P2.9, P3.0--P3.9) or all three factors proportionally (L0--L9); L9 and P3.9 set the same factors. % src: 12:475; T:welfare_progressivity_mvpfv7.tex:115-158
+Two Medicare reforms raise the share of total medical spending covered after age 65 by 20 percentage points, for everyone (Part A) or for nonparticipants only (Part B), because employer-provided plans already cover physician and outpatient services for most workers. % src: 12:536; 7:198; T:welfare_medicare_mvpfv8.tex:113,116
+% TODO-AUTHORS: Open question 5 -- confirm the Medicare unit (percentage points of total spending; table label "+ 20 pp"; May 2025 text "by 20%").
+Income-tax reforms I1--I5 lower income taxes after age 62 so that after-tax income rises by 1 to 5 percent. % src: 7:349; T:welfare_tax_mvpf_v8.tex:114-118
+% TODO-AUTHORS: Open question 6 -- 12:557 implements lambda_t + x(t-61), which grows with age; confirm which rule was run.
+Saving-subsidy reforms K1--K3 raise the net return on assets by 0.2, 0.4, and 0.8 percentage points; they stand for an expansion of the tax preferences that retirement saving already receives through individual retirement accounts and 401(k) plans, and K3, which brings the net return of 3.2 percent to the gross return of 4 percent, is the experiment reported as D3 in \autoref{sec:elimination}. % src: 12:560; 5:390; 7:423 (IRAs and 401(k) plans)
+\autoref{app:reforms} gives the implementation of each reform.
+
+\input{tables/new_reform_menu}
+
+\subsection{The cohort perspective and the financing benchmark}\label{subsec:cohort}
+
+Each reform is a permanent change in the rules faced by one cohort from age 30. Welfare is the ex ante average of expected utility at age 30 (\autoref{sec:accounting}). Fiscal flows are the cohort's own---benefits, Medicare payments, and transfers received, less payroll and income taxes paid---as per-capita net present values at age 62 at the net return of 3.2 percent; a reform changes the cohort's net position by the change in net government spending that the Net column of every reform table measures (\autoref{app:derivations}). % src: 12:611; 5:390
+Fiscal savings are valued at face value: a dollar the cohort does not receive is available to taxpayers or beneficiaries outside it, on whom we place a unit welfare weight. Incidence within the cohort is valued by the ex ante average, not by the distribution of gains and losses across realized histories. Incidence across cohorts is not weighted here: the marginal value of public funds is a shadow price, the welfare delivered to the cohort per dollar of net spending on it \citep{hendren2020unified}, to which any intergenerational weight can be applied through the Net column. No transition is modeled, and nothing is said about the welfare of other cohorts.
+
+The benchmark on the fiscal side is the long-run financing gap: the 2024 Trustees Report puts the 75-year actuarial deficit of OASDI at 3.50 percent of taxable payroll \citep{trustees2024}. % src: v6:6_quant...resubmission_v6.tex:546 (figure carried from the companion paper)
+% Trustees figure verified against the 2024 OASDI Trustees Report by web search on 2026-11-09 (Override O4; AUTHOR_NOTES.md Open question 13; same check as sections/01_intro.tex, Section 1.1).
+A reform contributes to closing it if its net fiscal effect on the cohort is negative. The Net column is in percent of the cohort's baseline net spending; expressing it in percent of taxable payroll would require the present value of the cohort's payroll, which the reported baseline aggregates do not include, so the comparison with the Trustees' figure is one of sign.
+% TODO-AUTHORS: Open question 7 -- a payroll-unit conversion needs PV_62 of the cohort's taxable payroll from baseline output.

@@ -1,0 +1,76 @@
+% tables/new_accounting_conventions.tex -- Table 4 (tab:conventions), written by W2.
+% DEFINITIONAL table (Override O1): no numeric constants. Every cell paraphrases an outcome definition of the
+% May 2025 appendix; the notes quote the four family definitions verbatim.
+% Sources of every definition in this file:
+%   Social Security families (P, L, AN, AD, AL): frot/sub2025/12_app_quant.tex:611; 7_policy_reforms.tex:73 (NPV at 62 footnote)
+%   Medicare Part A / Part B:                    frot/sub2025/12_app_quant.tex:615
+%   Income tax I1-I5:                            frot/sub2025/12_app_quant.tex:620-622
+%   Saving subsidies K1-K3:                      frot/sub2025/12_app_quant.tex:626
+%   MVPF, dollar conversion, lower bound:        frot/sub2025/12_app_quant.tex:631-634 (s = 62), 12_app_quant.tex:639 (s = 30 for K)
+%   Upper bound for K:                           frot/sub2025/7_policy_reforms.tex:423
+%   MVPF cell forms:                             tables/welfare_progressivity_mvpfv7.tex:115 ([LB,+inf)); tables/welfare_age_dependence_mvpfv5.tex:108-126 (number for AN, inf for AD/AL); tables/welfare_savings_mvpf_v3.tex:120-123 ([LB,UB])
+%   Discounting at the net return r:             frot/sub2025/5_quantitative_model.tex:390; 12_app_quant.tex:611
+%TODO-AUTHORS: Open question 4 (BLUEPRINT section 11) -- the Net base is the "NPV of government spending at the baseline"
+%  (12_app_quant.tex:616), whose items the source does not state; the printed cells rule out B^0 + O^0 with O as described at
+%  12:611 (see the derived check in sections/05_accounting.tex). Confirm the items and sign convention of G^0 from the code;
+%  no cell changes unless the code's O or G differs from 12_app_quant.tex:611-626.
+\begin{table}[!t]
+\centering
+\caption{Accounting Conventions by Reform Family}
+\label{tab:conventions}
+\vspace{6pt}
+\scriptsize
+\setlength{\tabcolsep}{3pt}
+\renewcommand{\arraystretch}{1.0}
+\begin{threeparttable}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.85in}>{\raggedright\arraybackslash}p{1.05in}>{\raggedright\arraybackslash}p{0.8in}>{\raggedright\arraybackslash}p{0.9in}>{\raggedright\arraybackslash}p{0.7in}>{\raggedright\arraybackslash}p{0.55in}>{\raggedright\arraybackslash}p{1.15in}@{}}
+\toprule
+Family & Program outlay $B$ & Base of Direct ($\text{base}_f$) & Base of Indirect ($O^{0}$) & Base of Net ($G^{0}$) & Window for $\mathcal{W}$ ($\Cbar{s}$) & MVPF cell \\
+\midrule
+Social Security: benefit formula (P, L); claiming schedule (AN, AD, AL)
+ & NPV of retirement benefits paid by the program, $b_t\,ss_t$, from age 62
+ & $B^{0}$: baseline retirement benefits
+ & All other taxes and transfers: disability benefits and transfers, net of income and payroll taxes
+ & Baseline government spending
+ & From age 62
+ & Number if $\Delta G>0$; $[\,\mathcal{W}/\Delta B,+\infty)$ if $\Delta G<0<\Delta B$; $\infty$ if $\Delta G<0$ and $\Delta B<0$; for $\mathcal{W}<0$, $\Delta G<0$ (AN) the number is the value of the reverse reform \\
+\addlinespace
+Medicare Part A; Part B
+ & NPV of medical payments by the program to the targeted beneficiaries after age 65
+ & $T^{p,0}$: baseline payroll-tax collections
+ & All taxes and transfers: Social Security benefits and transfers, net of income and payroll taxes
+ & Baseline government spending
+ & From age 62
+ & Number \\
+\addlinespace
+Income tax (I1--I5)
+ & NPV of income-tax revenue forgone after age 62, $-\Delta T$
+ & $|T^{0}|$: baseline income-tax collections
+ & All other taxes and transfers: Social Security benefits and transfers, net of payroll taxes
+ & Baseline government spending
+ & From age 62
+ & Number \\
+\addlinespace
+Saving subsidy (K1--K3)
+ & NPV of the subsidy $\mathit{Sub}$ paid on assets at all ages
+ & $G^{0}$: baseline government spending
+ & Government spending excluding the subsidy
+ & Baseline spending including the subsidy
+ & From age 30, compounded to 62
+ & $[\,\mathcal{W}/\mathit{Sub},$ $\mathcal{W}/\Delta G^{\mathrm{full}}]$ \\
+\bottomrule
+\end{tabular}
+\begin{tablenotes}[flushleft]\scriptsize
+\item[] \textit{Notes:} All fiscal aggregates are per-capita net present values (NPVs) discounted to age 62 at the net return $r$ with the factor $(1+r)^{-(t-62)}$; the columns are defined in \eqref{eq:ce}, \eqref{eq:wtp}--\eqref{eq:netidentity}, and \eqref{eq:mvpf}--\eqref{eq:mvpfk}, and the three fiscal columns are related by \eqref{eq:netidentity}, not by addition. Participation columns report changes in labor force participation at ages 30--49, 62--64, and 65--69 in percentage points. The definitions used in computing the tables are the following.
+% src: 7_policy_reforms.tex:73 (participation age groups)
+\emph{Social Security:} ``the direct fiscal effect is calculated as the percentage change in the net present value (NPV) of total retirement benefits paid out by the program, discounted to age 62 by a factor of $(1+r)^{-1}$. The indirect fiscal effects are computed as the percentage change in the NPV of all other taxes and transfers, including payments to disability benefits and government transfers net of income and payroll tax collections. The net fiscal effect combines the direct and indirect effects.'' The factor $(1+r)^{-1}$ in this definition is applied for each year between $t$ and age 62, that is, $(1+r)^{-(t-62)}$.
+% src: 12_app_quant.tex:611; 7_policy_reforms.tex:192 ("(1+r)^{-1(t-62)}")
+\emph{Medicare:} ``the direct fiscal effect is calculated as the changes in the NPV of medical payments made by the program to the targeted beneficiaries after age 65 (Part A for everyone; Part B for labor market nonparticipants), expressed as a share of payroll tax collections at the baseline. The indirect fiscal effects are computed as the percentage change in the NPV of all taxes and transfers, including payments to all Social Security benefits and government transfers net of income and payroll tax collections. The net fiscal effect is measured as the sum of the NPV of the change in government spending and the total medical payments to the targeted beneficiaries, divided by the NPV of government spending at the baseline.''
+% src: 12_app_quant.tex:615
+\emph{Income tax:} ``the direct fiscal effect is calculated as the percentage change in the NPV of negative total income tax collection. The indirect fiscal effect is computed as the percentage change in the NPV of all other taxes and transfers, including payments to all Social Security benefits and government transfers net of payroll tax collections. The net fiscal effect combines the direct and indirect effects.''
+% src: 12_app_quant.tex:620-622
+\emph{Saving subsidy:} ``the direct fiscal effect is calculated as the NPV of the subsidy as a share of government spending at the baseline. The indirect fiscal effect is computed as the percentage change in the NPV of government spending, excluding subsidies. The net fiscal effect is measure[d] as the percentage change in the NPV of the government spending, including subsidies.'' The welfare NPV for this family starts at age 30 and ``the lower bound uses only the subsidy in the denominator.''
+% src: 12_app_quant.tex:626; 12_app_quant.tex:639
+\end{tablenotes}
+\end{threeparttable}
+\end{table}

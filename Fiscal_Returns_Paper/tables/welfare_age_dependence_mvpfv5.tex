@@ -1,0 +1,131 @@
+% Color definitions
+\definecolor{blue}{RGB}{0,114,178}
+\definecolor{red}{RGB}{213,94,0}
+\definecolor{white}{RGB}{255,255,255}
+\newcommand*{\opacity}{100}% Full opacity
+
+% Specific gradient commands for different columns
+% For xchange% column: 0 is white, positive blue, negative red
+\newcommand{\gradXchange}[1]{%
+    \ifdim#1pt=0pt
+        \cellcolor{white!\opacity} #1
+    \else
+        \ifdim#1pt>0pt
+            % Positive values - blue
+            \pgfmathparse{int(round(min(100, 100*(#1/1.5))))}% Scaling factor based on max value in column
+            \xdef\tempa{\pgfmathresult}
+            \cellcolor{blue!\tempa!white!\opacity} #1
+        \else
+            % Negative values - red
+            \pgfmathparse{int(round(min(100, 100*(-#1/1.09))))}% Scaling based on min value
+            \xdef\tempa{\pgfmathresult}
+            \cellcolor{red!\tempa!white!\opacity} #1
+        \fi
+    \fi
+}
+
+% For sspay %Δ column: 0 is white, positive red, negative blue
+\newcommand{\gradSSpay}[1]{%
+    \ifdim#1pt=0pt
+        \cellcolor{white!\opacity} #1
+    \else
+        \ifdim#1pt>0pt
+            % Positive values - red
+            \pgfmathparse{int(round(min(100, 100*(#1/0.5))))}% Scaling based on max positive
+            \xdef\tempa{\pgfmathresult}
+            \cellcolor{red!\tempa!white!\opacity} #1
+        \else
+            % Negative values - blue
+            \pgfmathparse{int(round(min(100, 100*(-#1/16.75))))}% Scaling based on min value
+            \xdef\tempa{\pgfmathresult}
+            \cellcolor{blue!\tempa!white!\opacity} #1
+        \fi
+    \fi
+}
+
+% For MVPF column: infinity values are blue, finite positive values are red
+\newcommand{\infval}{$\infty$}
+\newcommand{\gradMVPF}[1]{%
+    \def\testarg{#1}
+    \ifx\testarg\infval
+        % Infinite value - solid blue
+        \cellcolor{blue!100!white!\opacity} #1
+     %   \cellcolor{blue!100} #1
+    \else
+        % Numeric value - red with intensity based on value
+        \pgfmathparse{int(round(min(100, 100*(0.20/#1))))}
+        \xdef\tempa{\pgfmathresult}
+        \cellcolor{red!\tempa!white!\opacity} #1
+    \fi
+}
+
+% For total cost and indirect cost columns: 0 is white, positive red, negative blue
+\newcommand{\gradCost}[1]{%
+    \ifdim#1pt=0pt
+        \cellcolor{white!\opacity} #1
+    \else
+        \ifdim#1pt>0pt
+            % Positive values - red
+            \pgfmathparse{int(round(min(100, 100*(#1/0.5))))}% Scaling based on max value
+            \xdef\tempa{\pgfmathresult}
+            \cellcolor{red!\tempa!white!\opacity} #1
+        \else
+            % Negative values - blue
+            \pgfmathparse{int(round(min(100, 100*(-#1/2))))}% Scaling based on min value
+            \xdef\tempa{\pgfmathresult}
+            \cellcolor{blue!\tempa!white!\opacity} #1
+        \fi
+    \fi
+}
+
+% For age range p.p. columns: 0 is white, positive blue, negative red
+\newcommand{\gradPP}[1]{%
+    \ifdim#1pt=0pt
+        \cellcolor{white!\opacity} #1
+    \else
+        \ifdim#1pt>0pt
+            % Positive values - blue
+            \pgfmathparse{int(round(min(100, 100*(#1/3.46))))}% Scaling based on max value
+            \xdef\tempa{\pgfmathresult}
+            \cellcolor{blue!\tempa!white!\opacity} #1
+        \else
+            % Negative values - red
+            \pgfmathparse{int(round(min(100, 100*(-#1/3.46))))}% Scaling based on min value
+            \xdef\tempa{\pgfmathresult}
+            \cellcolor{red!\tempa!white!\opacity} #1
+        \fi
+    \fi
+}
+
+%\begin{tabular}{clcccccccc}% 
+\begin{tabular}{llllllllll}%
+   \toprule
+\hline
+ \multicolumn{2}{c}{Policy Reforms}&\multicolumn{2}{c}{$\%\Delta$ Welfare}&\multicolumn{3}{c}{\%$\Delta$ Budget}&\multicolumn{3}{c}{$\Delta$ Participation}\\
+
+        \hline
+&&MVPF&WTP&Net&Direct&Indir.&30--49&62--64&65--69\\	\hline
+(AN1)&NRA at 66&\gradMVPF{0.17}&\gradXchange{-0.38}&\gradCost{-0.87}&\gradSSpay{-6.13}&\gradCost{-0.02}&\gradPP{-0.04}&\gradPP{0.38}&\gradPP{0.60}		\\
+(AN2)&NRA at 67&\gradMVPF{0.16}&\gradXchange{-0.74}&\gradCost{-1.75}&\gradSSpay{-11.82}&\gradCost{-0.12}&\gradPP{-0.07}&\gradPP{-0.04}&\gradPP{1.98}		\\
+(AN3)&NRA at 68&\gradMVPF{0.18}&\gradXchange{-1.09}&\gradCost{-2.38}&\gradSSpay{-16.75}&\gradCost{-0.08}&\gradPP{-0.14}&\gradPP{-0.43}&\gradPP{3.27}		\\
+        \hline
+(AD1)&DRC at 8\%	&\cellcolor{blue!100!white!\opacity}$\infty$&\gradXchange{0.16}&\gradCost{-0.45}&\gradSSpay{-2.46}&\gradCost{-0.10}&\gradPP{0.11}&\gradPP{0.15}&\gradPP{0.74}		\\
+(AD2)&DRC at 8.5\%	&\cellcolor{blue!100!white!\opacity}$\infty$&\gradXchange{0.19}&\gradCost{-0.44}&\gradSSpay{-2.87}&\gradCost{-0.04}&\gradPP{0.10}&\gradPP{0.18}&\gradPP{0.57}		\\
+(AD3)&DRC at 9\%	&\cellcolor{blue!100!white!\opacity}$\infty$&\gradXchange{0.23}&\gradCost{-0.66}&\gradSSpay{-4.22}&\gradCost{-0.07}&\gradPP{0.09}&\gradPP{-0.36}&\gradPP{1.20}		\\
+(AD4)&DRC at 9.5\%	&\cellcolor{blue!100!white!\opacity}$\infty$&\gradXchange{0.26}&\gradCost{-0.73}&\gradSSpay{-4.56}&\gradCost{-0.09}&\gradPP{0.12}&\gradPP{-0.49}&\gradPP{1.37}		\\
+(AD5)&DRC at 10\%	&\cellcolor{blue!100!white!\opacity}$\infty$&\gradXchange{0.3}&\gradCost{-0.78}&\gradSSpay{-5.05}&\gradCost{-0.08}&\gradPP{0.14}&\gradPP{-0.97}&\gradPP{1.39}		\\
+		\hline											
+(AL1)&Linear $\pm 7\%$	&\cellcolor{blue!100!white!\opacity}$\infty$&\gradXchange{0.10}&\gradCost{-0.12}&\gradSSpay{-0.74}&\gradCost{-0.01}&\gradPP{0.05}&\gradPP{0.24}&\gradPP{0.22}		\\
+(AL2)&Linear $\pm 8\%$	&\cellcolor{blue!100!white!\opacity}$\infty$&\gradXchange{0.15}&\gradCost{-0.46}&\gradSSpay{-2.81}&\gradCost{-0.07}&\gradPP{0.11}&\gradPP{0.05}&\gradPP{0.61}		\\
+(AL3)&Linear $\pm 9\%$	&\cellcolor{blue!100!white!\opacity}$\infty$&\gradXchange{0.21}&\gradCost{-0.72}&\gradSSpay{-4.74}&\gradCost{-0.07}&\gradPP{0.11}&\gradPP{-0.31}&\gradPP{1.21}		\\
+(AL4)&Linear $\pm 10\%$	&\cellcolor{blue!100!white!\opacity}$\infty$&\gradXchange{0.29}&\gradCost{-0.86}&\gradSSpay{-5.54}&\gradCost{-0.09}&\gradPP{0.14}&\gradPP{-0.93}&\gradPP{1.42}		\\
+(AL5)&Linear $\pm 11\%$	&\cellcolor{blue!100!white!\opacity}$\infty$&\gradXchange{0.37}&\gradCost{-1.17}&\gradSSpay{-7.02}&\gradCost{-0.19}&\gradPP{0.19}&\gradPP{-1.15}&\gradPP{2.01}		\\
+(AL6)&Linear $\pm 12\%$	&\cellcolor{blue!100!white!\opacity}$\infty$&\gradXchange{0.47}&\gradCost{-1.37}&\gradSSpay{-7.72}&\gradCost{-0.28}&\gradPP{0.30}&\gradPP{-1.46}&\gradPP{2.61}		\\
+(AL7)&Linear $\pm 13\%$	&\cellcolor{blue!100!white!\opacity}$\infty$&\gradXchange{0.57}&\gradCost{-1.38}&\gradSSpay{-8.21}&\gradCost{-0.23}&\gradPP{0.32}&\gradPP{-2.90}&\gradPP{2.50}		\\
+(AL8)&Linear $\pm 14\%$	&\cellcolor{blue!100!white!\opacity}$\infty$&\gradXchange{0.69}&\gradCost{-1.47}&\gradSSpay{-8.22}&\gradCost{-0.31}&\gradPP{0.34}&\gradPP{-3.30}&\gradPP{2.42}		\\
+(AL9)&Linear $\pm 15\%$	&\cellcolor{blue!100!white!\opacity}$\infty$&\gradXchange{0.80}&\gradCost{-1.57}&\gradSSpay{-8.45}&\gradCost{-0.37}&\gradPP{0.36}&\gradPP{-3.49}&\gradPP{2.26}		\\
+%medicare	plus 20\%	&\gradXchange{1.322}&\gradSSpay{0.004}&&\gradPP{0.3}&\gradPP{-0.59}&\gradPP{-0.31}		\\
+%medicare	minus 20\%	&\gradXchange{-1.194}&\gradSSpay{0.158}&&\gradPP{-0.19}&\gradPP{0.86}&\gradPP{0.88}		\\
+ \hline
+ \bottomrule
+    \end{tabular}

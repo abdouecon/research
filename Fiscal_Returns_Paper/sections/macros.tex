@@ -1,0 +1,14 @@
+% sections/macros.tex -- notation macros fixed in BLUEPRINT section 3.1 (W4).
+% \MVPF, \WTP, \pp, \E are defined in preamble.tex and are NOT redefined here.
+% Indicator: the blueprint writes \mathbb{1}; amsfonts has no double-struck digit, and the only
+% blackboard-one font installed with Type 1 outlines is dsfont (\mathds). The macro \ind is the
+% interface; its rendering is the only thing that differs.
+\usepackage{dsfont}
+\newcommand{\CE}{\mathrm{CE}}                 % consumption-equivalent superscript: x^{\CE}
+\newcommand{\LE}{\mathrm{LE}}                 % leisure-equivalent superscript: x^{\LE}
+\DeclareMathOperator{\FM}{FM}                 % fiscal multiplier; \FM_B for the behavioral part
+\newcommand{\aime}{\mathit{aime}}             % average indexed monthly earnings (state variable)
+\newcommand{\PIA}{\mathit{PIA}}               % primary insurance amount
+\newcommand{\NRA}{\mathit{NRA}}               % normal retirement age
+\newcommand{\ind}[1]{\mathds{1}\{#1\}}        % indicator function 1{...}
+\newcommand{\Cbar}[1]{\bar{C}_{#1}}           % baseline consumption aggregate from age #1: \Cbar{62}, \Cbar{30}

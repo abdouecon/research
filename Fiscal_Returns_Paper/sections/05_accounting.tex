@@ -1,0 +1,160 @@
+% sections/05_accounting.tex -- Section 5, Welfare and Fiscal Accounting (W2).
+% Plan: BLUEPRINT sections 2.5 and 4 (equations eq:ce ... eq:bcmap, in that order), Overrides O1 and O5.
+% Sources: dossier 03 section 3; frot/sub2025/12_app_quant.tex:563-640; 7_policy_reforms.tex:60-80, 117-121, 400-425.
+% Every sentence with a number from a table, figure or source line carries a "% src:" comment (Override O5).
+\section{Welfare and Fiscal Accounting}\label{sec:accounting}
+
+Every reform in Sections~\ref{sec:elimination}--\ref{sec:menu} is evaluated with one welfare measure and one fiscal accounting. This section defines both, maps each column of the reform tables to a formula, and relates the marginal value of public funds to the objects of the sufficient-statistics literature; \autoref{app:derivations} collects the algebra. Superscript $0$ denotes the status quo, $\rho$ a reform, and $\Delta$ the difference.
+
+\subsection{Welfare measures and willingness to pay}\label{sec:welfare}
+
+Let $V^{i}_{30}$ be the value function \eqref{eq:bellman} of simulated individual $i$ at age 30, the entry age of the model.
+% src: 5_quantitative_model.tex:23 (entry age 30)
+Cohort welfare is the average of $V^{i}_{30}$ over the $I^{s}$ simulated individuals, $V^{0}$ under the status quo and $V^{\rho}$ under reform $\rho$: an ex ante measure, taken before health, mortality, wage, and medical-expense shocks are realized. The consumption-equivalent (CE) welfare change $x^{\CE}_{\rho}$ is the log change in status-quo consumption at every age and state, with leisure held fixed, that makes the cohort as well off as under the reform; $e^{x^{\CE}_{\rho}}-1$ is the corresponding proportional change, which $x^{\CE}_{\rho}$ approximates to first order. Flow utility \eqref{eq:utility} is homogeneous of degree $\gamma(1-\nu)$ in consumption, so $x^{\CE}_{\rho}$ solves $V^{\rho}=e^{\gamma x^{\CE}_{\rho}(1-\nu)}V^{0}$:
+% src: 12_app_quant.tex:567-570 (CE change defined through V_after = e^{gamma x (1-nu)} V_before)
+\begin{equation}\label{eq:ce}
+x^{\CE}_{\rho}=\frac{\ln\!\left(V^{\rho}/V^{0}\right)}{\gamma(1-\nu)},
+\qquad
+V^{0}\equiv\frac{1}{I^{s}}\sum_{i=1}^{I^{s}}V^{i,0}_{30},
+\qquad
+V^{\rho}\equiv\frac{1}{I^{s}}\sum_{i=1}^{I^{s}}V^{i,\rho}_{30}.
+\end{equation}
+With $\nu>1$ (\autoref{tab:est}) both averages are negative, so the ratio $V^{\rho}/V^{0}$ is positive; a welfare-improving reform makes $V^{\rho}$ less negative, the ratio lies below one, and dividing its negative logarithm by $\gamma(1-\nu)<0$ gives $x^{\CE}_{\rho}>0$.
+% src: tables/estimated_parameters.tex:11 (nu = 1.7029 > 1)
+The WTP column of every reform table reports $100\,x^{\CE}_{\rho}$, the CE change in percent, the cohort's willingness to pay (WTP) for the reform as a share of consumption.
+% src: 7_policy_reforms.tex:73 (WTP column = CE welfare change in percent)
+
+The leisure-equivalent (LE) change scales leisure instead of consumption:
+\begin{equation}\label{eq:le}
+x^{\LE}_{\rho}=\frac{\ln\!\left(V^{\rho}/V^{0}\right)}{(1-\gamma)(1-\nu)}=\frac{\gamma}{1-\gamma}\,x^{\CE}_{\rho}.
+\end{equation}
+% src: 12_app_quant.tex:582 (LE formula)
+At the estimate $\gamma=0.5354$ the factor $\gamma/(1-\gamma)$ is 1.15, so the LE column of \autoref{tab:elim} is a rescaling of the CE column and appears nowhere else.
+% src: tables/estimated_parameters.tex:9 (gamma = 0.5354); 1.15 = gamma/(1-gamma) is the identity stated in BLUEPRINT section 4.2, eq. 21 (not a result)
+
+The dollar value of a reform converts $x^{\CE}_{\rho}$ with baseline consumption:
+\begin{equation}\label{eq:wtp}
+\mathcal{W}_{\rho}=x^{\CE}_{\rho}\,\Cbar{s},
+\qquad
+\Cbar{s}\equiv\sum_{t=s}^{85}(1+r)^{-(t-62)}\,\E\!\left[c^{0}_{t}\right],
+\qquad s\in\{62,30\},
+\end{equation}
+% src: 12_app_quant.tex:632 (CE change times the NPV of per capita baseline consumption from 62, discounted to 62); 12_app_quant.tex:639 (from 30 for K); 5_quantitative_model.tex:23 (terminal age 85)
+%TODO-AUTHORS: confirm that E[.] averages over all N simulated individuals with zero consumption after death (per-capita NPV); the sentence below changes if only survivors are averaged.
+where $\E[\cdot]$ averages over the simulated cohort, $r$ is the net return of \autoref{sec:model}, and $\Cbar{s}$ is the per-capita net present value (NPV) at age 62 of status-quo consumption from age $s$ onward. The window is $s=62$ for the Social Security, Medicare, and income-tax families, whose reforms change flows received from age 62 onward, and $s=30$ for the saving subsidies, which change the return on assets at every age; for $t<62$ the factor compounds forward.
+% src: 12_app_quant.tex:632, 639; tables/parameters_ss.tex:46 (ERA 62)
+The CE change scales consumption at all ages while $\Cbar{62}$ counts consumption from age 62, so $\mathcal{W}_{\rho}$ is the dollar value of the CE change applied to consumption after 62; because $\Cbar{30}$ and $\Cbar{62}$ differ, MVPF levels of the saving-subsidy family are not compared with those of the other families.
+% src: 12_app_quant.tex:632 (consumption window from 62), 639 (from 30 for K)
+
+\subsection{Direct, indirect, and net fiscal effects}\label{sec:fiscal}
+
+Three aggregates are computed for each family, all per capita and discounted to age 62 at the net return $r=3.2$ percent with the factor $(1+r)^{-(t-62)}$: $B$, the outlay of the program being reformed; $O$, the other taxes and transfers listed in \autoref{tab:conventions}; and $G$, government spending on the cohort, whose baseline value $G^{0}$ is the base of the Net column and whose change satisfies $\Delta G=\Delta B+\Delta O$ when every flow the reform changes is counted in $B$ or in $O$.
+% src: 5_quantitative_model.tex:390 (net return 3.2 percent); 12_app_quant.tex:611 (discounted to age 62)
+\autoref{tab:conventions} states what $B$ and $O$ contain in each family. The three columns are
+\begin{equation}\label{eq:fiscal}
+\text{Direct}_{\rho}=100\,\frac{\Delta B}{\text{base}_f},
+\qquad
+\text{Indirect}_{\rho}=100\,\frac{\Delta O}{O^{0}},
+\qquad
+\text{Net}_{\rho}=100\,\frac{\Delta G}{G^{0}},
+\qquad \Delta G=\Delta B+\Delta O,
+\end{equation}
+where $\text{base}_f=B^{0}$ (baseline retirement benefits) for the Social Security families, $T^{p,0}$ (baseline payroll-tax collections) for Medicare, $|T^{0}|$ (baseline income-tax collections) for the income-tax reforms, for which $B$ is revenue forgone, and $G^{0}$ for the saving subsidies, for which $B$ is the subsidy. The Direct bases are positive by construction, so a negative Direct entry is a reduction in the program's own outlay, and a negative Net entry is a reduction in government spending on the cohort; the Indirect column is read with the same convention, a negative entry being a reduction in the government's other net outlays.
+% src: 12_app_quant.tex:611, 615, 620-622, 626 (bases by family); 12_app_quant.tex:616 (Net base: NPV of government spending at the baseline)
+% derived check, not printed (Open question 4): on the printed Social Security cells Net = 0.137 Direct + 1.12 Indirect to within 0.01 in every row
+%   (e.g. AN3: 0.137(-16.75) + 1.12(-0.08) = -2.38; P1.2: 0.137(1.23) + 1.12(-0.07) = 0.09), so omega_D, omega_O > 0 and B^0 + O^0 differs from G^0;
+%   the sign reading of the Indirect column rests on O^0 > 0, which these weights imply but the code's definitions have not confirmed.
+%TODO-AUTHORS: Open question 6 -- confirm that the printed Direct column for I1-I5 is lost revenue over baseline income-tax collections (12_app_quant.tex:620 says "percentage change in the NPV of negative total income tax collection"; the printed cells are positive). Open question 4 -- confirm O^0 > 0 and G^0 > 0 under the code's definitions.
+
+Because the three bases differ, the Net column is not the sum of the other two: for I1 the Direct and Indirect entries are 0.70 and $-0.81$ while Net is 0.69; for P1.1 they are 0.57 and $-0.10$ while Net is $-0.03$.
+% src: tables/welfare_tax_mvpf_v8.tex:114 (I1: 0.70, -0.81, 0.69); tables/welfare_progressivity_mvpfv7.tex:115 (P1.1: 0.57, -0.10, -0.03)
+The relation that holds is
+\begin{equation}\label{eq:netidentity}
+\text{Net}_{\rho}=\omega_{D}\,\text{Direct}_{\rho}+\omega_{O}\,\text{Indirect}_{\rho},
+\qquad
+\omega_{D}\equiv\frac{\text{base}_f}{G^{0}},
+\qquad
+\omega_{O}\equiv\frac{O^{0}}{G^{0}},
+\end{equation}
+which follows from \eqref{eq:fiscal} whenever $\Delta G=\Delta B+\Delta O$. The weights are ratios of baseline aggregates and are not printed; they sum to one only if $G^{0}=B^{0}+O^{0}$, which is not assumed. For the saving subsidies both equal one (the subsidy is zero at the baseline and the Direct base is $G^{0}$), and Net equals Direct plus Indirect in every K row.
+% src: tables/welfare_savings_mvpf_v3.tex:120-123 (K1: 1.77 - 1.69 = 0.08; K2: 3.77 - 3.59 = 0.18; K3: 8.44 - 7.10 = 1.34)
+%TODO-AUTHORS: Open question 4 -- the printed Social Security cells satisfy (eq:netidentity) with constant weights that do not sum to one (derived check above), so the code's G^0 is not B^0 + O^0 with O as described at 12_app_quant.tex:611; the items of G^0 must be stated from the code before the Net-base cell of Table 4 can say more than 'baseline government spending'.
+
+\input{tables/new_accounting_conventions}
+
+\subsection{The marginal value of public funds and the table columns}\label{sec:mvpf}
+
+The marginal value of public funds (MVPF) of a reform is the ratio of the beneficiaries' willingness to pay to the net cost to the government, inclusive of behavioral responses \citep{hendren2016policy,hendren2020unified,finkelstein2020welfare}. Here both terms are per capita for the cohort:
+\begin{equation}\label{eq:mvpf}
+\MVPF_{\rho}=\frac{\mathcal{W}_{\rho}}{\Delta G_{\rho}}.
+\end{equation}
+% src: 12_app_quant.tex:631-632
+Substituting \eqref{eq:wtp} and \eqref{eq:fiscal},
+\begin{equation}\label{eq:mvpfcolumns}
+\MVPF_{\rho}=\kappa_f\,\frac{\WTP_{\rho}}{\text{Net}_{\rho}},
+\qquad
+\kappa_f\equiv\frac{\Cbar{s}}{G^{0}},
+\end{equation}
+so within a family the MVPF column is proportional to WTP/Net. For P1.2, the ratio of WTP to Net is 0.22/0.09; the MVPF of 0.97 converts it to dollars of welfare per dollar of net spending.
+% src: tables/welfare_progressivity_mvpfv7.tex:116 (P1.2: MVPF 0.97, WTP 0.22, Net 0.09)
+
+When $\mathcal{W}_{\rho}>0$ and $\Delta G_{\rho}>0$ the MVPF is a positive number. When $\mathcal{W}_{\rho}>0>\Delta G_{\rho}$ the reform raises welfare and reduces net spending: it is self-financing, the MVPF is infinite, and the tables print $\infty$; when in addition $\Delta B_{\rho}>0$ they report a lower bound that counts only the program's own outlay,
+\begin{equation}\label{eq:mvpflb}
+\MVPF^{\mathrm{LB}}_{\rho}=\frac{\mathcal{W}_{\rho}}{\Delta B_{\rho}}=\frac{\Cbar{s}}{\text{base}_f}\,\frac{\WTP_{\rho}}{\text{Direct}_{\rho}},
+\end{equation}
+% src: 12_app_quant.tex:634 (lower bound = dollar CE gain over the change in the direct cost)
+printed as $[\MVPF^{\mathrm{LB}}_{\rho},+\infty)$; P1.1 is the one such row, with a lower bound of 0.52.
+% src: tables/welfare_progressivity_mvpfv7.tex:115 ([0.52,+infty))
+When $\Delta B_{\rho}<0$ as well as $\Delta G_{\rho}<0$, as in every AD and AL row, no finite bound exists.
+% src: tables/welfare_age_dependence_mvpfv5.tex:112-126 (WTP > 0, Direct < 0, Net < 0, MVPF = infty in all AD and AL rows)
+When $\mathcal{W}_{\rho}<0$ and $\Delta G_{\rho}<0$, as in the AN rows, the positive ratio is the welfare loss per dollar of net savings and, since $x^{\CE}$ and $\Delta G$ both change sign when a reform is reversed, equals the MVPF of the reverse reform except for the difference between the consumption aggregates $\Cbar{s}$ of \eqref{eq:wtp} under the two rules; \autoref{sec:claiming} reads the AN rows in this way.
+% src: tables/welfare_age_dependence_mvpfv5.tex:108-110 (AN1-AN3: WTP < 0, Net < 0, finite MVPF); 7_policy_reforms.tex:119 (reversal reading)
+For the saving subsidies the tables print an interval,
+\begin{equation}\label{eq:mvpfk}
+\MVPF_{\rho}\in\left[\frac{\mathcal{W}_{\rho}}{\mathit{Sub}_{\rho}},\;\frac{\mathcal{W}_{\rho}}{\Delta G^{\mathrm{full}}_{\rho}}\right],
+\end{equation}
+whose upper bound uses the net cost $\Delta G^{\mathrm{full}}_{\rho}$ computed as if all capital gains were realized and taxed in each period.
+% src: 12_app_quant.tex:639 (lower bound uses only the subsidy); 7_policy_reforms.tex:423 (upper bound: all capital gains realized and taxed)
+
+\citet{hendren2020unified} write that ``the creation of MVPFs requires various judgment calls.'' Ours are the following.
+% src: 7_policy_reforms.tex:73 (quotation from hendren2020unified)
+Welfare is the equal-weighted ex ante average of expected utility at age 30. Fiscal flows are per-capita NPVs at age 62 at the net return $r$ and enter at face value: no marginal cost of public funds multiplies the Net column, unlike in the marginal-cost-of-funds tradition of \citet{mayshar1990measures}, \citet{slemrod1996costs}, and \citet{kleven2006marginal}; the reform's own revenue response is inside $\Delta G$, and the cost of raising the funds enters by comparing MVPFs across policies. The accounting is for one cohort, with no transition (\autoref{sec:institutions} states the stance on incidence outside the cohort), and at fixed prices (\autoref{sec:scope} sets out how factor-price responses would enter $\mathcal{W}$ and $\Delta G$). The participation columns report changes in labor force participation at ages 30--49, 62--64, and 65--69 in percentage points (\pp); they are the behavioral responses behind the fiscal effects and enter no formula directly.
+% src: 7_policy_reforms.tex:73 (participation age groups, in percentage points)
+
+\subsection{Relation to sufficient statistics: consumption smoothing and the fiscal multiplier}\label{sec:suffstats}
+
+In the sufficient-statistics approach to social insurance \citep{baily1978some,chetty2006general,chetty2008moral,chetty2009sufficient,chetty2013social}, a marginal expansion of a program raises welfare when the consumption-smoothing value of the transfer exceeds its fiscal cost, the mechanical outlay plus the fiscal externality from behavioral responses. \citet{haller2022welfare} extends the formula to a dynamic retirement setting and evaluates increases in the early retirement age and reductions in benefit levels with a fiscal multiplier, the total fiscal effect per mechanical dollar, estimated from Austrian administrative data; the multiplier is the object to which the fiscal columns are mapped below.
+%TODO-AUTHORS: Open question 16 -- haller2022welfare is an @unpublished entry; the instruments named above (early retirement age; pension generosity) are those of the 2019 CESifo draft and the 2022 WIFO seminar abstract; confirm against the current version before this sentence is final. No number is imported from it.
+Split the change in program outlays into a mechanical and a behavioral part,
+\begin{equation}\label{eq:decomp}
+\Delta B=\Delta B^{M}+\Delta B^{B},
+\end{equation}
+where $\Delta B^{M}$ applies the reformed benefit, coverage, tax, or return rule to the status-quo histories with every policy function held at its status-quo value, and $\Delta B^{B}$ is the remainder; $\Delta O$ is behavioral except for mechanical interactions through the consumption floor \eqref{eq:transfer} and the income-tax base in \eqref{eq:budget}. Define
+\begin{equation}\label{eq:fm}
+\FM\equiv\frac{\Delta G}{\Delta B^{M}}=1+\frac{\Delta B^{B}+\Delta O}{\Delta B^{M}},
+\qquad
+\FM_{B}\equiv\frac{\Delta B}{\Delta B^{M}}=1+\frac{\Delta B^{B}}{\Delta B^{M}},
+\end{equation}
+the fiscal multiplier and its within-program part, and
+\begin{equation}\label{eq:bcmap}
+\hat{\pi}\equiv\frac{\mathcal{W}}{\Delta B^{M}}-1,
+\qquad
+\MVPF=\frac{1+\hat{\pi}}{\FM},
+\qquad
+\MVPF^{\mathrm{LB}}=\frac{1+\hat{\pi}}{\FM_{B}}.
+\end{equation}
+Both equalities in \eqref{eq:bcmap} are identities: $\mathcal{W}=(1+\hat\pi)\,\Delta B^{M}$ by the definition of $\hat\pi$ and $\Delta G=\FM\,\Delta B^{M}$ by \eqref{eq:fm}, so their ratio is \eqref{eq:mvpf}, and replacing $\Delta G$ by $\Delta B$ gives \eqref{eq:mvpflb}; both require only $\Delta B^{M}\neq0$ and hold exactly for discrete reforms. An MVPF of one is the condition $1+\hat\pi=\FM$, the Baily--Chetty condition when a dollar of public funds is valued at one, that is, relative to a financing instrument whose own MVPF is one; an infinite MVPF with $\Delta B^{M}>0$ means $\FM<0$, behavioral fiscal gains exceeding the mechanical outlay.
+
+For a marginal change in a transfer rule, the envelope theorem applied to \eqref{eq:bellman} gives $\mathcal{W}\approx\sum_{t}(1+r)^{-(t-62)}\,\E[\omega_t\,\delta^{M}_t]$, where $\delta^{M}_t$ is the mechanical change in the individual's resources at age $t$ and $\omega_t$ is the marginal utility of consumption at $t$, discounted at $\beta$ and compounded to age 62 at $r$, relative to the average marginal utility implicit in the conversion of $x^{\CE}$ to dollars (\autoref{app:derivations}). Then $\pi\approx\E[\omega\,\delta^{M}]/\E[\delta^{M}]-1$ is the transfer-weighted average of relative marginal utilities minus one, the consumption-smoothing value of the transfer: the term of \citet{baily1978some} and \citet{chetty2006general}, positive when the transfer accrues in states of high marginal utility such as poor health, low assets, and survival to old age \citep[see also][]{landais2021value,kolsrud2024retirement}. With nonseparable utility and $\nu>1$, marginal utility of consumption falls with leisure, so a dollar is valued less after labor-force exit than while working at the same consumption.
+% src: tables/estimated_parameters.tex:11 (nu > 1); eq:utility (u_c proportional to l^{(1-gamma)(1-nu)}, decreasing in l when nu > 1)
+Two cautions apply. First, the structural $\mathcal{W}$ is exact for the discrete reforms considered, whereas the envelope expression is first-order in the size of the reform and omits the utility changes of individuals who switch participation or claiming state, discrete choices with fixed costs \citep{kleven2021sufficient}; $\hat\pi$ is defined by \eqref{eq:bcmap} so that the identities hold regardless. Second, the printed Direct column is $\Delta B$, not $\Delta B^{M}$: it combines the mechanical change with the within-program behavioral response, while the Indirect column holds the behavioral response outside the program. Separating $\Delta B^{M}$ from $\Delta B^{B}$ requires an accounting pass over saved status-quo histories with behavior held fixed, which is not part of the present output: the tables identify $(1+\hat\pi)/\FM$ and $(1+\hat\pi)/\FM_B$ but neither $\FM$ nor $\hat\pi$ separately, the fiscal multiplier cannot be read from the Direct column, and the comparison with \citet{haller2022welfare} is one of objects, not of magnitudes.
+%TODO-AUTHORS: Open question 4 -- if Delta B^M can be computed by an accounting pass over saved panels, FM and pi-hat become numbers and this paragraph is upgraded.
+
+Two sign inferences follow from the printed cells and the schedules of \autoref{tab:schedules}, and no others. For AD1--AD5 every factor after the NRA rises and every factor before it is unchanged, so with claiming held at its status-quo age outlays rise for everyone who claims after age 65 or whose benefits withheld under the earnings test after the NRA are credited at the DRC (\autoref{subsec:programs}), and fall for no one: $\Delta B^{M}\ge0$.
+% src: tables/DRC_visualization_4.tex:37 (AN0) versus :43-47 (AD1-AD5: factors at 62-65 unchanged, factors at 66-70 higher); tables/parameters_ss.tex:47 (NRA 65)
+Direct and Net are negative in all five rows, so $\Delta B<0$ and $\Delta G<0$, hence $\FM_B<0$ and $\FM<0$ whenever $\Delta B^{M}>0$: the behavioral change in outlays more than offsets the mechanical increase.
+% src: tables/welfare_age_dependence_mvpfv5.tex:112-116 (AD1-AD5: Direct -2.46 to -5.05, Net -0.45 to -0.78)
+For AN1--AN3 every factor falls, so $\Delta B^{M}<0$ by construction, and WTP is negative; the finite ratio is the reversal value of \autoref{sec:mvpf}.
+% src: tables/DRC_visualization_4.tex:38-40 (AN1-AN3: every factor below the AN0 factor at the same age); tables/welfare_age_dependence_mvpfv5.tex:108-110 (WTP -0.38, -0.74, -1.09)
+For the benefit-formula, Medicare, and income-tax families $\Delta B^{M}>0$, but the sign of $\Delta B^{B}$ is not identified, so whether $\FM$ exceeds one is undetermined; the AL rows move factors in both directions, so $\Delta B^{M}$ itself is unsigned.
+% src: tables/DRC_visualization_4.tex:50-58 (AL1-AL9: factors below the NRA fall, factors above it rise)

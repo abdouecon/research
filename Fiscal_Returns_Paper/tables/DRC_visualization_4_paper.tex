@@ -1,0 +1,60 @@
+% Copy of DRC_visualization_4.tex (Override O6). Edits, header rows only: the \hline duplicating \toprule and the \hline duplicating \bottomrule removed; the spanner `Benefit as a Percentage of PIA at Different Claiming Ages` moved above the claiming-age row it describes (with \cmidrule) and reworded `Benefit as a Percentage of the PIA, by Claiming Age`; the stub labels `Claiming Ages`/`Reforms` replaced by `Reform` (layout audit 19). All factor cells untouched (lines 37-58 of the original). Listed in tables/EDITS.md.
+% Color set related!
+\definecolor{blue}{RGB}{0,114,178}  % Blue for values above 100
+\definecolor{red}{RGB}{213,94,0}    % Red for values below 100
+\definecolor{white}{RGB}{255,255,255} % White for value of 100
+\newcommand*{\opacity}{100}% Full opacity
+
+% Data set related!
+\newcommand*{\minval}{55}% Minimum value in the dataset
+\newcommand*{\maxval}{175}% Maximum value in the dataset
+\newcommand*{\centerval}{100}% Center value (white)
+
+% Gradient function with three colors (red-white-blue)
+\newcommand{\gradient}[1]{%
+    \ifdim#1pt=\centerval pt
+        \cellcolor{white!\opacity} #1
+    \else
+        \ifdim#1pt>\centerval pt
+            % For values above center (100)
+            \pgfmathparse{int(round(100*(#1-\centerval)/(\maxval-\centerval)))}
+            \xdef\tempa{\pgfmathresult}
+            \cellcolor{blue!\tempa!white!\opacity} #1
+        \else
+            % For values below center (100)
+            \pgfmathparse{int(round(100*(\centerval-#1)/(\centerval-\minval)))}
+            \xdef\tempa{\pgfmathresult}
+            \cellcolor{red!\tempa!white!\opacity} #1
+        \fi
+    \fi
+}
+
+\begin{tabular}{ll|lllllllll}
+\toprule
+  \multicolumn{2}{c}{Reform} &   \multicolumn{9}{c}{Benefit as a Percentage of the PIA, by Claiming Age} \\ \cmidrule(lr){3-11}
+  \multicolumn{2}{c}{}      & 62 & 63     & 64     & 65     & 66     & 67     & 68    & 69    & 70 \\ [0.5ex]
+  \hline
+(AN0)&NRA at 65    & \gradient{80} & \gradient{86.67} & \gradient{93.33} & \gradient{100} & \gradient{104.5} & \gradient{109} & \gradient{113.5} & \gradient{118} & \gradient{122.5} \\
+(AN1)&NRA at 66    & \gradient{75} & \gradient{80} & \gradient{86.67} & \gradient{93.33} & \gradient{100} & \gradient{104.5} & \gradient{109} & \gradient{113.5} & \gradient{118} \\
+(AN2)&NRA at 67    & \gradient{70} & \gradient{75} & \gradient{80} & \gradient{86.67} & \gradient{93.33} & \gradient{100} & \gradient{104.5} & \gradient{109} & \gradient{113.5} \\
+(AN3)&NRA at 68    & \gradient{65} & \gradient{70} & \gradient{75} & \gradient{80} & \gradient{86.67} & \gradient{93.33} & \gradient{100} & \gradient{104.5} & \gradient{109} \\
+\hline
+%\hline
+(AD1) & DRC at 8\%     & \gradient{80} & \gradient{86.67} & \gradient{93.33} & \gradient{100} & \gradient{108} & \gradient{116} & \gradient{124} & \gradient{132} & \gradient{140} \\
+(AD2) & DRC at 8.5\%   & \gradient{80} & \gradient{86.67} & \gradient{93.33} & \gradient{100} & \gradient{108.5} & \gradient{117} & \gradient{125.5} & \gradient{134} & \gradient{142.5} \\
+(AD3) & DRC at 9\%     & \gradient{80} & \gradient{86.67} & \gradient{93.33} & \gradient{100} & \gradient{109} & \gradient{118} & \gradient{127} & \gradient{136} & \gradient{145} \\
+(AD4) & DRC at 9.5\%   & \gradient{80} & \gradient{86.67} & \gradient{93.33} & \gradient{100} & \gradient{109.5} & \gradient{119} & \gradient{128.5} & \gradient{138} & \gradient{147.5} \\
+(AD5) & DRC at 10\%    & \gradient{80} & \gradient{86.67} & \gradient{93.33} & \gradient{100} & \gradient{110} & \gradient{120} & \gradient{130} & \gradient{140} & \gradient{150} \\
+\hline
+%\hline
+(AL1) & Linear $\pm 7\%$  & \gradient{79} & \gradient{86} & \gradient{93} & \gradient{100} & \gradient{107} & \gradient{114} & \gradient{121} & \gradient{128} & \gradient{135} \\
+(AL2) & Linear $\pm 8\%$  & \gradient{76} & \gradient{84} & \gradient{92} & \gradient{100} & \gradient{108} & \gradient{116} & \gradient{124} & \gradient{132} & \gradient{140} \\
+(AL3) & Linear $\pm 9\%$  & \gradient{73} & \gradient{82} & \gradient{91} & \gradient{100} & \gradient{109} & \gradient{118} & \gradient{127} & \gradient{136} & \gradient{145} \\
+(AL4) & Linear $\pm 10\%$ & \gradient{70} & \gradient{80} & \gradient{90} & \gradient{100} & \gradient{110} & \gradient{120} & \gradient{130} & \gradient{140} & \gradient{150} \\
+(AL5) & Linear  $\pm 11\%$ & \gradient{67} & \gradient{78} & \gradient{89} & \gradient{100} & \gradient{111} & \gradient{122} & \gradient{133} & \gradient{144} & \gradient{155} \\
+(AL6) & Linear $\pm 12\%$ & \gradient{64} & \gradient{76} & \gradient{88} & \gradient{100} & \gradient{112} & \gradient{124} & \gradient{136} & \gradient{148} & \gradient{160} \\
+(AL7) & Linear $\pm 13\%$ & \gradient{61} & \gradient{74} & \gradient{87} & \gradient{100} & \gradient{113} & \gradient{126} & \gradient{139} & \gradient{152} & \gradient{165} \\
+(AL8) & Linear $\pm 14\%$ & \gradient{58} & \gradient{72} & \gradient{86} & \gradient{100} & \gradient{114} & \gradient{128} & \gradient{142} & \gradient{156} & \gradient{170} \\
+(AL9) & Linear $\pm 15\%$ & \gradient{55} & \gradient{70} & \gradient{85} & \gradient{100} & \gradient{115} & \gradient{130} & \gradient{145} & \gradient{160} & \gradient{175} \\ 
+\bottomrule
+\end{tabular}

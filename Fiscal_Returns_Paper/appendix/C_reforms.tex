@@ -1,0 +1,138 @@
+% appendix/C_reforms.tex -- Appendix C, Reform Construction and Outcome Definitions (W3b).
+% Plan: BLUEPRINT 7 ("Appendix C"), 4.1 (verbatim conventions), 2.8-2.9; Overrides O1, O5, O6.
+% C.1 reform construction (12:472-560 content, in the paper's notation); C.2 outcome definitions by family (12:610-639);
+% C.3 full progressivity grid (Table C1 <- tables/welfare_progressivity_mvpfv7.tex, unedited); C.5 participation under
+% D1-D5 (figures/abdou/frot_weld1*_paper.tex, frot_weld2*.tex; figure notes rewritten from 12:325-328, 12:368-374).
+% C.4 (fig:participation_saving, built by W3a from Table 7 cells in figures/new/fig_participation_saving.tex) was appended by W3a;
+% moved before the elimination-participation subsection on 2026-11-09 so that the two half-page figures share a page and all Appendix C floats
+% stay inside Appendix C (\FloatBarrier at the end of the file).
+% Provenance abbreviations in "% src:" comments: T:x = paper/tables/x; 12:NN = frot/sub2025/12_app_quant.tex:NN;
+% 7:NN = frot/sub2025/7_policy_reforms.tex:NN; 5:NN = frot/sub2025/5_quantitative_model.tex:NN.
+\providecommand{\cleargradientmacros}{%
+  \let\opacity\undefined \let\gradXchange\undefined \let\gradSSpay\undefined \let\gradMVPF\undefined
+  \let\gradCost\undefined \let\gradPP\undefined \let\gradMedpay\undefined \let\gradTaxchange\undefined}
+\section{Reform Construction and Outcome Definitions}\label{app:reforms}
+
+This appendix states the rule change behind each reform family of \autoref{tab:menu}, restates the outcome definitions of \autoref{sec:accounting} family by family, reports the full grid of benefit-formula reforms, plots the participation changes of the claiming-schedule reforms against their direct fiscal effect, and shows labor force participation by age under the elimination experiments of \autoref{sec:elimination}.
+
+\subsection{Construction of the reforms}\label{app:construction}
+
+\paragraph{Benefit levels and progressivity (P1, P2, P3, L).}
+Reforms P1.1--P1.9 modify the first bracket of the primary insurance amount \eqref{eq:pia} by raising its rate from 0.90 by one percentage point per step, from 0.91 under P1.1 to 0.99 under P1.9. % src: 12:475
+Reforms P2.0--P2.9 and P3.0--P3.9 target the second and third brackets: with the first rate at 0.99, P2.0--P2.9 raise the second rate from 0.32 by 0.32 percentage points per step to 0.352, and with the first two rates at 0.99 and 0.352, P3.0--P3.9 raise the third rate from 0.15 by 0.15 percentage points per step to 0.165; each step is one percent of the bracket's initial rate. % src: 12:475; T:welfare_progressivity_mvpfv7.tex:126-146
+Reforms L0--L9 raise the three rates proportionally by one percent per step. % src: 12:475
+The full set of bracket triples is the second column of \autoref{tab:progressivity_full}; L9 and P3.9 share the triple (0.99, 0.352, 0.165). % src: T:welfare_progressivity_mvpfv7.tex:115-158; :146 vs :158
+The bend points, the cap, and every other rule are unchanged.
+
+\paragraph{Claiming schedule (AN, AD, AL).}
+Reforms AN1--AN3 raise the normal retirement age to 66, 67, and 68. % src: 12:487
+The implementation shifts the status-quo schedule of \autoref{tab:ssdrc} to the right by one year per year of increase and sets the factor at age 62 to $100-5\,(\NRA+1-62)$ percent of the primary insurance amount, that is, to 75, 70, and 65; the resulting schedules are rows AN1--AN3 of \autoref{tab:schedules}. % src: 7:187 (implementation note); T:DRC_visualization_4.tex:38-40
+Reforms AD1--AD5 raise the delayed retirement credit from the cohort's 4.5 percent per year of delay to 8, 8.5, 9, 9.5, and 10 percent and leave the factors before the normal retirement age unchanged. % src: 12:487; 12:10; T:DRC_visualization_4.tex:43-47
+Reforms AL1--AL9 set the reduction per year of claiming before the normal retirement age and the credit per year of claiming after it to a common value of 7 to 15 percent, in steps of one percentage point. % src: 12:487; T:DRC_visualization_4.tex:50-58
+In every reform of this family the factor at the normal retirement age is 100, claiming remains possible from age 62 and mandatory by age 70, and the earnings test, the benefit formula, and disability insurance are unchanged. % src: 12:97 (claiming between 62 and 70); T:DRC_visualization_4.tex:37-58 (factor 100 at the NRA in every row)
+
+\paragraph{Medicare Part A and Part B.}
+Let $m^{0}(h,t,P)$ denote baseline out-of-pocket spending at ages 65 and older for health $h$, age $t$, and participation status $P$, and let $\xi$ denote the average share of total medical spending at those ages paid by Medicare for the targeted group, so that total spending is $m^{0}/(1-\xi)$. % src: 12:536 ("aged 65 and older"); 12:538-552 (working note: TE = OOP + Cover, c = Cover/TE, m* = (1-c) TE; the note's c is written xi here to avoid a clash with consumption)
+A reform that raises the coverage share by $\Delta\xi$ sets
+\begin{equation}\label{eq:medreform}
+m^{\rho}(h,t,P)=m^{0}(h,t,P)\,\frac{1-\xi-\Delta\xi}{1-\xi},\qquad t\geq 65,
+\end{equation}
+for everyone aged 65 and older under Part A and for nonparticipants aged 65 and older ($P=0$) under Part B, with $\Delta\xi=0.20$. % src: 12:538-552 (m(h_t,t) = m*(h_t,t)(1-c-x)/(1-c)); 12:536; T:welfare_medicare_mvpfv8.tex:113, :116 ("+ 20 pp")
+The experiments start from a re-simulated baseline: the coverage shares are computed from the MEPS for individuals aged 65 and older by health and participation status, the estimated model is simulated with these shares, and the two reforms are applied to that simulation. % src: 12:536; 7:328 fn
+% TODO-AUTHORS: Open question 5 -- confirm that Delta xi = 0.20 (the note's x) is 20 percentage points of total medical spending (table label "+ 20 pp"; May 2025 text "by 20%"). The working note at 12:538-552 writes the Part B rule as m*(h,p,t)(1-c_np-x)/(1-c) with separate shares c_p and c_np for participants and nonparticipants; the symbol xi in (eq:medreform) stands for the share of the targeted group. Confirm the exact scaling used in the code.
+
+\paragraph{Income tax after age 62 (I1--I5).}
+After-tax income is $y_t-T_t(y_t)=\lambda_t y_t^{1-\tau_t}$ by \eqref{eq:tax}, so a reduction in the tax is an increase in $\lambda_t$. The implementation note of the May 2025 appendix sets, for $t\geq 62$,
+\begin{equation}\label{eq:taxreform}
+\tilde{\lambda}_t=\lambda_t+\Delta\lambda\,(t-61),\qquad \Delta\lambda\in\{0.01,\,0.02,\,0.03,\,0.04,\,0.05\},
+\end{equation}
+with $\lambda_t$ unchanged before age 62, and the table labels describe the same five reforms as increases of 1 to 5 percent in after-tax income after age 62. % src: 12:556-557; 7:349; T:welfare_tax_mvpf_v8.tex:114-118
+% TODO-AUTHORS: Open question 6 -- (eq:taxreform) grows with age after 62 (Delta lambda, the note's x, per year of age) whereas the labels and 7:349 describe a flat increase; state which rule generated panel B of Table 9 and delete the other description here and in Section 9.2. Also confirm the sign convention of the Direct column (12:620: "percentage change in the NPV of negative total income tax collection"; printed entries are positive and are read as revenue forgone).
+The direct effect is the change in the net present value from age 62 of income-tax collections, with the sign reversed so that revenue forgone is positive, as a share of baseline collections. % src: 12:620; 7:392 (NPV of lost taxes from age 62)
+
+\paragraph{Saving subsidies (K1--K3).}
+The net return in \eqref{eq:budget} is raised from $r=(1-\tau_k)r_f$, equal to 3.2 percent, by 0.2, 0.4, and 0.8 percentage points at every age; the subsidy is the additional return $\Delta r\,a_t$ paid on assets held in each period. % src: 12:560; 5:390
+K3 sets the net return equal to the gross return of 4 percent and coincides with the elimination experiment D3 of \autoref{tab:elim}. % src: 5:390; T:welfare_decomposition_gradient.tex:33 (3.60) and T:welfare_savings_mvpf_v3.tex:123 (3.6)
+
+\subsection{Outcome definitions by family}\label{app:outcomes}
+
+The welfare columns are common to all families: WTP is $100\,x^{\CE}$ from \eqref{eq:ce}, and the dollar value $\mathcal{W}$ in \eqref{eq:wtp} uses baseline consumption from age 62 for the Social Security, Medicare, and income-tax families and from age 30 for the saving subsidies. % src: 12:567-570; 12:632; 12:639
+The fiscal columns follow \eqref{eq:fiscal} with the objects listed below; the definitions used in computing the tables are quoted verbatim in the notes to \autoref{tab:conventions}. All net present values (NPVs) are per capita at age 62 at the net return $r$. % src: 12:611; 7:73 fn
+\begin{itemize}[nosep,leftmargin=1.5em]
+\item \emph{Social Security (P, L, AN, AD, AL).} $B$ is the NPV of retirement benefits $b_t\,ss_t$ paid by the program; Direct is $\Delta B$ in percent of $B^{0}$; $O$ is all other taxes and transfers, namely disability benefits and transfers net of income and payroll taxes; Indirect is $\Delta O$ in percent of $O^{0}$; Net is $\Delta G$ in percent of baseline government spending $G^{0}$. % src: 12:611; 7:73 (net effect reflects changes in government spending G)
+\item \emph{Medicare (Part A, Part B).} $B$ is the NPV of Medicare payments to the targeted group after 65 (everyone for Part A; nonparticipants for Part B); Direct is $\Delta B$ in percent of baseline payroll-tax collections $T^{p,0}$; $O$ is all taxes and transfers, namely Social Security benefits and transfers net of income and payroll taxes; Indirect is $\Delta O$ in percent of $O^{0}$; Net is $(\Delta B+\Delta O)$ in percent of baseline government spending. % src: 12:615
+\item \emph{Income tax (I1--I5).} $B$ is the NPV of revenue forgone after 62; Direct is $\Delta B$ in percent of baseline income-tax collections $|T^{0}|$; $O$ is all other taxes and transfers, namely Social Security benefits and transfers net of payroll taxes; Indirect is $\Delta O$ in percent of $O^{0}$; Net is $\Delta G$ in percent of $G^{0}$. % src: 12:620-622
+\item \emph{Saving subsidies (K1--K3).} $B=\mathit{Sub}$ is the NPV of the subsidy; Direct is $\mathit{Sub}$ in percent of baseline government spending $G^{0}$; Indirect is the change in government spending excluding the subsidy, in percent; Net is the change in government spending including the subsidy, in percent; the MVPF is the interval $[\mathcal{W}/\mathit{Sub},\;\mathcal{W}/\Delta G^{\mathrm{full}}]$ of \eqref{eq:mvpfk}, whose upper bound uses the net cost under full realization and taxation of capital gains. % src: 12:626; 12:639; 7:423
+\end{itemize}
+The MVPF of the first three families is $\mathcal{W}/\Delta G$ \eqref{eq:mvpf}; when $\Delta G<0<\Delta B$ the tables report the lower bound $\mathcal{W}/\Delta B$ \eqref{eq:mvpflb}, and when $\mathcal{W}>0$, $\Delta B<0$, and $\Delta G<0$ they report $\infty$. % src: 12:634; T:welfare_progressivity_mvpfv7.tex:115; T:welfare_age_dependence_mvpfv5.tex:112-126
+The participation columns are changes in labor force participation at ages 30--49, 62--64, and 65--69 in percentage points. % src: 7:73
+
+\subsection{Benefit-formula reforms: the full grid}\label{app:pfull}
+
+\autoref{tab:progressivity_full} reports all 39 rows of the grid of \autoref{subsec:pgrid}; \autoref{tab:progressivity} in the main text reproduces ten of them. % src: T:welfare_progressivity_mvpfv7.tex:115-158
+The two sequences coincide at their endpoint, so the L9 row repeats the P3.9 row. % src: T:welfare_progressivity_mvpfv7.tex:146, :158
+
+\begin{table}[!p]
+\centering
+\caption{Social Security Progressivity and Level Reforms: Full Grid}
+\label{tab:progressivity_full}
+\vspace{6pt}
+\setstretch{1.0}
+\footnotesize
+\setlength{\tabcolsep}{5pt}
+\begin{threeparttable}
+\cleargradientmacros
+\input{tables/welfare_progressivity_mvpfv7}
+\begin{tablenotes}[flushleft]\scriptsize
+\item[] \textit{Notes:} The second column gives the three bracket rates of the primary insurance amount \eqref{eq:pia} under the reform; the status quo is (0.9, 0.32, 0.15). P2.0--P2.9 are applied on top of P1.9 and P3.0--P3.9 on top of P2.9; L9 and P3.9 are the same policy. Columns as in \autoref{tab:progressivity} and \autoref{tab:conventions}: WTP in percent of consumption; Direct in percent of baseline retirement benefits; Indir.\ in percent of baseline other taxes and transfers; Net in percent of baseline net government spending; MVPF in dollars of welfare per dollar of net spending, with $[0.52,+\infty)$ the lower bound that counts only the direct cost in the one row in which net spending falls; participation changes in percentage points at ages 30--49, 62--64, and 65--69. All NPVs per capita at age 62 at the net return of 3.2 percent. Shading is blue for a welfare gain, a fiscal saving, a higher MVPF, or a participation increase and red for the opposite. Source: simulations of the estimated model.
+% src: T:welfare_progressivity_mvpfv7.tex:115-158; 12:475; 12:611; 12:631-634; 5:390
+\end{tablenotes}
+\end{threeparttable}
+\end{table}
+
+\subsection{Participation and fiscal saving under the claiming-schedule reforms}\label{app:partsave}
+% Added by W3a (2026-11-09): BLUEPRINT 2.7 exhibits, Appendix Figure C3 (fig:participation_saving), referenced from sections/07_claiming.tex.
+% The figure file is a self-contained float (caption, label, notes) built from tables/welfare_age_dependence_mvpfv5.tex:108-126.
+
+\autoref{fig:participation_saving} plots, for every row of \autoref{tab:claiming}, the change in participation at ages 62--64 and at ages 65--69 against the direct fiscal effect, with one marker per reform and the marker type by family. % src: T:welfare_age_dependence_mvpfv5.tex:108-126
+
+\input{figures/new/fig_participation_saving}
+\subsection{Participation under the elimination experiments}\label{app:elimlfp}
+
+\autoref{fig:elimlfp} plots labor force participation by age in the estimated model and under the five elimination experiments of \autoref{sec:elimination}, and \autoref{fig:elimlfp_health} repeats the comparison by health state. These figures are the only exhibit of the participation responses to D1--D5; \autoref{tab:elim} reports welfare only. Removing Social Security benefits (D1) raises participation from age 63 by more than any other experiment; removing disability benefits (D5) raises it from age 50, by more than D1 at every age from 50 to 62 except age 60, where the two are within half a percentage point, and most of all among individuals with a disability, the group eligible for the benefit. Full coverage of medical spending after 65 (D2), the full saving subsidy (D3), and removal of the income tax (D4) lower participation at the older ages, D4 by less than the other two from the early 60s.
+% src: figures/abdou/frot_weld1_paper.tex and frot_weld2.tex, embedded series rows 50-69 (D5 > D1 at 50-59, 61, 62; D1 > D5 at 60 by 0.34 pp; D1 largest from 63; D4 decline smaller than D2 and D3 from 61); frot_weld1_2_paper.tex, frot_weld2_2.tex (disability panel); no numeric value printed
+
+\begin{figure}[!tp]
+\centering
+\caption{Labor Force Participation by Age under the Elimination Experiments}
+\label{fig:elimlfp}
+\vspace{6pt}
+\begin{tabular}{cc}
+\input{figures/abdou/frot_weld1_paper} & \input{figures/abdou/frot_weld2}
+\end{tabular}
+\begin{minipage}{0.95\textwidth}\footnotesize\setstretch{1.0}
+\textit{Notes:} Labor force participation rate in percent by age, 30--69, in the estimated model (gray) and in the elimination experiments of \autoref{tab:elim}. D1 sets Social Security retirement benefits to zero; D2 sets out-of-pocket medical spending after age 65 to zero for participants and nonparticipants; D3 sets the net return on assets equal to the gross return (the K3 reform of \autoref{tab:other}); D4 sets the income tax to zero; D5 sets disability benefits to zero. Left panel: D1 and D2; right panel: D3--D5. Source: simulations of the estimated model.
+% src: 12:325-328 (May 2025 figure notes, rewritten); T:welfare_decomposition_gradient.tex:27-37 (D1-D5 definitions); 5:390 (r -> r_f)
+\end{minipage}
+\end{figure}
+
+\begin{figure}[!p]
+\centering
+\caption{Labor Force Participation by Age and Health under the Elimination Experiments}
+\label{fig:elimlfp_health}
+\vspace{6pt}
+\begin{tabular}{cc}
+\multicolumn{2}{l}{\footnotesize (A) Good health}\\
+\input{figures/abdou/frot_weld1_0_paper} & \input{figures/abdou/frot_weld2_0}\\
+\multicolumn{2}{l}{\footnotesize (B) Poor health}\\
+\input{figures/abdou/frot_weld1_1_paper} & \input{figures/abdou/frot_weld2_1}\\
+\multicolumn{2}{l}{\footnotesize (C) With a disability}\\
+\input{figures/abdou/frot_weld1_2_paper} & \input{figures/abdou/frot_weld2_2}
+\end{tabular}
+\begin{minipage}{0.95\textwidth}\footnotesize\setstretch{1.0}
+\textit{Notes:} Labor force participation rate in percent by age, 30--69, by current health state, in the estimated model (gray) and in the elimination experiments of \autoref{tab:elim}: D1 sets Social Security retirement benefits to zero; D2 sets out-of-pocket medical spending after age 65 to zero; D3 sets the net return on assets equal to the gross return; D4 sets the income tax to zero; D5 sets disability benefits to zero. In panels (B) and (C) the legend abbreviates the experiment labels to their identifiers. Source: simulations of the estimated model.
+% src: 12:368-374 (May 2025 figure notes, rewritten); figures/abdou/frot_weld1_2.tex:114,161 and frot_weld2_1.tex:115,161,210 (abbreviated legends)
+\end{minipage}
+\end{figure}
+
+% Final fix pass: the \FloatBarrier that closed Appendix C was removed. It forced Figure C3 (a full-page float) onto its own page and left the preceding page about 40 percent blank; without it the text of Appendix D fills that page and Figure C3 floats onto the page after it.
