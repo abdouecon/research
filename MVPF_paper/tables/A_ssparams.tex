@@ -2,6 +2,7 @@
 % Source: FROT tables/parameters_ss.tex (scratchpad copy: src/tables/parameters_ss.tex).
 % Every number copied exactly; rows regrouped and the redundant source column moved to the notes.
 % The payroll-tax rate is denoted tau^p_t here (tau^{ss}_t in the source) to match the text.
+% The 3%--7.65% range is the employee rate (OASDI plus HI); the source called it the combined employee and employer rate.
 \begin{tabular}{@{}l l l@{}}
 \toprule
 Parameter & Description & Value \\
@@ -20,13 +21,13 @@ $aime_{max}$ & Maximum AIME & \$43,800 \\
 $\tau_{ret}$ & Benefit reduction rate, below the NRA & 50\% \\
 $\tau_{ret}$ & Benefit reduction rate, from the NRA to age 69 & 33\% \\
 $y_{ret}$ & Exempt amount, below the NRA & \$6,000 \\
-$y_{ret}$ & Exempt amount, from the NRA to age 69 & \$8,186 \\
+$y_{ret}$ & Exempt amount, from the NRA to age 69 & \$8,186 \\ % AUTHORS: SSA 1987 exempt amount for ages 65-69 is $8,160; confirm the code value.
 \addlinespace
 \multicolumn{3}{@{}l}{\textit{D. Disability insurance}} \\
 $y_{db}$ & Earnings threshold for DI eligibility & \$3,600 \\
 \addlinespace
 \multicolumn{3}{@{}l}{\textit{E. Payroll tax}} \\
-$\tau^p_t$ & Payroll tax rate (OASDI and HI) & 3\%--7.65\% \\
+$\tau^p_t$ & Employee payroll tax rate (OASDI and HI) & 3\%--7.65\% \\
 $\bar{y}^{ss}_t$ & Payroll tax threshold & \$14,459--\$64,974 \\
 \bottomrule
 \end{tabular}

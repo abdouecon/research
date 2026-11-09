@@ -27,7 +27,7 @@ The asset and reentry profiles are not conditioned on health. Healthy individual
 
 \subsection{Moment Conditions and Criterion}
 
-Let $t\in\{30,\dots,69\}$ index the $T=40$ target ages and $g\in\{\text{healthy},\text{unhealthy}\}$ the two health groups, with unhealthy meaning $h\in\{1,2\}$. Let $p_t(X;\mathcal{P},\chi)$, $n_t(X;\mathcal{P},\chi)$, $a_t(X;\mathcal{P},\chi)$, and $RE_t(X;\mathcal{P},\chi)$ denote the participation, hours, asset, and reentry outcomes implied by the model's decision rules in state $X$, and let $F_{g,t}(\cdot;\mathcal{P},\chi)$ and $F_t(\cdot;\mathcal{P},\chi)$ denote the simulated distributions of the state at age $t$ within health group $g$ and in the whole population. The vector of moment conditions stacks, for every $t$ and $g$,
+Let $t\in\{30,\dots,69\}$ index the $J=40$ target ages and $g\in\{\text{healthy},\text{unhealthy}\}$ the two health groups, with unhealthy meaning $h\in\{1,2\}$. Let $p_t(X;\mathcal{P},\chi)$, $n_t(X;\mathcal{P},\chi)$, $a_t(X;\mathcal{P},\chi)$, and $RE_t(X;\mathcal{P},\chi)$ denote the participation, hours, asset, and reentry outcomes implied by the model's decision rules in state $X$, and let $F_{g,t}(\cdot;\mathcal{P},\chi)$ and $F_t(\cdot;\mathcal{P},\chi)$ denote the simulated distributions of the state at age $t$ within health group $g$ and in the whole population. The vector of moment conditions stacks, for every $t$ and $g$,
 \[
 \hat{\varphi}(\mathcal{P};\chi)=
 \begin{bmatrix}
@@ -40,16 +40,16 @@ Let $t\in\{30,\dots,69\}$ index the $T=40$ target ages and $g\in\{\text{healthy}
 \]
 where hats denote the data profiles of Section~\ref{sec:estimation}: $\hat{p}_{g,t}$ and $\hat{n}_{g,t}$ are participation and hours of participants in group $g$ at age $t$, $\hat{a}_t$ and $\hat{a}^{\mathrm{med}}_t$ are mean and median assets, and $\widehat{re}_t$ is the mean reentry rate. The vector has
 \begin{enumerate}[label=(\roman*)]
-\item $2T$ elements for participation by health group,
-\item $2T$ elements for hours conditional on participation by health group,
-\item $2T$ elements for mean and median assets, and
-\item $T$ elements for the reentry rate,
+\item $2J$ elements for participation by health group,
+\item $2J$ elements for hours conditional on participation by health group,
+\item $2J$ elements for mean and median assets, and
+\item $J$ elements for the reentry rate,
 \end{enumerate}
-for a total of $7T=280$ moment conditions. The MSM estimator minimizes
+for a total of $7J=280$ moment conditions. The MSM estimator minimizes
 \[
 Q(\mathcal{P})=\frac{N}{1+N/N_s}\,\hat{\varphi}(\mathcal{P};\chi)'\,\hat{\mathbf{W}}\,\hat{\varphi}(\mathcal{P};\chi),
 \]
-where $N$ is the number of observations in the data and $N_s$ the number of simulated observations; the ratio $N/N_s$ accounts for the additional variance introduced by simulation. The weighting matrix $\hat{\mathbf{W}}$ is the inverse of the $7T\times7T$ diagonal matrix whose diagonal elements are the sampling variances of the data moments.
+where $N$ is the number of observations in the data and $N_s$ the number of simulated observations; the ratio $N/N_s$ accounts for the additional variance introduced by simulation. The weighting matrix $\hat{\mathbf{W}}$ is the inverse of the $7J\times7J$ diagonal matrix whose diagonal elements are the sampling variances of the data moments.
 
 \subsection{Estimation Algorithm}
 
@@ -78,9 +78,10 @@ The baseline specification has nonseparable preferences over consumption and lei
 \[
 u(c,n)=\ln c-\kappa\,\frac{n^{1+1/\eta}}{1+1/\eta}-\tilde{\phi}(h)\,\Ind\{P=1\}-\tilde{\phi}_{RE}\,\Ind\{RE=1\},
 \]
-where $n$ is annual hours, $\kappa$ scales the disutility of hours, $\eta$ is the Frisch elasticity of hours, $\tilde{\phi}(h)$ is the utility cost of participation in health state $h$, with $\tilde{\phi}(1)=\tilde{\phi}(2)$ as in the baseline, and $\tilde{\phi}_{RE}$ is the utility cost of reentering the labor market. We set $\eta=0.5$, following \citet{chetty2012bounds}, and estimate $(\beta,\kappa,\tilde{\phi}(0),\tilde{\phi}(1),\tilde{\phi}_{RE})$ by the same MSM procedure. All other components of the model---the health and wage processes, medical expenses, policy rules, and estimation targets---are unchanged.
+where $n$ is annual hours, $\kappa$ scales the disutility of hours, $\eta$ is the Frisch elasticity of hours, $\tilde{\phi}(h)$ is the utility cost of participation in health state $h$, with $\tilde{\phi}(1)=\tilde{\phi}(2)$ as in the baseline, and $\tilde{\phi}_{RE}$ is the utility cost of reentering the labor market. We fix $\eta=0.5$, a common value for the intensive-margin Frisch elasticity of hours, and estimate $(\beta,\kappa,\tilde{\phi}(0),\tilde{\phi}(1),\tilde{\phi}_{RE})$ by the same MSM procedure. All other components of the model---the health and wage processes, medical expenses, policy rules, and estimation targets---are unchanged.
+% AUTHORS: eta = 0.5 was attributed to Chetty (2012), which reports Hicksian elasticities (0.33 intensive), not a Frisch elasticity of 0.5. The usual source for an intensive-margin Frisch elasticity near 0.5 is Chetty, Guren, Manoli and Weber (2011, AER P&P 101(3)), which is not in references.bib; add it and cite it here and in the tab:lnc note if desired.
 
-\autoref{tab:lnc} reports the estimates, and \autoref{fig:fit_lnc} compares the simulated and empirical profiles. The estimates are broadly consistent with the baseline. The utility cost of working is higher for unhealthy individuals than for healthy ones, 0.59 against 0.53, as the time cost is higher in the baseline; and the reentry cost is large relative to the per-period cost of participation. The two specifications fit different parts of the data. The logarithmic specification fits assets at older ages better than the baseline, but it matches participation less accurately: simulated participation remains above the data until about age 60 in both health groups and misses the earlier decline of unhealthy individuals, and simulated assets exceed the data at younger ages.
+\autoref{tab:lnc} reports the estimates, and \autoref{fig:fit_lnc} compares the simulated and empirical profiles. The estimates are broadly consistent with the baseline. The utility cost of working is higher for unhealthy individuals than for healthy ones, 0.59 against 0.53, as the time cost is higher in the baseline; and the reentry cost is large relative to the per-period cost of participation. The two specifications fit different parts of the data. The logarithmic specification fits mean assets at older ages better than the baseline, but it matches participation less accurately: simulated participation remains above the data until about age 60 for the healthy and until 64 for the unhealthy, so the model misses the earlier decline of unhealthy individuals. Simulated median assets exceed the data at nearly all ages, and simulated mean assets do so from age 39 to 59. % Source: figures/h800_l0_lnc_edit.tex (above the band at 30--61), h800_l1_lnc_edit.tex (33--64), h800_lnc_mediana.tex (31, 33--68), h800_lnc_meana.tex (39--59).
 
 The reform analysis in Sections~\ref{sec:framework} to \ref{sec:financing} uses the baseline nonseparable specification of \autoref{tab:estimates}. Participation and its decline by health status govern the behavioral responses and fiscal externalities of retirement reforms, and the baseline matches these profiles more closely.
 
@@ -89,7 +90,7 @@ The reform analysis in Sections~\ref{sec:framework} to \ref{sec:financing} uses 
 \caption{Estimated Parameters: Logarithmic Utility}\label{tab:lnc}
 \small
 \input{tables/msm_lnc}
-\tabnotes{\textit{Notes:} Method-of-simulated-moments estimates and standard errors for the specification $u(c,n)=\ln c-\kappa n^{1+1/\eta}/(1+1/\eta)-\tilde{\phi}(h)\Ind\{P=1\}-\tilde{\phi}_{RE}\Ind\{RE=1\}$. The costs $\tilde{\phi}(h)$ and $\tilde{\phi}_{RE}$ are in utils; poor health ($h=1$) and disability ($h=2$) share one cost of work. The Frisch elasticity $\eta$ is fixed at 0.5 following \citet{chetty2012bounds}. Targets, first-step parameters, and policy rules are those of the baseline estimation. \textit{Data source:} Panel Study of Income Dynamics.}
+\tabnotes{\textit{Notes:} Method-of-simulated-moments estimates and standard errors for the specification $u(c,n)=\ln c-\kappa n^{1+1/\eta}/(1+1/\eta)-\tilde{\phi}(h)\Ind\{P=1\}-\tilde{\phi}_{RE}\Ind\{RE=1\}$. The costs $\tilde{\phi}(h)$ and $\tilde{\phi}_{RE}$ are in utils; poor health ($h=1$) and disability ($h=2$) share one cost of work. The Frisch elasticity $\eta$ is fixed at 0.5, not estimated. Estimates and standard errors are reported at the precision of the original estimation output. Targets, first-step parameters, and policy rules are those of the baseline estimation. \textit{Data source:} Panel Study of Income Dynamics.}
 \end{table}
 
 \begin{figure}[!htbp]
@@ -98,9 +99,10 @@ The reform analysis in Sections~\ref{sec:framework} to \ref{sec:financing} uses 
 \vspace{0.5em}
 \pgfplotsset{every axis title/.append style={font=\footnotesize}}
 % Panels copied verbatim from FROT figures/abdou/{h800_l0_lnc_edit,h800_l1_lnc_edit,h800_lnc_meana,h800_lnc_mediana}.tex (2025 simulation of the log-utility model).
-\begin{tabular}{@{}c@{\hspace{1.5em}}c@{}}
+\begin{tabular}{@{}c@{\hspace{1.2em}}c@{}}
 \input{figures/h800_l0_lnc_edit} & \input{figures/h800_l1_lnc_edit} \\[1ex]
 \input{figures/h800_lnc_meana} & \input{figures/h800_lnc_mediana}
 \end{tabular}
-\tabnotes{\textit{Notes:} Panels A and B show labor force participation rates (percent) of healthy individuals ($h=0$) and unhealthy individuals (poor health or disability, $h\in\{1,2\}$); panels C and D show mean and median nonpension assets (hundreds of thousands of 2016 dollars). Solid lines are data profiles estimated from the Panel Study of Income Dynamics, shaded areas are 95\% confidence intervals, and dashed lines are profiles simulated from the model with logarithmic utility at the estimates of \autoref{tab:lnc}. Compared with the baseline (\autoref{fig:fit_labor} and \autoref{fig:fit_assets}), the logarithmic specification fits assets at older ages better and participation worse.}
+\tabnotes{\textit{Notes:} Panels A and B show labor force participation rates (percent) of healthy individuals ($h=0$) and unhealthy individuals (poor health or disability, $h\in\{1,2\}$); panels C and D show mean and median nonpension assets (hundreds of thousands of 2016 dollars). Solid lines are data profiles estimated from the Panel Study of Income Dynamics, shaded areas are 95\% confidence intervals, and dashed lines are profiles simulated from the model with logarithmic utility at the estimates of \autoref{tab:lnc}. Compared with the baseline (\autoref{fig:fit_labor} and \autoref{fig:fit_assets}), the logarithmic specification fits mean assets at older ages better and participation worse.}
 \end{figure}
+\FloatBarrier

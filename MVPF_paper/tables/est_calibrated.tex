@@ -1,6 +1,6 @@
 % Table body for tab:calibrated (Section 3).
 % Sources: FROT tables/parameters_summary.tex (rho = 0.981, sigma^2 = 0.016, ERA 62, NRA 65, DRC 4.5%; scratchpad src/tables/parameters_summary.tex);
-% r_f = 4%, 20% wedge, consumption floor $3,500: FROT 2025_sub/5_quantitative_model.tex (First-Step Estimation) and blueprint Sec. 5.
+% r_f = 4%, 20% wedge, consumption floor $3,500: FROT 2025_sub/5_quantitative_model.tex (First-Step Estimation) and blueprint Sec. 5; floor attribution corrected to French2004.
 \begin{tabular}{@{}l l l l@{}}
 \toprule
 Parameter & Description & Value & Source \\
@@ -15,9 +15,10 @@ $\sigma^2$ & Variance of ability innovations & 0.016 & PSID \\
 $\lambda_t,\tau_t$ & Income tax function by age & Age-specific & \citet{Borella2023} \\
 \addlinespace
 \multicolumn{4}{@{}l}{\textit{B. Taken from the literature}} \\
+% AUTHORS: the r_f (French 2005) and tau_k (Stantcheva 2017) attributions follow FROT 2025_sub/5_quantitative_model.tex; a reviewer could not locate either value in the cited papers. Add page/table references or cite the original sources.
 $r_f$ & Gross interest rate & 4\% & \citet{french2005effects} \\
 $\tau_k$ & Wedge between gross and net return & 20\% & \citet{Stantcheva2017} \\
-$\underline{c}$ & Consumption floor & \$3,500 & \citet{french2011effects} \\
+$\underline{c}$ & Consumption floor & \$3,500 & \citet{French2004} \\ % Attribution per verified_facts item 8: $3,500 is French and Jones (2004, CRR WP 2004-12), not French and Jones (2011).
 \addlinespace
 \multicolumn{4}{@{}l}{\textit{C. Program rules, cohorts born 1920--1940}} \\
 ERA & Early retirement age & 62 & SSA \\

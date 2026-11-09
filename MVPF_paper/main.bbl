@@ -62,11 +62,6 @@
   Between Structural and Reduced-Form Methods,'' {\it Annual Review of
   Economics}, 2009, {\it 1}, 451--488.
 
-\harvarditem[Chetty]{Chetty}{2012}{chetty2012bounds}
-{\bf \bysame{}}, ``Bounds on elasticities with optimization frictions: A
-  synthesis of micro and macro evidence on labor supply,'' {\it Econometrica},
-  2012, {\it 80} (3), 969--1018.
-
 \harvarditem[Chetty et al.]{Chetty, Stepner, Abraham, Lin, Scuderi, Turner,
   Bergeron and Cutler}{2016}{chetty2016association}
 {\bf \bysame{}, Michael Stepner, Sarah Abraham, Shelby Lin, Benjamin Scuderi,
@@ -84,6 +79,13 @@
   Explanations,'' in Courtney~C. Coile, Kevin Milligan, and David~A. Wise,
   eds., {\it Social Security Programs and Retirement around the World: Working
   Longer}, University of Chicago Press, 2019.
+
+\harvarditem[Coile et al.]{Coile, Diamond, Gruber and
+  Jousten}{2002}{Coile2002delays}
+{\bf Coile, Courtney, Peter Diamond, Jonathan Gruber, and Alain Jousten},
+  ``Delays in Claiming Social Security Benefits,'' {\it Journal of Public
+  Economics}, 2002, {\it 84} (3), 357--385.
+\newblock Earlier version: NBER Working Paper 7318 (1999).
 
 \harvarditem[Conesa and Krueger]{Conesa and Krueger}{1999}{Conesa1999social}
 {\bf Conesa, Juan~Carlos and Dirk Krueger}, ``Social Security Reform with
@@ -223,15 +225,16 @@
 {\bf Gourinchas, Pierre-Olivier and Jonathan~A. Parker}, ``Consumption Over the
   Life Cycle,'' {\it Econometrica}, January 2002, {\it 70} (1), 47--89.
 
-\harvarditem[Gruber and Wise]{Gruber and Wise}{2009}{gruber2009social}
-{\bf Gruber, Jonathan and David~A Wise}, {\it Social security programs and
-  retirement around the world: Fiscal implications of reform}, University of
-  Chicago Press, 2009.
-
 \harvarditem[Gruber and Wise, eds]{Gruber and Wise, eds}{2004}{Gruberwise2002}
-{\bf \bysame{} and David~A. Wise, eds}, {\it Social Security Programs and
-  Retirement Around the World: Micro-Estimation} International Social Security,
-  Chicago: University of Chicago Press, 2004.
+{\bf Gruber, Jonathan and David~A. Wise, eds}, {\it Social Security Programs
+  and Retirement Around the World: Micro-Estimation} International Social
+  Security, Chicago: University of Chicago Press, 2004.
+
+\harvarditem[Gruber and Wise, eds]{Gruber and Wise,
+  eds}{2007}{gruber2009social}
+{\bf \bysame{} and \bysame{}, eds}, {\it Social Security Programs and
+  Retirement around the World: Fiscal Implications of Reform}, Chicago:
+  University of Chicago Press, 2007.
 
 \harvarditem[Gruber and Wise]{Gruber and Wise}{1998}{gruber1998social}
 {\bf \bysame{} and David Wise}, ``Social security and retirement: An
@@ -277,9 +280,8 @@
 \harvarditem[Heckman]{Heckman}{1976}{Heckman1976}
 {\bf Heckman, James~J.}, ``The Common Structure of Statistical Models of
   Truncation, Sample Selection and Limited Dependent Variables and a Simple
-  Estimator for Such Models,'' in Sanford~V. Berg, ed., {\it Annals of Economic
-  and Social Measurement}, Vol.~5, National Bureau of Economic Research,
-  October 1976, pp.~479--492.
+  Estimator for Such Models,'' {\it Annals of Economic and Social Measurement},
+  1976, {\it 5} (4), 475--492.
 
 \harvarditem[Hendren]{Hendren}{2016}{hendren2016policy}
 {\bf Hendren, Nathaniel}, ``The policy elasticity,'' {\it Tax Policy and the
@@ -329,7 +331,7 @@
 \harvarditem[Jones and Li]{Jones and Li}{2023}{Jones2023}
 {\bf Jones, John~Bailey and Yue Li}, ``Social Security Reform with
   Heterogeneous Mortality,'' {\it Review of Economic Dynamics}, April 2023,
-  {\it 48}, 320--334.
+  {\it 48}, 320--344.
 
 \harvarditem[Judd]{Judd}{1998}{Judd1998}
 {\bf Judd, Kenneth~L.}, {\it Numerical Methods in Economics}, 1 ed., Vol.~1,
@@ -348,16 +350,21 @@
   funds: Hours of work versus labor force participation,'' {\it Journal of
   Public Economics}, 2006, {\it 90} (10-11), 1955--1973.
 
+\harvarditem[Kolsrud et al.]{Kolsrud, Landais, Reck and
+  Spinnewijn}{2024}{Kolsrud2024retirement}
+{\bf Kolsrud, Jonas, Camille Landais, Daniel Reck, and Johannes Spinnewijn},
+  ``Retirement Consumption and Pension Design,'' {\it American Economic
+  Review}, 2024, {\it 114} (1), 89--133.
+
+\harvarditem[Lalive et al.]{Lalive, Magesan and Staubli}{2023}{Lalive2023how}
+{\bf Lalive, Rafael, Arvind Magesan, and Stefan Staubli}, ``How {Social
+  Security} Reform Affects Retirement and Pension Claiming,'' {\it American
+  Economic Journal: Economic Policy}, 2023, {\it 15} (3), 115--150.
+
 \harvarditem[Laun and Wallenius]{Laun and Wallenius}{2015}{Laun2015life}
 {\bf Laun, Tobias and Johanna Wallenius}, ``A Life Cycle Model of Health and
   Retirement: The Case of {Swedish} Pension Reform,'' {\it Journal of Public
   Economics}, 2015, {\it 127}, 127--136.
-
-\harvarditem[{Le Monde}]{{Le Monde}}{2023}{lemonde2023retraites}
-{\bf {Le Monde}}, ``R{\'e}forme des retraites : environ 20 000 amendements
-  d{\'e}pos{\'e}s {\`a} l'Assembl{\'e}e, dont plus de la moiti{\'e} par le
-  groupe LFI,'' {\it Le Monde}, February 2023.
-\newblock Accessed: 2025-05-10.
 
 \harvarditem[Li]{Li}{2018}{Li2018}
 {\bf Li, Yue}, ``Paradoxical effects of increasing the normal retirement age: A
@@ -454,6 +461,11 @@
 {\bf Seibold, Arthur}, ``Reference Points for Retirement Behavior: Evidence
   from German Pension Discontinuities,'' {\it American Economic Review}, 2021,
   {\it 111} (4), 1126--1165.
+
+\harvarditem[Shoven and Slavov]{Shoven and Slavov}{2014}{Shoven2014does}
+{\bf Shoven, John~B. and Sita~Nataraj Slavov}, ``Does It Pay to Delay {Social
+  Security}?,'' {\it Journal of Pension Economics and Finance}, 2014, {\it 13}
+  (2), 121--144.
 
 \harvarditem[Shoven et al.]{Shoven, Slavov and Wise}{2017}{shoven2017}
 {\bf Shoven, John~B, Sita~Nataraj Slavov, and David~A Wise}, ``Social Security
