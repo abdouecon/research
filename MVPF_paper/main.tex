@@ -1,0 +1,145 @@
+% ============================================================================
+%  Retirement Reforms That Pay for Themselves
+%  Abdoulaye Ndiaye and Zhixiu Yu
+%  Main file. Compile with pdflatex + bibtex (latexmk -pdf main.tex).
+%  In Overleaf, set this file (MVPF_paper/main.tex) as the main document.
+% ============================================================================
+\documentclass[12pt]{article}
+
+% ---- Paths: lets the document compile from its own folder or from the project root
+\makeatletter
+\def\input@path{{./}{MVPF_paper/}}
+\makeatother
+
+% ---- Fonts, layout, spacing
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{mathpazo}
+\usepackage{microtype}
+\usepackage[margin=1in]{geometry}
+\usepackage{setspace}
+\onehalfspacing
+
+% ---- Mathematics
+\usepackage{amsmath,amssymb,amsthm,bm,mathtools}
+
+% ---- Tables and figures
+\usepackage{booktabs,threeparttable,multirow,makecell,array}
+\usepackage{graphicx}
+\usepackage[table]{xcolor}
+\usepackage{colortbl}
+\usepackage{tikz,pgfplots,pgfplotstable}
+\pgfplotsset{compat=1.16}
+\usepgfplotslibrary{fillbetween}
+\usetikzlibrary{arrows,positioning,calc,decorations.markings,patterns}
+\usepackage{caption}
+\captionsetup{font=normalsize,labelfont=bf,labelsep=period,justification=centering,skip=6pt}
+\captionsetup[table]{skip=6pt}
+\usepackage{subcaption}
+\usepackage{float,placeins}
+\usepackage{pdflscape}
+
+% ---- Colors used by the figure files (house palette of the FROT project)
+\definecolor{blue}{RGB}{0,114,178}
+\definecolor{red}{RGB}{213,94,0}
+\definecolor{yellow}{RGB}{240,228,66}
+\definecolor{green}{RGB}{0,158,115}
+
+
+% ---- Bibliography
+\usepackage[round]{natbib}
+\bibpunct{(}{)}{;}{a}{}{,}
+
+% ---- Hyperlinks
+\usepackage[hidelinks]{hyperref}
+\hypersetup{colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue}
+\usepackage{url}
+
+% ---- Possessive citations: \citepos{key} -> Author's (Year)
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd{\NAT@test}{\else \NAT@nm}{\else \NAT@nmfmt{\NAT@nm}}{}{}
+\DeclareRobustCommand\citepos
+  {\begingroup
+   \let\NAT@nmfmt\NAT@posfmt
+   \NAT@swafalse\let\NAT@ctype\z@\NAT@partrue
+   \@ifstar{\NAT@fulltrue\NAT@citetp}{\NAT@fullfalse\NAT@citetp}}
+\let\NAT@orig@nmfmt\NAT@nmfmt
+\def\NAT@posfmt#1{\NAT@orig@nmfmt{#1's}}
+\makeatother
+
+% ---- Section formatting
+\usepackage{titlesec}
+\titlespacing\section{0pt}{14pt plus 4pt minus 2pt}{6pt plus 2pt minus 2pt}
+\titlespacing\subsection{0pt}{12pt plus 4pt minus 2pt}{4pt plus 2pt minus 2pt}
+\titlespacing\subsubsection{0pt}{10pt plus 4pt minus 2pt}{2pt plus 2pt minus 2pt}
+\titlespacing{\paragraph}{0pt}{0.5\baselineskip}{1em}
+\usepackage{enumitem}
+\setlist{itemsep=2pt,topsep=4pt}
+
+% ---- Theorem environments
+\newtheorem{proposition}{Proposition}
+\newtheorem{lemma}{Lemma}
+\newtheorem{corollary}{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}
+\newtheorem{assumption}{Assumption}
+\theoremstyle{remark}
+\newtheorem{remark}{Remark}
+
+% ---- Notation macros
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\MVPF}{\mathit{MVPF}}
+\newcommand{\WTP}{\mathit{WTP}}
+\newcommand{\Ind}{\mathbf{1}}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+
+% ---- Table notes
+\newcommand{\tabnotes}[1]{\par\vspace{2pt}\begin{minipage}{\linewidth}\footnotesize\setstretch{1.0}#1\end{minipage}}
+
+\title{\textbf{Retirement Reforms That Pay for Themselves}\thanks{Ndiaye: New York University (\href{mailto:an1490@nyu.edu}{an1490@nyu.edu}). Yu: Louisiana State University. The quantitative life-cycle analysis of retirement policy in this paper first appeared in an earlier version of our companion paper, \citet{NdiayeYu2026frot}, which studies the constrained-efficient design of taxes and retirement benefits in a dynamic Mirrlees economy estimated on the same data. This paper develops the positive and fiscal analysis separately.}}
+\author{Abdoulaye Ndiaye \and Zhixiu Yu}
+\date{\today}
+
+\begin{document}
+\raggedbottom
+\setlength{\parindent}{15pt}
+\maketitle
+\thispagestyle{empty}
+
+\input{sections/0_abstract}
+
+\clearpage
+\setcounter{page}{1}
+
+\input{sections/1_intro}
+\input{sections/2_model}
+\input{sections/3_estimation}
+\input{sections/4_framework}
+\input{sections/5_results}
+\input{sections/6_financing}
+\input{sections/7_discussion}
+\input{sections/8_conclusion}
+
+\clearpage
+\singlespacing
+\bibliographystyle{aer}
+\bibliography{references}
+
+\clearpage
+\onehalfspacing
+\appendix
+
+
+\counterwithin{table}{section}
+\counterwithin{figure}{section}
+\begin{center}{\Large\bfseries Appendix}\end{center}
+\input{sections/A_model_details}
+\input{sections/B_data}
+\input{sections/C_estimation_details}
+\input{sections/D_reforms}
+\input{sections/E_derivations}
+\input{sections/F_additional_figures}
+
+\end{document}
