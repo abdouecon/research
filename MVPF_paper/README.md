@@ -9,7 +9,7 @@ Companion paper to "Flexible Retirement and Optimal Taxation" (FROT). It contain
   - `sections/`: 0 abstract, 1–8 main text, A–F appendices.
   - `tables/`: `*_body.tex` files are generated, do not edit by hand.
   - `figures/`: TikZ/pgfplots.
-  - `references.bib`: FROT's `JMPreferences.bib` plus 24 added entries, each verified against publisher, RePEc, or SSA records. Non-ASCII characters were converted to LaTeX, and broken entries were repaired in this copy only.
+  - `references.bib`: FROT's `JMPreferences.bib` plus 25 added entries (the companion paper and 24 references), each verified against publisher, RePEc, or SSA records. Non-ASCII characters were converted to LaTeX, and broken entries were repaired in this copy only.
 - `tools/`: `gen_tables.py` regenerates `tables/tab_*_body.tex` from the original FROT tables (`../tables/welfare_*`); `gen_figs.py` regenerates `figures/mvpf_map.tex` and `figures/schedules_*.tex`. Run both from this folder. Note: `figures/mvpf_map.tex` was hand-tuned after generation (label and legend placement only), so re-running `gen_figs.py` overwrites those tweaks.
 
 ## Provenance of numbers
