@@ -51,7 +51,7 @@
 \bibpunct{(}{)}{;}{a}{}{,}
 
 % ---- Hyperlinks
-\usepackage[hidelinks]{hyperref}
+\usepackage{hyperref}
 \hypersetup{colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue}
 \usepackage{url}
 
@@ -67,6 +67,14 @@
 \let\NAT@orig@nmfmt\NAT@nmfmt
 \def\NAT@posfmt#1{\NAT@orig@nmfmt{#1's}}
 \makeatother
+
+% ---- Float placement
+\renewcommand{\topfraction}{0.85}
+\renewcommand{\bottomfraction}{0.6}
+\renewcommand{\textfraction}{0.1}
+\renewcommand{\floatpagefraction}{0.75}
+\setcounter{topnumber}{3}
+\setcounter{totalnumber}{4}
 
 % ---- Section formatting
 \usepackage{titlesec}
@@ -105,13 +113,14 @@
 \begin{document}
 \raggedbottom
 \setlength{\parindent}{15pt}
+\pagenumbering{roman}
 \maketitle
 \thispagestyle{empty}
 
 \input{sections/0_abstract}
 
 \clearpage
-\setcounter{page}{1}
+\pagenumbering{arabic}
 
 \input{sections/1_intro}
 \input{sections/2_model}
