@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2026.11.9)  9 NOV 2026 07:35
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2026.11.9)  9 NOV 2026 08:21
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -944,7 +944,7 @@ Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
 )
 \Hy@SectionHShift=\skip68
 )
-Package hyperref Info: Option `colorlinks' set `true' on input line 55.
+Package hyperref Info: Option `colorlinks' set `true' on input line 57.
 
 (/usr/share/texlive/texmf-dist/tex/latex/titlesec/titlesec.sty
 Package: titlesec 2023/10/27 v2.16 Sectioning titles
@@ -974,7 +974,7 @@ Package: enumitem 2019/06/20 v3.9 Customized lists
 \c@assumption=\count342
 \c@remark=\count343
 LaTeX Font Info:    Trying to load font information for T1+ppl on input line 11
-3.
+5.
 
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/t1ppl.fd
 File: t1ppl.fd 2001/06/04 font definitions for T1/ppl.
@@ -987,37 +987,37 @@ File: l3backend-pdftex.def 2024-01-04 L3 backend support: PDF output (pdfTeX)
 (./main.aux)
 \openout1 = `main.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 113.
-LaTeX Font Info:    ... okay on input line 113.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 113.
-LaTeX Font Info:    ... okay on input line 113.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 113.
-LaTeX Font Info:    ... okay on input line 113.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 113.
-LaTeX Font Info:    ... okay on input line 113.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 113.
-LaTeX Font Info:    ... okay on input line 113.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 113.
-LaTeX Font Info:    ... okay on input line 113.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 113.
-LaTeX Font Info:    ... okay on input line 113.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 113.
-LaTeX Font Info:    ... okay on input line 113.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 113.
-LaTeX Font Info:    ... okay on input line 113.
-LaTeX Info: Redefining \microtypecontext on input line 113.
-Package microtype Info: Applying patch `item' on input line 113.
-Package microtype Info: Applying patch `toc' on input line 113.
-Package microtype Info: Applying patch `eqnum' on input line 113.
-Package microtype Info: Applying patch `footnote' on input line 113.
-Package microtype Info: Applying patch `verbatim' on input line 113.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 115.
+LaTeX Font Info:    ... okay on input line 115.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 115.
+LaTeX Font Info:    ... okay on input line 115.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 115.
+LaTeX Font Info:    ... okay on input line 115.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 115.
+LaTeX Font Info:    ... okay on input line 115.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 115.
+LaTeX Font Info:    ... okay on input line 115.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 115.
+LaTeX Font Info:    ... okay on input line 115.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 115.
+LaTeX Font Info:    ... okay on input line 115.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 115.
+LaTeX Font Info:    ... okay on input line 115.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 115.
+LaTeX Font Info:    ... okay on input line 115.
+LaTeX Info: Redefining \microtypecontext on input line 115.
+Package microtype Info: Applying patch `item' on input line 115.
+Package microtype Info: Applying patch `toc' on input line 115.
+Package microtype Info: Applying patch `eqnum' on input line 115.
+Package microtype Info: Applying patch `footnote' on input line 115.
+Package microtype Info: Applying patch `verbatim' on input line 115.
 Package microtype Info: Generating PDF output.
 Package microtype Info: Character protrusion enabled (level 2).
 Package microtype Info: Using default protrusion set `alltext'.
 Package microtype Info: Automatic font expansion enabled (level 2),
 (microtype)             stretch: 20, shrink: 20, step: 1, non-selected.
 Package microtype Info: Using default expansion set `alltext-nott'.
-LaTeX Info: Redefining \showhyphens on input line 113.
+LaTeX Info: Redefining \showhyphens on input line 115.
 Package microtype Info: No adjustment of tracking.
 Package microtype Info: No adjustment of interword spacing.
 Package microtype Info: No adjustment of character kerning.
@@ -1087,37 +1087,37 @@ Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: float package is loaded.
 Package caption Info: hyperref package is loaded.
 Package caption Info: End \AtBeginDocument code.
-Package hyperref Info: Link coloring ON on input line 113.
+Package hyperref Info: Link coloring ON on input line 115.
 (./main.out) (./main.out)
 \@outlinefile=\write4
 \openout4 = `main.out'.
 
 LaTeX Font Info:    Trying to load font information for OT1+ppl on input line 1
-18.
+20.
 
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1ppl.fd
 File: ot1ppl.fd 2001/06/04 font definitions for OT1/ppl.
 )
 LaTeX Font Info:    Trying to load font information for OML+zplm on input line 
-118.
+120.
 
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/omlzplm.fd
 File: omlzplm.fd 2002/09/08 Fontinst v1.914 font definitions for OML/zplm.
 )
 LaTeX Font Info:    Trying to load font information for OMS+zplm on input line 
-118.
+120.
 
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/omszplm.fd
 File: omszplm.fd 2002/09/08 Fontinst v1.914 font definitions for OMS/zplm.
 )
 LaTeX Font Info:    Trying to load font information for OMX+zplm on input line 
-118.
+120.
 
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/omxzplm.fd
 File: omxzplm.fd 2002/09/08 Fontinst v1.914 font definitions for OMX/zplm.
 )
 LaTeX Font Info:    Trying to load font information for OT1+zplm on input line 
-118.
+120.
 
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1zplm.fd
 File: ot1zplm.fd 2002/09/08 Fontinst v1.914 font definitions for OT1/zplm.
@@ -1127,47 +1127,47 @@ Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
 LaTeX Font Info:    Font shape `U/msa/m/n' will be
-(Font)              scaled to size 21.61124pt on input line 118.
+(Font)              scaled to size 21.61124pt on input line 120.
 
 (/usr/share/texlive/texmf-dist/tex/latex/microtype/mt-msa.cfg
 File: mt-msa.cfg 2006/02/04 v1.1 microtype config. file: AMS symbols (a) (RS)
 )
 LaTeX Font Info:    Font shape `U/msa/m/n' will be
-(Font)              scaled to size 15.0049pt on input line 118.
+(Font)              scaled to size 15.0049pt on input line 120.
 LaTeX Font Info:    Font shape `U/msa/m/n' will be
-(Font)              scaled to size 12.50409pt on input line 118.
+(Font)              scaled to size 12.50409pt on input line 120.
 LaTeX Font Info:    Font shape `U/msb/m/n' will be
-(Font)              scaled to size 21.61124pt on input line 118.
+(Font)              scaled to size 21.61124pt on input line 120.
 
 (/usr/share/texlive/texmf-dist/tex/latex/microtype/mt-msb.cfg
 File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
 )
 LaTeX Font Info:    Font shape `U/msb/m/n' will be
-(Font)              scaled to size 15.0049pt on input line 118.
+(Font)              scaled to size 15.0049pt on input line 120.
 LaTeX Font Info:    Font shape `U/msb/m/n' will be
-(Font)              scaled to size 12.50409pt on input line 118.
+(Font)              scaled to size 12.50409pt on input line 120.
 LaTeX Font Info:    Trying to load font information for TS1+ppl on input line 1
-18.
+20.
 
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ts1ppl.fd
 File: ts1ppl.fd 2001/06/04 font definitions for TS1/ppl.
 )
 LaTeX Font Info:    Font shape `U/msa/m/n' will be
-(Font)              scaled to size 10.42007pt on input line 118.
+(Font)              scaled to size 10.42007pt on input line 120.
 LaTeX Font Info:    Font shape `U/msa/m/n' will be
-(Font)              scaled to size 8.33606pt on input line 118.
+(Font)              scaled to size 8.33606pt on input line 120.
 LaTeX Font Info:    Font shape `U/msb/m/n' will be
-(Font)              scaled to size 10.42007pt on input line 118.
+(Font)              scaled to size 10.42007pt on input line 120.
 LaTeX Font Info:    Font shape `U/msb/m/n' will be
-(Font)              scaled to size 8.33606pt on input line 118.
+(Font)              scaled to size 8.33606pt on input line 120.
 LaTeX Font Info:    Font shape `U/msa/m/n' will be
-(Font)              scaled to size 7.91925pt on input line 118.
+(Font)              scaled to size 7.91925pt on input line 120.
 LaTeX Font Info:    Font shape `U/msa/m/n' will be
-(Font)              scaled to size 6.25204pt on input line 118.
+(Font)              scaled to size 6.25204pt on input line 120.
 LaTeX Font Info:    Font shape `U/msb/m/n' will be
-(Font)              scaled to size 7.91925pt on input line 118.
+(Font)              scaled to size 7.91925pt on input line 120.
 LaTeX Font Info:    Font shape `U/msb/m/n' will be
-(Font)              scaled to size 6.25204pt on input line 118.
+(Font)              scaled to size 6.25204pt on input line 120.
 
 (./sections/0_abstract.tex) [1
 
@@ -1175,16 +1175,16 @@ LaTeX Font Info:    Font shape `U/msb/m/n' will be
 st/fonts/enc/dvips/base/8r.enc}]
 (./sections/1_intro.tex [1
 
-] [2] [3] [4] [5] [6]) (./sections/2_model.tex
+] [2]
 LaTeX Font Info:    Font shape `U/msa/m/n' will be
-(Font)              scaled to size 9.37807pt on input line 13.
+(Font)              scaled to size 9.37807pt on input line 18.
 LaTeX Font Info:    Font shape `U/msa/m/n' will be
-(Font)              scaled to size 7.29405pt on input line 13.
+(Font)              scaled to size 7.29405pt on input line 18.
 LaTeX Font Info:    Font shape `U/msb/m/n' will be
-(Font)              scaled to size 9.37807pt on input line 13.
+(Font)              scaled to size 9.37807pt on input line 18.
 LaTeX Font Info:    Font shape `U/msb/m/n' will be
-(Font)              scaled to size 7.29405pt on input line 13.
-
+(Font)              scaled to size 7.29405pt on input line 18.
+ [3] [4] [5] [6]) (./sections/2_model.tex
 [7] [8]
 LaTeX Font Info:    Trying to load font information for U+fplmbb on input line 
 31.
@@ -1202,7 +1202,6 @@ LaTeX Font Info:    Font shape `U/msb/m/n' will be
 )
 [22] [23] [24] (./tables/est_parameters.tex) [25] [26]
 (./figures/h800_l0_edit_c.tex
-Missing character: There is no ; in font nullfont!
 Package pgfplots info on input line 258: fill between: activating layered graph
 ics
 \pgf@layerbox@axis background=\box76
@@ -1225,105 +1224,102 @@ Package pgfplots info on input line 258: Setting layers 'axis background,axis g
 rid,axis ticks,axis lines,axis tick labels,pre main,main,axis descriptions,axis
  foreground'...
 ) (./figures/h800_l1_edit_c.tex
-Missing character: There is no ; in font nullfont!
 Package pgfplots info on input line 258: fill between: activating layered graph
 ics
 Package pgfplots info on input line 258: Setting layers 'axis background,axis g
 rid,axis ticks,axis lines,axis tick labels,pre main,main,axis descriptions,axis
  foreground'...
-) (./figures/h800_h0_edit_c.tex
-Missing character: There is no ; in font nullfont!
+)
+(./figures/h800_h0_edit_c.tex
 Package pgfplots info on input line 258: fill between: activating layered graph
 ics
 Package pgfplots info on input line 258: Setting layers 'axis background,axis g
 rid,axis ticks,axis lines,axis tick labels,pre main,main,axis descriptions,axis
  foreground'...
 ) (./figures/h800_h1_edit_c.tex
-Missing character: There is no ; in font nullfont!
 Package pgfplots info on input line 210: fill between: activating layered graph
 ics
 Package pgfplots info on input line 210: Setting layers 'axis background,axis g
 rid,axis ticks,axis lines,axis tick labels,pre main,main,axis descriptions,axis
  foreground'...
-) [27] (./figures/h800_meana_edit_c.tex
-Missing character: There is no ; in font nullfont!
+)
+(./figures/h800_meana_edit_c.tex
 Package pgfplots info on input line 214: fill between: activating layered graph
 ics
 Package pgfplots info on input line 214: Setting layers 'axis background,axis g
 rid,axis ticks,axis lines,axis tick labels,pre main,main,axis descriptions,axis
  foreground'...
 ) (./figures/h800_mediana_edit_c.tex
-Missing character: There is no ; in font nullfont!
 Package pgfplots info on input line 211: fill between: activating layered graph
 ics
 Package pgfplots info on input line 211: Setting layers 'axis background,axis g
 rid,axis ticks,axis lines,axis tick labels,pre main,main,axis descriptions,axis
  foreground'...
-) (./figures/h800_reentry_edit.tex
-Missing character: There is no ; in font nullfont!
+)
+(./figures/h800_reentry_edit.tex
 Package pgfplots info on input line 211: fill between: activating layered graph
 ics
 Package pgfplots info on input line 211: Setting layers 'axis background,axis g
 rid,axis ticks,axis lines,axis tick labels,pre main,main,axis descriptions,axis
  foreground'...
-)) (./sections/4_framework.tex [28] [29] [30] [31] [32] [33] [34] [35] [36]
-[37]) (./sections/5_results.tex [38] (./tables/res_elim.tex) [39]
-(./figures/schedules_A.tex
+) [27]) (./sections/4_framework.tex [28]
+[29] [30] [31] [32] [33] [34] [35] [36] [37] [38]) (./sections/5_results.tex
+[39] (./tables/res_elim.tex) [40] [41] (./figures/schedules_A.tex)
+(./figures/schedules_B.tex
 LaTeX Font Info:    Font shape `U/msa/m/n' will be
-(Font)              scaled to size 5.21004pt on input line 19.
+(Font)              scaled to size 5.21004pt on input line 21.
 LaTeX Font Info:    Font shape `U/msb/m/n' will be
-(Font)              scaled to size 5.21004pt on input line 19.
-) (./figures/schedules_B.tex) [40]
-(./tables/tab_claiming_body.tex) [41] [42] [43] [44]
-(./tables/tab_generosity_body.tex) [45] [46] [47] (./tables/tab_other_body.tex)
-[48] [49] [50] (./figures/mvpf_map.tex)) (./sections/6_financing.tex [51]
-[52] [53] [54]) (./sections/7_discussion.tex [55] [56] [57] [58] [59] [60])
-(./sections/8_conclusion.tex [61]) [62] [63] (./main.bbl [64
+(Font)              scaled to size 5.21004pt on input line 21.
+) [42] (./tables/tab_claiming_body.tex) [43] [44]
+[45] (./tables/tab_generosity_body.tex) [46] [47] [48]
+(./tables/tab_other_body.tex) [49] [50] [51] (./figures/mvpf_map.tex) [52]
+[53]) (./sections/6_financing.tex [54] [55]) (./sections/7_discussion.tex
+[56] [57] [58] [59] [60] [61] [62]) (./sections/8_conclusion.tex [63]) [64]
+(./main.bbl [65
 
-] [65] [66]
-[67] [68] [69]) [70] (./sections/A_model_details.tex (./tables/A_ssparams.tex)
-[71
+] [66] [67] [68] [69] [70]) [71] (./sections/A_model_details.tex (./tables/A_ss
+params.tex) [72
 
-] [72] [73] [74]) (./sections/B_data.tex [75] (./tables/data_sample_psid.tex) (
-./tables/data_sample_meps.tex) [76] [77] (./tables/data_health_measures.tex) (.
-/tables/data_survival.tex) [78] [79] (./tables/data_wages.tex) [80]
-(./tables/data_initial.tex)) (./sections/C_estimation_details.tex [81] [82]
-[83] [84] (./tables/msm_lnc.tex) (./figures/h800_l0_lnc_edit.tex
-Missing character: There is no ; in font nullfont!
+] [73] [74] [75]) (./sections/B_data.tex [76]
+(./tables/data_sample_psid.tex) (./tables/data_sample_meps.tex) [77] [78]
+(./tables/data_health_measures.tex) (./tables/data_survival.tex) [79] [80]
+(./tables/data_wages.tex) [81] (./tables/data_initial.tex))
+(./sections/C_estimation_details.tex [82] [83] [84]
+(./figures/h800_l0_lnc_edit.tex
 Package pgfplots info on input line 261: fill between: activating layered graph
 ics
 Package pgfplots info on input line 261: Setting layers 'axis background,axis g
 rid,axis ticks,axis lines,axis tick labels,pre main,main,axis descriptions,axis
  foreground'...
 ) (./figures/h800_l1_lnc_edit.tex
-Missing character: There is no ; in font nullfont!
 Package pgfplots info on input line 258: fill between: activating layered graph
 ics
 Package pgfplots info on input line 258: Setting layers 'axis background,axis g
 rid,axis ticks,axis lines,axis tick labels,pre main,main,axis descriptions,axis
  foreground'...
-) (./figures/h800_lnc_meana.tex
-Missing character: There is no ; in font nullfont!
-Package pgfplots info on input line 217: fill between: activating layered graph
+)
+(./figures/h800_lnc_meana.tex
+Package pgfplots info on input line 216: fill between: activating layered graph
 ics
-Package pgfplots info on input line 217: Setting layers 'axis background,axis g
+Package pgfplots info on input line 216: Setting layers 'axis background,axis g
 rid,axis ticks,axis lines,axis tick labels,pre main,main,axis descriptions,axis
  foreground'...
 ) (./figures/h800_lnc_mediana.tex
-Missing character: There is no ; in font nullfont!
 Package pgfplots info on input line 211: fill between: activating layered graph
 ics
 Package pgfplots info on input line 211: Setting layers 'axis background,axis g
 rid,axis ticks,axis lines,axis tick labels,pre main,main,axis descriptions,axis
  foreground'...
-) [85]) (./sections/D_reforms.tex [86] [87] (./tables/D_schedules.tex) [88]
-[89] [90] [91] [92]) (./sections/E_derivations.tex [93] [94] [95] [96] [97])
-(./sections/F_additional_figures.tex [98] (./tables/tab_generosity_app_body.tex
-) (./figures/frot_weld1.tex) (./figures/frot_weld2.tex)
+) [85] [86]
+(./tables/msm_lnc.tex)) (./sections/D_reforms.tex [87] [88]
+(./tables/D_schedules.tex) [89] [90] [91] [92] [93])
+(./sections/E_derivations.tex [94] [95] [96] [97] [98])
+(./sections/F_additional_figures.tex [99] (./figures/frot_weld1.tex)
+(./figures/frot_weld2.tex) [100] (./tables/tab_generosity_app_body.tex)
 (./figures/frot_weld1_0.tex) (./figures/frot_weld2_0.tex)
 (./figures/frot_weld1_1.tex) (./figures/frot_weld2_1.tex)
-(./figures/frot_weld1_2.tex) (./figures/frot_weld2_2.tex)) [99] [100] [101]
-[102] (./main.aux)
+(./figures/frot_weld1_2.tex) (./figures/frot_weld2_2.tex)) [101] [102]
+(./main.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-01-22>
@@ -1332,13 +1328,13 @@ Package rerunfilecheck Info: File `main.out' has not changed.
 (rerunfilecheck)             Checksum: AEC7F59F2594DAA633E77E7F110CEE05;14789.
  ) 
 Here is how much of TeX's memory you used:
- 42340 strings out of 476106
- 954510 string characters out of 5793933
- 1999975 words of memory out of 5000000
- 62239 multiletter control sequences out of 15000+600000
- 689046 words of font info for 814 fonts, out of 8000000 for 9000
+ 42322 strings out of 476106
+ 954118 string characters out of 5793933
+ 1991975 words of memory out of 5000000
+ 62217 multiletter control sequences out of 15000+600000
+ 689189 words of font info for 816 fonts, out of 8000000 for 9000
  59 hyphenation exceptions out of 8191
- 84i,28n,87p,2913b,2452s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 84i,28n,87p,3034b,2452s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></us
 r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/shar
 e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texli
@@ -1350,10 +1346,10 @@ thpazo/fplmri.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/sy
 mbols/msam10.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/palatino/uplb8a
 .pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/palatino/uplr8a.pfb></usr/s
 hare/texlive/texmf-dist/fonts/type1/urw/palatino/uplri8a.pfb>
-Output written on main.pdf (103 pages, 550924 bytes).
+Output written on main.pdf (103 pages, 557253 bytes).
 PDF statistics:
- 1903 PDF objects out of 2073 (max. 8388607)
- 1756 compressed objects within 18 object streams
- 334 named destinations out of 1000 (max. 500000)
+ 1914 PDF objects out of 2073 (max. 8388607)
+ 1767 compressed objects within 18 object streams
+ 335 named destinations out of 1000 (max. 500000)
  165493 words of extra memory for PDF output out of 184870 (max. 10000000)
 

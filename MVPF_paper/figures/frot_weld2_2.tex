@@ -8,10 +8,11 @@ xmin=30,
 xmax=70,
 xlabel style={font=\color{white!15!black}},
 xlabel={Age},
-ymin=-0,
+ymin=-5,
+ytick={0,20,...,100},
 ymax=0100,
 ylabel style={font=\color{white!15!black}},
-ylabel={},
+ylabel={Rate in \%},
 axis background/.style={fill=white},
 %title style={font=\bfseries},
 title={},
@@ -65,7 +66,7 @@ minor tick num=1
 68	8.166969	\\
 69	7.651246	\\
 };
-\addlegendentry{Model}
+% \addlegendentry{Model} % legend shown in row (A) only
 
 % Red line (Poor health) - dash-dotted
 \addplot [color=blue, line width=1.5pt, dotted]
@@ -112,7 +113,7 @@ minor tick num=1
 69	5.338078	\\
 };
 %\addlegendentry{(D3) No Cap. Gains Tax}
-\addlegendentry{(D3)}
+% \addlegendentry{(D3)} % legend shown in row (A) only
 % Blue line (Good health) - dotted
 \addplot [color=red, line width=1.5pt, dashdotted]
   table[row sep=crcr]{%
@@ -158,7 +159,7 @@ minor tick num=1
 69	5.871886	\\
 };
 %\addlegendentry{(D4) No Income Tax}
-\addlegendentry{(D4)}
+% \addlegendentry{(D4)} % legend shown in row (A) only
 
 
 % Green line (Disabled) - dashed
@@ -206,6 +207,6 @@ minor tick num=1
 69	12.27758	\\
 };
 %\addlegendentry{(D5) No Disability Benefit}
-\addlegendentry{(D5)}
+% \addlegendentry{(D5)} % legend shown in row (A) only
 \end{axis}
 \end{tikzpicture}

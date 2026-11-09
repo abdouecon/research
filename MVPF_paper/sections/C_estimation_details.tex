@@ -74,6 +74,19 @@ where $\mathbf{W}$ is the probability limit of $\hat{\mathbf{W}}$, and the facto
 
 \subsection{Alternative Preferences: Logarithmic Utility}\label{app:logpref}
 
+\begin{figure}[!htbp]
+\centering
+\caption{Data and Simulated Profiles: Logarithmic Utility}\label{fig:fit_lnc}
+\vspace{0.5em}
+\pgfplotsset{every axis title/.append style={font=\footnotesize,text width=5.7cm,align=center},every axis y label/.append style={at={(axis description cs:-0.21,0.5)}}}
+% Panels copied verbatim from FROT figures/abdou/{h800_l0_lnc_edit,h800_l1_lnc_edit,h800_lnc_meana,h800_lnc_mediana}.tex (2025 simulation of the log-utility model).
+\begin{tabular}{@{}c@{\hspace{0.9em}}c@{}}
+\input{figures/h800_l0_lnc_edit} & \input{figures/h800_l1_lnc_edit} \\[1ex]
+\input{figures/h800_lnc_meana} & \input{figures/h800_lnc_mediana}
+\end{tabular}
+\tabnotes{\textit{Notes:} Panels A and B show labor force participation rates (percent) of healthy individuals ($h=0$) and unhealthy individuals (poor health or disability, $h\in\{1,2\}$); panels C and D show mean and median nonpension assets (hundreds of thousands of 2016 dollars). Solid lines are data profiles estimated from the Panel Study of Income Dynamics, shaded areas are 95\% confidence intervals, and dashed lines are profiles simulated from the model with logarithmic utility at the estimates of \autoref{tab:lnc}. Compared with the baseline (\autoref{fig:fit_labor} and \autoref{fig:fit_assets}), the logarithmic specification fits mean assets at older ages better and participation worse.}
+\end{figure}
+
 The baseline specification has nonseparable preferences over consumption and leisure, with participation and reentry costs measured in hours. As a check on this functional form, we reestimate the model with preferences that are separable in consumption and hours, logarithmic in consumption, and subject to fixed utility costs of participation and reentry:
 \[
 u(c,n)=\ln c-\kappa\,\frac{n^{1+1/\eta}}{1+1/\eta}-\tilde{\phi}(h)\,\Ind\{P=1\}-\tilde{\phi}_{RE}\,\Ind\{RE=1\},
@@ -90,19 +103,7 @@ The reform analysis in Sections~\ref{sec:framework} to \ref{sec:financing} uses 
 \caption{Estimated Parameters: Logarithmic Utility}\label{tab:lnc}
 \small
 \input{tables/msm_lnc}
-\tabnotes{\textit{Notes:} Method-of-simulated-moments estimates and standard errors for the specification $u(c,n)=\ln c-\kappa n^{1+1/\eta}/(1+1/\eta)-\tilde{\phi}(h)\Ind\{P=1\}-\tilde{\phi}_{RE}\Ind\{RE=1\}$. The costs $\tilde{\phi}(h)$ and $\tilde{\phi}_{RE}$ are in utils; poor health ($h=1$) and disability ($h=2$) share one cost of work. The Frisch elasticity $\eta$ is fixed at 0.5, not estimated. Estimates and standard errors are reported at the precision of the original estimation output. Targets, first-step parameters, and policy rules are those of the baseline estimation. \textit{Data source:} Panel Study of Income Dynamics.}
+\tabnotes{\textit{Notes:} Method-of-simulated-moments estimates and standard errors for the specification $u(c,n)=\ln c-\kappa n^{1+1/\eta}/(1+1/\eta)-\tilde{\phi}(h)\Ind\{P=1\}-\tilde{\phi}_{RE}\Ind\{RE=1\}$. The costs $\tilde{\phi}(h)$ and $\tilde{\phi}_{RE}$ are in utils; poor health ($h=1$) and disability ($h=2$) share one cost of work. The Frisch elasticity $\eta$ is fixed at 0.5, not estimated. Estimates and standard errors are reported at the precision of the original estimation output. Targets, first-step parameters, and policy rules are those of the baseline estimation. \textit{Source:} Panel Study of Income Dynamics.}
 \end{table}
 
-\begin{figure}[!htbp]
-\centering
-\caption{Data and Simulated Profiles: Logarithmic Utility}\label{fig:fit_lnc}
-\vspace{0.5em}
-\pgfplotsset{every axis title/.append style={font=\footnotesize}}
-% Panels copied verbatim from FROT figures/abdou/{h800_l0_lnc_edit,h800_l1_lnc_edit,h800_lnc_meana,h800_lnc_mediana}.tex (2025 simulation of the log-utility model).
-\begin{tabular}{@{}c@{\hspace{1.2em}}c@{}}
-\input{figures/h800_l0_lnc_edit} & \input{figures/h800_l1_lnc_edit} \\[1ex]
-\input{figures/h800_lnc_meana} & \input{figures/h800_lnc_mediana}
-\end{tabular}
-\tabnotes{\textit{Notes:} Panels A and B show labor force participation rates (percent) of healthy individuals ($h=0$) and unhealthy individuals (poor health or disability, $h\in\{1,2\}$); panels C and D show mean and median nonpension assets (hundreds of thousands of 2016 dollars). Solid lines are data profiles estimated from the Panel Study of Income Dynamics, shaded areas are 95\% confidence intervals, and dashed lines are profiles simulated from the model with logarithmic utility at the estimates of \autoref{tab:lnc}. Compared with the baseline (\autoref{fig:fit_labor} and \autoref{fig:fit_assets}), the logarithmic specification fits mean assets at older ages better and participation worse.}
-\end{figure}
 \FloatBarrier

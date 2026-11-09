@@ -8,10 +8,11 @@ xmin=30,
 xmax=70,
 xlabel style={font=\color{white!15!black}},
 xlabel={Age},
-ymin=-0,
+ymin=-5,
+ytick={0,20,...,100},
 ymax=0100,
 ylabel style={font=\color{white!15!black}},
-ylabel={},
+ylabel={Rate in \%},
 axis background/.style={fill=white},
 %title style={font=\bfseries},
 title={},
@@ -112,7 +113,7 @@ minor tick num=1
 68	8.4	\\
 69	6.971429	\\
 };
-\addlegendentry{(D3) Full Savings Subs.}
+\addlegendentry{(D3) Savings Subsidy}
 % Blue line (Good health) - dotted
 \addplot [color=red, line width=1.5pt, dashdotted]
   table[row sep=crcr]{%
@@ -204,6 +205,6 @@ minor tick num=1
 68	16.685714	\\
 69	14.285714	\\
 };
-\addlegendentry{(D5) No Disability Benefit}
+\addlegendentry{(D5) No DI Benefit}
 \end{axis}
 \end{tikzpicture}
