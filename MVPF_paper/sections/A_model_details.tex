@@ -1,0 +1,74 @@
+% ============================================================================
+%  Appendix A: Model Details and Numerical Solution
+%  Sources: FROT 2025_sub/12_app_quant.tex ("Social Security Policy Rules",
+%  "Disability Insurance", "Pension Benefits", "Taxes", "Dynamic Program of
+%  Positive Economy"), 2025_sub/5_quantitative_model.tex (AIME footnote, interest
+%  rate footnote), 2025_sub/11_app_data.tex ("Initial Distribution"),
+%  tables/parameters_ss.tex.
+% ============================================================================
+\section{Model Details and Numerical Solution}\label{app:model}
+
+This appendix documents the institutional parameters of the model of Section~\ref{sec:model} and the numerical method used to solve and simulate it.
+
+\subsection{Social Security}\label{app:model_ss}
+
+\paragraph{Program parameters.} According to the Social Security Administration (SSA), individuals born between 1920 and 1940 faced an early retirement age (ERA) of 62 and, on average, a normal retirement age (NRA) of 65. Their delayed retirement credit (DRC) ranged from 3 to 6 percent per year, depending on the year of birth; we use the cohort average of 4.5 percent. % 3--6%: FROT 2025_sub/12_app_quant.tex, Social Security Policy Rules
+ The PIA formula had bend points at \$3,720 and \$22,392, and the AIME was capped at \$43,800. The retirement earnings test imposed different rates and thresholds by age: beneficiaries younger than 65 lost \$1 of benefits for every \$2 of earnings above \$6,000, and those aged 65 to 69 lost \$1 for every \$3 of earnings above \$8,186. \autoref{tab:ssparams} summarizes these parameters together with the threshold for disability insurance and the payroll-tax schedule. All monetary values are in 1987 dollars and, like $aime_t$ in \eqref{eq:aime}, at annual rates.
+
+\begin{table}[!htbp]
+\centering
+\caption{Social Security Parameters}\label{tab:ssparams}
+\small
+\input{tables/A_ssparams}
+\tabnotes{\textit{Notes:} Parameters of the Social Security, disability insurance, and payroll-tax rules faced by the cohort born between 1920 and 1940, as used in the model of Section~\ref{sec:model}. The NRA is the cohort average and the DRC is the average of the credits, which ranged from 3 to 6 percent by year of birth. The bend points and the maximum of the average indexed monthly earnings (AIME) enter the primary insurance amount (PIA) formula \eqref{eq:pia} and the law of motion \eqref{eq:aime}. The benefit reduction rate is the dollar reduction in benefits per dollar of labor earnings above the exempt amount \eqref{eq:ret}. The DI threshold corresponds to the monthly substantial gainful activity amount of \$300 for nonblind individuals \eqref{eq:di}. Payroll-tax rates and thresholds vary over the cohort's working life; the table reports their ranges. Abbreviations: ERA = early retirement age; NRA = normal retirement age; DRC = delayed retirement credit; RET = retirement earnings test; DI = disability insurance; OASDI = Old-Age, Survivors, and Disability Insurance; HI = Hospital Insurance (Medicare). Monetary values in 1987 dollars. \textit{Source:} Social Security Administration.}
+\end{table}
+
+\paragraph{Earnings record.} Individuals are assumed to enter the labor market at age 25, so that by age 30, the first age in the model, they have accumulated five years of earnings \citep{french2005effects}. The initial value of $aime_t$ is imputed by assuming that each individual worked 2,000 hours per year for five years at her hourly wage at age 30, following \citet{french2005effects}. % Source: FROT 2025_sub/11_app_data.tex, Initial Distribution; age 25 entry: 2025_sub/5_quantitative_model.tex, AIME footnote
+ Under the SSA rules, earnings up to two years before the age of eligibility, that is, up to age 60, are indexed to average wage growth to account for the rise in living standards over the working life. In the model, $aime_t$ is adjusted for inflation by indexing wages to the personal consumption expenditure price index. The law of motion \eqref{eq:aime} lets each year of earnings before age 60 add one thirty-fifth of annual earnings to $aime_t$; ages 25 to 59 span exactly 35 years. From age 60, earnings raise $aime_t$ only if they exceed its current value, which mimics the replacement of a low year in the computation over the highest 35 years.
+
+\paragraph{Claiming schedule.} Under the status-quo rules, the benefit as a percentage of the PIA is 80, 86.67, 93.33, 100, 104.5, 109, 113.5, 118, and 122.5 for claiming ages 62 through 70. The schedule rises by 6.67 percentage points per year of delay up to the NRA and by the DRC of 4.5 percentage points per year after it. \autoref{fig:schedules} and \autoref{tab:schedules} report the schedules under the claiming-age reforms. Claiming is irreversible and must occur by age 70.
+% Note for the authors: the state vector X_t contains b_{t-1} and aime_t but not the claiming age.
+% FROT's working notes (2025_sub/5_quantitative_model.tex, commented block) follow French and Jones (2011,
+% appendix) in folding the claiming-age adjustment into aime_t at the time of claiming. If this is how the code
+% implements alpha(t^c), add: "As in French and Jones (2011), the actuarial adjustment and the crediting of
+% withheld benefits are implemented as adjustments to aime_t, so that the claiming age need not be a separate
+% state variable." Not printed because it is not stated in the submitted FROT text.
+
+\paragraph{Earnings test and crediting.} Beneficiaries younger than 70 face the earnings test \eqref{eq:ret}. Following \citet{french2011effects}, benefits withheld by the test are credited through higher future benefits at the rates of the claiming schedule: if a year's worth of benefits is withheld before the NRA, future benefits rise by the early-claiming increment of 6.67 percent of the PIA; if a year's worth of benefits is withheld after the NRA, future benefits rise by the DRC. From age 70, benefits are not subject to the test.
+
+\subsection{Disability Insurance}\label{app:model_di}
+
+Individuals with a disability are eligible for DI benefits before the NRA if their labor earnings fall below a threshold. DI application is not an endogenous decision in the model, because it is not the focus of the paper and the relevant data are difficult to obtain. In models that treat applications explicitly, such as \citet{Low2015}, the probability that an application succeeds depends on age and health. To keep the model tractable, we grant DI benefits exclusively to individuals who have a disability ($h_t=2$), are older than 50, and earn less than $y_{db}=\$3{,}600$ per year, the annual equivalent of the monthly substantial gainful activity amount of \$300 that the SSA sets for nonblind individuals with a disability. The benefit, given by \eqref{eq:di}, equals the individual's PIA, without the reduction for early claiming, multiplied by $\pi^{db}$, the probability of receiving DI benefits for older individuals with severe work limitations estimated by \citet{Low2015}. Because not all individuals with a disability are awarded benefits, scaling by $\pi^{db}$ captures the average DI benefit received by individuals with a disability. DI benefits end at the NRA.
+% The numerical value of pi^{db} appears only in a commented-out row of FROT tables/parameters_ss.tex; it is not printed here.
+
+\subsection{Pensions}\label{app:model_pensions}
+
+Pension benefits capture the main features of defined-benefit (DB) plans. Like Social Security benefits, they depend on the individual's work history and are illiquid before a specified age, which we set to 62. Unlike Social Security, DB plans often create strong incentives to leave the labor force at particular ages through the structure of their accrual rates \citep{Gustman2000,Ippolito1997}. To capture these features, we impute pension income as a function of Social Security benefits, following \citet{french2005effects}:
+\begin{equation*}
+pb_t=pb(PIA_t)+\xi_t \qquad \text{for } t\geq 62,
+\end{equation*}
+and $pb_t=0$ before age 62. The function $pb(\cdot)$ maps lifetime earnings, summarized by the PIA, into pension income, with parameters based on the estimates of \citet{Gustman1999}. The term $\xi_t$ is an age-specific adjustment, based on the pension accrual rates of \citet{Gustman2000}, that accounts for the difference between the accrual of pension wealth and the accrual of Social Security wealth over the life cycle; this difference tends to be positive at older ages. \citet{french2005effects} describes the procedure in detail. Pension income is part of taxable income $y_t$ in \eqref{eq:budget}.
+
+\subsection{Taxes and the Return to Saving}\label{app:model_taxes}
+
+\paragraph{Income tax.} Individuals face the age-dependent tax function \eqref{eq:tax} on total income, with parameters $(\lambda_t,\tau_t)$ estimated from PSID data as in \citet{Borella2023}. For tractability, individuals anticipate the changes in these parameters with age. Total income includes interest income, so that interest is taxed as it accrues.
+
+\paragraph{Payroll tax.} Payroll-tax rates and taxable maxima are based on the historical data of the SSA for the Old-Age, Survivors, and Disability Insurance (OASDI) and Medicare Hospital Insurance (HI) programs. Since 1960, the combined OASDI and HI tax rates for employees and employers have ranged from 3 to 7.65 percent. % Source: FROT 2025_sub/12_app_quant.tex, Taxes
+ The taxable maximum ranges from \$14,459 to \$64,974 in 1987 dollars (\autoref{tab:ssparams}).
+
+\paragraph{Return to saving.} The pretax interest rate is $r_f=4$ percent \citep{french2005effects}. We set the wedge between the gross and the net return to $\tau_k=20$ percent, as in \citet{Stantcheva2017}. Even though interest income is taxed as part of total income by \eqref{eq:tax}, this wedge captures corporate and other direct capital taxes that the model does not represent. The analysis is therefore equivalent to one with a baseline net interest rate of $r=3.2$ percent. The savings-subsidy reforms of Section~\ref{sec:results_savings} raise the net return toward $r_f$.
+
+\subsection{Solution and Simulation}\label{app:solution}
+
+\paragraph{Parameters.} An individual's decisions at age $t$ depend on the state $X_t$, on the preference parameters $\mathcal{P}=(\gamma,\nu,\phi_n(0),\phi_n(1),\phi_{RE},L,\beta)$, with $\phi_n(2)=\phi_n(1)$, which are estimated in the second step (Section~\ref{sec:estimation}), and on the parameters that govern the data-generating process for the state variables and the policy environment,
+\begin{equation*}
+\chi=\Big(r,\,\sigma^2,\,\rho,\,\{W(h,t)\}_{t},\,\{\pi_{j,i,t+1}\}_{t},\,\{s_{t+1}\}_{t},\,\{m_t\}_{t},\,\{pb_t\}_{t},\,\{ss_t\}_{t},\,\{db_t\}_{t},\,Y_t(\cdot)\Big),
+\end{equation*}
+which are estimated or calibrated in the first step. Out-of-pocket medical expenses, pension income, and benefits are functions of the state and current choices and are not separate state variables.
+
+\paragraph{Backward induction.} The life cycle is divided into three stages. From 30 to 61, individuals choose consumption and hours; from 62 to 69, they also choose whether to claim; from 70 to 85, all have claimed and choose consumption and hours. We solve the problem \eqref{eq:value} by backward induction. At the terminal age $T=85$, $V_{T+1}\equiv0$ and $a_{T+1}=0$, so the individual consumes her remaining resources and chooses hours. Given the value function at $T$, we solve for the decision rules and the value function at $T-1$, and we proceed backward to age 30. The model features savings for retirement, precautionary savings against wage, health, and medical-expense risk, and accidental bequests, but no bequest motive. The solution consists of the consumption rules $c_t(X_t;\mathcal{P},\chi)$, the hours rules $n_t(X_t;\mathcal{P},\chi)$, and the claiming rules $b_t(X_t;\mathcal{P},\chi)$; participation $P_t$ follows from the hours rule, and next-period assets $a_{t+1}$ follow from the budget constraint \eqref{eq:budget}.
+
+\paragraph{Grids, quadrature, and interpolation.} We discretize the state space with 30 asset points, 10 wage points, 10 AIME points, 2 claiming states ($b_{t-1}\in\{0,1\}$), 3 health states, and 2 states for previous participation ($P_{t-1}\in\{0,1\}$). We compute the value function directly at these grid points and integrate over the wage innovation $\varepsilon_{t+1}$ with five-node Gauss--Hermite quadrature \citep{Judd1998}. To evaluate the value function at points off the grid, we use linear interpolation within the grid and linear extrapolation outside it.
+
+\paragraph{Simulation.} We simulate life-cycle histories forward with the decision rules. Initial states at age 30 are drawn from the empirical joint distribution of wages, health, assets, and labor force participation of individuals aged 28 to 32 in the target cohort in the PSID, % Source: FROT 2025_sub/11_app_data.tex, Initial Distribution
+ with the mean of log wages adjusted to match the estimated wage profile within each health group (Appendix~\ref{app:data} and \autoref{tab:initial}). The initial AIME is imputed as described in Appendix~\ref{app:model_ss}, and no individual has claimed at age 30. Given the decisions at age 30, the state at age 31 is generated from the health transition probabilities, the survival probabilities, and draws of the wage innovation, and the process is repeated through age $T$, which yields complete simulated histories. The simulated histories deliver the life-cycle profiles used in estimation (Appendix~\ref{app:msm}), the value at age 30 used to measure welfare (Section~\ref{sec:fw_welfare}), and the per capita flows that enter the government accounts of Section~\ref{sec:model_gov}. For each reform, we solve the model again under the reform's rules and simulate the cohort from the same initial distribution (Appendix~\ref{app:reforms}).

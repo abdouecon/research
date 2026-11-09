@@ -1,0 +1,182 @@
+% ============================================================================
+%  Section 2: A Life-Cycle Model of Retirement with Health
+%  Sources: FROT 2025_sub/5_quantitative_model.tex (Setup), 2025_sub/12_app_quant.tex
+%  (SS rules, DI, pensions, taxes, dynamic program, construction of outcomes),
+%  2025_sub/2_theory_model.tex (utility and health notation), v6 appendix (wording).
+% ============================================================================
+\section{A Life-Cycle Model of Retirement with Health}\label{sec:model}
+
+This section presents the life-cycle model in which we evaluate retirement reforms and defines the government accounts with which we measure their fiscal effects. Health enters the model through four channels: it raises the fixed time cost of working, lowers wages, raises out-of-pocket medical expenses, and lowers survival. These channels make retirement a response both to incentives and to health, and they determine which individuals can respond to a reform and at what cost. The institutional environment contains the features of the US system through which retirement reforms change behavior and the budget: the Social Security benefit formula with its claiming-age adjustments and earnings test, disability insurance, pensions, Medicare, the income and payroll taxes, and a means-tested consumption floor.
+
+\subsection{Demographics, Timing, and Choices}\label{sec:model_timing}
+
+The economy is populated by a single cohort of individuals. Time is discrete and annual, and we index periods by age $t$. Individuals enter the model at age 30 and live at most until age $T=85$; between consecutive ages they face a mortality risk that depends on age and health. The institutional environment is that faced by the cohort born between 1920 and 1940, whose life cycle we observe in the data (Section~\ref{sec:estimation}). We model individuals rather than households: the budget constraint contains no spousal income, and the model is estimated to match the outcomes of the whole cohort rather than those of male household heads.
+
+At the beginning of age $t$, an individual observes her health $h_t$ and her ability $\theta_t$, which together determine her hourly wage. She holds assets $a_t$, a record of past earnings summarized by her annualized average indexed monthly earnings $aime_t$, and two indicators from the previous period: whether she has claimed Social Security retirement benefits, $b_{t-1}\in\{0,1\}$, and whether she participated in the labor market, $P_{t-1}\in\{0,1\}$. She then chooses consumption $c_t$, hours of work $n_t\geq 0$, and, if eligible, whether to claim retirement benefits, $b_t$. Participation is $P_t=\Ind\{n_t>0\}$. At the end of the period she survives to age $t+1$ with a probability that depends on her current health and age, and next period's health and ability are drawn.
+
+The life cycle has three stages that differ in the choice set. Between ages 30 and 61, individuals choose consumption and hours. Between ages 62 and 69, they also decide whether to claim Social Security retirement benefits. Claiming is a one-time, irreversible decision, $b_t\geq b_{t-1}$, and it is not available before the early retirement age of 62. Claiming must occur by age 70: individuals who have not claimed earlier receive benefits from age 70, so that between ages 70 and 85 every individual receives benefits and chooses consumption and hours. Labor supply remains a choice at every age up to 85. Retirement, the decision to stop working, is therefore distinct from claiming: individuals can claim while working, stop working before claiming, and work past age 70.
+
+\subsection{Preferences}\label{sec:model_prefs}
+
+Flow utility is nonseparable in consumption and leisure, as in \citet{french2011effects}:
+\begin{equation}\label{eq:utility}
+u(c_t,l_t)=\frac{1}{1-\nu}\left(c_t^{\gamma}\,l_t^{1-\gamma}\right)^{1-\nu},
+\end{equation}
+where $\gamma\in(0,1)$ is the weight on consumption and $\nu>0$ is the curvature of utility in the consumption--leisure composite. Leisure is the time endowment net of hours worked and of two time costs of working:
+\begin{equation}\label{eq:leisure}
+l_t=L-n_t-\phi_n(h_t)\,\Ind\{n_t>0\}-\phi_{RE}\,RE_t, \qquad RE_t=P_t\,(1-P_{t-1}).
+\end{equation}
+Here $L$ is the annual time endowment in hours, $\phi_n(h_t)$ is a fixed time cost incurred whenever hours are positive, and $\phi_{RE}$ is a reentry cost incurred by an individual who works at age $t$ after not working at age $t-1$. Individuals discount the future with factor $\beta$, so that expected lifetime utility at age 30 is
+\begin{equation*}
+U=\E_{30}\sum_{t=30}^{T}\beta^{\,t-30}\Bigg(\prod_{k=31}^{t}s_k\Bigg)u(c_t,l_t),
+\end{equation*}
+where $s_k$ is the probability of surviving from age $k-1$ to age $k$ (Section~\ref{sec:model_health}). There is no bequest motive: assets held at death are accidental bequests that the individual does not value, and $a_{T+1}=0$. This keeps the model comparable with life-cycle models of taxation with exogenous retirement \citep{farhi2013insurance,golosov2016redistribution,Stantcheva2017}.
+
+The fixed cost $\phi_n(h_t)$ makes labor supply nonconvex. The first hour of work costs $1+\phi_n(h_t)$ hours of leisure, so short workweeks are dominated: an individual either works enough hours to justify the fixed cost or does not work at all. As incentives to work weaken with age, hours fall continuously only down to a threshold, below which participation drops discretely to zero. This is the mechanism through which life-cycle models generate retirement as a discrete exit rather than as a gradual reduction in hours \citep{french2005effects,prescott2009lifetime,rogerson2013nonconvexities}, and it places the participation margin at the center of the response to old-age incentives.
+
+The reentry cost $\phi_{RE}$ makes an exit costly to reverse: an individual who has stopped working returns only if the gain from working covers $\phi_{RE}$ in addition to the fixed cost. Reentry is rare in the data, and the estimated reentry cost is large (Section~\ref{sec:estimation}). Incentives to work longer therefore act mainly on individuals who are still working when the incentive applies, rather than on those who have already left.
+
+The fixed cost depends on health. Declining health makes work less pleasant \citep{blundell2016retirement}, and a larger fixed cost raises the wage at which working becomes worthwhile, so that at a given wage unhealthy individuals are more likely to exit. Because the PSID contains few observations of individuals with a disability, we impose $\phi_n(1)=\phi_n(2)$ in estimation: poor health and disability share one participation cost. Disability nevertheless differs from poor health through wages, medical expenses, survival, and eligibility for disability insurance.
+
+Three properties of \eqref{eq:utility} are used below. First, the coefficient of relative risk aversion over consumption, holding leisure fixed, is $-u_{cc}c/u_c=1-\gamma(1-\nu)$, which equals 1.38 at the estimates of Section~\ref{sec:estimation}.\footnote{With $\gamma=0.5354$ and $\nu=1.7029$ (\autoref{tab:estimates}), $1-\gamma(1-\nu)=1+0.5354\times0.7029\approx1.38$.} Second, when $\nu>1$, as in our estimates, the marginal utility of consumption falls with leisure ($u_{cl}<0$), so that optimal consumption drops when an individual stops working. Third, utility is homogeneous in consumption: scaling consumption at every age and in every state by $e^{x}$ multiplies flow utility, and hence expected lifetime utility, by $e^{\gamma(1-\nu)x}$. Section~\ref{sec:fw_welfare} uses this property to express welfare changes as consumption equivalents.
+
+\subsection{Health, Disability, and Mortality}\label{sec:model_health}
+
+Health takes three values, $h_t\in\mathcal{H}\equiv\{0,1,2\}$: good health ($h_t=0$), poor health ($h_t=1$), and disability ($h_t=2$). In the data, health is measured from self-reported work limitations in the PSID and self-perceived health in the MEPS (Section~\ref{sec:estimation} and Appendix~\ref{app:data}). Health follows a Markov chain with age-dependent transition probabilities
+\begin{equation*}
+\pi_{j,i,t+1}=\Pr\left(h_{t+1}=j \,\middle|\, h_t=i,\, t+1\right), \qquad i,j\in\mathcal{H}.
+\end{equation*}
+The probability of surviving to age $t+1$ depends on current health and age, $s_{t+1}=S(h_t,t+1)$, with $s_{T+1}=0$. Health at age 30 is drawn, jointly with assets, wages, and past participation, from the empirical distribution in the PSID (Appendix~\ref{app:data}).
+
+Health and survival evolve exogenously: neither depends on past work, consumption, or medical spending. This is the identification assumption of \citet{french2005effects}, under which work decisions do not affect health or wages. It implies that reforms in the model change behavior, welfare, and the budget, but not the distribution of health or longevity in the cohort. \autoref{fig:firststep} in Section~\ref{sec:estimation} shows the estimated transition, survival, medical-expense, and wage profiles by health.
+
+\subsection{Wages}\label{sec:model_wages}
+
+The hourly wage has a deterministic component that depends on health and age and a persistent idiosyncratic component, ability:
+\begin{align}
+\ln w_t(\theta_t,h_t)&=W(h_t,t)+\ln\theta_t, \label{eq:wage}\\
+\ln\theta_t&=\rho\,\ln\theta_{t-1}+\varepsilon_t, \qquad \varepsilon_t\sim\mathcal{N}(0,\sigma^2), \label{eq:ability}
+\end{align}
+where the innovations $\varepsilon_t$ are independent over time and across individuals. The deterministic profiles $W(h,t)$ are estimated from the PSID with a correction for selection into work, and ability follows an AR(1) process with $\rho=0.981$ and $\sigma^2=0.016$ (Section~\ref{sec:estimation}). At every age, the estimated wage profile is highest in good health and lowest with a disability, so that a deterioration of health lowers the return to work at the same time as it raises its fixed cost. Wages do not depend on past work, so the model abstracts from human-capital accumulation on the job. Because ability is highly persistent, a wage shock near retirement changes expected wages for the remainder of the working life and, through $aime_t$, future benefits.
+
+\subsection{Out-of-Pocket Medical Expenses}\label{sec:model_medical}
+
+Out-of-pocket medical expenses depend on health, age, and participation, $m_t=M(h_t,t,P_t)$. They are defined as total medical expenditure net of the part paid by health insurance before age 65 and by Medicare from age 65. Medical expenses are not a choice: given health, age, and participation they are deterministic, so medical-expense risk in the model is health risk. Out-of-pocket expenses rise with age and are considerably higher in poor health and with a disability (Section~\ref{sec:estimation}). Their dependence on participation lets insurance coverage, and hence out-of-pocket costs, differ between workers and nonworkers, which captures in reduced form the link between employment and health insurance that \citet{Blau2008b}, \citet{french2011effects}, and \citet{Imrohoroglu2012} model explicitly.
+
+From age 65, Medicare pays the part of total medical expenditure that is not paid out of pocket: denoting an individual's total medical expenditure by $m^{tot}_t$, Medicare's payment on her behalf at ages 65 and older is $m^G_t=m^{tot}_t-m_t$. These payments do not enter the individual's budget. They are the fiscal object of the Medicare reforms of Section~\ref{sec:results_medicare}, which raise the share of expenditure paid by Medicare (with coverage rates measured by health and working status; Appendix~\ref{app:reforms}) and thereby shift expenditure from $m_t$ to $m^G_t$.
+
+\subsection{Social Security}\label{sec:model_ss}
+
+Social Security retirement benefits depend on lifetime earnings, the age at which benefits are claimed, and earnings after claiming. We model each element following the rules faced by the 1920--1940 cohort; \autoref{tab:ssparams} in Appendix~\ref{app:model} lists the parameters, in 1987 dollars.
+
+\paragraph{Lifetime earnings.} Benefits are based on the average indexed monthly earnings (AIME), approximately the average of the highest 35 years of earnings. We track an annualized version, $aime_t$, which is capped at $aime_{max}$ and evolves according to
+\begin{equation}\label{eq:aime}
+aime_{t+1}=
+\begin{cases}
+\min\left\{aime_t+\dfrac{w_t n_t}{35},\; aime_{max}\right\} & \text{if } t<60,\\[2ex]
+\min\left\{aime_t+\max\left\{0,\dfrac{w_t n_t-aime_t}{35}\right\},\; aime_{max}\right\} & \text{if } t\geq 60.
+\end{cases}
+\end{equation}
+Individuals are assumed to start working at age 25, so that they enter the model with five years of earnings \citep{french2005effects}; ages 25 to 59 thus span the 35 years of the averaging period. % Age-25 entry: FROT 2025_sub/5_quantitative_model.tex, AIME footnote
+ From age 60, an additional year raises $aime_t$ only if its earnings exceed the current average, which approximates the replacement of a low-earnings year in the highest 35. This weakens the incentive to keep working once a full earnings record has been accumulated.
+
+\paragraph{Benefit formula.} The primary insurance amount (PIA) is a piecewise-linear function of $aime_t$:
+\begin{equation}\label{eq:pia}
+\begin{split}
+PIA_t={}&0.90\,\min\{aime_t,aime_0\}+0.32\,\min\big\{\max\{aime_t-aime_0,0\},\,aime_1-aime_0\big\}\\
+&+0.15\,\max\{aime_t-aime_1,0\},
+\end{split}
+\end{equation}
+with bend points $aime_0$ and $aime_1$. The marginal replacement rate falls from 90 to 32 to 15 percent across the three brackets, so the formula replaces a larger share of lifetime earnings for low earners. The progressivity and level reforms of Section~\ref{sec:results_generosity} raise these three rates.
+
+\paragraph{Claiming age.} The benefit to which an individual is entitled before the earnings test is $ssb_t=\alpha(t^c)\,PIA_t$, where $t^c$ is the claiming age and $\alpha(\cdot)$ is the actuarial adjustment. Benefits can be claimed from the early retirement age (ERA) of 62. Claiming before the normal retirement age (NRA) reduces benefits, and delaying a claim past the NRA raises them through the delayed retirement credit (DRC), up to age 70. For our cohort the NRA is 65, and the DRC, which ranged from 3 to 6 percent depending on the year of birth, is set to the cohort average of 4.5 percent. % 3--6 percent range: FROT 2025_sub/12_app_quant.tex, "Social Security Policy Rules".
+Under these rules, an individual who claims at 62 receives 80 percent of her PIA. Each year of delay raises the benefit by 6.67 percentage points, to 100 percent at the NRA of 65, and each year of delay after the NRA raises it by the DRC of 4.5 percent of the PIA, to 122.5 percent at 70. \autoref{fig:schedules} plots this schedule together with those implied by the claiming-age reforms (see also \autoref{tab:schedules} in Appendix~\ref{app:reforms}). The adjustments were designed to be approximately actuarially fair for an individual with average life expectancy at the interest rates prevailing when the rules were set. For an individual whose survival differs from the average---in the model, because of her health---delay is more or less than fair; Section~\ref{sec:fw_claiming} derives when a marginal delay saves the government money.
+
+\paragraph{Earnings test.} Beneficiaries younger than 70 who work are subject to the retirement earnings test (RET). Each dollar of labor earnings above an exempt amount $y_{ret}$ reduces benefits by $\tau_{ret}$ dollars, until the entire benefit is withheld:
+\begin{equation}\label{eq:ret}
+ss_t=\max\Big\{0,\; ssb_t-\tau_{ret}\max\{0,\,w_t n_t-y_{ret}\}\Big\} \qquad \text{if } t<70,
+\end{equation}
+and $ss_t=ssb_t$ from age 70. Below the NRA, $\tau_{ret}=50$ percent and $y_{ret}=\$6{,}000$; between the NRA and age 69, $\tau_{ret}=33$ percent and $y_{ret}=\$8{,}186$. Withheld benefits are not lost. Following \citet{french2011effects}, they are credited as if claiming had been delayed: a year's worth of benefits withheld before the NRA raises future benefits by the early-claiming adjustment for one year, and a year's worth withheld after the NRA raises them by the DRC. The earnings test is therefore a tax on work only to the extent that these credits fall short of actuarial fairness for the individual \citep[see][for evidence on its employment effects]{gelber2020employment}, and a higher DRC also lowers the implicit tax it levies on beneficiaries who keep working after the NRA.
+
+\subsection{Disability Insurance and Pensions}\label{sec:model_di}
+
+\paragraph{Disability insurance.} Individuals with a disability who are older than 50 and younger than the NRA receive disability insurance (DI) benefits if their labor earnings are below a threshold $y_{db}$:
+\begin{equation}\label{eq:di}
+db_t=\pi^{db}\,PIA_t\;\Ind\{h_t=2\}\;\Ind\{w_t n_t\leq y_{db}\} \qquad \text{if } 50<t<NRA,
+\end{equation}
+and $db_t=0$ otherwise. The threshold $y_{db}=\$3{,}600$ is the annual equivalent of the monthly substantial gainful activity amount of \$300 that the Social Security Administration (SSA) sets for nonblind individuals with a disability. The benefit is the PIA without the reduction for early claiming, scaled by $\pi^{db}$, the probability that an older individual with severe work limitations receives DI benefits, taken from \citet{Low2015}. DI thus enters as its expected value: application and award are not modeled, and every eligible individual receives the fraction $\pi^{db}$ of her PIA.
+
+Disability insurance is an alternative pathway out of the labor force before the NRA \citep{Maestas2013,French2014,Low2015,Li2018,Yu2024}. The income test makes it a notch: earnings above $y_{db}$ forfeit the entire benefit, so that for an individual with a disability the return to working a small number of hours after age 50 is sharply negative. Because DI is paid until the NRA, a reform that raises the NRA also lengthens the period during which individuals with a disability are eligible for DI benefits, which are not subject to the reduction for early claiming. The NRA reforms of Section~\ref{sec:results_claiming} therefore act on the budget through DI outlays as well as through retirement benefits.
+
+\paragraph{Pensions.} Pension income $pb_t$ captures defined-benefit (DB) plans, which depend on the work history, are illiquid before age 62, and often create strong incentives to leave the labor force at particular ages through their accrual rates \citep{Gustman2000,Ippolito1997}. Following \citet{french2005effects}, we impute pension income as a function of Social Security benefits, $pb_t=pb(PIA_t)+\xi_t$ for $t\geq 62$, and $pb_t=0$ before 62. The function $pb(\cdot)$ is based on the estimates of \citet{Gustman1999}, and the age-specific term $\xi_t$ accounts for the difference between pension and Social Security accrual over the life cycle, based on \citet{Gustman2000}. Pensions are not a reform instrument here, but they shape the incentive to exit in the early 60s on which the claiming-age reforms act. Appendix~\ref{app:model} gives details on DI and pensions.
+
+\subsection{Taxes}\label{sec:model_taxes}
+
+Individuals pay an income tax on total income $y_t$ and a payroll tax on labor earnings:
+\begin{equation}\label{eq:tax}
+T_t(y_t)=y_t-\lambda_t\,y_t^{1-\tau_t}, \qquad T^p_t(w_t n_t)=\tau^p_t\,\min\{w_t n_t,\,\bar{y}^{ss}_t\}.
+\end{equation}
+The income tax takes the form of \citet{Benabou2002} and \citet{heathcote2017optimal}: after-tax income is $\lambda_t y_t^{1-\tau_t}$, where $\lambda_t$ governs the level of taxation and $\tau_t$ its progressivity. Both parameters depend on age and are estimated from the PSID as in \citet{Borella2023}; individuals anticipate their evolution. Total income comprises interest income, labor earnings, and pension income (Section~\ref{sec:model_budget}), so interest income is taxed as it accrues. Social Security and DI benefits are not part of taxable income. The payroll tax, which finances Social Security's Old-Age, Survivors, and Disability Insurance (OASDI) and Medicare's Hospital Insurance (HI), applies at rate $\tau^p_t$ to earnings up to the taxable maximum $\bar{y}^{ss}_t$; both follow the historical SSA schedules for the cohort, with the combined rate ranging from 3 to 7.65 percent and the threshold from \$14,459 to \$64,974 (\autoref{tab:ssparams}). A reform that raises participation at some age raises income- and payroll-tax revenue at that age, and a reform that raises saving raises the tax on interest income later. These revenues are part of the indirect fiscal effects of Section~\ref{sec:framework}. The income-tax reforms of Section~\ref{sec:results_tax} raise $\lambda_t$ after age 61.
+
+\subsection{Budget Constraint, Borrowing, and the Consumption Floor}\label{sec:model_budget}
+
+Assets evolve according to
+\begin{equation}\label{eq:budget}
+\begin{aligned}
+a_{t+1}&=a_t+Y_t+b_t\,ss_t+db_t+tr_t-m_t-c_t,\\
+y_t&=r\,a_t+w_t n_t+pb_t,\qquad Y_t=y_t-T_t(y_t)-T^p_t(w_t n_t),\\
+a_{t+1}&\geq 0,
+\end{aligned}
+\end{equation}
+where $y_t$ is taxable income, $Y_t$ is after-tax income, $b_t ss_t$ are retirement benefits net of the earnings test, $db_t$ are DI benefits, and $tr_t$ are means-tested transfers. The net return on assets is $r=(1-\tau_k)\,r_f$. The pretax interest rate $r_f$ is 4 percent \citep{french2005effects}, and the wedge $\tau_k=20$ percent represents corporate and other direct capital taxes that are not modeled \citep{Stantcheva2017}. The net return is therefore 3.2 percent. Because individuals cannot borrow against future Social Security benefits and can rarely borrow against pension wealth, the borrowing limit is zero \citep{Zeldes1989,Hubbard1995}. The absence of borrowing matters for claiming: an individual with few assets who stops working before 62, or who faces high medical expenses, values the liquidity of an early claim.
+
+Government transfers guarantee a minimum level of consumption $\underline{c}$, as in \citet{Hubbard1995} and \citet{Denardi2010}:
+\begin{equation}\label{eq:transfer}
+tr_t=\max\Big\{0,\;\underline{c}+m_t-\big(a_t+Y_t+b_t\,ss_t+db_t\big)\Big\}.
+\end{equation}
+The floor, set to $\underline{c}=\$3{,}500$ \citep{french2011effects}, stands for safety-net programs such as the Supplemental Nutrition Assistance Program and Supplemental Security Income \citep[modeled explicitly by][]{Braun2017}, and insures individuals against health and medical-expense risk. Because the transfer falls one for one with the individual's own resources when it is positive, it also taxes earnings, saving, and Social Security benefits implicitly at a 100 percent rate for individuals who receive transfers \citep{Hubbard1995}. An increase in benefits for low earners is therefore partly offset, in the aggregate, by lower transfers, which is one of the fiscal externalities of the generosity reforms of Section~\ref{sec:results_generosity}.
+
+\subsection{The Individual's Problem}\label{sec:model_recursive}
+
+The state of an individual at age $t$ is $X_t=(a_t,\theta_t,h_t,b_{t-1},P_{t-1},aime_t)$: assets, ability, health, whether benefits have been claimed, whether she worked in the previous period, and the earnings record.\footnote{Given health and age, ability and the wage are in one-to-one correspondence through \eqref{eq:wage}, so the state can equivalently be written in terms of the wage $w_t$, as in the numerical implementation (Appendix~\ref{app:solution}).} Out-of-pocket medical expenses, pension income, retirement and DI benefits, and transfers are functions of the state and current choices and need not be separate state variables. The value function satisfies
+\begin{equation}\label{eq:value}
+V_t(X_t)=\max_{c_t,\,n_t,\,b_t}\;\Big\{u(c_t,l_t)+\beta\,s_{t+1}\,\E_t\big[V_{t+1}(X_{t+1})\big]\Big\},
+\end{equation}
+subject to the leisure constraint \eqref{eq:leisure}, the budget constraint and borrowing limit \eqref{eq:budget}, the consumption floor \eqref{eq:transfer}, the benefit rules \eqref{eq:aime}--\eqref{eq:di}, the tax functions \eqref{eq:tax}, and the claiming constraints $b_t\geq b_{t-1}$, $b_t=0$ for $t<62$, and $b_t=1$ for $t\geq 70$, with $V_{T+1}\equiv 0$. The expectation is taken over next period's health and ability, conditional on survival:
+\begin{equation*}
+\E_t\big[V_{t+1}(X_{t+1})\big]=\sum_{j\in\mathcal{H}}\pi_{j,h_t,t+1}\int V_{t+1}\big(a_{t+1},\,\theta_{t+1},\,j,\,b_t,\,P_t,\,aime_{t+1}\big)\,d\Phi_{\sigma}(\varepsilon_{t+1}),
+\end{equation*}
+where $\ln\theta_{t+1}=\rho\ln\theta_t+\varepsilon_{t+1}$, $\Phi_\sigma$ is the normal distribution with mean zero and variance $\sigma^2$, and survival enters \eqref{eq:value} through $s_{t+1}=S(h_t,t+1)$.
+
+Between 62 and 69, an individual who has not yet claimed trades off one more year of benefits now against a permanently higher benefit later. Delay raises the benefit by the actuarial adjustment and, for an individual who keeps working, avoids the withholding of benefits by the earnings test; its value depends on survival, and hence on health, which governs how long the higher benefit is received, and on assets, which govern how much the individual values liquidity now. The joint choice of hours and claiming is what links retirement to the claiming-age schedule: a steeper schedule raises the return to delay for those who can keep working, while a shift of the schedule changes the benefit at every claiming age.
+
+The solution consists of decision rules $c_t(X_t)$, $n_t(X_t)$, and $b_t(X_t)$, from which participation $P_t$ and next-period assets $a_{t+1}$ follow. We solve the problem by backward induction from age $T$ and simulate the cohort forward from initial conditions drawn from the PSID; Appendix~\ref{app:solution} describes the numerical method.
+
+\subsection{Government Accounts}\label{sec:model_gov}
+
+The government runs Social Security, DI, and Medicare, provides the consumption floor, and levies the income and payroll taxes. We measure its fiscal position vis-\`a-vis the cohort with present values at age 62, the early eligibility age, discounted at the net interest rate $r$. For a flow $x_t$, let $\bar{x}_t$ denote its per capita value at age $t$ in the simulated cohort, and define
+\begin{equation*}
+\mathcal{N}[x]\equiv\sum_{t=30}^{T}(1+r)^{-(t-62)}\,\bar{x}_t .
+\end{equation*}
+The fiscal aggregates are the present values of Social Security retirement outlays, DI outlays, consumption-floor transfers, income-tax revenue, payroll-tax revenue, and Medicare payments:
+\begin{gather*}
+\mathit{SS}=\mathcal{N}[b_t\,ss_t], \qquad \mathit{DI}=\mathcal{N}[db_t], \qquad \mathit{TR}=\mathcal{N}[tr_t],\\
+\mathit{IT}=\mathcal{N}[T_t(y_t)], \qquad \mathit{PT}=\mathcal{N}[T^p_t(w_t n_t)], \qquad \mathit{MC}=\mathcal{N}\big[m^G_t\,\Ind\{t\geq 65\}\big].
+\end{gather*}
+Net government spending on the cohort is
+\begin{equation*}
+G\equiv \mathit{SS}+\mathit{DI}+\mathit{TR}-\mathit{IT}-\mathit{PT},
+\end{equation*}
+outlays on retirement benefits, disability benefits, and transfers, net of income- and payroll-tax revenue. Section~\ref{sec:framework} measures the fiscal effect of a reform by its effect on $G$ and splits it into a direct effect on the program that the reform changes---retirement outlays $\mathit{SS}$ for Social Security reforms and income-tax revenue $\mathit{IT}$ for income-tax reforms---and an indirect effect on all other components. Medicare payments are kept outside $G$; they enter only the fiscal accounting of the Medicare reforms, through Medicare's payments to the beneficiaries targeted by each reform. The savings-subsidy reforms finance a higher net return with an explicit subsidy, whose present value is an additional outlay. The wedge $\tau_k$ stands for taxes outside the model and does not enter $G$. Section~\ref{sec:fw_fiscal} and Appendix~\ref{app:outcomes} give the exact construction of each fiscal measure.
+
+The analysis is partial equilibrium: the wage profiles, the ability process, and the interest rate are fixed, and reforms do not change prices (Section~\ref{sec:discussion} discusses general-equilibrium effects). The government's budget is not required to balance: a reform changes $G$, and Section~\ref{sec:framework} values that change through the marginal value of public funds rather than by financing it with a particular instrument. Each reform is a permanent change in the rules faced by the cohort, known from age 30, so that individuals adjust saving and labor supply over the whole life cycle in anticipation of rules that apply later in life. The aggregates thus measure the government's net spending on one cohort over its lifetime rather than the annual balance of a pay-as-you-go system.
+
+\subsection{Relation to Existing Life-Cycle Retirement Models}\label{sec:model_relation}
+
+The model belongs to the class of structural life-cycle models of retirement with health \citep{rust1989dynamic,french2005effects,Denardi2010,french2011effects,Haan2014,blundell2016retirement,Denardi2018,fan2024estimation}, several of which have been used to evaluate Social Security reforms \citep{Imrohoroglu2012,Li2018,Jones2023,Bairoliya2023}. It differs from \citet{french2005effects} and \citet{french2011effects} in seven respects, each of which matters for the valuation of claiming-age and benefit reforms.
+
+First, individuals can work at every age up to 85, rather than having endogenous retirement decisions end at age 70, while claiming must occur by 70. Participation responses to reforms are therefore not truncated at the last claiming age. Second, the model is estimated on the outcomes of the whole cohort rather than on male household heads, which aligns the behavioral responses with the per capita fiscal aggregates that enter the MVPF. Third, the model has an explicit disability state and DI benefits. DI is an early-exit pathway that is essential for explaining the participation declines of unhealthy individuals in their 50s \citep{Yu2024}, and, because DI is paid until the NRA, it is a margin through which NRA reforms affect the budget outside retirement outlays. Fourth, the fixed cost of participation depends on health, whereas \citet{french2011effects} specify a time cost of bad health that does not depend on participation and a time cost of participation that does not depend on health. Making the nonconvexity itself depend on health lets health determine who can respond to a reward for delay: a higher DRC is collected by those who find continued work least costly, whereas a higher NRA lowers the benefits also of those for whom work is too costly to continue.
+
+Fifth, health has three states. Poor health lowers wages and raises the costs of working and of medical care but leaves DI out of reach; disability opens the DI pathway. Distinguishing the two separates individuals who can respond to old-age incentives, at a higher cost of work, from those who can leave the labor force through DI before the NRA. Sixth, income taxes follow an age-dependent function estimated as in \citet{Borella2023}. Together with the payroll tax, it determines how participation responses at each age reach the budget, and it provides the instrument for the old-age income-tax reforms. Seventh, the model serves as a laboratory for the MVPF of a large grid of reforms: for 66 reforms and 5 instrument-elimination experiments, we compute the ex ante willingness to pay and the fiscal effects across Social Security, DI, transfers, Medicare, and taxes.
+
+Three simplifications cut in the other direction. The model has no bequest motive, which matters for the decumulation of wealth late in life \citep{Denardi2010,lockwood2018incidental} and for the fit of the asset profiles after the mid-50s (Section~\ref{sec:estimation}); it does not distinguish types of health insurance, which \citet{french2011effects} show matter for retirement before 65; and health is unaffected by work.

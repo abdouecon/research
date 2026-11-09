@@ -1,0 +1,108 @@
+% ============================================================================
+%  Appendix B: Data and First-Step Estimation
+%  Source: FROT 2025_sub/11_app_data.tex (Data, Health and Disability Measurement,
+%          First Step of Estimation) and FROT tables/{sample_psid,sample_meps,
+%          health_measures,survival_coeffs,wages_coeffs,initial_conditions}.tex.
+%  Every number below is copied from these files; the path is noted next to it.
+% ============================================================================
+\section{Data and First-Step Estimation}\label{app:data}
+
+This appendix describes the two samples, the measurement of health and disability, and the first-step estimation of the health, survival, medical-expense, and wage processes and of the initial conditions summarized in Section~\ref{sec:estimation}.
+
+\subsection{Samples}
+
+\paragraph{Panel Study of Income Dynamics.} The PSID is a longitudinal survey of a representative sample of the US population that collects detailed information on labor market outcomes, income, health, and wealth. It began in 1968 with interviews of about 4,800 families % Source: FROT 2025_sub/11_app_data.tex
+and has followed the original respondents and their descendants since, with interviews conducted annually until 1997 and biennially thereafter. The original sample has two components: 1,872 low-income families drawn from the Survey of Economic Opportunity (SEO) and 2,930 families selected by the Survey Research Center (SRC) at the University of Michigan to represent the US population. % Source: FROT 2025_sub/11_app_data.tex
+
+We keep individuals from the SRC component interviewed between 1968 and 2015. We exclude the SEO component, most of whose families were dropped from the survey after 1997, which makes the sample more representative of the US population. We keep household heads and their spouses, aged 20 to 90, with nonmissing labor and health information, and restrict the sample to individuals born between 1920 and 1940, a group of cohorts that faced similar Social Security rules and that the PSID observes over most of the life cycle. \autoref{tab:sample_psid} reports each selection step. The final sample has 2,248 individuals and 44,404 person--year observations. % Source: FROT tables/sample_psid.tex
+We use it to estimate health transitions, wage profiles and dynamics, survival probabilities, the initial distribution of the state variables, and the target profiles of the second step.
+
+\paragraph{Medical Expenditure Panel Survey.} The MEPS is a nationally representative survey of families, individuals, their medical providers, and employers across the United States, with detailed information on medical expenditures, sources of payment, insurance coverage, health status, and demographics. It covers individuals of all ages, with age top-coded at 85. % Source: FROT 2025_sub/11_app_data.tex
+Medical spending is reported at the individual level and cross-validated with information from providers and insurers. We use the 1999--2012 waves, restrict the sample to household heads aged 20 and older, and exclude observations with missing age, medical spending, insurance coverage during working years, or health status. \autoref{tab:sample_meps} reports each step; the final sample has 120,731 individuals and 211,709 person--year observations. % Source: FROT tables/sample_meps.tex
+We use the MEPS only to estimate out-of-pocket medical expenses.
+
+\begin{table}[!htbp]
+\centering
+\caption{PSID Sample Selection}\label{tab:sample_psid}
+\small
+\input{tables/data_sample_psid}
+\tabnotes{\textit{Notes:} Number of individuals and person--year observations remaining after each selection step, applied sequentially from top to bottom. Non-SEO sample: excludes the Survey of Economic Opportunity low-income subsample and keeps the nationally representative Survey Research Center component. \textit{Data source:} Panel Study of Income Dynamics, 1968--2015 waves.}
+\end{table}
+
+\begin{table}[!htbp]
+\centering
+\caption{MEPS Sample Selection}\label{tab:sample_meps}
+\small
+\input{tables/data_sample_meps}
+\tabnotes{\textit{Notes:} Number of individuals and person--year observations remaining after each selection step, applied sequentially from top to bottom. Insurance information is required at ages 25--65. \textit{Data source:} Medical Expenditure Panel Survey, 1999--2012 waves.}
+\end{table}
+
+\subsection{Health and Disability Measures}
+
+\paragraph{PSID.} Health and disability status in the PSID are constructed from three self-reported work-limitation questions asked in each wave:
+\begin{enumerate}[label=(\arabic*)]
+\item \textit{Do you have any physical or nervous condition that limits the type of work or the amount of work that you can do?}
+\item \textit{Does this condition keep you from doing some types of work?}
+\item \textit{For work you can do, how much does it limit the amount of work you can do---a lot, somewhat, or just a little?}
+\end{enumerate}
+The first question admits \textit{Yes} or \textit{No}. The second question, available from 1986, admits \textit{Yes}, \textit{No}, or \textit{Can do nothing}. % Source: FROT 2025_sub/11_app_data.tex
+The response options to the third question changed over time: since 1976 they have been \textit{Not at all}, \textit{Somewhat}, \textit{Just a little}, or \textit{A lot}; before 1976 they were \textit{We can't work}, \textit{It limits me a lot}, \textit{Some, not much}, or \textit{Limitation but not on work}. % Source: FROT 2025_sub/11_app_data.tex
+For observations before 1986, health status is based on the first and third questions only.
+
+Following \citet{Low2015}, we classify individuals into three health states. An individual is in good health ($h_t=0$) if she answers \textit{No} to the first question or \textit{Not at all} to the third; in poor health ($h_t=1$) if she answers \textit{Yes} to the first question and \textit{Somewhat} or \textit{Just a little} to the third; and has a disability ($h_t=2$) if she answers \textit{Yes} to the first question, \textit{Can do nothing} to the second, and \textit{A lot} to the third, in accordance with the Social Security Administration criterion for disability insurance qualification. Two alternative measures are not suitable for our purposes. The frailty index of \citet{Hosseini2021} relies on PSID questions available only since 2003, and self-rated health has been collected only since 1984. % Source: FROT 2025_sub/11_app_data.tex
+Neither provides consistent information on health over the entire life cycle of the 1920--1940 cohorts.
+
+\paragraph{MEPS.} In the MEPS, health status is based on self-rated health, following \citet{Pashchenko2019}. Each year includes three interview rounds, and in each round respondents rate their health as (1) excellent, (2) very good, (3) good, (4) fair, or (5) poor. An individual is in good health ($h_t=0$) if her rating falls in categories 1 to 3 in all three rounds, has a disability ($h_t=2$) if she reports poor health in any round, and is in poor health ($h_t=1$) otherwise.
+
+\paragraph{Comparison.} \autoref{tab:health_measures} compares the distribution of health by age group in the two surveys. The shares of people with a disability are close in every age group, and both surveys show the share in good health declining with age. The MEPS classifies a larger share of individuals in poor health at every age, so out-of-pocket medical expenses by health state are estimated from a population whose poor-health group is somewhat broader than in the PSID.
+
+\begin{table}[!htbp]
+\centering
+\caption{Health Status by Age in the MEPS and the PSID}\label{tab:health_measures}
+\small
+\input{tables/data_health_measures}
+\tabnotes{\textit{Notes:} Percentage of individuals in each health state within each age group and survey. Health states are defined from self-rated health in the Medical Expenditure Panel Survey (MEPS) and from work-limitation questions in the Panel Study of Income Dynamics (PSID), as described in the text. \textit{Data sources:} MEPS and PSID.}
+\end{table}
+
+\subsection{First-Step Estimation}\label{app:firststep}
+
+\paragraph{Health transitions.} We estimate the transition probabilities $\Pr(h_t=j\mid h_{t-1}=i)$, $i,j\in\{0,1,2\}$, by probit regressions of the indicator $\Ind\{h_t=j\}$ on a full set of age dummies, using the observations with $h_{t-1}=i$. The predicted values are the estimated transition probabilities, which we interpolate linearly across ages so that the transition matrices change smoothly over the life cycle.
+
+\paragraph{Survival.} We estimate age- and health-dependent survival probabilities in the PSID by a logistic regression of an indicator for survival on a polynomial in age, lagged health status, and their interactions, keeping the terms that are statistically significant. \autoref{tab:survival} reports the estimated coefficients, and panel B of \autoref{fig:firststep} shows the implied mortality rates by age and health state.
+
+\begin{table}[!htbp]
+\centering
+\caption{Estimated Coefficients of the Survival Model}\label{tab:survival}
+\small
+\input{tables/data_survival}
+\tabnotes{\textit{Notes:} Logistic regression of an indicator of survival on the square of age, indicators of lagged health status (1: poor health; 2: disability), and the interaction of lagged health status with the square of age. Robust standard errors, clustered at the individual level, in parentheses. *** $p<0.01$. \textit{Data source:} Panel Study of Income Dynamics.}
+\end{table}
+
+\paragraph{Out-of-pocket medical expenses.} Out-of-pocket medical expenses are total medical expenditures net of the amount covered by health insurance, measured in the MEPS. Following the procedure of \citet{Pashchenko2019}, we estimate the profiles of total medical expenditures by weighted regressions on age and year dummies, separately for each health state, using both the cross-sectional and the longitudinal weights. We estimate the profiles of insurance coverage in the same way. For working-age individuals, coverage is the amount paid by insurance; for individuals aged 65 and older, it is the amount paid by Medicare. Out-of-pocket expenditures are the product of the estimated coinsurance rate and total medical expenses at each age and health state. Following \citet{Denardi2018}, we multiply the estimated expenditures by 1.60 below age 65 and by 1.90 from age 65 so that medical spending is consistent with the aggregates of the National Health Expenditure Accounts. % Source: FROT 2025_sub/11_app_data.tex
+Finally, we smooth the profiles by regressing them on a quadratic function of age.
+
+\paragraph{Wages.} Hourly wages are annual earnings divided by annual hours worked, both reported in the PSID for the previous calendar year. We exclude observations with hourly wages below \$6.50 or above \$250 in 2016 dollars. % Source: FROT 2025_sub/11_app_data.tex
+Because wages are observed only for participants, we correct for selection with the two-stage estimator of \citet{Heckman1976}, as adapted by \citet{Guner2012}. In the first stage, a probit regression of labor force participation on all PSID observations generates an inverse Mills ratio. In the second stage, we regress log hourly wages on an age polynomial, the interactions of health with the age polynomial, and the inverse Mills ratio. Family size and year of birth enter the selection equation but not the wage equation. \autoref{tab:wages} reports the coefficients of both stages. Earlier studies instead estimate the wage equation inside the structural model by matching the wage profiles of participants \citep{french2005effects,french2011effects}; the Heckman correction fits the targeted moments well and keeps the wage profiles outside the second-step search, which saves computation.
+
+\begin{table}[!htbp]
+\centering
+\caption{Estimated Coefficients of the Wage Equation with Selection}\label{tab:wages}
+\small
+\input{tables/data_wages}
+\tabnotes{\textit{Notes:} Two-stage Heckman selection model. Wage equation: dependent variable is the logarithm of the hourly wage. Selection equation: dependent variable is an indicator of labor force participation. Robust standard errors, clustered at the individual level, in parentheses. * $p<0.10$, ** $p<0.05$, *** $p<0.01$. \textit{Data source:} Panel Study of Income Dynamics.}
+\end{table}
+
+\paragraph{Ability process.} We estimate the autoregressive coefficient and innovation variance $(\rho,\sigma^2)$ of the ability process \eqref{eq:ability} from the wage residuals of the second stage. We restrict the residuals to ages 25 to 65 and drop the top 0.5 percent to limit the influence of outliers on the variance. % Source: FROT 2025_sub/11_app_data.tex
+Estimation is by maximum likelihood with the standard Kalman filter recursions. The estimates are $(\rho,\sigma^2)=(0.981,0.016)$.
+
+\paragraph{Initial conditions.} Simulated individuals enter the model at age 30. We draw their initial states from the empirical joint distribution of wages, health, assets, and labor force participation of individuals aged 28 to 32 in the PSID sample, % Source: FROT 2025_sub/11_app_data.tex
+adjusting the mean of log wages to match the estimated wage profile within each health state. To impute initial average indexed monthly earnings, we assume, following \citet{french2005effects}, that every individual has worked for five years, 2,000 hours per year, at her hourly wage at age 30. % Source: FROT 2025_sub/11_app_data.tex
+\autoref{tab:initial} summarizes the initial distribution. Individuals in good health have higher wages, assets, and participation, on average, than individuals in poor health or with a disability.
+
+\begin{table}[!htbp]
+\centering
+\caption{Initial Conditions}\label{tab:initial}
+\small
+\input{tables/data_initial}
+\tabnotes{\textit{Notes:} Summary statistics of the empirical joint distribution from which initial states at age 30 are drawn: individuals aged 28 to 32 in the PSID sample. Participation is an indicator for working more than 800 hours in the year. Share of sample: percentage of observations in each health state. Monetary values in 2016 dollars. \textit{Data source:} Panel Study of Income Dynamics.}
+\end{table}
